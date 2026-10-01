@@ -360,7 +360,6 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
 
 /* ---------- Cars24 bits ---------- */
 .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
-.reb-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--pink); color: var(--ink); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; text-transform: none; rotate: 2deg; }
 .foot-tag .reb { color: var(--pink); font-weight: 700; }
 .patch-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--hi); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; text-transform: none; rotate: 2deg; }
 .game-copy .chips { margin-bottom: 0; }
@@ -389,7 +388,6 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
       <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#121212"/><circle cx="14" cy="19.5" r="4.6" fill="#fff"/><circle cx="26" cy="19.5" r="4.6" fill="#fff"/><circle cx="15" cy="20.2" r="2.1" fill="#121212"/><circle cx="27" cy="20.2" r="2.1" fill="#121212"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
       <span>Cars24 Patch</span>
     </a>
-    <button class="btn btn-sm" type="button" data-focus-form>notify me <span class="arr">↗</span></button>
   </div>
 </header>
 
@@ -400,7 +398,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
     <div class="hero-grid">
 
       <div class="hero-copy">
-        <div class="chips"><span class="tag-chip slap" style="--r:-2deg;--d:.05s">coming soon</span><span class="reb-chip slap" style="--r:2deg;--d:.14s">a Cars24 Rebellion</span></div>
+        <div class="chips"><span class="tag-chip slap" style="--r:-2deg;--d:.05s">coming soon</span></div>
 
         <div class="hl-wrap">
           <h1 class="hl" id="h1" aria-label="Shut up, pothole.">
@@ -772,18 +770,6 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
     });
   });
   if (lsGet(CONFIG.storageKey)) forms.forEach(function (f) { f.classList.add('is-done'); });
-
-  $$('[data-focus-form]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var beh = reduce ? 'auto' : 'smooth', hf = $('#hero-form'), r = hf.getBoundingClientRect();
-      if ((r.top >= 0 && r.bottom <= window.innerHeight) || window.scrollY < window.innerHeight * 0.5) {
-        window.scrollTo({ top: 0, behavior: beh }); $('#email-hero').focus({ preventScroll: true });
-      } else {
-        $('#subscribe').scrollIntoView({ behavior: beh, block: 'center' });
-        setTimeout(function () { $('#email-final').focus({ preventScroll: true }); }, reduce ? 0 : 700);
-      }
-    });
-  });
 
   /* ---------- swerve practice ---------- */
   (function game() {
