@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>404 — Patch</title>
-<meta name="description" content="This page doesn't exist. The potholes, however, are getting filled.">
+<meta name="description" content="Cool. Another thing that doesn’t work. Anyway. We’re fixing the roads first.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FFD60A">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FFD60A'/%3E%3Cellipse cx='16' cy='17' rx='11' ry='8' fill='%23121212'/%3E%3Ccircle cx='12' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='20' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='12.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3Ccircle cx='20.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3C/svg%3E">
@@ -43,7 +43,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 150; pointer-even
 .btn:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
 .btn .arr { display: inline-block; transition: transform .25s var(--spring); }
 .btn:hover .arr { transform: translate(3px, -3px) rotate(8deg); }
-.btn-ghost { background: var(--white); color: var(--ink); }
+.btn-back:hover .arr { transform: translateX(-4px); }
 .btn-sm { height: 46px; padding: 0 20px; font-size: 15px; box-shadow: 4px 4px 0 var(--ink); }
 .btn-sm:hover { box-shadow: 6px 6px 0 var(--ink); }
 
@@ -65,7 +65,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 150; pointer-even
 
 /* 4 [pothole] 4 */
 .num-wrap { container-type: inline-size; width: 100%; max-width: 980px; margin-top: 44px; }
-.num { display: flex; align-items: center; justify-content: center; gap: .02em; font-family: var(--ff-d); font-weight: 800; font-stretch: 75%; font-variation-settings: 'wdth' 75; letter-spacing: -.04em; line-height: .8; font-size: clamp(6rem, 40cqw, 21rem); }
+.num { display: flex; align-items: center; justify-content: center; gap: .02em; font-family: var(--ff-d); font-weight: 800; font-stretch: 75%; font-variation-settings: 'wdth' 75; letter-spacing: -.04em; line-height: .8; font-size: clamp(6rem, 36cqw, 17rem); }
 .num .d { display: block; }
 .zero { position: relative; flex: none; width: .68em; height: .8em; margin-inline: .03em; border-radius: 49% 51% 50% 50% / 52% 48% 52% 48%; background: var(--ink); box-shadow: 0 0 0 .03em var(--prim), 0 0 0 .055em var(--ink); }
 .zero::before, .zero::after { content: ""; position: absolute; inset: -9%; border: 3px solid var(--ink); border-radius: 50%; opacity: 0; animation: ripple 3.6s ease-out infinite; }
@@ -77,6 +77,11 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 150; pointer-even
 .mouth { position: absolute; left: 50%; top: 60%; width: 17%; height: 22%; translate: -50% 0; border: .035em solid var(--white); border-radius: 50%; animation: gulp 2.8s ease-in-out infinite; }
 @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
 @keyframes gulp { 0%, 100% { height: 22%; width: 17%; } 45% { height: 12%; width: 22%; } }
+.zero { cursor: pointer; }
+.eye.roll .pupil { animation: eyeroll 1s ease-in-out; }
+@keyframes eyeroll { 0%, 100% { translate: 0 0; } 15% { translate: 0 -60%; } 35% { translate: 60% 0; } 55% { translate: 0 60%; } 75% { translate: -60% 0; } 90% { translate: 0 -60%; } }
+.note.swap { animation: note-swap .5s var(--spring) both; }
+@keyframes note-swap { from { opacity: 0; transform: translateY(8px) rotate(-5deg) scale(.94); } to { opacity: 1; transform: none; } }
 .fall { position: absolute; left: 50%; top: -6%; width: 1em; font-size: .24em; line-height: 1; translate: -50% 0; animation: fall-in 5s ease-in infinite; z-index: 2; }
 .fall span { display: block; }
 @keyframes fall-in {
@@ -86,9 +91,10 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 150; pointer-even
   86%, 100% { translate: -50% 160%; rotate: 220deg; scale: .15; opacity: 0; }
 }
 
-h1.line { margin-top: 28px; font: 800 clamp(2.4rem, 1rem + 6vw, 5.4rem)/.88 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+h1.line { margin-top: 28px; font: 800 clamp(2rem, .9rem + 4.6vw, 4.2rem)/.9 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
 h1.line .hi { background: var(--ink); color: var(--yellow); border-radius: 10px; padding: 0 .14em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-.lead { margin-top: 18px; max-width: 34ch; font: 600 clamp(1.1rem, 1rem + .7vw, 1.5rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
+.sub { margin-top: 18px; max-width: 30ch; font: 700 clamp(1.25rem, 1rem + 1.3vw, 2rem)/1.2 var(--ff-d); letter-spacing: -.02em; text-wrap: balance; }
+.squig { background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23121212' stroke-width='3' stroke-linecap='round'/></svg>") repeat-x left bottom / 28px 10px; padding-bottom: .16em; }
 .note { margin-top: 14px; font: 400 clamp(1.05rem, .8rem + 1vw, 1.5rem)/1.2 var(--ff-h); rotate: -2deg; }
 .actions { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 @media (max-width: 480px) { .actions { flex-direction: column; width: 100%; } .actions .btn { width: 100%; } }
@@ -146,19 +152,18 @@ h1.line .hi { background: var(--ink); color: var(--yellow); border-radius: 10px;
       </div>
     </div>
 
-    <h1 class="line pop" style="--d:.3s">this page is <span class="hi">a pothole.</span></h1>
-    <p class="lead pop" style="--d:.42s">nothing here. you swerved into the wrong url. the potholes, however, are getting filled.</p>
-    <p class="note pop" style="--d:.55s">(we’re on the move.)</p>
+    <h1 class="line pop" style="--d:.3s">Cool. Another thing that <span class="hi">doesn’t work.</span></h1>
+    <h2 class="sub pop" style="--d:.42s">Anyway. We’re fixing the <span class="squig">roads first.</span></h2>
+    <p class="note pop" id="note" aria-hidden="true" style="--d:.55s">(it’s giving pothole.)</p>
 
     <div class="actions pop" style="--d:.65s">
-      <a class="btn" href="/">take me home <span class="arr">↗</span></a>
-      <a class="btn btn-ghost" href="/#subscribe">notify me at launch <span class="arr">↗</span></a>
+      <a class="btn btn-back" id="back" href="/"><span class="arr">←</span> Go back</a>
     </div>
   </div>
 
   <div class="tape" aria-hidden="true"><div class="tape-track">
-    <div class="tape-g"><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span></div>
-    <div class="tape-g"><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span></div>
+    <div class="tape-g"><span>page not found</span><span>✦</span><span>anyway</span><span>✦</span><span>404</span><span>✦</span><span>roads first</span><span>✦</span><span>cool.</span><span>✦</span><span>page not found</span><span>✦</span><span>anyway</span><span>✦</span><span>404</span><span>✦</span><span>roads first</span><span>✦</span><span>cool.</span><span>✦</span><span>page not found</span><span>✦</span><span>anyway</span><span>✦</span><span>404</span><span>✦</span><span>roads first</span><span>✦</span><span>cool.</span><span>✦</span></div>
+    <div class="tape-g"><span>page not found</span><span>✦</span><span>anyway</span><span>✦</span><span>404</span><span>✦</span><span>roads first</span><span>✦</span><span>cool.</span><span>✦</span><span>page not found</span><span>✦</span><span>anyway</span><span>✦</span><span>404</span><span>✦</span><span>roads first</span><span>✦</span><span>cool.</span><span>✦</span><span>page not found</span><span>✦</span><span>anyway</span><span>✦</span><span>404</span><span>✦</span><span>roads first</span><span>✦</span><span>cool.</span><span>✦</span></div>
   </div></div>
 </main>
 
@@ -188,6 +193,19 @@ h1.line .hi { background: var(--ink); color: var(--yellow); border-radius: 10px;
     if (Date.now() - lastMove < 3000) return;
     var a = Math.random() * Math.PI * 2; look(Math.cos(a), Math.sin(a), Math.random());
   }, 1700);
+
+  // gen z: the pothole has opinions. Tap it (or wait) and the note changes; it rolls its eyes.
+  var lines = ['(it’s giving pothole.)', '(no notes. just a hole.)', '(bestie, this isn’t it.)', '(404, but make it a pothole.)', '(we’ll patch this too. eventually.)'];
+  var note = document.getElementById('note'), eyes = Array.prototype.slice.call(document.querySelectorAll('.eye')), li = 0;
+  function nextLine() { li = (li + 1) % lines.length; note.textContent = lines[li]; note.classList.remove('swap'); void note.offsetWidth; note.classList.add('swap'); }
+  function rollEyes() { if (reduce) return; eyes.forEach(function (e) { e.classList.remove('roll'); void e.offsetWidth; e.classList.add('roll'); }); }
+  zero.addEventListener('click', function () { nextLine(); rollEyes(); });
+  if (!reduce) setInterval(nextLine, 4200);
+
+  // "Go back" goes back when you came from this site, and goes home when you did not.
+  document.getElementById('back').addEventListener('click', function (e) {
+    try { if (history.length > 1 && document.referrer && new URL(document.referrer).origin === location.origin) { e.preventDefault(); history.back(); } } catch (err) {}
+  });
 })();
 </script>
 </body>
