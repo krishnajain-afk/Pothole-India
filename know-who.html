@@ -1,0 +1,1105 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pothole India — Coming soon</title>
+<meta name="description" content="Pothole India is coming soon: a public platform to report, track and close road defects. Potholes killed 2,385 people in India in 2024. Get notified at launch.">
+<meta name="theme-color" content="#4A35FF">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pothole India — Every pothole has an owner. Soon, you'll know who.">
+<meta property="og:description" content="Potholes killed 2,385 people in India in 2024. Pothole India is coming soon. Get notified at launch.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234A35FF'/%3E%3Cellipse cx='16' cy='17' rx='9' ry='6.5' fill='none' stroke='white' stroke-width='2'/%3E%3Cellipse cx='16' cy='17' rx='3.6' ry='2.4' fill='white'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ==========================================================================
+   Pothole India — coming soon
+   Built on the Crashfree India design system:
+   Montserrat (headings) + Geist (body) · #4A35FF institutional blue ·
+   white → lavender → blue section rotation · two-line headline pattern.
+   ========================================================================== */
+
+:root {
+  /* Brand tokens */
+  --brand: #4A35FF;
+  --brand-fg: #FFFFFF;
+  --brand-lite: #F8F7FF;
+  --lavender: #F3F1FF;
+  /* Status tokens (semantic, never decorative) */
+  --danger: #F10015;
+  --success: #00AA44;
+  /* Neutrals */
+  --ink: #1A1C1C;
+  --neutral: #777589;
+  --muted: #666479;      /* body grey, darkened from #777589 to clear WCAG AA (4.5:1) at 16px */
+  --border: #EDEEF2;
+  --bg: #FFFFFF;
+
+  --ff-head: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ff-body: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --r-card: 16px;
+  --r-panel: 24px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --nav-h: 72px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg { display: block; max-width: 100%; }
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button, input { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--brand) 50%, #fff); outline-offset: 3px; border-radius: 6px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 16px; top: -64px; z-index: 100; background: var(--brand); color: #fff; padding: 12px 20px; border-radius: 999px; text-decoration: none; transition: top .2s; }
+.skip:focus { top: 12px; }
+
+/* Icons (Lucide-style strokes, sprite at bottom of body) */
+.ic { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+
+/* ---------- Layout primitives ---------- */
+.wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 24px; }
+@media (min-width: 768px) { .wrap { padding-inline: 40px; } }
+
+.sec { border-top: 1px solid var(--border); padding-block: 96px; position: relative; }
+@media (min-width: 1024px) { .sec { padding-block: 128px; } }
+.sec-white { background: var(--bg); }
+.sec-lite { background: var(--brand-lite); }
+.sec-brand { background: var(--brand); color: var(--brand-fg); border-top-color: transparent; }
+
+/* ---------- Type ---------- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--ff-head); font-weight: 600; font-size: 12px; line-height: 1;
+  letter-spacing: .25em; text-transform: uppercase; color: var(--brand);
+}
+.eyebrow .n { opacity: .55; }
+.sec-brand .eyebrow { color: var(--lavender); }
+
+.h2 {
+  font-family: var(--ff-head); font-weight: 700; letter-spacing: -.02em;
+  font-size: clamp(2rem, 1.25rem + 3.2vw, 3.75rem); line-height: 1.05;
+  margin-top: 24px; max-width: 18ch;
+  text-wrap: balance;
+}
+.h2 .accent { color: var(--brand); }
+.sec-brand .h2 .accent { color: var(--lavender); }
+.lead { font-size: clamp(1rem, .95rem + .3vw, 1.125rem); line-height: 1.65; color: var(--muted); max-width: 62ch; margin-top: 24px; }
+.sec-brand .lead { color: rgba(255,255,255,.86); }
+.sec-head { max-width: 760px; }
+.h2.wide { max-width: 22ch; }
+
+sup.ref { font-size: .62em; vertical-align: super; line-height: 0; margin-left: 2px; }
+sup.ref a { text-decoration: none; color: var(--brand); font-weight: 700; padding: 0 1px; }
+sup.ref a:hover { text-decoration: underline; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 48px; padding: 0 28px; border-radius: 999px; border: 1px solid transparent;
+  font-family: var(--ff-body); font-weight: 500; font-size: 16px; line-height: 1;
+  cursor: pointer; white-space: nowrap; text-decoration: none; position: relative;
+  transition: transform .25s var(--ease), background-color .2s, box-shadow .25s;
+}
+.btn:active { transform: scale(.97); }
+.btn-primary {
+  background: var(--brand); color: var(--brand-fg);
+  box-shadow: 0 10px 15px -3px color-mix(in srgb, var(--brand) 30%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--brand) 30%, transparent);
+}
+.btn-primary:hover { background: color-mix(in srgb, var(--brand) 90%, #fff); }
+.btn .ic-arrow { transition: transform .3s var(--ease); }
+.btn:hover .ic-arrow { transform: translateX(4px); }
+.btn-sm { height: 44px; padding: 0 22px; font-size: 15px; }
+.btn[disabled] { cursor: progress; }
+.btn .spin { display: none; width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; animation: spin .7s linear infinite; }
+.btn.is-loading .spin { display: block; }
+.btn.is-loading .ic-arrow { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.link-down {
+  display: inline-flex; align-items: center; gap: 10px; height: 48px;
+  font-weight: 500; color: var(--ink); text-decoration: none;
+}
+.link-down .circ { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border); background: #fff; color: var(--brand); transition: border-color .2s, transform .3s var(--ease); }
+.link-down:hover .circ { border-color: color-mix(in srgb, var(--brand) 40%, transparent); transform: translateY(3px); }
+
+/* ---------- Chips ---------- */
+.chip {
+  display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--brand) 25%, transparent);
+  background: color-mix(in srgb, var(--brand) 10%, transparent);
+  font-family: var(--ff-head); font-weight: 600; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--brand); line-height: 1;
+}
+.dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--brand); }
+.dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--brand); animation: dot-ping 2s ease-out infinite; }
+@keyframes dot-ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(3.2); opacity: 0; } }
+
+/* ---------- Progress + Nav ---------- */
+.progress { position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 60; background: transparent; pointer-events: none; }
+.progress i { display: block; height: 100%; background: var(--brand); transform-origin: 0 50%; transform: scaleX(0); }
+
+.nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.96); border-bottom: 1px solid transparent; transition: border-color .25s; }
+.nav.is-stuck { border-bottom-color: var(--border); }
+.nav-in { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.mark { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-family: var(--ff-head); font-weight: 700; font-size: 19px; letter-spacing: -.01em; white-space: nowrap; }
+.mark svg { width: 34px; height: 34px; color: var(--brand); }
+.nav-r { display: flex; align-items: center; gap: 16px; }
+@media (max-width: 420px) {
+  .mark { font-size: 17px; gap: 10px; } .mark svg { width: 30px; height: 30px; }
+  .btn-sm { padding: 0 18px; font-size: 14px; }
+}
+
+/* ---------- Hero ---------- */
+.hero { position: relative; background: var(--bg); overflow: hidden; border-top: 0; }
+.hero::before {                       /* single radial brand glow (design-system hero pattern) */
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(circle at 18% 18%, rgba(74,53,255,.22), transparent 60%);
+  background: radial-gradient(circle at 18% 18%, color-mix(in srgb, var(--brand) 22%, transparent), transparent 60%);
+}
+.hero::after {                        /* faint grid overlay, 5% */
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .05;
+  background-image: linear-gradient(var(--ink) 1px, transparent 1px), linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 85%); mask-image: linear-gradient(to bottom, #000, transparent 85%);
+}
+.hero .wrap { position: relative; z-index: 1; padding-top: 48px; padding-bottom: 72px; }
+@media (min-width: 768px) { .hero .wrap { padding-top: 64px; padding-bottom: 96px; } }
+@media (min-width: 1024px) { .hero .wrap { min-height: calc(100svh - var(--nav-h)); display: flex; align-items: center; padding-block: 56px 72px; } }
+.hero-grid { display: grid; gap: 40px; align-items: center; width: 100%; }
+@media (min-width: 980px) { .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 56px; } }
+
+.h1 {
+  font-family: var(--ff-head); font-weight: 700; letter-spacing: -.025em; line-height: 1.04;
+  font-size: clamp(2.5rem, 1.5rem + 4.2vw, 4.5rem); margin-top: 28px;
+}
+.h1 .accent { color: var(--brand); }
+.hero .lead { margin-top: 28px; max-width: 54ch; }
+.hero .lead strong { color: var(--ink); font-weight: 700; }
+.hero-actions { margin-top: 36px; max-width: 540px; }
+.hero-more { margin-top: 12px; }
+
+/* Entrance choreography (only when JS is present) */
+html.js .rise { opacity: 0; transform: translateY(20px); animation: rise-in .9s var(--ease) var(--d, 0s) forwards; }
+html.js .h-line { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+html.js .h-line > span { display: block; transform: translateY(112%); animation: slide-up 1.05s var(--ease) var(--d, 0s) forwards; }
+@keyframes rise-in { to { opacity: 1; transform: none; } }
+@keyframes slide-up { to { transform: none; } }
+.h-line > span { display: block; text-wrap: balance; }
+
+/* ---------- Subscribe form ---------- */
+.sub { width: 100%; }
+.sub-field {
+  display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 22px; min-height: 60px;
+  background: #fff; border: 1px solid var(--border); border-radius: 999px;
+  box-shadow: 0 18px 40px -22px color-mix(in srgb, var(--brand) 45%, transparent);
+  transition: border-color .2s, box-shadow .25s;
+}
+.sub-field:focus-within { border-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 16%, transparent), 0 18px 40px -22px color-mix(in srgb, var(--brand) 45%, transparent); }
+.sub-field.is-invalid { border-color: var(--danger); box-shadow: 0 0 0 4px color-mix(in srgb, var(--danger) 12%, transparent); }
+.sub-field .ic-mail { font-size: 20px; color: var(--neutral); }
+.sub-field input[type="email"] { flex: 1 1 auto; min-width: 0; height: 48px; border: 0; outline: 0; background: transparent; font-size: 16px; color: var(--ink); }
+.sub-field input::placeholder { color: var(--neutral); opacity: 1; }
+.hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.sub-msg { min-height: 24px; margin-top: 12px; padding-left: 22px; font-size: 14px; line-height: 1.5; display: flex; align-items: center; gap: 8px; color: var(--danger); }
+.sub-msg:empty { display: none; }
+.sub-note { margin-top: 12px; padding-left: 22px; font-size: 14px; color: var(--muted); }
+.sub-msg:not(:empty) + .sub-note { margin-top: 4px; }
+
+.sub-done { display: none; align-items: center; gap: 16px; padding: 16px 24px 16px 16px; background: #fff; border: 1px solid color-mix(in srgb, var(--success) 35%, transparent); border-radius: var(--r-card); }
+.sub.is-done .sub-field, .sub.is-done .sub-msg, .sub.is-done .sub-note { display: none; }
+.sub.is-done .sub-done { display: flex; animation: pop .6s var(--ease) both; }
+.sub-done .tick { width: 44px; height: 44px; border-radius: 50%; background: var(--success); color: #fff; display: grid; place-items: center; flex: none; }
+.sub-done .tick svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 26; stroke-dashoffset: 26; }
+.sub.is-done .tick svg { animation: draw .55s .25s var(--ease) forwards; }
+.sub-done b { display: block; font-family: var(--ff-head); font-size: 17px; line-height: 1.3; color: var(--ink); }
+.sub-done span { display: block; font-size: 14px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* On brand sections */
+.sec-brand .sub-note { color: rgba(255,255,255,.86); }
+.sec-brand .sub-field { border-color: transparent; box-shadow: 0 24px 48px -24px rgba(0,0,0,.35); }
+.sec-brand .sub-field:focus-within { border-color: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,.28), 0 24px 48px -24px rgba(0,0,0,.35); }
+.sec-brand .sub-msg { color: #fff; background: rgba(255,255,255,.14); border-radius: 12px; padding: 10px 14px; margin-left: 12px; width: fit-content; }
+.sec-brand .sub-done { border-color: transparent; }
+
+@media (max-width: 520px) {
+  .sub-field { flex-direction: column; align-items: stretch; background: transparent; border: 0; box-shadow: none; padding: 0; gap: 12px; min-height: 0; }
+  .sub-field:focus-within, .sec-brand .sub-field:focus-within, .sub-field.is-invalid { box-shadow: none; border: 0; }
+  .sub-field .ic-mail { display: none; }
+  .sub-field input[type="email"] { height: 56px; padding: 0 22px; background: #fff; border: 1px solid var(--border); border-radius: 999px; box-shadow: 0 14px 32px -20px color-mix(in srgb, var(--brand) 50%, transparent); }
+  .sub-field input[type="email"]:focus { border-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 16%, transparent); }
+  .sub-field.is-invalid input[type="email"] { border-color: var(--danger); }
+  .sec-brand .sub-field input[type="email"]:focus { border-color: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,.28); }
+  .sub-field .btn { height: 56px; width: 100%; }
+  .sub-msg, .sub-note { padding-left: 8px; }
+  .sec-brand .sub-msg { margin-left: 0; }
+}
+
+/* ---------- Hero scene: a road in perspective ---------- */
+.scene { position: relative; width: 100%; max-width: 580px; margin-inline: auto; aspect-ratio: 1 / 1; }
+.road-vp {
+  position: absolute; inset: 0; perspective: 800px; perspective-origin: 50% 18%; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 46%, #000 86%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 46%, #000 86%, transparent 100%);
+}
+.road {                                /* one 3000px-long plane, tilted back like a floor */
+  position: absolute; left: 50%; bottom: -14%; width: 84%; height: 3000px; margin-left: -42%;
+  overflow: hidden; transform-origin: 50% 100%; transform: rotateX(60deg);
+}
+.strip { position: absolute; left: 0; right: 0; top: 0; height: 6000px; animation: drive 14s linear infinite; will-change: transform; }
+@keyframes drive { from { transform: translateY(-3000px); } to { transform: translateY(0); } }
+.tile {
+  position: relative; height: 3000px;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255,255,255,.95) 0 64px, transparent 64px 150px) center / 12px 100% no-repeat,
+    linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)) 4% 0 / 7px 100% no-repeat,
+    linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)) 96% 0 / 7px 100% no-repeat,
+    var(--brand);
+}
+.ph {
+  position: absolute; left: var(--x); top: var(--y); width: var(--s); height: calc(var(--s) * .72);
+  transform: translate(-50%, -50%) rotate(var(--r, 0deg)); background: var(--ink);
+  border-radius: 46% 54% 50% 50% / 58% 46% 54% 42%;
+  box-shadow: 0 0 0 calc(var(--s) * .08) rgba(255,255,255,.22), inset 0 calc(var(--s) * .12) 0 rgba(255,255,255,.1);
+}
+.ph::after {
+  content: ""; position: absolute; inset: -34%; border-radius: 50%; border: 5px solid rgba(255,255,255,.95);
+  opacity: 0; animation: ping 2.8s var(--dl, 0s) ease-out infinite;
+}
+@keyframes ping { 0% { transform: scale(.35); opacity: .95; } 100% { transform: scale(1.35); opacity: 0; } }
+
+.pin-chip, .rep {
+  position: absolute; background: #fff; border: 1px solid var(--border); border-radius: var(--r-card);
+  box-shadow: 0 24px 48px -24px color-mix(in srgb, var(--brand) 55%, transparent);
+}
+.pin-chip {
+  left: 0; top: 20%; display: flex; align-items: center; gap: 10px; padding: 10px 16px 10px 10px; border-radius: 999px;
+  font-size: 14px; font-weight: 500; line-height: 1; animation: float 5.5s ease-in-out infinite;
+}
+.pin-chip .pi { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 16px; }
+.rep { right: 0; bottom: 8%; width: min(250px, 66%); padding: 16px; animation: float 6.5s -2s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.rep-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.rep-h b { font-family: var(--ff-head); font-size: 14px; line-height: 1.2; }
+.rep-h em { font-style: normal; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.rep ol { margin-top: 12px; display: grid; gap: 10px; }
+.rep li { display: flex; align-items: center; gap: 10px; font-size: 13px; line-height: 1.3; color: var(--muted); transition: color .4s; }
+.rep li i { position: relative; flex: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); background: #fff; transition: background-color .4s, border-color .4s; }
+.rep li i::after { content: ""; position: absolute; left: 5px; top: 2px; width: 5px; height: 9px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg) scale(0); transition: transform .35s var(--ease); }
+.rep li.done { color: var(--ink); }
+.rep li.done i { background: var(--brand); border-color: var(--brand); }
+.rep li.done i::after { transform: rotate(45deg) scale(1); }
+.rep li.done.final i { background: var(--success); border-color: var(--success); }
+@media (max-width: 600px) { .scene { aspect-ratio: 1 / .9; } .hero .wrap { padding-bottom: 48px; } }
+@media (max-width: 420px) { .pin-chip { top: 14%; font-size: 13px; } .rep { padding: 14px; } }
+
+/* ---------- 01 · Cross-section ---------- */
+.xs-grid { display: grid; gap: 40px; margin-top: 64px; align-items: center; }
+@media (min-width: 980px) { .xs-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; } .xs-fig { order: 2; } }
+.xs-fig { background: #fff; border: 1px solid var(--border); border-radius: var(--r-panel); padding: 16px; --sbg: #fff; }
+.xs { width: 100%; height: auto; overflow: hidden; border-radius: 12px; }
+.xs text { font-family: var(--ff-head); font-weight: 600; font-size: 15px; letter-spacing: .02em; }
+
+.xs .l-surface { fill: var(--brand); }
+.xs .l-base { fill: var(--brand); opacity: .55; }
+.xs .l-sub { fill: var(--brand); opacity: .3; }
+.xs .l-soil { fill: var(--brand); opacity: .14; }
+.xs .t-w { fill: #fff; } .xs .t-i { fill: var(--ink); }
+.xs .stk { fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; }
+.xs .drop { stroke: var(--brand); stroke-width: 3; stroke-linecap: round; animation: fall 1.1s var(--dl, 0s) linear infinite; }
+@keyframes fall { 0% { transform: translateY(-4px); opacity: 0; } 15% { opacity: 1; } 100% { transform: translateY(64px); opacity: 0; } }
+
+.xs .a1, .xs .a2, .xs .a3, .xs .a4 { opacity: 0; transition: opacity .6s var(--ease); }
+.xs.on-1 .a1, .xs.on-2 .a2, .xs.on-3 .a3, .xs.on-4 .a4 { opacity: 1; }
+.xs.on-4 .crack { opacity: 0; }
+.xs.on-4 .rain { opacity: 0; }
+.xs.on-4 .wheel { opacity: 0; }
+
+.xs .crack path { stroke-width: 2.6; }
+.xs .seep path { stroke-width: 3; stroke-dasharray: 90; stroke-dashoffset: 90; opacity: .9; }
+.xs.on-2 .seep path { stroke-dashoffset: 0; transition: stroke-dashoffset 1.4s var(--ease) .2s; }
+.xs .wet { fill: #fff; opacity: 0; transform-box: fill-box; transform-origin: 50% 20%; transform: scale(.2); transition: opacity .8s, transform 1.4s var(--ease); }
+.xs.on-2 .wet { opacity: .28; transform: scale(1); }
+.xs .chunk { fill: #fff; fill-opacity: .22; transform-box: fill-box; transform-origin: 50% 100%; }
+.xs.on-3 .chunk { animation: jolt 1.2s ease-in-out infinite; }
+@keyframes jolt { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3px) rotate(-2deg); } }
+.xs .wheel { transform: translateX(60px); }
+.xs.on-3 .wheel { animation: roll 3.2s linear infinite; }
+@keyframes roll { from { transform: translateX(60px); } to { transform: translateX(580px); } }
+.xs .tire { fill: var(--ink); } .xs .hub { fill: #fff; }
+.xs .spoke { stroke: #fff; stroke-width: 3; stroke-linecap: round; }
+.xs .wheel-spin { transform-box: view-box; animation: spin 1.1s linear infinite; }
+
+.xs .hole { fill: var(--sbg); }
+.xs .hole-in { fill: var(--ink); fill-opacity: .1; }
+.xs .puddle { fill: var(--brand); fill-opacity: .9; }
+.xs .deb { fill: var(--brand); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.xs.on-4 .deb { animation: throw .9s var(--ease) forwards; animation-delay: var(--dl, 0s); }
+@keyframes throw { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 100% { opacity: 1; transform: translate(var(--dx), var(--dy)) rotate(var(--dr, 90deg)); } }
+.xs .tag line { stroke: var(--danger); stroke-width: 2; }
+.xs .tag rect { fill: var(--danger); }
+.xs .tag text { fill: #fff; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; font-weight: 700; }
+
+.xsteps { display: grid; gap: 12px; }
+.xstep {
+  position: relative; width: 100%; display: flex; gap: 16px; align-items: flex-start; text-align: left; cursor: pointer;
+  padding: 18px 20px; background: transparent; border: 1px solid transparent; border-radius: var(--r-card);
+  transition: background-color .3s, border-color .3s, transform .3s var(--ease);
+}
+.xstep:hover { border-color: var(--border); }
+.xstep.is-active { background: #fff; border-color: var(--border); box-shadow: 0 18px 40px -26px color-mix(in srgb, var(--brand) 60%, transparent); }
+.xstep .xn { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; font-family: var(--ff-head); font-weight: 700; font-size: 14px; background: color-mix(in srgb, var(--brand) 10%, transparent); color: var(--brand); transition: background-color .3s, color .3s; }
+.xstep.is-active .xn { background: var(--brand); color: #fff; }
+.xstep .xt b { display: block; font-family: var(--ff-head); font-size: 17px; line-height: 1.3; }
+.xstep .xt span { display: block; margin-top: 4px; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.xstep .xbar { position: absolute; left: 20px; right: 20px; bottom: 0; height: 3px; border-radius: 3px; background: transparent; overflow: hidden; }
+.xstep .xbar::after { content: ""; display: block; height: 100%; background: var(--brand); transform: scaleX(0); transform-origin: 0 50%; }
+.xstep.is-active .xbar::after { animation: fill var(--dur, 3s) linear forwards; }
+.xsteps.is-paused .xstep.is-active .xbar::after { animation: none; transform: scaleX(1); opacity: .25; }
+@keyframes fill { to { transform: scaleX(1); } }
+.xsteps li:nth-child(4) .xstep { --dur: 4.4s; }
+.xs-callout { margin-top: 24px; padding: 20px 24px; border-left: 3px solid var(--brand); background: #fff; border-radius: 0 var(--r-card) var(--r-card) 0; font-size: 16px; color: var(--ink); line-height: 1.6; }
+.xs-callout b { font-family: var(--ff-head); }
+
+/* ---------- 02 · Numbers ---------- */
+.num-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; margin-top: 64px; }
+@media (min-width: 980px) { .num-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); } }
+.panel { background: #fff; border: 1px solid var(--border); border-radius: var(--r-panel); padding: 32px; }
+@media (min-width: 768px) { .panel { padding: 40px; } }
+.big { display: flex; flex-direction: column; justify-content: space-between; gap: 24px; container-type: inline-size; min-width: 0; }
+.big-n { font-family: var(--ff-head); font-weight: 700; letter-spacing: -.04em; line-height: .9; color: var(--danger); white-space: nowrap; font-size: clamp(3.5rem, 12vw, 8.5rem); font-variant-numeric: tabular-nums; }
+/* Size the figure from its own panel so it can never outgrow it (the figure is ~2.9em wide). */
+@supports (font-size: 1cqw) { .big-n { font-size: clamp(3.5rem, 31cqw, 8.5rem); } }
+.big-l { font-family: var(--ff-head); font-weight: 600; font-size: clamp(1.125rem, 1rem + .5vw, 1.375rem); line-height: 1.4; max-width: 24ch; }
+.big-s { font-size: 15px; color: var(--muted); line-height: 1.55; padding-top: 20px; border-top: 1px solid var(--border); }
+
+.chart-h { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; align-items: baseline; }
+.chart-h h3 { font-family: var(--ff-head); font-weight: 600; font-size: 16px; line-height: 1.4; }
+.chart-h span { font-size: 13px; color: var(--muted); }
+.bars { margin-top: 32px; height: 300px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(8px, 2vw, 24px); align-items: end; }
+.bar-col { height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; gap: 10px; }
+.bar-v { white-space: nowrap; text-align: center; font-family: var(--ff-head); font-weight: 700; font-size: clamp(13px, 1.1vw + 8px, 18px); font-variant-numeric: tabular-nums; opacity: 0; transform: translateY(8px); transition: opacity .6s, transform .6s var(--ease); transition-delay: calc(var(--i) * .12s + .6s); }
+.bar { height: 0; border-radius: 10px 10px 4px 4px; background: color-mix(in srgb, var(--danger) 26%, transparent); transition: height 1.3s var(--ease); transition-delay: calc(var(--i) * .12s); }
+.bar-col.last .bar { background: var(--danger); }
+.bar-y { text-align: center; font-size: 13px; color: var(--muted); font-weight: 500; }
+.chart.is-in .bar { height: var(--h); }
+.chart.is-in .bar-v { opacity: 1; transform: none; }
+.chart-n { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 14px; color: var(--muted); display: flex; gap: 10px; align-items: flex-start; line-height: 1.55; }
+.chart-n .ic { font-size: 16px; margin-top: 3px; color: var(--neutral); }
+/* Small phones: tighter panels and chart labels (must come after the base chart rules) */
+@media (max-width: 480px) {
+  .panel { padding: 24px; }
+  .bars { gap: 6px; height: 260px; }
+  .bar-v { font-size: 12px; letter-spacing: -.02em; }
+}
+@media (max-width: 380px) { .bar-v { font-size: 11px; letter-spacing: -.03em; } }
+
+.stat-row { display: grid; gap: 24px; margin-top: 24px; }
+@media (min-width: 768px) { .stat-row { grid-template-columns: repeat(3, 1fr); } }
+.stat { background: var(--lavender); border: 1px solid transparent; border-radius: var(--r-card); padding: 28px; transition: border-color .3s, box-shadow .3s, transform .3s var(--ease); }
+.stat:hover { border-color: color-mix(in srgb, var(--brand) 40%, transparent); box-shadow: 0 20px 40px -26px color-mix(in srgb, var(--brand) 50%, transparent); transform: translateY(-3px); }
+.stat-n { font-family: var(--ff-head); font-weight: 700; font-size: clamp(2.75rem, 2rem + 2vw, 3.75rem); line-height: 1; letter-spacing: -.03em; color: var(--brand); font-variant-numeric: tabular-nums; }
+.stat-l { margin-top: 12px; font-size: 15px; line-height: 1.55; color: var(--muted); }
+.stat-l b { color: var(--ink); font-weight: 700; }
+
+.perspective { margin-top: 24px; display: grid; gap: 16px; padding: 28px; border-left: 3px solid var(--brand); background: var(--brand-lite); border-radius: 0 var(--r-card) var(--r-card) 0; }
+@media (min-width: 768px) { .perspective { grid-template-columns: 220px 1fr; gap: 32px; align-items: start; padding: 32px; } }
+.perspective h3 { font-family: var(--ff-head); font-size: 18px; line-height: 1.35; font-weight: 700; }
+.perspective p { color: var(--muted); font-size: 16px; line-height: 1.65; }
+.perspective p b { color: var(--ink); }
+
+/* ---------- 03 · Ownership (brand section) ---------- */
+.own-h { margin-top: 64px; font-family: var(--ff-head); font-weight: 600; font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); line-height: 1.3; }
+.route { position: relative; margin-top: 32px; display: grid; gap: 16px; }
+.route::before { content: ""; position: absolute; left: 27px; top: 28px; bottom: 28px; width: 2px; background: repeating-linear-gradient(to bottom, rgba(255,255,255,.4) 0 8px, transparent 8px 16px); }
+.route-dot { position: absolute; left: 20px; top: 21px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 6px rgba(255,255,255,.2); animation: travel-y 10s ease-in-out infinite; z-index: 2; }
+@keyframes travel-y { 0% { transform: translateY(0); } 100% { transform: translateY(var(--span, 560px)); } }
+.node { position: relative; display: flex; gap: 20px; align-items: flex-start; padding: 20px 24px 20px 20px; border-radius: var(--r-card); border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); transition: background-color .35s, border-color .35s, transform .35s var(--ease); z-index: 1; }
+.node:hover, .node:focus-within { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.3); transform: translateY(-3px); }
+.node .tag { flex: none; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: #fff; color: var(--brand); font-family: var(--ff-head); font-weight: 700; font-size: 11px; letter-spacing: .04em; }
+.node h4 { font-family: var(--ff-head); font-size: 18px; line-height: 1.3; font-weight: 600; }
+.node p { margin-top: 6px; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,.86); }
+.node .who { display: inline-block; margin-top: 10px; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,.12); font-size: 13px; line-height: 1.5; color: #fff; }
+@keyframes travel-x { 0% { transform: translateX(0); } 100% { transform: translateX(var(--span, 1000px)); } }
+@media (min-width: 900px) {
+  .route { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; padding-top: 40px; }
+  .route::before { left: 28px; right: 28px; top: 13px; bottom: auto; width: auto; height: 2px; background: repeating-linear-gradient(to right, rgba(255,255,255,.4) 0 8px, transparent 8px 16px); }
+  .route-dot { left: 20px; top: 6px; animation-name: travel-x; }
+  .node { flex-direction: column; gap: 16px; padding: 24px; }
+}
+.gaps { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+.gap-pill { display: inline-flex; align-items: center; gap: 10px; padding: 12px 20px; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); font-size: 15px; font-weight: 500; line-height: 1.2; }
+.gap-pill .ic { font-size: 16px; color: var(--lavender); }
+.pivot { margin-top: 56px; font-family: var(--ff-head); font-weight: 600; font-size: clamp(1.25rem, 1rem + 1.2vw, 1.875rem); line-height: 1.4; max-width: 32ch; }
+.pivot span { color: var(--lavender); }
+
+/* ---------- 04 · What we are building ---------- */
+.flow { display: grid; gap: 24px; margin-top: 64px; }
+@media (min-width: 640px) { .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1040px) { .flow { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.fstep { position: relative; background: #fff; border: 1px solid var(--border); border-radius: var(--r-card); padding: 28px; transition: border-color .3s, box-shadow .3s, transform .3s var(--ease); }
+.fstep:hover { border-color: color-mix(in srgb, var(--brand) 40%, transparent); box-shadow: 0 20px 40px -26px color-mix(in srgb, var(--brand) 50%, transparent); transform: translateY(-4px); }
+.fic { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 14px; background: color-mix(in srgb, var(--brand) 10%, transparent); color: var(--brand); font-size: 24px; transition: background-color .3s, color .3s; }
+.fstep:hover .fic { background: var(--brand); color: #fff; }
+.fnum { position: absolute; top: 24px; right: 28px; font-family: var(--ff-head); font-weight: 700; font-size: 13px; letter-spacing: .1em; color: var(--neutral); }
+.fstep h3 { margin-top: 24px; font-family: var(--ff-head); font-weight: 700; font-size: 22px; line-height: 1.2; }
+.fstep p { margin-top: 10px; font-size: 15px; line-height: 1.6; color: var(--muted); }
+@media (min-width: 1040px) {
+  .fstep:not(:last-child)::after {                 /* connector line that draws on reveal */
+    content: ""; position: absolute; top: 54px; left: calc(100% + 4px); width: 16px; height: 2px; background: var(--brand);
+    transform: scaleX(0); transform-origin: 0 50%; transition: transform .6s var(--ease); transition-delay: calc(var(--d, 0s) + .5s);
+  }
+  .fstep.is-in:not(:last-child)::after { transform: scaleX(1); }
+}
+.principles { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 40px; }
+.pchip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-size: 14px; color: var(--ink); line-height: 1.2; }
+.pchip .ic { color: var(--brand); font-size: 15px; }
+.devnote { margin-top: 24px; font-size: 14px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.devnote i { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex: none; }
+
+/* ---------- Final subscribe ---------- */
+.cta-in { display: grid; gap: 48px; align-items: end; }
+@media (min-width: 980px) { .cta-in { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 64px; } }
+.cta .h2 { max-width: 16ch; }
+.cta-form { width: 100%; max-width: 560px; }
+.cta-meta { margin-top: 28px; display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,.86); }
+.cta-meta .dot { background: #fff; } .cta-meta .dot::after { background: #fff; }
+.sec-brand .btn-primary.on-white { background: #fff; color: var(--brand); box-shadow: none; }
+.sec-brand .btn-primary.on-white:hover { background: var(--lavender); }
+.sec-brand .btn-primary.on-white .spin { border-color: color-mix(in srgb, var(--brand) 25%, transparent); border-top-color: var(--brand); }
+
+/* ---------- Footer ---------- */
+.foot { border-top: 1px solid var(--border); background: var(--bg); padding-block: 56px 40px; }
+.foot-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
+.foot-tag { font-size: 15px; color: var(--muted); }
+.src { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); }
+.src h2 { font-family: var(--ff-head); font-size: 12px; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--brand); }
+.src ol { margin-top: 20px; display: grid; gap: 12px; list-style: decimal; padding-left: 20px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+.src li::marker { color: var(--brand); font-weight: 700; }
+.src a { color: var(--brand); text-underline-offset: 3px; }
+.foot-b { margin-top: 32px; font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+/* ---------- Scroll reveal ---------- */
+html.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: var(--d, 0s); }
+html.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
+  html.js .rise, html.js .h-line > span, html.js .reveal { opacity: 1; transform: none; }
+  .strip { animation: none; transform: translateY(-1800px); }
+  .pin-chip, .rep { animation: none; }
+  .ph::after { opacity: .45; transform: scale(.9); }
+  .bar { height: var(--h); } .bar-v { opacity: 1; transform: none; }
+  .xs .wheel { display: none; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+<!-- ============================== NAV ============================== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="mark" href="#top" aria-label="Pothole India — home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><ellipse cx="16" cy="17" rx="9" ry="6.5" fill="none" stroke="#fff" stroke-width="2"/><ellipse cx="16" cy="17" rx="3.6" ry="2.4" fill="#fff"/></svg>
+      <span>Pothole India</span>
+    </a>
+    <div class="nav-r">
+      <button class="btn btn-primary btn-sm" type="button" data-scroll-subscribe>Notify me <svg class="ic ic-arrow"><use href="#i-arrow"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<!-- ============================== HERO ============================== -->
+<section class="sec hero" id="top" aria-labelledby="h1">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <span class="chip rise" style="--d:.05s"><i class="dot"></i>Coming soon</span>
+
+        <h1 class="h1" id="h1">
+          <span class="h-line" style="--d:.15s"><span>Every pothole</span></span>
+          <span class="h-line" style="--d:.25s"><span>has an owner.</span></span>
+          <span class="h-line accent" style="--d:.38s"><span>Soon, you’ll know who.</span></span>
+        </h1>
+
+        <p class="lead rise" style="--d:.55s">
+          Potholes killed <strong>2,385 people in India in 2024</strong>.<sup class="ref"><a href="#src-1" aria-label="Source 1">1</a></sup>
+          Pothole India is a public platform to report, track and close road defects — so every pothole has a name against it and a deadline attached.
+        </p>
+
+        <div class="hero-actions rise" style="--d:.7s">
+          <form class="sub" id="hero-form" novalidate data-source="hero" aria-label="Get notified when Pothole India launches">
+            <div class="sub-field">
+              <svg class="ic ic-mail" aria-hidden="true"><use href="#i-mail"/></svg>
+              <label class="sr-only" for="email-hero">Email address</label>
+              <input id="email-hero" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="Your email address" required aria-describedby="msg-hero">
+              <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+              <button class="btn btn-primary" type="submit"><span class="lbl">Notify me</span><svg class="ic ic-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="spin" aria-hidden="true"></span></button>
+            </div>
+            <p class="sub-msg" id="msg-hero" role="status" aria-live="polite"></p>
+            <p class="sub-note">No spam. Launch updates only.</p>
+            <div class="sub-done" role="status">
+              <span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+              <div><b>You’re on the list.</b><span>We’ll email you the moment Pothole India opens.</span></div>
+            </div>
+          </form>
+          <div class="hero-more">
+            <a class="link-down" href="#story"><span class="circ"><svg class="ic" aria-hidden="true"><use href="#i-down"/></svg></span>Why this matters</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Illustrative scene: a road in perspective, potholes “pinging” as they are detected -->
+      <div class="scene rise" style="--d:.45s" aria-hidden="true">
+        <div class="road-vp">
+          <div class="road">
+            <div class="strip">
+              <div class="tile">
+                <i class="ph" style="--x:32%;--y:220px;--s:96px;--r:-8deg;--dl:0s"></i>
+                <i class="ph" style="--x:66%;--y:600px;--s:84px;--r:12deg;--dl:.9s"></i>
+                <i class="ph" style="--x:44%;--y:980px;--s:108px;--r:4deg;--dl:1.7s"></i>
+                <i class="ph" style="--x:72%;--y:1330px;--s:80px;--r:-14deg;--dl:.4s"></i>
+                <i class="ph" style="--x:28%;--y:1720px;--s:100px;--r:10deg;--dl:1.3s"></i>
+                <i class="ph" style="--x:60%;--y:2090px;--s:90px;--r:-4deg;--dl:2.1s"></i>
+                <i class="ph" style="--x:38%;--y:2450px;--s:104px;--r:8deg;--dl:.6s"></i>
+                <i class="ph" style="--x:68%;--y:2800px;--s:86px;--r:-10deg;--dl:1.5s"></i>
+              </div>
+              <div class="tile">
+                <i class="ph" style="--x:32%;--y:220px;--s:96px;--r:-8deg;--dl:0s"></i>
+                <i class="ph" style="--x:66%;--y:600px;--s:84px;--r:12deg;--dl:.9s"></i>
+                <i class="ph" style="--x:44%;--y:980px;--s:108px;--r:4deg;--dl:1.7s"></i>
+                <i class="ph" style="--x:72%;--y:1330px;--s:80px;--r:-14deg;--dl:.4s"></i>
+                <i class="ph" style="--x:28%;--y:1720px;--s:100px;--r:10deg;--dl:1.3s"></i>
+                <i class="ph" style="--x:60%;--y:2090px;--s:90px;--r:-4deg;--dl:2.1s"></i>
+                <i class="ph" style="--x:38%;--y:2450px;--s:104px;--r:8deg;--dl:.6s"></i>
+                <i class="ph" style="--x:68%;--y:2800px;--s:86px;--r:-10deg;--dl:1.5s"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pin-chip"><span class="pi"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span>Pinned to map</div>
+
+        <div class="rep" id="rep">
+          <div class="rep-h"><b>Pothole report</b><em>Illustrative</em></div>
+          <ol>
+            <li class="done"><i></i>Reported</li>
+            <li class="done"><i></i>Routed to road owner</li>
+            <li><i></i>Fix scheduled</li>
+            <li class="final"><i></i>Verified &amp; closed</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 01 · HOW IT STARTS (lavender) ============================== -->
+<section class="sec sec-lite" id="story" aria-labelledby="h-01">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="n">01</span> How it starts</span>
+      <h2 class="h2" id="h-01">It starts with a crack.<br><span class="accent">Water does the rest.</span></h2>
+      <p class="lead">A hairline crack lets water into the layers under the surface. Every wheel that rolls over it pumps that water through weakened road. The surface breaks up, loose material is thrown out, and the hole grows.</p>
+    </div>
+
+    <div class="xs-grid">
+      <figure class="xs-fig reveal" id="xs-fig" style="--d:.1s">
+        <svg id="xs" class="xs on-1 on-2 on-3 on-4" viewBox="80 54 480 332" role="img" aria-labelledby="xs-t xs-d">
+          <title id="xs-t">How a pothole forms</title>
+          <desc id="xs-d">Cross-section of a road. A crack opens in the surface, rain seeps into the layers below, wheels break the weakened surface apart, and a pothole opens.</desc>
+          <defs><clipPath id="roadClip"><rect x="40" y="150" width="560" height="230"/></clipPath></defs>
+
+          <!-- rain -->
+          <g class="rain a2">
+            <path class="drop" d="M236 70v12" style="--dl:0s"/><path class="drop" d="M272 60v12" style="--dl:.35s"/>
+            <path class="drop" d="M308 74v12" style="--dl:.7s"/><path class="drop" d="M344 64v12" style="--dl:.15s"/>
+            <path class="drop" d="M380 72v12" style="--dl:.55s"/><path class="drop" d="M416 62v12" style="--dl:.9s"/>
+            <path class="drop" d="M200 66v12" style="--dl:.8s"/>
+          </g>
+
+          <g clip-path="url(#roadClip)">
+            <rect class="l-surface" x="40" y="150" width="560" height="36"/>
+            <rect class="l-base"    x="40" y="186" width="560" height="72"/>
+            <rect class="l-sub"     x="40" y="258" width="560" height="64"/>
+            <rect class="l-soil"    x="40" y="322" width="560" height="58"/>
+
+            <ellipse class="wet a2" cx="320" cy="226" rx="104" ry="46"/>
+            <g class="seep a2">
+              <path class="stk" d="M318 188C318 214 298 234 290 264"/>
+              <path class="stk" d="M322 188C324 212 346 236 356 268"/>
+              <path class="stk" d="M320 190L320 262"/>
+            </g>
+            <g class="crack a1">
+              <path class="stk" d="M320 150L315 160L323 168L317 178L321 188"/>
+              <g class="a3"><path class="stk" d="M317 178L303 184"/><path class="stk" d="M323 168L338 173"/><path class="stk" d="M321 188L315 202L324 216"/></g>
+            </g>
+            <polygon class="chunk a3" points="298,150 318,150 314,165 303,163"/>
+            <polygon class="chunk a3" points="324,150 344,150 340,164 328,168"/>
+            <text class="t-w" x="98" y="173">Surface</text>
+            <text class="t-i" x="98" y="228">Base</text>
+            <text class="t-i" x="98" y="295">Sub-base</text>
+            <text class="t-i" x="98" y="355">Soil</text>
+          </g>
+
+          <!-- the hole -->
+          <path class="hole a4" d="M258 146H384V150Q356 150 352 176Q348 210 328 218Q304 210 298 178Q294 150 258 150Z"/>
+          <path class="hole-in a4" d="M258 150Q294 150 298 178Q304 210 328 218Q348 210 352 176Q356 150 384 150L384 154L258 154Z"/>
+          <ellipse class="puddle a4" cx="326" cy="209" rx="19" ry="4.5"/>
+          <g class="a4">
+            <polygon class="deb" points="262,148 272,148 268,140" style="--dx:-34px;--dy:-26px;--dl:.0s"/>
+            <polygon class="deb" points="372,148 384,148 378,138" style="--dx:38px;--dy:-34px;--dr:-80deg;--dl:.08s"/>
+            <polygon class="deb" points="280,148 288,148 284,142" style="--dx:-18px;--dy:-48px;--dl:.14s"/>
+            <polygon class="deb" points="356,148 366,148 361,141" style="--dx:20px;--dy:-52px;--dr:120deg;--dl:.04s"/>
+            <polygon class="deb" points="248,148 256,148 252,143" style="--dx:-52px;--dy:-10px;--dl:.2s"/>
+            <polygon class="deb" points="388,148 396,148 392,142" style="--dx:54px;--dy:-14px;--dr:-60deg;--dl:.1s"/>
+          </g>
+          <g class="tag a4">
+            <line x1="328" y1="106" x2="328" y2="140"/>
+            <rect x="282" y="74" width="92" height="32" rx="16"/>
+            <text x="328" y="95" text-anchor="middle">Pothole</text>
+          </g>
+
+          <!-- wheel -->
+          <g class="wheel a3">
+            <circle class="tire" cx="0" cy="122" r="28"/>
+            <circle class="hub" cx="0" cy="122" r="10"/>
+            <g class="wheel-spin" style="transform-origin:0 122px"><path class="spoke" d="M0 114V130M-8 122H8"/></g>
+          </g>
+        </svg>
+        <figcaption class="sr-only">Cross-section diagram showing the four stages of pothole formation.</figcaption>
+      </figure>
+
+      <div class="reveal" style="--d:.2s">
+        <ul class="xsteps" id="xsteps">
+          <li><button class="xstep is-active" type="button" data-stage="1" aria-pressed="true"><span class="xn">01</span><span class="xt"><b>A hairline crack</b><span>Age, heat and heavy loads open small cracks. This is the cheapest stage to fix.</span></span><span class="xbar" aria-hidden="true"></span></button></li>
+          <li><button class="xstep" type="button" data-stage="2" aria-pressed="false"><span class="xn">02</span><span class="xt"><b>Water gets in</b><span>Rain seeps through the crack and softens the layers underneath.</span></span><span class="xbar" aria-hidden="true"></span></button></li>
+          <li><button class="xstep" type="button" data-stage="3" aria-pressed="false"><span class="xn">03</span><span class="xt"><b>Traffic does the rest</b><span>Wheels pump water through the weak layer and break the surface apart.</span></span><span class="xbar" aria-hidden="true"></span></button></li>
+          <li><button class="xstep" type="button" data-stage="4" aria-pressed="false"><span class="xn">04</span><span class="xt"><b>The hole opens</b><span>Loose material is thrown out. Every vehicle that follows now meets a hazard.</span></span><span class="xbar" aria-hidden="true"></span></button></li>
+        </ul>
+        <p class="xs-callout"><b>Caught at stage 1, it is a routine repair.</b> Missed until stage 4, it is a crash risk.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 02 · WHAT IT COSTS (white) ============================== -->
+<section class="sec sec-white" id="numbers" aria-labelledby="h-02">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="n">02</span> What it costs</span>
+      <h2 class="h2" id="h-02">Then it becomes a crash.<br><span class="accent">And the toll keeps rising.</span></h2>
+      <p class="lead">Pothole-related deaths have risen every year since 2021. In 2024 alone, 2,385 people were killed in crashes the official record attributes to potholes.<sup class="ref"><a href="#src-1" aria-label="Source 1">1</a></sup></p>
+    </div>
+
+    <div class="num-grid">
+      <div class="panel big reveal" style="--d:.05s">
+        <div>
+          <div class="big-n" data-count="2385" aria-label="2,385">2,385</div>
+        </div>
+        <p class="big-l">people killed in pothole-related road accidents in India in 2024.</p>
+        <p class="big-s">Up from 1,555 in 2020. Official figures count recorded crashes only — crashes that were never reported are not in these numbers.</p>
+      </div>
+
+      <figure class="panel chart reveal" id="chart" style="--d:.15s">
+        <div class="chart-h">
+          <h3>People killed in pothole-related accidents, India</h3>
+          <span>2020 – 2024 · <a href="#src-1" style="color:var(--brand)">Source 1</a></span>
+        </div>
+        <div class="bars" role="img" aria-label="Bar chart. Deaths in pothole-related accidents: 2020, 1,555. 2021, 1,481. 2022, 1,856. 2023, 2,161. 2024, 2,385.">
+          <div class="bar-col" style="--i:0;--h:65.2%"><div class="bar-v">1,555</div><div class="bar"></div><div class="bar-y">2020</div></div>
+          <div class="bar-col" style="--i:1;--h:62.1%"><div class="bar-v">1,481</div><div class="bar"></div><div class="bar-y">2021</div></div>
+          <div class="bar-col" style="--i:2;--h:77.8%"><div class="bar-v">1,856</div><div class="bar"></div><div class="bar-y">2022</div></div>
+          <div class="bar-col" style="--i:3;--h:90.6%"><div class="bar-v">2,161</div><div class="bar"></div><div class="bar-y">2023</div></div>
+          <div class="bar-col last" style="--i:4;--h:100%"><div class="bar-v" style="color:var(--danger)">2,385</div><div class="bar"></div><div class="bar-y">2024</div></div>
+        </div>
+        <p class="chart-n"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg><span>Bars show deaths, not accidents. Heights are proportional to the 2024 figure.</span></p>
+      </figure>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat reveal" style="--d:.05s">
+        <div class="stat-n"><span data-count="53" data-prefix="+" data-suffix="%">+53%</span></div>
+        <p class="stat-l"><b>Rise in pothole deaths since 2020</b> — from 1,555 to 2,385.<sup class="ref"><a href="#src-2" aria-label="Derived figures">2</a></sup></p>
+      </div>
+      <div class="stat reveal" style="--d:.15s">
+        <div class="stat-n"><span data-count="6.5" data-decimals="1">6.5</span></div>
+        <p class="stat-l"><b>People killed every day</b> in 2024 — more than six, every single day.<sup class="ref"><a href="#src-2" aria-label="Derived figures">2</a></sup></p>
+      </div>
+      <div class="stat reveal" style="--d:.25s">
+        <div class="stat-n"><span data-count="9438">9,438</span></div>
+        <p class="stat-l"><b>People killed in five years</b>, 2020 to 2024, across 23,056 pothole-related accidents.<sup class="ref"><a href="#src-1" aria-label="Source 1">1</a></sup></p>
+      </div>
+    </div>
+
+    <div class="perspective reveal">
+      <h3>In proportion</h3>
+      <p>Potholes account for about <b>1.2% of India’s road deaths</b> — 2,161 of 1,72,890 in 2023.<sup class="ref"><a href="#src-2" aria-label="Derived figures">2</a>,<a href="#src-3" aria-label="Source 3">3</a></sup> A small share, but a category that is, by definition, a maintenance failure. Every one of these crashes happened on a road that some authority is responsible for keeping in repair.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== 03 · WHY IT STAYS (brand) ============================== -->
+<section class="sec sec-brand" id="ownership" aria-labelledby="h-03">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="n">03</span> Why it stays broken</span>
+      <h2 class="h2 wide" id="h-03">When everyone owns the road,<br><span class="accent">no one owns the pothole.</span></h2>
+      <p class="lead">India’s roads are split between national, state, city and village authorities. Before a citizen can complain, they have to work out who is responsible — and each authority has its own channel. Rarely is there a public record of what was reported, who is accountable and when it will be fixed.</p>
+    </div>
+
+    <h3 class="own-h reveal">One journey. Up to four owners.</h3>
+
+    <div class="route reveal" id="route" style="--d:.1s">
+      <i class="route-dot" aria-hidden="true"></i>
+      <article class="node" tabindex="0">
+        <span class="tag">City</span>
+        <div><h4>Your street</h4><p>Lanes, colony roads and city arterials.</p><span class="who">Municipal corporation or local body</span></div>
+      </article>
+      <article class="node" tabindex="0">
+        <span class="tag">SH</span>
+        <div><h4>State highway</h4><p>The road that connects your city to the next.</p><span class="who">State PWD or road development body</span></div>
+      </article>
+      <article class="node" tabindex="0">
+        <span class="tag">NH</span>
+        <div><h4>National highway</h4><p>Long-distance corridors and expressways.</p><span class="who">NHAI, MoRTH or state PWD</span></div>
+      </article>
+      <article class="node" tabindex="0">
+        <span class="tag">Rural</span>
+        <div><h4>Village road</h4><p>The last stretch into a village.</p><span class="who">Panchayati Raj or PMGSY agency</span></div>
+      </article>
+    </div>
+
+    <div class="gaps reveal" style="--d:.1s">
+      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg>Different owner for each stretch</span>
+      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>Different complaint channel for each owner</span>
+      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>No shared deadline for any of them</span>
+    </div>
+
+    <p class="pivot reveal">The pothole is the symptom. <span>The missing owner is the problem.</span></p>
+  </div>
+</section>
+
+<!-- ============================== 04 · WHAT WE ARE BUILDING (lavender) ============================== -->
+<section class="sec sec-lite" id="build" aria-labelledby="h-04">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span class="n">04</span> What we’re building</span>
+      <h2 class="h2 wide" id="h-04">One place to report it.<br><span class="accent">One clock until it’s fixed.</span></h2>
+      <p class="lead">Pothole India is being built to give every road defect a record, a responsible authority and a deadline — visible to everyone.</p>
+    </div>
+
+    <ol class="flow">
+      <li class="fstep reveal" style="--d:0s"><span class="fnum">01</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span><h3>Report</h3><p>A photo and your location. You don’t need to know who owns the road.</p></li>
+      <li class="fstep reveal" style="--d:.12s"><span class="fnum">02</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg></span><h3>Route</h3><p>Your report goes to the authority responsible for that stretch.</p></li>
+      <li class="fstep reveal" style="--d:.24s"><span class="fnum">03</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg></span><h3>Track</h3><p>A public status and a deadline for every report, visible to everyone.</p></li>
+      <li class="fstep reveal" style="--d:.36s"><span class="fnum">04</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span><h3>Close</h3><p>A report is marked resolved only after the repair is verified.</p></li>
+    </ol>
+
+    <div class="principles reveal">
+      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Public record</span>
+      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Time-bound</span>
+      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Verified closure</span>
+    </div>
+    <p class="devnote reveal"><i></i>In development. Features and launch timing may change.</p>
+  </div>
+</section>
+
+<!-- ============================== SUBSCRIBE (brand) ============================== -->
+<section class="sec sec-brand cta" id="subscribe" aria-labelledby="h-cta">
+  <div class="wrap">
+    <div class="cta-in">
+      <div class="reveal">
+        <span class="eyebrow">Launching soon</span>
+        <h2 class="h2" id="h-cta">Be first to know<br><span class="accent">when we go live.</span></h2>
+        <p class="lead">Leave your email and we’ll tell you the moment Pothole India opens.</p>
+      </div>
+      <div class="cta-form reveal" style="--d:.15s">
+        <form class="sub" id="final-form" novalidate data-source="footer" aria-label="Get notified when Pothole India launches">
+          <div class="sub-field">
+            <svg class="ic ic-mail" aria-hidden="true"><use href="#i-mail"/></svg>
+            <label class="sr-only" for="email-final">Email address</label>
+            <input id="email-final" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="Your email address" required aria-describedby="msg-final">
+            <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button class="btn btn-primary on-white" type="submit"><span class="lbl">Notify me</span><svg class="ic ic-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="spin" aria-hidden="true"></span></button>
+          </div>
+          <p class="sub-msg" id="msg-final" role="status" aria-live="polite"></p>
+          <p class="sub-note">No spam. Launch updates only.</p>
+          <div class="sub-done" role="status">
+            <span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <div><b>You’re on the list.</b><span>We’ll email you the moment Pothole India opens.</span></div>
+          </div>
+        </form>
+        <p class="cta-meta"><i class="dot"></i>Coming soon</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="mark" href="#top" aria-label="Pothole India — back to top">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><ellipse cx="16" cy="17" rx="9" ry="6.5" fill="none" stroke="#fff" stroke-width="2"/><ellipse cx="16" cy="17" rx="3.6" ry="2.4" fill="#fff"/></svg>
+        <span>Pothole India</span>
+      </a>
+      <p class="foot-tag">Public accountability for India’s roads.</p>
+    </div>
+
+    <div class="src">
+      <h2>Sources &amp; notes</h2>
+      <ol>
+        <li id="src-1">Pothole-related deaths and accidents, 2020–2024: Ministry of Road Transport and Highways (MoRTH) data, from the Union Minister’s written reply in Parliament; reported by <a href="https://www.tribuneindia.com/news/uttar-pradesh/pothole-deaths-rise-53-per-cent-in-5-years-up-accounts-for-over-half-of-9400-fatalities" target="_blank" rel="noopener">The Tribune</a>, updated 14 February 2026. Series: 1,555 · 1,481 · 1,856 · 2,161 · 2,385 deaths (total 9,438; 23,056 accidents).</li>
+        <li id="src-2">Derived by Pothole India from source 1: +53% = (2,385 − 1,555) ÷ 1,555; 6.5 a day = 2,385 ÷ 366 days (2024 was a leap year); 1.2% = 2,161 ÷ 1,72,890.</li>
+        <li id="src-3">Total road deaths in 2023 (1,72,890): MoRTH, <em>Road Accidents in India 2023</em>; reported by <a href="https://www.business-standard.com/india-news/india-road-accidents-deaths-injuries-report-road-highway-ministry-nitin-gadkari-125082801527_1.html" target="_blank" rel="noopener">Business Standard</a>, 28 August 2025.</li>
+        <li>Road ownership shown is indicative. Responsibility for a given stretch varies by state and by road.</li>
+      </ol>
+    </div>
+
+    <div class="foot-b">
+      <span>© 2026 Pothole India. All rights reserved.</span>
+      <span>Coming soon.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"/><circle cx="12" cy="13" r="3"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+</svg>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ======================================================================
+     CONFIG — wire up the subscribe form here.
+     Set `endpoint` to any URL that accepts a JSON POST: Formspree, a
+     Supabase Edge Function, a Vercel / Netlify function, your own API, or
+     a Google Apps Script web app (for Apps Script, change the Content-Type
+     below to 'text/plain;charset=utf-8' to avoid a CORS preflight).
+     Until an endpoint is set, sign-ups are NOT sent anywhere (preview mode).
+     ====================================================================== */
+  var CONFIG = {
+    endpoint: '',
+    storageKey: 'pothole-india-cfi:subscribed'
+  };
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* ---------- scroll progress + sticky nav border ---------- */
+  var bar = $('#progress'), nav = $('#nav'), ticking = false;
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.transform = 'scaleX(' + (h > 0 ? Math.min(window.scrollY / h, 1) : 0) + ')';
+    nav.classList.toggle('is-stuck', window.scrollY > 8);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+
+  /* ---------- count-up ---------- */
+  function fmt(el, v) {
+    var dec = parseInt(el.dataset.decimals || '0', 10);
+    return (el.dataset.prefix || '') + new Intl.NumberFormat('en-IN', { minimumFractionDigits: dec, maximumFractionDigits: dec }).format(v) + (el.dataset.suffix || '');
+  }
+  var counters = $$('[data-count]');
+  if (!reduce) counters.forEach(function (el) { el.textContent = fmt(el, 0); });
+  function countUp(el) {
+    var target = parseFloat(el.dataset.count);
+    if (reduce) { el.textContent = fmt(el, target); return; }
+    var t0 = null, dur = 1800;
+    (function step(t) {
+      if (t0 === null) t0 = t;
+      var p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 4);
+      el.textContent = fmt(el, target * e);
+      if (p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  var supportsIO = 'IntersectionObserver' in window;
+  if (supportsIO) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        $$('[data-count]', e.target).forEach(countUp);
+        if (e.target.hasAttribute('data-count')) countUp(e.target);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+    $$('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    $$('.reveal').forEach(function (el) { el.classList.add('is-in'); });
+    counters.forEach(function (el) { el.textContent = fmt(el, parseFloat(el.dataset.count)); });
+  }
+
+  /* ---------- hero: report card cycles through its states ---------- */
+  var repItems = $$('#rep li');
+  if (repItems.length) {
+    var s = 2;
+    var paint = function () { repItems.forEach(function (li, i) { li.classList.toggle('done', i < s); }); };
+    paint();
+    if (reduce) { s = 4; paint(); }
+    else setInterval(function () { s = (s + 1) % 7; paint(); }, 1500);
+  }
+
+  /* ---------- 01: pothole formation cross-section ---------- */
+  var xs = $('#xs'), xsteps = $('#xsteps'), btns = $$('.xstep'), stage = 1, auto = !reduce, inView = false, timer = null;
+  function setStage(n) {
+    stage = n;
+    for (var i = 1; i <= 4; i++) xs.classList.toggle('on-' + i, i <= n);
+    btns.forEach(function (b, i) { var on = i + 1 === n; b.classList.toggle('is-active', on); b.setAttribute('aria-pressed', on); });
+  }
+  function queue() {
+    clearTimeout(timer);
+    if (!auto || !inView) return;
+    timer = setTimeout(function () { setStage(stage === 4 ? 1 : stage + 1); queue(); }, stage === 4 ? 4400 : 3000);
+  }
+  setStage(1);
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      auto = false; clearTimeout(timer);
+      xsteps.classList.add('is-paused');
+      setStage(parseInt(b.dataset.stage, 10));
+    });
+  });
+  if (supportsIO) {
+    new IntersectionObserver(function (en) {
+      inView = en[0].isIntersecting;
+      if (inView) { setStage(1); queue(); } else clearTimeout(timer);
+    }, { threshold: 0.35 }).observe($('#xs-fig'));
+  }
+  if (reduce) { xsteps.classList.add('is-paused'); setStage(4); }
+
+  /* ---------- 03: size the travelling dot to the route ---------- */
+  var route = $('#route'), dot = $('.route-dot');
+  function sizeRoute() {
+    if (!route) return;
+    var horiz = window.matchMedia('(min-width: 900px)').matches;
+    var nodes = $$('.node', route), last = nodes[nodes.length - 1];
+    var span = horiz ? (route.clientWidth - 56) : (last.offsetTop + 28 - 21);
+    dot.style.setProperty('--span', Math.max(span, 0) + 'px');
+  }
+  sizeRoute(); window.addEventListener('resize', sizeRoute);
+
+  /* ---------- subscribe ---------- */
+  var forms = $$('.sub');
+  var EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function store(get, val) {
+    try { return get ? localStorage.getItem(CONFIG.storageKey) : localStorage.setItem(CONFIG.storageKey, val); } catch (e) { return null; }
+  }
+  function markDone(email) {
+    forms.forEach(function (f) { f.classList.add('is-done'); });
+    store(false, email || '1');
+  }
+  function setMsg(form, text) {
+    var m = $('.sub-msg', form), field = $('.sub-field', form);
+    m.innerHTML = '';
+    if (text) {
+      var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('class', 'ic'); svg.setAttribute('aria-hidden', 'true'); svg.style.fontSize = '16px';
+      svg.innerHTML = '<use href="#i-alert"/>';
+      m.appendChild(svg); m.appendChild(document.createTextNode(text));
+    }
+    field.classList.toggle('is-invalid', !!text);
+  }
+  function setBusy(form, busy) {
+    var b = $('button[type="submit"]', form);
+    b.classList.toggle('is-loading', busy); b.disabled = busy;
+    $('.lbl', b).textContent = busy ? 'Sending' : 'Notify me';
+  }
+  function send(email, source) {
+    if (!CONFIG.endpoint) {
+      console.warn('[Pothole India] No subscribe endpoint configured — this email was NOT sent anywhere. Set CONFIG.endpoint in the page.');
+      return new Promise(function (r) { setTimeout(r, 700); });
+    }
+    return fetch(CONFIG.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email: email, source: source, page: location.href, at: new Date().toISOString() })
+    }).then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); });
+  }
+
+  forms.forEach(function (form) {
+    var input = $('input[type="email"]', form);
+    input.addEventListener('input', function () { setMsg(form, ''); });
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = input.value.trim();
+      if (!email) { setMsg(form, 'Enter your email address to get notified.'); input.focus(); return; }
+      if (!EMAIL.test(email)) { setMsg(form, 'That doesn’t look like a valid email address. Check it and try again.'); input.focus(); return; }
+      if ($('.hp', form).value) { markDone(); return; }          // honeypot: bots fill hidden fields
+      setMsg(form, ''); setBusy(form, true);
+      send(email, form.dataset.source).then(function () {
+        setBusy(form, false); markDone(email);
+      }).catch(function () {
+        setBusy(form, false); setMsg(form, 'Something went wrong on our side. Please try again in a moment.');
+      });
+    });
+  });
+  if (store(true)) forms.forEach(function (f) { f.classList.add('is-done'); });
+
+  /* ---------- nav "Notify me": focus the nearest form ---------- */
+  $$('[data-scroll-subscribe]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var behavior = reduce ? 'auto' : 'smooth';
+      var hero = $('#hero-form'), r = hero.getBoundingClientRect();
+      var heroVisible = r.top >= 0 && r.bottom <= window.innerHeight;
+      if (heroVisible || window.scrollY < window.innerHeight * 0.5) {
+        window.scrollTo({ top: 0, behavior: behavior });
+        $('#email-hero').focus({ preventScroll: true });
+      } else {
+        $('#subscribe').scrollIntoView({ behavior: behavior, block: 'center' });
+        setTimeout(function () { $('#email-final').focus({ preventScroll: true }); }, reduce ? 0 : 700);
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
