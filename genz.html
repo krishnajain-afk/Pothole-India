@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pothole India — shut up ***hole. Coming soon.</title>
-<meta name="description" content="India has swerved, slowed down and suffered enough. The potholes are getting filled. Pothole India, coming soon.">
+<title>Potholefree India — shut up ***hole. Coming soon.</title>
+<meta name="description" content="India has swerved, slowed down and suffered enough. The potholes are getting filled. Potholefree India, coming soon.">
 <meta name="theme-color" content="#FFD60A">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Shut up ***hole. — Pothole India, coming soon">
+<meta property="og:site_name" content="Cars24 Patch">
+<meta property="og:title" content="Shut up ***hole. — Potholefree India, coming soon">
 <meta property="og:description" content="India has swerved, slowed down and suffered enough. The potholes are getting filled.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FFD60A'/%3E%3Cellipse cx='16' cy='17' rx='11' ry='8' fill='%23121212'/%3E%3Ccircle cx='12' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='20' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='12.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3Ccircle cx='20.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3C/svg%3E">
@@ -16,11 +17,22 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-<script>document.documentElement.classList.add('js');</script>
+<script>
+/* Colour theme: ?theme=yellow|blue wins, then the saved choice, then blue. Set before first paint. */
+(function () {
+  var t = 'blue';
+  try {
+    var q = new URLSearchParams(location.search).get('theme'), s = localStorage.getItem('pothole-india-genz:theme');
+    t = (q === 'yellow' || q === 'blue') ? q : (s === 'yellow' || s === 'blue') ? s : 'blue';
+  } catch (e) {}
+  document.documentElement.setAttribute('data-theme', t);
+  document.documentElement.classList.add('js');
+})();
+</script>
 
 <style>
 /* ==========================================================================
-   Pothole India — the loud one.
+   Potholefree India — the loud one.
    Caution-tape yellow · asphalt black · electric blue · sticker pink.
    Bricolage Grotesque (display) · Space Mono (labels) · Permanent Marker (scribbles)
    ========================================================================== */
@@ -29,6 +41,12 @@
   --paper: #F6F1E6;
   --yellow: #FFD60A;
   --blue: #3B2BFF;
+  /* Theme roles. Yellow theme: yellow is the big colour, blue is the accent. The blue theme swaps them. */
+  --prim: var(--yellow); --on-prim: var(--ink);     /* nav, hero, tape, pills, call-to-action */
+  --acc: var(--blue);    --on-acc: var(--white);    /* stickers, highlight blocks, the game section */
+  --hi: #FFD60A;                                    /* bright text on black */
+  --focus: var(--blue); --edge: #FFD60A;
+  --squig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23121212' stroke-width='3' stroke-linecap='round'/></svg>");
   --pink: #FF5FA2;
   --red: #FF2D2D;
   --white: #FFFFFF;
@@ -55,7 +73,7 @@ h1, h2, h3, p, ul, ol, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 button, input { font: inherit; color: inherit; }
 a { color: inherit; }
-:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
 ::selection { background: var(--ink); color: var(--yellow); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -83,7 +101,7 @@ body::after {
 .btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
 .btn:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
 .btn[disabled] { cursor: progress; }
-.btn-yellow { background: var(--yellow); color: var(--ink); }
+.btn-yellow { background: var(--prim); color: var(--on-prim); }
 .btn-sm { height: 46px; padding: 0 20px; font-size: 15px; box-shadow: 4px 4px 0 var(--ink); }
 .btn-sm:hover { box-shadow: 6px 6px 0 var(--ink); }
 .btn .arr { display: inline-block; transition: transform .25s var(--spring); }
@@ -93,16 +111,19 @@ body::after {
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ---------- Nav ---------- */
-.nav { position: sticky; top: 0; z-index: 100; background: var(--yellow); border-bottom: var(--bd); }
+.nav { position: sticky; top: 0; z-index: 100; background: var(--prim); color: var(--on-prim); border-bottom: var(--bd); }
 .nav-in { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 800 24px/1 var(--ff-d); letter-spacing: -.03em; white-space: nowrap; }
 .logo svg { width: 36px; height: 36px; flex: none; transition: transform .4s var(--spring); }
 .logo:hover svg { transform: rotate(-12deg) scale(1.1); }
 @media (max-width: 420px) { .logo { font-size: 20px; gap: 8px; } .logo svg { width: 30px; height: 30px; } .btn-sm { padding: 0 16px; font-size: 14px; } }
+@media (max-width: 400px) { .nav-in { gap: 8px; } .logo { font-size: 18px; } }
 @media (max-width: 360px) { .nav-in { gap: 8px; } .logo { font-size: 17px; gap: 6px; } .logo svg { width: 26px; height: 26px; } .btn-sm { padding: 0 12px; font-size: 13px; gap: 6px; } }
+@media (max-width: 340px) { .logo { font-size: 15px; gap: 5px; } .logo svg { width: 24px; height: 24px; } }
+@media (max-width: 300px) { .wrap { padding-inline: 16px; } .logo { font-size: 14px; } .btn-sm .arr { display: none; } }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; background: var(--yellow); overflow: hidden; }
+.hero { position: relative; background: var(--prim); color: var(--on-prim); overflow: hidden; }
 .hero .wrap { position: relative; z-index: 1; }
 .hero-grid { display: grid; gap: 40px; align-items: center; padding-block: 40px 64px; }
 @media (min-width: 768px) { .hero-grid { padding-block: 56px 80px; } }
@@ -130,7 +151,7 @@ body::after {
 .censor .face { grid-area: 1 / 1; display: block; width: max-content; backface-visibility: hidden; transition: transform .75s var(--spring); }
 .censor .stars { justify-self: start; }
 .censor .pot {
-  justify-self: start; transform: rotateX(180deg); background: var(--blue); color: var(--white);
+  justify-self: start; transform: rotateX(180deg); background: var(--acc); color: var(--on-acc);
   border: .045em solid var(--ink); border-radius: .16em; padding: 0 .1em; rotate: -3deg; box-shadow: .055em .055em 0 var(--ink);
 }
 .censor.is-pot .stars { transform: rotateX(-180deg); }
@@ -145,15 +166,15 @@ body::after {
 .note-pot svg { width: 44px; height: 30px; flex: none; }
 
 .lead { margin-top: 8px; font: 600 clamp(1.3rem, 1rem + 1.5vw, 2rem)/1.35 var(--ff-d); letter-spacing: -.015em; max-width: 24ch; isolation: isolate; }
-.lead mark { position: relative; background: none; color: inherit; padding: 0 .14em; white-space: nowrap; }
+.lead mark { position: relative; background: none; color: var(--ink); padding: 0 .14em; white-space: nowrap; }
 .lead mark::before {
   content: ""; position: absolute; inset: .1em -.02em .02em; z-index: -1; background: var(--c); border: 2px solid var(--ink); border-radius: 6px;
   transform: skew(-6deg) rotate(-1.2deg) scaleX(0); transform-origin: left center; transition: transform .6s var(--ease) var(--d, .8s);
 }
 html.js .lead.in mark::before, html:not(.js) .lead mark::before { transform: skew(-6deg) rotate(-1.2deg) scaleX(1); }
-.lead mark.m-blue { color: var(--white); }
+.lead mark.m-blue { color: var(--on-acc); }
 .big-line { margin-top: 14px; font: 800 clamp(2rem, 1.2rem + 3.4vw, 3.8rem)/.95 var(--ff-d); letter-spacing: -.03em; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-transform: uppercase; max-width: 14ch; }
-.squig { background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23121212' stroke-width='3' stroke-linecap='round'/></svg>") repeat-x left bottom / 28px 10px; padding-bottom: .16em; }
+.squig { background: var(--squig) repeat-x left bottom / 28px 10px; padding-bottom: .16em; }
 .hero .sub { margin-top: 24px; }
 
 /* entrance */
@@ -166,10 +187,10 @@ html.js .slap { opacity: 0; animation: slap .7s var(--spring) var(--d, 0s) forwa
 .art { position: relative; width: 100%; max-width: 520px; margin-inline: auto; aspect-ratio: 1; container-type: inline-size; }
 .px { position: absolute; transform: translate(calc(var(--mx, 0) * var(--depth, 10) * 1px), calc(var(--my, 0) * var(--depth, 10) * 1px)); transition: transform .25s ease-out; }
 .ring { position: absolute; inset: 0; animation: spin 22s linear infinite; }
-.ring text { font: 700 11px var(--ff-m); letter-spacing: .02em; fill: var(--ink); }
+.ring text { font: 700 11px var(--ff-m); letter-spacing: .02em; fill: var(--on-prim); }
 .hole {
   position: absolute; inset: 15%; border-radius: 49% 51% 50% 50% / 52% 48% 52% 48%; background: var(--ink);
-  box-shadow: 0 0 0 1.4cqw var(--yellow), 0 0 0 2.4cqw var(--ink); display: grid; place-items: center;
+  box-shadow: 0 0 0 1.4cqw var(--prim), 0 0 0 2.4cqw var(--ink); display: grid; place-items: center;
 }
 .hole::before, .hole::after {
   content: ""; position: absolute; inset: -8%; border: 3px solid var(--ink); border-radius: 50%; opacity: 0; animation: ripple 3.6s ease-out infinite;
@@ -222,7 +243,7 @@ html.js .slap { opacity: 0; animation: slap .7s var(--spring) var(--d, 0s) forwa
   font: 500 17px var(--ff-d); color: var(--ink); box-shadow: var(--sh); outline: 0; transition: transform .18s var(--ease), box-shadow .18s var(--ease);
 }
 .sub input[type="email"]::placeholder { color: #6a6a6a; opacity: 1; }
-.sub input[type="email"]:focus { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--blue); }
+.sub input[type="email"]:focus { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--acc); }
 .sub-row.is-invalid input[type="email"] { box-shadow: 6px 6px 0 var(--red); }
 .hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .sub-msg { margin-top: 14px; font: 700 14px/1.4 var(--ff-m); }
@@ -244,7 +265,7 @@ html.js .slap { opacity: 0; animation: slap .7s var(--spring) var(--d, 0s) forwa
 /* ---------- Tape ---------- */
 .tapes { position: relative; height: clamp(170px, 24vw, 260px); background: var(--paper); overflow: hidden; border-top: var(--bd); }
 .tape { position: absolute; left: -6%; width: 112%; display: flex; overflow: hidden; white-space: nowrap; border-block: var(--bd); padding-block: 12px; }
-.tape.t1 { top: 24%; background: var(--yellow); rotate: -3deg; }
+.tape.t1 { top: 24%; background: var(--prim); color: var(--on-prim); rotate: -3deg; }
 .tape.t2 { top: 47%; background: var(--ink); color: var(--yellow); rotate: 2.2deg; border-color: var(--ink); }
 .tape-track { display: flex; flex: none; animation: marquee 28s linear infinite; }
 .tape.t2 .tape-track { animation-direction: reverse; animation-duration: 34s; }
@@ -258,7 +279,7 @@ html.js .slap { opacity: 0; animation: slap .7s var(--spring) var(--d, 0s) forwa
 @media (min-width: 1024px) { .sec { padding-block: 120px; } }
 .kicker { display: inline-block; font: 700 13px/1 var(--ff-m); letter-spacing: .14em; text-transform: uppercase; padding: 8px 12px; border: var(--bd); border-radius: 10px; background: var(--white); rotate: -1.5deg; }
 .h2 { margin-top: 22px; font: 800 clamp(2.8rem, 1rem + 7vw, 6.4rem)/.88 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
-.h2 .hi { background: var(--yellow); border: var(--bd); border-radius: 12px; padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.h2 .hi { background: var(--prim); color: var(--on-prim); border: var(--bd); border-radius: 12px; padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .sec-lead { margin-top: 20px; max-width: 36ch; font: 500 clamp(1.1rem, 1rem + .6vw, 1.4rem)/1.4 var(--ff-d); }
 
 html.js .reveal { opacity: 0; translate: 0 36px; transition: opacity .7s var(--ease), translate .8s var(--spring); transition-delay: var(--d, 0s); }
@@ -270,7 +291,7 @@ html.js .reveal.in { opacity: 1; translate: 0 0; }
 @media (min-width: 900px) { .cards { grid-template-columns: 1.25fr 1fr 1fr; align-items: stretch; } }
 .card { container-type: inline-size; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; min-width: 0; padding: 28px; border: var(--bd); border-radius: 26px; background: var(--white); box-shadow: var(--sh); rotate: var(--r, 0deg); transition: rotate .4s var(--spring), translate .4s var(--spring), box-shadow .3s; }
 .card:hover { rotate: 0deg; translate: 0 -6px; box-shadow: 10px 10px 0 var(--ink); }
-.card.c-blue { background: var(--blue); color: var(--white); }
+.card.c-blue { background: var(--acc); color: var(--on-acc); }
 .card.c-pink { background: var(--pink); }
 .card .n { font: 800 clamp(3.4rem, 33cqw, 9rem)/.88 var(--ff-d); letter-spacing: -.035em; font-stretch: 75%; font-variation-settings: 'wdth' 75; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .card.c-red .n { color: var(--red); }
@@ -281,12 +302,12 @@ html.js .reveal.in { opacity: 1; translate: 0 0; }
 .closer span { background: var(--ink); color: var(--yellow); padding: 0 .14em; border-radius: 8px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 
 /* game */
-.sec-blue { background: var(--blue); color: var(--white); border-block: var(--bd); overflow: hidden; }
+.sec-blue { background: var(--acc); color: var(--on-acc); border-block: var(--bd); overflow: hidden; }
 .sec-blue .kicker { color: var(--ink); }
 .game-grid { display: grid; gap: 40px; align-items: center; }
 @media (min-width: 900px) { .game-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 64px; } }
 .game-frame { position: relative; width: 100%; max-width: 440px; margin-inline: auto; border: var(--bd); border-radius: 26px; background: #262626; box-shadow: 10px 10px 0 var(--ink); overflow: hidden; }
-#game { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; touch-action: none; }
+#game { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; touch-action: pan-y; }
 .game-ov { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 12px; padding: 24px; text-align: center; background: rgba(18,18,18,.78); color: var(--white); }
 .game-ov[hidden] { display: none; }
 .game-ov h3 { font: 800 clamp(2.6rem, 2rem + 4vw, 4.4rem)/.9 var(--ff-d); letter-spacing: -.03em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; color: var(--yellow); }
@@ -294,16 +315,16 @@ html.js .reveal.in { opacity: 1; translate: 0 0; }
 .game-ctl { display: flex; justify-content: center; gap: 14px; margin-top: 22px; }
 .game-ctl .btn { width: 84px; padding: 0; font-size: 26px; }
 .hint { margin-top: 18px; font: 400 13px/1.5 var(--ff-m); text-align: center; opacity: .9; }
-.game-copy .sec-lead { color: var(--white); }
+.game-copy .sec-lead { color: var(--on-acc); }
 .game-score { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
-.pill { display: inline-flex; align-items: baseline; gap: 10px; padding: 12px 18px; border: var(--bd); border-radius: 14px; background: var(--yellow); color: var(--ink); box-shadow: 5px 5px 0 var(--ink); font: 700 13px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; }
+.pill { display: inline-flex; align-items: baseline; gap: 10px; padding: 12px 18px; border: var(--bd); border-radius: 14px; background: var(--prim); color: var(--on-prim); box-shadow: 5px 5px 0 var(--ink); font: 700 13px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; }
 .pill b { font: 800 30px/1 var(--ff-d); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 
 /* CTA */
-.sec-yellow { background: var(--yellow); overflow: hidden; }
+.sec-yellow { background: var(--prim); color: var(--on-prim); overflow: hidden; }
 .cta-grid { display: grid; gap: 40px; }
 .cta .h2 { max-width: none; font-size: clamp(2.6rem, 1rem + 6.4vw, 6.4rem); }
-.cta .h2 .blue { display: inline-block; max-width: 100%; margin-top: .08em; background: var(--blue); color: var(--white); border: var(--bd); border-radius: 12px; padding: .02em .14em 0; }
+.cta .h2 .blue { display: inline-block; max-width: 100%; margin-top: .08em; background: var(--acc); color: var(--on-acc); border: var(--bd); border-radius: 12px; padding: .02em .14em 0; }
 .cta-sticker { position: absolute; right: 6%; bottom: 12%; width: clamp(96px, 14vw, 170px); --r: 12deg; rotate: var(--r); animation: bob 5s ease-in-out infinite; }
 .cta-sticker svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(4px 4px 0 var(--ink)); }
 .cta-sticker text { font: 800 13px var(--ff-d); fill: var(--ink); font-stretch: 75%; text-transform: uppercase; }
@@ -327,6 +348,29 @@ html.js .reveal.in { opacity: 1; translate: 0 0; }
 .cursor.show { opacity: 1; } .cursor.big { width: 58px; height: 58px; } .cursor.hide { opacity: 0; }
 html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
 
+/* ---------- Theme: blue ---------- */
+html[data-theme="blue"] {
+  --prim: var(--blue); --on-prim: var(--white);
+  --acc: var(--yellow); --on-acc: var(--ink);
+  --focus: var(--ink); --edge: #7A6FFF;
+  --squig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23FFFFFF' stroke-width='3' stroke-linecap='round'/></svg>");
+}
+html[data-theme="blue"] :is(.nav, .hero, .sec-yellow) :focus-visible { outline-color: #fff; }
+html[data-theme="blue"] .hero::selection { background: var(--ink); }
+/* text on white/paper cards must stay dark even inside a blue or yellow section */
+.checks, .sub-done, .kicker { color: var(--ink); }
+
+/* ---------- Preview toggle (remove before going live) ---------- */
+.theme-toggle { position: fixed; right: 14px; bottom: 14px; z-index: 210; display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 14px 0 10px; border: var(--bd); border-radius: 999px; background: var(--white); color: var(--ink); font: 700 12px/1 var(--ff-m); letter-spacing: .06em; cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
+.theme-toggle:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+.theme-toggle i { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--ink); background: var(--prim); }
+.theme-toggle small { font-weight: 400; opacity: .6; }
+
+/* ---------- Cars24 bits ---------- */
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.reb-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--pink); color: var(--ink); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; text-transform: none; rotate: 2deg; }
+.foot-tag .reb { color: var(--pink); font-weight: 700; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -341,12 +385,13 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="cursor" id="cursor" aria-hidden="true"></div>
+<button class="theme-toggle" id="theme-toggle" type="button" title="Preview only: switch between the blue and yellow looks"><i aria-hidden="true"></i><span>blue</span><small>preview</small></button>
 
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="#top" aria-label="Pothole India — home">
+    <a class="logo" href="#top" aria-label="Potholefree India — home">
       <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#121212"/><circle cx="14" cy="19.5" r="4.6" fill="#fff"/><circle cx="26" cy="19.5" r="4.6" fill="#fff"/><circle cx="15" cy="20.2" r="2.1" fill="#121212"/><circle cx="27" cy="20.2" r="2.1" fill="#121212"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
-      <span>pothole india</span>
+      <span>potholefree india</span>
     </a>
     <button class="btn btn-sm" type="button" data-focus-form>notify me <span class="arr">↗</span></button>
   </div>
@@ -359,7 +404,7 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
     <div class="hero-grid">
 
       <div class="hero-copy">
-        <span class="tag-chip slap" style="--r:-2deg;--d:.05s">coming soon</span>
+        <div class="chips"><span class="tag-chip slap" style="--r:-2deg;--d:.05s">coming soon</span><span class="reb-chip slap" style="--r:2deg;--d:.14s">a Cars24 Rebellion</span></div>
 
         <div class="hl-wrap">
           <h1 class="hl" id="h1" aria-label="Shut up, pothole.">
@@ -367,15 +412,15 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
             <span class="hl-line" aria-hidden="true"><span class="censor pop" id="censor" style="--d:.3s"><span class="face stars">***</span><span class="face pot">pot</span></span><span class="w pop" style="--d:.38s">hole</span></span>
           </h1>
           <div class="note-pot" id="note" aria-hidden="true">
-            <svg viewBox="0 0 44 30" fill="none" stroke="#121212" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M42 24C30 26 14 22 6 8"/><path d="M4 16L6 6l10 4"/></svg>
+            <svg viewBox="0 0 44 30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M42 24C30 26 14 22 6 8"/><path d="M4 16L6 6l10 4"/></svg>
             (it’s “pot”. relax.)
           </div>
         </div>
 
-        <p class="lead" id="lead">India has <mark class="m-pink" style="--c:var(--pink);--d:.9s">swerved</mark>, <mark style="--c:var(--white);--d:1.15s">slowed down</mark> and <mark class="m-blue" style="--c:var(--blue);--d:1.4s">suffered enough</mark>.</p>
+        <p class="lead" id="lead">India has <mark class="m-pink" style="--c:var(--pink);--d:.9s">swerved</mark>, <mark style="--c:var(--white);--d:1.15s">slowed down</mark> and <mark class="m-blue" style="--c:var(--acc);--d:1.4s">suffered enough</mark>.</p>
         <p class="big-line pop" style="--d:.7s">The potholes are <span class="squig">getting filled.</span></p>
 
-        <form class="sub pop" style="--d:.85s" id="hero-form" novalidate data-source="hero" aria-label="Get notified when Pothole India launches">
+        <form class="sub pop" style="--d:.85s" id="hero-form" novalidate data-source="hero" aria-label="Get notified when Potholefree India launches">
           <div class="sub-row">
             <label class="sr-only" for="email-hero">Email address</label>
             <input id="email-hero" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="drop your email" required aria-describedby="msg-hero">
@@ -499,7 +544,7 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
         <h2 class="h2" id="h-cta">potholes: getting filled.<br><span class="blue">you: getting notified.</span></h2>
       </div>
       <div class="reveal" style="--d:.12s">
-        <form class="sub" id="final-form" novalidate data-source="footer" aria-label="Get notified when Pothole India launches">
+        <form class="sub" id="final-form" novalidate data-source="footer" aria-label="Get notified when Potholefree India launches">
           <div class="sub-row">
             <label class="sr-only" for="email-final">Email address</label>
             <input id="email-final" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="drop your email" required aria-describedby="msg-final">
@@ -519,22 +564,22 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
 <footer class="foot">
   <div class="wrap">
     <div class="foot-top">
-      <a class="logo" href="#top" aria-label="Pothole India — back to top">
+      <a class="logo" href="#top" aria-label="Potholefree India — back to top">
         <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#FFD60A"/><circle cx="14" cy="19.5" r="4.6" fill="#121212"/><circle cx="26" cy="19.5" r="4.6" fill="#121212"/><circle cx="15" cy="20.2" r="2.1" fill="#FFD60A"/><circle cx="27" cy="20.2" r="2.1" fill="#FFD60A"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#121212" stroke-width="2.4" stroke-linecap="round"/></svg>
-        <span>pothole india</span>
+        <span>potholefree india</span>
       </a>
-      <p class="foot-tag">made by people who are tired of swerving.</p>
+      <p class="foot-tag">made by people who are tired of swerving.<br><span class="reb">Potholefree India is a Cars24 Rebellion.</span></p>
     </div>
 
     <div class="src">
       <h2>sources &amp; notes</h2>
       <ol>
         <li id="src-1">Pothole-related deaths, 2020–2024 (1,555 · 1,481 · 1,856 · 2,161 · 2,385): Ministry of Road Transport and Highways data, from the Union Minister’s written reply in Parliament; reported by <a href="https://www.tribuneindia.com/news/uttar-pradesh/pothole-deaths-rise-53-per-cent-in-5-years-up-accounts-for-over-half-of-9400-fatalities" target="_blank" rel="noopener">The Tribune</a>, updated 14 February 2026. Recorded crashes only.</li>
-        <li id="src-2">Derived by Pothole India from source 1: +53% = (2,385 − 1,555) ÷ 1,555; 6.5 a day = 2,385 ÷ 366 days (2024 was a leap year).</li>
+        <li id="src-2">Derived by Potholefree India from source 1: +53% = (2,385 − 1,555) ÷ 1,555; 6.5 a day = 2,385 ÷ 366 days (2024 was a leap year).</li>
       </ol>
     </div>
 
-    <div class="foot-b"><span>© 2026 Pothole India. All rights reserved.</span><span>coming soon.</span></div>
+    <div class="foot-b"><span>© 2026 Cars24 Patch. All rights reserved.</span><span>coming soon.</span></div>
   </div>
 </footer>
 
@@ -549,7 +594,7 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
      (Formspree, a Vercel / Supabase function, your own API). Until it is set,
      sign-ups are NOT sent anywhere (preview mode) and a console warning says so.
      ====================================================================== */
-  var CONFIG = { endpoint: 'https://script.google.com/macros/s/AKfycbzpR_pp42QrOUaAGSoE37UHaZI4ljenb3-xTUXW-ho0RVMWU2HcMLs0xQRk27s13AgYBA/exec', storageKey: 'pothole-india-genz:subscribed', bestKey: 'pothole-india-genz:best' };
+  var CONFIG = { endpoint: 'https://script.google.com/macros/s/AKfycbzpR_pp42QrOUaAGSoE37UHaZI4ljenb3-xTUXW-ho0RVMWU2HcMLs0xQRk27s13AgYBA/exec', storageKey: 'pothole-india-genz:subscribed', bestKey: 'pothole-india-genz:best', themeKey: 'pothole-india-genz:theme' };
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine = window.matchMedia('(pointer: fine)').matches;
@@ -557,6 +602,19 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  /* ---------- colour theme preview (remove before going live) ---------- */
+  var themeBtn = $('#theme-toggle');
+  function applyTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    lsSet(CONFIG.themeKey, t);
+    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', t === 'blue' ? '#3B2BFF' : '#FFD60A');
+    $('span', themeBtn).textContent = t;
+    themeBtn.setAttribute('aria-label', 'Preview colour theme. Now ' + t + '. Activate to switch.');
+    if (window.__potholeTheme) window.__potholeTheme();
+  }
+  themeBtn.addEventListener('click', function () { applyTheme(document.documentElement.getAttribute('data-theme') === 'blue' ? 'yellow' : 'blue'); });
+  applyTheme(document.documentElement.getAttribute('data-theme') || 'blue');
 
   /* ---------- reveal + counters ---------- */
   function fmt(el, v) {
@@ -681,7 +739,7 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
   }
   function send(email, source) {
     if (!CONFIG.endpoint) {
-      console.warn('[Pothole India] No subscribe endpoint configured — this email was NOT sent anywhere. Set CONFIG.endpoint in the page.');
+      console.warn('[Potholefree India] No subscribe endpoint configured — this email was NOT sent anywhere. Set CONFIG.endpoint in the page.');
       return new Promise(function (r) { setTimeout(r, 700); });
     }
     var payload = JSON.stringify({ email: email, source: source, page: /^https?:$/.test(location.protocol) ? location.origin + location.pathname : 'local-preview', at: new Date().toISOString() });
@@ -744,7 +802,7 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
     var ctx = cv.getContext('2d'), ov = $('#game-ov'), ovT = $('#ov-title'), ovS = $('#ov-sub'), playBtn = $('#play');
     var elScore = $('#g-score'), elBest = $('#g-best');
     var W = 0, H = 0, dpr = 1, lane = 1, px = 0, lean = 0, holes = [], speed = 0, score = 0, best = parseInt(lsGet(CONFIG.bestKey) || '0', 10) || 0;
-    var state = 'idle', last = 0, spawn = 0, off = 0, shake = 0, vis = false, raf = 0;
+    var state = 'idle', last = 0, spawn = 0, off = 0, shake = 0, vis = false, raf = 0, edgeCol = '#FFD60A';
     elBest.textContent = best;
 
     function laneW() { return W / 3; }
@@ -782,7 +840,7 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
       if (shake > 0 && !reduce) ctx.translate((Math.random() - 0.5) * shake, (Math.random() - 0.5) * shake);
       ctx.fillStyle = '#262626'; ctx.fillRect(-20, -20, W + 40, H + 40);
       // edges
-      ctx.fillStyle = '#FFD60A'; ctx.fillRect(5, -20, 4, H + 40); ctx.fillRect(W - 9, -20, 4, H + 40);
+      ctx.fillStyle = edgeCol; ctx.fillRect(5, -20, 4, H + 40); ctx.fillRect(W - 9, -20, 4, H + 40);
       // lane dashes
       var dash = H * 0.07, gap = H * 0.07, per = dash + gap, o = off % per;
       ctx.fillStyle = 'rgba(255,255,255,.85)';
@@ -845,7 +903,9 @@ html.has-cursor, html.has-cursor *:not(input) { cursor: none !important; }
     if (hasIO) new IntersectionObserver(function (en) { vis = en[0].isIntersecting; if (vis) kick(); }, { threshold: 0.1 }).observe(cv);
     else { vis = true; kick(); }
     document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
-    resize(); reset(); draw();
+    function readEdge() { edgeCol = (getComputedStyle(document.documentElement).getPropertyValue('--edge') || '').trim() || '#FFD60A'; draw(); }
+    window.__potholeTheme = readEdge;
+    resize(); reset(); readEdge();
   })();
 })();
 </script>
