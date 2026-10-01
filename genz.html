@@ -370,6 +370,11 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
 .chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
 .reb-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--pink); color: var(--ink); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; text-transform: none; rotate: 2deg; }
 .foot-tag .reb { color: var(--pink); font-weight: 700; }
+.patch-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--hi); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; text-transform: none; rotate: 2deg; }
+.game-copy .chips { margin-bottom: 0; }
+.reb-band { background: var(--paper); border-top: var(--bd); border-bottom: var(--bd); padding-block: 48px; text-align: center; overflow: hidden; }
+.reb-tag { display: inline-block; max-width: 100%; padding: 14px 24px 12px; border: var(--bd); border-radius: 999px; background: var(--pink); color: var(--ink); font: 800 clamp(1.2rem, .6rem + 3.2vw, 2.6rem)/1 var(--ff-d); letter-spacing: -.02em; text-transform: none; box-shadow: var(--sh); rotate: -2deg; transition: rotate .4s var(--spring), box-shadow .3s; }
+.reb-tag:hover { rotate: 1deg; box-shadow: 8px 8px 0 var(--ink); }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
@@ -506,7 +511,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
   <div class="wrap">
     <div class="game-grid">
       <div class="game-copy reveal">
-        <span class="kicker">side quest</span>
+        <div class="chips"><span class="kicker">side quest</span><span class="patch-chip">by Cars24 Patch</span></div>
         <h2 class="h2" id="h-game">swerve practice.</h2>
         <p class="sec-lead">you’ve been doing this daily for years. let’s see the score.</p>
         <div class="game-score" aria-live="polite">
@@ -557,6 +562,12 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
         </form>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="reb-band" aria-label="A Cars24 Rebellion">
+  <div class="wrap">
+    <span class="reb-tag reveal">a Cars24 Rebellion</span>
   </div>
 </section>
 </main>
