@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>404 — Patch</title>
+<meta name="description" content="This page doesn't exist. The potholes, however, are getting filled.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3B2BFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FFD60A'/%3E%3Cellipse cx='16' cy='17' rx='11' ry='8' fill='%23121212'/%3E%3Ccircle cx='12' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='20' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='12.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3Ccircle cx='20.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* Patch — 404. Same loud system as the homepage; everything is inline and every link is
+   absolute, because this page is served for any missing URL, at any depth. */
+:root {
+  --ink: #121212; --paper: #F6F1E6; --yellow: #FFD60A; --blue: #3B2BFF; --pink: #FF5FA2; --white: #FFFFFF;
+  --prim: var(--blue); --on-prim: var(--white);
+  --ff-d: 'Bricolage Grotesque', 'Archivo Narrow', Impact, system-ui, sans-serif;
+  --ff-m: 'Space Mono', ui-monospace, Menlo, monospace;
+  --ff-h: 'Permanent Marker', 'Comic Sans MS', cursive;
+  --bd: 3px solid var(--ink); --sh: 6px 6px 0 var(--ink);
+  --ease: cubic-bezier(.2, .8, .2, 1); --spring: cubic-bezier(.34, 1.56, .64, 1);
+  --nav-h: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--prim); color: var(--on-prim); font-family: var(--ff-d); font-weight: 500; font-size: 17px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: clip; min-height: 100svh; display: flex; flex-direction: column; }
+h1, p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #fff; outline-offset: 3px; border-radius: 8px; }
+::selection { background: var(--ink); color: var(--yellow); }
+body::after { content: ""; position: fixed; inset: 0; z-index: 150; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 24px; }
+@media (min-width: 768px) { .wrap { padding-inline: 40px; } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px; border: var(--bd); border-radius: 16px; background: var(--ink); color: var(--yellow); font: 700 17px/1 var(--ff-d); letter-spacing: -.01em; white-space: nowrap; text-decoration: none; cursor: pointer; box-shadow: var(--sh); transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
+.btn .arr { display: inline-block; transition: transform .25s var(--spring); }
+.btn:hover .arr { transform: translate(3px, -3px) rotate(8deg); }
+.btn-ghost { background: var(--white); color: var(--ink); }
+.btn-sm { height: 46px; padding: 0 20px; font-size: 15px; box-shadow: 4px 4px 0 var(--ink); }
+.btn-sm:hover { box-shadow: 6px 6px 0 var(--ink); }
+
+.nav { position: sticky; top: 0; z-index: 100; background: var(--prim); color: var(--on-prim); border-bottom: var(--bd); }
+.nav-in { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 800 24px/1 var(--ff-d); letter-spacing: -.03em; white-space: nowrap; }
+.logo svg { width: 36px; height: 36px; flex: none; transition: transform .4s var(--spring); }
+.logo:hover svg { transform: rotate(-12deg) scale(1.1); }
+@media (max-width: 420px) { .logo { font-size: 20px; gap: 8px; } .logo svg { width: 30px; height: 30px; } .btn-sm { padding: 0 16px; font-size: 14px; } }
+@media (max-width: 400px) { .nav-in { gap: 8px; } .logo { font-size: 18px; } }
+@media (max-width: 360px) { .logo { font-size: 17px; gap: 6px; } .logo svg { width: 26px; height: 26px; } .btn-sm { padding: 0 12px; font-size: 13px; gap: 6px; } }
+@media (max-width: 340px) { .logo { font-size: 15px; gap: 5px; } .logo svg { width: 24px; height: 24px; } }
+@media (max-width: 300px) { .wrap { padding-inline: 16px; } .logo { font-size: 14px; } .btn-sm .arr { display: none; } }
+
+/* ---------- Stage ---------- */
+.stage { position: relative; flex: 1; overflow: hidden; display: flex; align-items: center; }
+.stage .wrap { position: relative; z-index: 1; padding-block: 40px 56px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--yellow); font: 700 13px/1 var(--ff-m); letter-spacing: .14em; text-transform: uppercase; rotate: -2deg; }
+
+/* 4 [pothole] 4 */
+.num-wrap { container-type: inline-size; width: 100%; max-width: 980px; margin-top: 44px; }
+.num { display: flex; align-items: center; justify-content: center; gap: .02em; font-family: var(--ff-d); font-weight: 800; font-stretch: 75%; font-variation-settings: 'wdth' 75; letter-spacing: -.04em; line-height: .8; font-size: clamp(6rem, 40cqw, 21rem); }
+.num .d { display: block; }
+.zero { position: relative; flex: none; width: .68em; height: .8em; margin-inline: .03em; border-radius: 49% 51% 50% 50% / 52% 48% 52% 48%; background: var(--ink); box-shadow: 0 0 0 .03em var(--prim), 0 0 0 .055em var(--ink); }
+.zero::before, .zero::after { content: ""; position: absolute; inset: -9%; border: 3px solid var(--ink); border-radius: 50%; opacity: 0; animation: ripple 3.6s ease-out infinite; }
+.zero::after { animation-delay: 1.8s; }
+@keyframes ripple { 0% { transform: scale(.9); opacity: .55; } 100% { transform: scale(1.4); opacity: 0; } }
+.eye { position: absolute; top: 20%; width: 29%; height: 27%; border-radius: 50%; background: var(--white); display: grid; place-items: center; animation: blink 5.5s infinite; }
+.eye.l { left: 14%; } .eye.r { right: 14%; animation-delay: .05s; }
+.pupil { width: 46%; height: 46%; border-radius: 50%; background: var(--ink); transition: transform .12s ease-out; }
+.mouth { position: absolute; left: 50%; top: 60%; width: 17%; height: 22%; translate: -50% 0; border: .035em solid var(--white); border-radius: 50%; animation: gulp 2.8s ease-in-out infinite; }
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.08); } }
+@keyframes gulp { 0%, 100% { height: 22%; width: 17%; } 45% { height: 12%; width: 22%; } }
+.fall { position: absolute; left: 50%; top: -6%; width: 1em; font-size: .24em; line-height: 1; translate: -50% 0; animation: fall-in 5s ease-in infinite; z-index: 2; }
+.fall span { display: block; }
+@keyframes fall-in {
+  0%, 52% { translate: -50% -260%; rotate: -20deg; scale: 1; opacity: 0; }
+  58% { opacity: 1; }
+  78% { translate: -50% 130%; rotate: 150deg; scale: .5; opacity: 1; }
+  86%, 100% { translate: -50% 160%; rotate: 220deg; scale: .15; opacity: 0; }
+}
+
+h1.line { margin-top: 28px; font: 800 clamp(2.4rem, 1rem + 6vw, 5.4rem)/.88 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+h1.line .hi { background: var(--ink); color: var(--yellow); border-radius: 10px; padding: 0 .14em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.lead { margin-top: 18px; max-width: 34ch; font: 600 clamp(1.1rem, 1rem + .7vw, 1.5rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
+.note { margin-top: 14px; font: 400 clamp(1.05rem, .8rem + 1vw, 1.5rem)/1.2 var(--ff-h); rotate: -2deg; }
+.actions { margin-top: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+@media (max-width: 480px) { .actions { flex-direction: column; width: 100%; } .actions .btn { width: 100%; } }
+
+/* tape */
+.tape { position: absolute; left: -6%; right: -6%; bottom: 22px; z-index: 0; display: flex; overflow: hidden; white-space: nowrap; background: var(--ink); color: var(--yellow); border-block: var(--bd); padding-block: 10px; rotate: -2deg; opacity: .95; }
+.tape-track { display: flex; flex: none; animation: marquee 30s linear infinite; }
+.tape-g { display: flex; flex: none; }
+.tape-g span { padding: 0 1rem; font: 800 clamp(1.1rem, .9rem + 1.4vw, 1.9rem)/1 var(--ff-d); text-transform: uppercase; letter-spacing: -.02em; font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.stage .wrap { padding-bottom: 88px; }
+
+/* entrance */
+.pop { opacity: 0; animation: pop-in .9s var(--spring) var(--d, 0s) forwards; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(.3em) rotate(4deg) scale(.92); } to { opacity: 1; transform: none; } }
+
+.foot { background: var(--ink); color: var(--paper); padding-block: 36px 28px; }
+.foot-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+.foot .logo { color: var(--yellow); font-size: 20px; }
+.foot .logo svg { width: 30px; height: 30px; }
+.foot p { font: 400 12px/1.5 var(--ff-m); opacity: .8; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
+  .pop { opacity: 1; transform: none; } .tape-track { animation: none !important; } .fall { display: none; }
+}
+</style>
+</head>
+
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="/" aria-label="Patch — home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#121212"/><circle cx="14" cy="19.5" r="4.6" fill="#fff"/><circle cx="26" cy="19.5" r="4.6" fill="#fff"/><circle cx="15" cy="20.2" r="2.1" fill="#121212"/><circle cx="27" cy="20.2" r="2.1" fill="#121212"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span>Patch</span>
+    </a>
+    <a class="btn btn-sm" href="/">home <span class="arr">↗</span></a>
+  </div>
+</header>
+
+<main class="stage" id="main">
+  <div class="wrap">
+    <span class="chip pop" style="--d:.05s">error 404</span>
+
+    <div class="num-wrap" aria-hidden="true">
+      <div class="num pop" style="--d:.15s">
+        <span class="d">4</span>
+        <span class="zero" id="zero">
+          <span class="eye l"><i class="pupil"></i></span>
+          <span class="eye r"><i class="pupil"></i></span>
+          <span class="mouth"></span>
+          <span class="fall"><span>🛵</span></span>
+        </span>
+        <span class="d">4</span>
+      </div>
+    </div>
+
+    <h1 class="line pop" style="--d:.3s">this page is <span class="hi">a pothole.</span></h1>
+    <p class="lead pop" style="--d:.42s">nothing here. you swerved into the wrong url. the potholes, however, are getting filled.</p>
+    <p class="note pop" style="--d:.55s">(we’re on the move.)</p>
+
+    <div class="actions pop" style="--d:.65s">
+      <a class="btn" href="/">take me home <span class="arr">↗</span></a>
+      <a class="btn btn-ghost" href="/#subscribe">notify me at launch <span class="arr">↗</span></a>
+    </div>
+  </div>
+
+  <div class="tape" aria-hidden="true"><div class="tape-track">
+    <div class="tape-g"><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span></div>
+    <div class="tape-g"><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span><span>page not found</span><span>✦</span><span>404</span><span>✦</span><span>you fell in one</span><span>✦</span></div>
+  </div></div>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="logo" href="/" aria-label="Patch — home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#FFD60A"/><circle cx="14" cy="19.5" r="4.6" fill="#121212"/><circle cx="26" cy="19.5" r="4.6" fill="#121212"/><circle cx="15" cy="20.2" r="2.1" fill="#FFD60A"/><circle cx="27" cy="20.2" r="2.1" fill="#FFD60A"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#121212" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span>Patch</span>
+    </a>
+    <p>© 2026 Patch. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pupils = Array.prototype.slice.call(document.querySelectorAll('.pupil')), zero = document.getElementById('zero'), lastMove = 0;
+  function look(dx, dy, m) { pupils.forEach(function (p) { p.style.transform = 'translate(' + (dx * m * 55) + '%,' + (dy * m * 55) + '%)'; }); }
+  window.addEventListener('pointermove', function (e) {          // the pothole watches you
+    lastMove = Date.now();
+    var r = zero.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var dx = e.clientX - cx, dy = e.clientY - cy, d = Math.hypot(dx, dy) || 1;
+    look(dx / d, dy / d, Math.min(1, d / 260));
+  }, { passive: true });
+  if (!reduce) setInterval(function () {                           // idle wander (phones, or a still mouse)
+    if (Date.now() - lastMove < 3000) return;
+    var a = Math.random() * Math.PI * 2; look(Math.cos(a), Math.sin(a), Math.random());
+  }, 1700);
+})();
+</script>
+</body>
+</html>

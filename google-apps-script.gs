@@ -1,5 +1,5 @@
 /**
- * Pothole India: receives sign-ups from the website and appends them to a Google Sheet.
+ * Patch: receives sign-ups from the website and appends them to a Google Sheet.
  *
  * Setup (about two minutes):
  *   1. Open the "Pothole India email list" sheet, then Extensions > Apps Script.
