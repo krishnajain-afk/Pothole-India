@@ -1,6 +1,6 @@
-# Patch
+# Cars24 Patch
 
-Coming-soon site for Patch, a Cars24 Rebellion. Static, single-file pages: no framework, no build step.
+Coming-soon site for Cars24 Patch, a Cars24 Rebellion. Static, single-file pages: no framework, no build step.
 
 ## Pages
 
