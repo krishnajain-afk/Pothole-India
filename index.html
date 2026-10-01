@@ -914,14 +914,13 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 
   /* ======================================================================
      CONFIG — wire up the subscribe form here.
-     Set `endpoint` to any URL that accepts a JSON POST: Formspree, a
-     Supabase Edge Function, a Vercel / Netlify function, your own API, or
-     a Google Apps Script web app (for Apps Script, change the Content-Type
-     below to 'text/plain;charset=utf-8' to avoid a CORS preflight).
+     Set `endpoint` to the URL of your Google Apps Script web app (it ends in /exec;
+     see google-apps-script.gs), or to any other URL that accepts a JSON POST
+     (Formspree, a Vercel / Supabase function, your own API).
      Until an endpoint is set, sign-ups are NOT sent anywhere (preview mode).
      ====================================================================== */
   var CONFIG = {
-    endpoint: '',
+    endpoint: 'https://script.google.com/macros/s/AKfycbzpR_pp42QrOUaAGSoE37UHaZI4ljenb3-xTUXW-ho0RVMWU2HcMLs0xQRk27s13AgYBA/exec',
     storageKey: 'pothole-india-cfi:subscribed'
   };
 
@@ -1058,10 +1057,13 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
       console.warn('[Pothole India] No subscribe endpoint configured — this email was NOT sent anywhere. Set CONFIG.endpoint in the page.');
       return new Promise(function (r) { setTimeout(r, 700); });
     }
+    var payload = JSON.stringify({ email: email, source: source, page: /^https?:$/.test(location.protocol) ? location.origin + location.pathname : 'local-preview', at: new Date().toISOString() });
+    // A Google Apps Script web app can't answer a CORS preflight, so send a plain request and don't read the reply.
+    if (/^https:\/\/script\.google(usercontent)?\.com\//.test(CONFIG.endpoint)) {
+      return fetch(CONFIG.endpoint, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: payload });
+    }
     return fetch(CONFIG.endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ email: email, source: source, page: location.href, at: new Date().toISOString() })
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: payload
     }).then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); });
   }
 
