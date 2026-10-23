@@ -10,8 +10,11 @@ Coming-soon site for Cars24 Patch, a Cars24 Rebellion. Static, single-file pages
 | `/on-the-move` | `on-the-move.html` | The calm design. Every pothole has an owner. **And we’re on the move.** |
 | `/know-who` | `know-who.html` | The calm design, other headline. Every pothole has an owner. **Soon, you’ll know who.** |
 | any missing URL | `404.html` | The 404 page, in the homepage style. |
+| `/lab` | `lab.html` | The lab. Experiments are built and tried here before they reach the homepage. Unlisted (`noindex`). |
+| `/case-files` | `case-files.html` | The case-study repository: what we tried, what we found, what we learned. Unlisted (`noindex`). |
+| `/dodge` | `dodge.html` | Dodge with your head: a camera game (the camera needs https). Unlisted (`noindex`). |
 
-`/genz` used to be the Gen Z page and now redirects to `/` (see `vercel.json`), so old links keep working. The two calm pages are identical apart from one headline line and the matching `og:title`. They are marked `noindex`, so search engines only index the homepage.
+`/genz` used to be the Gen Z page and now redirects to `/` (see `vercel.json`), so old links keep working. The two calm pages are identical apart from one headline line and the matching `og:title`. They are marked `noindex`, so search engines only index the homepage. The lab pages are marked `noindex` too. `/dodge` (and the copy embedded in `/lab`) load MediaPipe face tracking from jsDelivr and Google Storage only when someone starts the camera; the video never leaves the device.
 
 ## Run locally
 
