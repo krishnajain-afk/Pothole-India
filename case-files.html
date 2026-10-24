@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Case files — Cars24 Patch</title>
+<meta name="description" content="Everything Cars24 Patch tries, in one place: the question, what we did, what we found, what we learned.">
+<!-- Draft page: keep it out of search engines until the case files are reviewed and approved. -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFD60A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cars24 Patch">
+<meta property="og:title" content="Case files — Cars24 Patch">
+<meta property="og:description" content="Everything we try, in one place: the question, what we did, what we found, what we learned.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FFD60A'/%3E%3Cellipse cx='16' cy='17' rx='11' ry='8' fill='%23121212'/%3E%3Ccircle cx='12' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='20' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='12.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3Ccircle cx='20.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+/* Yellow is the look. ?theme=blue shows the alternative (nothing is saved). Set before first paint. */
+(function () {
+  var t = 'yellow';
+  try { if (new URLSearchParams(location.search).get('theme') === 'blue') t = 'blue'; } catch (e) {}
+  document.documentElement.setAttribute('data-theme', t);
+  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:') document.documentElement.classList.add('is-local');
+  document.documentElement.classList.add('js');
+})();
+</script>
+
+<!-- Vercel Web Analytics: cookieless page views. Switch it on in Vercel: project > Analytics > Enable. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+<style>
+/* ==========================================================================
+   Cars24 Patch — the loud one.
+   Caution-tape yellow · asphalt black · electric blue · sticker pink.
+   Bricolage Grotesque (display) · Space Mono (labels) · Permanent Marker (scribbles)
+   ========================================================================== */
+:root {
+  --ink: #121212;
+  --paper: #F6F1E6;
+  --yellow: #FFD60A;
+  --blue: #3B2BFF;
+  /* Theme roles. Yellow theme: yellow is the big colour, blue is the accent. The blue theme swaps them. */
+  --prim: var(--yellow); --on-prim: var(--ink);     /* nav, hero, tape, pills, call-to-action */
+  --acc: var(--blue);    --on-acc: var(--white);    /* stickers, highlight blocks, the game section */
+  --hi: #FFD60A;                                    /* bright text on black */
+  --focus: var(--blue); --edge: #FFD60A;
+  --squig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23121212' stroke-width='3' stroke-linecap='round'/></svg>");
+  --pink: #FF5FA2;
+  --red: #FF2D2D;
+  --white: #FFFFFF;
+
+  --ff-d: 'Bricolage Grotesque', 'Archivo Narrow', Impact, system-ui, sans-serif;
+  --ff-m: 'Space Mono', ui-monospace, Menlo, monospace;
+  --ff-h: 'Permanent Marker', 'Comic Sans MS', cursive;
+
+  --bd: 3px solid var(--ink);
+  --sh: 6px 6px 0 var(--ink);
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+  --nav-h: 72px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--ff-d); font-weight: 500; font-size: 17px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button, input { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
+::selection { background: var(--ink); color: var(--yellow); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 16px; top: -64px; z-index: 400; background: var(--ink); color: var(--yellow); padding: 12px 20px; border-radius: 12px; text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* film grain over everything (static, cheap) */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 150; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 24px; }
+@media (min-width: 768px) { .wrap { padding-inline: 40px; } }
+
+.cond { font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px;
+  border: var(--bd); border-radius: 16px; background: var(--ink); color: var(--yellow);
+  font: 700 17px/1 var(--ff-d); letter-spacing: -.01em; white-space: nowrap; text-decoration: none; cursor: pointer;
+  box-shadow: var(--sh); transition: transform .18s var(--ease), box-shadow .18s var(--ease), background-color .2s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
+.btn[disabled] { cursor: progress; }
+.btn-yellow { background: var(--prim); color: var(--on-prim); }
+.btn-sm { height: 46px; padding: 0 20px; font-size: 15px; box-shadow: 4px 4px 0 var(--ink); }
+.btn-sm:hover { box-shadow: 6px 6px 0 var(--ink); }
+.btn .arr { display: inline-block; transition: transform .25s var(--spring); }
+.btn:hover .arr { transform: translate(3px, -3px) rotate(8deg); }
+.btn .spin { display: none; width: 18px; height: 18px; border-radius: 50%; border: 3px solid rgba(255,214,10,.35); border-top-color: var(--yellow); animation: spin .7s linear infinite; }
+.btn.is-loading .spin { display: block; } .btn.is-loading .arr { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Nav ---------- */
+.nav { position: sticky; top: 0; z-index: 100; background: var(--prim); color: var(--on-prim); border-bottom: var(--bd); }
+.nav-in { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 800 24px/1 var(--ff-d); letter-spacing: -.03em; white-space: nowrap; }
+.logo svg { width: 36px; height: 36px; flex: none; transition: transform .4s var(--spring); }
+.logo:hover svg { transform: rotate(-12deg) scale(1.1); }
+@media (max-width: 420px) { .logo { font-size: 20px; gap: 8px; } .logo svg { width: 30px; height: 30px; } .btn-sm { padding: 0 16px; font-size: 14px; } }
+@media (max-width: 400px) { .nav-in { gap: 8px; } .logo { font-size: 18px; } }
+@media (max-width: 360px) { .nav-in { gap: 8px; } .logo { font-size: 17px; gap: 6px; } .logo svg { width: 26px; height: 26px; } .btn-sm { padding: 0 12px; font-size: 13px; gap: 6px; } }
+@media (max-width: 340px) { .logo { font-size: 15px; gap: 5px; } .logo svg { width: 24px; height: 24px; } }
+@media (max-width: 300px) { .wrap { padding-inline: 16px; } .logo { font-size: 14px; } .btn-sm .arr { display: none; } }
+
+/* ---------- Sections ---------- */
+.sec { position: relative; padding-block: 88px; }
+@media (min-width: 1024px) { .sec { padding-block: 120px; } }
+.kicker { display: inline-block; font: 700 13px/1 var(--ff-m); letter-spacing: .14em; text-transform: uppercase; padding: 8px 12px; border: var(--bd); border-radius: 10px; background: var(--white); rotate: -1.5deg; }
+.h2 { margin-top: 22px; font: 800 clamp(2.8rem, 1rem + 7vw, 6.4rem)/.88 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+.h2 .hi { background: var(--prim); color: var(--on-prim); border: var(--bd); border-radius: 12px; padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.sec-lead { margin-top: 20px; max-width: 36ch; font: 500 clamp(1.1rem, 1rem + .6vw, 1.4rem)/1.4 var(--ff-d); }
+
+html.js .reveal { opacity: 0; translate: 0 36px; transition: opacity .7s var(--ease), translate .8s var(--spring); transition-delay: var(--d, 0s); }
+html.js .reveal.in { opacity: 1; translate: 0 0; }
+
+/* entrance */
+html.js .pop { opacity: 0; animation: pop-in .9s var(--spring) var(--d, 0s) forwards; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(.35em) rotate(5deg) scale(.9); } to { opacity: 1; transform: none; } }
+html.js .slap { opacity: 0; animation: slap .7s var(--spring) var(--d, 0s) forwards; }
+@keyframes slap { from { opacity: 0; scale: 1.8; rotate: calc(var(--r, 0deg) * 3); } to { opacity: 1; scale: 1; rotate: var(--r, 0deg); } }
+
+/* Footer */
+.foot { background: var(--ink); color: var(--paper); padding-block: 64px 40px; }
+.foot .logo { color: var(--yellow); }
+.foot-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
+.foot-tag { font: 400 14px var(--ff-m); opacity: .85; }
+.src { margin-top: 40px; padding-top: 28px; border-top: 2px solid rgba(246,241,230,.2); }
+.src h2 { font: 700 12px var(--ff-m); letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); }
+.src ol { margin-top: 16px; display: grid; gap: 10px; list-style: decimal; padding-left: 20px; font: 400 13px/1.6 var(--ff-m); opacity: .9; }
+.src li::marker { color: var(--yellow); }
+.src a { color: var(--yellow); text-underline-offset: 3px; }
+.foot-b { margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font: 400 12px var(--ff-m); opacity: .75; }
+
+/* ---------- Theme: blue ---------- */
+html[data-theme="blue"] {
+  --prim: var(--blue); --on-prim: var(--white);
+  --acc: var(--yellow); --on-acc: var(--ink);
+  --focus: var(--ink); --edge: #7A6FFF;
+  --squig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23FFFFFF' stroke-width='3' stroke-linecap='round'/></svg>");
+}
+html[data-theme="blue"] :is(.nav, .hero, .sec-yellow) :focus-visible { outline-color: #fff; }
+html[data-theme="blue"] .hero::selection { background: var(--ink); }
+/* text on white/paper cards must stay dark even inside a blue or yellow section */
+.checks, .sub-done, .kicker { color: var(--ink); }
+
+
+/* ---------- Cars24 bits ---------- */
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.foot-tag .reb { color: var(--pink); font-weight: 700; }
+.patch-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--hi); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; text-transform: none; rotate: 2deg; }
+.game-copy .chips { margin-bottom: 0; }
+.reb-band { background: var(--paper); border-top: var(--bd); border-bottom: var(--bd); padding-block: 48px; text-align: center; overflow: hidden; }
+.reb-tag { display: inline-block; max-width: 100%; padding: 14px 24px 12px; border: var(--bd); border-radius: 999px; background: var(--pink); color: var(--ink); font: 800 clamp(1.2rem, .6rem + 3.2vw, 2.6rem)/1 var(--ff-d); letter-spacing: -.02em; text-transform: none; box-shadow: var(--sh); rotate: -2deg; transition: rotate .4s var(--spring), box-shadow .3s; }
+.reb-tag:hover { rotate: 1deg; box-shadow: 8px 8px 0 var(--ink); }
+
+/* ---------- Dispatches / updates (experiment) ---------- */
+.sec-upd { background: var(--ink); color: var(--paper); border-bottom: var(--bd); padding-block: 88px; overflow: hidden; }
+@media (min-width: 1024px) { .sec-upd { padding-block: 120px; } }
+.upd-head { position: relative; }
+.upd-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.sec-upd .kicker { border-color: var(--paper); }
+.upd-chip { display: inline-block; padding: 9px 16px 8px; border: 3px solid var(--ink); border-radius: 999px; background: var(--pink); color: var(--ink); font: 700 13px/1 var(--ff-m); letter-spacing: .06em; rotate: 2deg; }
+.sec-upd .sec-lead { max-width: 40ch; color: var(--paper); }
+.upd-stamp { display: none; }
+@media (min-width: 1000px) {
+  .upd-stamp { display: block; position: absolute; right: 0; top: 6px; rotate: 8deg; padding: 12px 18px; border: 4px solid var(--pink); border-radius: 12px; color: var(--pink); font: 700 18px/1.15 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; text-align: center; opacity: .95; }
+}
+
+.upd-feed { position: relative; margin-top: 56px; display: grid; gap: 44px; }
+.upd { --sc: var(--hi); --sc-on: var(--ink); display: grid; gap: 16px; min-width: 0; }
+.upd[data-s="found"] { --sc: var(--pink); --sc-on: var(--ink); }
+.upd[data-s="doing"] { --sc: var(--prim); --sc-on: var(--on-prim); }
+.upd[data-s="next"]  { --sc: var(--acc);  --sc-on: var(--on-acc); }
+.upd-when { position: relative; }
+.upd-date { display: inline-block; padding: 10px 12px 9px; border-radius: 10px; background: var(--paper); color: var(--ink); font: 700 13px/1.25 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; rotate: -3deg; }
+@media (min-width: 768px) {
+  .upd { grid-template-columns: 150px minmax(0, 1fr); gap: 32px; align-items: start; }
+  .upd-feed::before { content: ""; position: absolute; left: 166px; top: 14px; bottom: 14px; border-left: 3px dashed rgba(246, 241, 230, .4); }
+  .upd-when::after { content: ""; position: absolute; left: calc(100% + 16px - 10px); top: 15px; width: 20px; height: 20px; border-radius: 50%; background: var(--sc); border: 3px solid var(--ink); box-shadow: 0 0 0 3px var(--paper); }
+}
+.upd-card {
+  min-width: 0; padding: clamp(18px, 3vw, 30px); border: var(--bd); border-radius: 22px; background: var(--paper); color: var(--ink);
+  box-shadow: 8px 8px 0 var(--sc); rotate: var(--r, 0deg); transition: rotate .4s var(--spring), translate .4s var(--spring), box-shadow .3s;
+}
+.upd:nth-child(even) .upd-card { --r: .7deg; }
+.upd-card:hover, .upd-card:has(details[open]) { rotate: 0deg; }
+.upd-card:hover { translate: 0 -4px; box-shadow: 11px 11px 0 var(--sc); }
+.upd-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.upd-tag { display: inline-block; padding: 7px 12px 6px; border: 2.5px solid var(--ink); border-radius: 999px; background: var(--sc); color: var(--sc-on); font: 700 12px/1 var(--ff-m); letter-spacing: .14em; text-transform: uppercase; }
+.upd-sample { display: inline-block; padding: 6px 10px 5px; border: 2px dashed var(--ink); border-radius: 999px; font: 700 11px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+.upd-title { margin-top: 14px; font: 800 clamp(1.8rem, 1rem + 2.6vw, 3.1rem)/.95 var(--ff-d); letter-spacing: -.03em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; overflow-wrap: anywhere; }
+.upd .nw { white-space: nowrap; }
+.upd-sum { margin-top: 10px; max-width: 46ch; font: 600 clamp(1.05rem, 1rem + .3vw, 1.25rem)/1.4 var(--ff-d); letter-spacing: -.01em; overflow-wrap: anywhere; }
+.upd details { margin-top: 18px; }
+.upd summary {
+  display: inline-flex; align-items: center; gap: 12px; min-height: 46px; padding: 0 18px; border: var(--bd); border-radius: 14px; background: var(--ink); color: var(--hi);
+  font: 700 15px/1 var(--ff-d); cursor: pointer; list-style: none; user-select: none; box-shadow: 4px 4px 0 var(--sc); transition: translate .18s var(--ease), box-shadow .18s var(--ease);
+}
+.upd summary::-webkit-details-marker { display: none; }
+.upd summary::after { content: "+"; font-size: 24px; line-height: 1; transition: rotate .3s var(--spring); }
+.upd details[open] summary::after { rotate: 45deg; }
+.upd summary:hover { translate: -2px -2px; box-shadow: 6px 6px 0 var(--sc); }
+.upd summary:active { translate: 2px 2px; box-shadow: 2px 2px 0 var(--sc); }
+.upd .w-open, .upd details[open] .w-closed { display: none; }
+.upd details[open] .w-open { display: inline; }
+.upd-body { margin-top: 16px; padding-top: 16px; border-top: 3px dashed var(--ink); display: grid; gap: 14px; animation: upd-in .45s var(--ease) both; }
+@keyframes upd-in { from { opacity: 0; translate: 0 -8px; } }
+.upd-body p { max-width: 60ch; font: 500 clamp(1rem, .95rem + .25vw, 1.15rem)/1.55 var(--ff-d); overflow-wrap: anywhere; }
+.upd-nums { display: flex; flex-wrap: wrap; gap: 8px; }
+.upd-nums li { padding: 8px 12px; border: 2.5px solid var(--ink); border-radius: 10px; background: var(--white); font: 400 13px/1.2 var(--ff-m); font-variant-numeric: tabular-nums; }
+.upd-nums b { font-weight: 700; margin-right: .4em; }
+.upd-body .upd-src { font: 400 12px/1.5 var(--ff-m); opacity: .85; }
+.upd-body a { color: inherit; text-underline-offset: 3px; }
+/* the empty slot: a dashed outline to copy */
+.upd-slot .upd-card { background: transparent; color: var(--paper); border: 3px dashed var(--paper); box-shadow: none; }
+.upd-slot .upd-card:hover { box-shadow: none; }
+.upd-slot .upd-tag { border-color: var(--paper); }
+.upd-slot .upd-sample { border-color: var(--paper); }
+.upd-slot summary { background: var(--hi); color: var(--ink); border-color: var(--paper); box-shadow: 4px 4px 0 var(--paper); }
+.upd-slot .upd-body { border-top-color: var(--paper); }
+.upd-slot :focus-visible { outline-color: var(--hi); }
+
+/* ---------- What we're up to: journey, updates & case files ---------- */
+.upd[data-s="done"] { --sc: var(--paper); --sc-on: var(--ink); }
+.hub-nav { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+.hub-nav a { padding: 10px 14px; border: 3px solid var(--paper); border-radius: 999px; color: var(--paper); text-decoration: none; font: 700 13px/1 var(--ff-m); letter-spacing: .04em; transition: background-color .2s, color .2s, translate .25s var(--spring); }
+.hub-nav a:hover, .hub-nav a:focus-visible { background: var(--paper); color: var(--ink); translate: 0 -2px; }
+.hub-block { margin-top: 72px; scroll-margin-top: 96px; }
+.hub-bh { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; }
+.hub-h { font: 800 clamp(1.9rem, 1rem + 3.4vw, 3.4rem)/.92 var(--ff-d); letter-spacing: -.03em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+.hub-goal, .hub-draft { display: inline-block; padding: 7px 12px 6px; border-radius: 999px; font: 700 12px/1 var(--ff-m); letter-spacing: .08em; text-transform: uppercase; }
+.hub-goal { background: var(--pink); color: var(--ink); border: 3px solid var(--ink); rotate: 1.5deg; }
+.hub-draft { border: 2px dashed var(--paper); color: var(--paper); opacity: .85; }
+
+.jr-bar { margin-top: 24px; display: flex; gap: 6px; }
+.jr-bar i { flex: 1; height: 12px; border: 3px solid var(--paper); border-radius: 999px; }
+.jr-bar i[data-s="done"] { background: var(--pink); border-color: var(--pink); }
+.jr-bar i[data-s="doing"] { background: var(--prim); border-color: var(--prim); }
+.jr { margin-top: 28px; display: grid; gap: 26px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .jr { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .jr { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; } }
+.jr-step { --sc: var(--hi); --sc-on: var(--ink); position: relative; min-width: 0; padding: 20px 18px 18px; border: var(--bd); border-radius: 20px; background: var(--paper); color: var(--ink); box-shadow: 6px 6px 0 var(--sc); rotate: var(--r, 0deg); }
+.jr-step[data-s="done"] { --sc: var(--pink); --sc-on: var(--ink); }
+.jr-step[data-s="doing"] { --sc: var(--prim); --sc-on: var(--on-prim); }
+.jr-step[data-s="next"] { --sc: var(--acc); --sc-on: var(--on-acc); border-style: dashed; }
+.jr-n { display: block; font: 700 12px/1 var(--ff-m); letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+.jr-tag { display: inline-block; margin-top: 10px; padding: 6px 10px 5px; border: 2.5px solid var(--ink); border-radius: 999px; background: var(--sc); color: var(--sc-on); font: 700 11px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; }
+.jr-t { margin-top: 12px; font: 800 clamp(1.4rem, 1rem + 1vw, 1.9rem)/.98 var(--ff-d); letter-spacing: -.025em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; overflow-wrap: anywhere; }
+.jr-step p { margin-top: 8px; font: 500 .98rem/1.45 var(--ff-d); overflow-wrap: anywhere; }
+.jr-step .jr-l { margin-top: 12px; }
+.jr-l a { font: 700 13px/1.3 var(--ff-m); color: inherit; text-underline-offset: 3px; }
+
+.upd-tag.alt { background: transparent; color: var(--ink); }
+.cf-no { font: 700 11px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+.cf-top { margin-top: 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.cf-count { margin: 0; font: 700 13px/1 var(--ff-m); letter-spacing: .08em; text-transform: uppercase; }
+.cf-filters { display: flex; flex-wrap: wrap; gap: 10px; }
+.cf-f { min-height: 44px; padding: 10px 16px; border: 3px solid var(--paper); border-radius: 999px; background: transparent; color: var(--paper); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; cursor: pointer; transition: translate .25s var(--spring), background-color .2s, color .2s; }
+.cf-f:hover { translate: 0 -2px; }
+.cf-f[aria-pressed="true"] { background: var(--hi); color: var(--ink); border-color: var(--hi); }
+.cf-grid { margin-top: 30px; display: grid; gap: 44px 32px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) { .cf-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.cf-grid > .cfile:has(details[open]) { grid-column: 1 / -1; }
+.cfile.upd { display: block; scroll-margin-top: 96px; }
+.cfile[hidden] { display: none; }
+.upd { scroll-margin-top: 96px; }
+.cf-sec { display: grid; gap: 8px; }
+.cf-sec + .cf-sec { margin-top: 6px; }
+.cf-sec h5 { margin: 0; font: 700 12px/1 var(--ff-m); letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+.cf-learn { display: grid; gap: 10px; max-width: 62ch; counter-reset: l; }
+.cf-learn li { position: relative; padding-left: 38px; font: 500 clamp(1rem, .95rem + .25vw, 1.15rem)/1.5 var(--ff-d); counter-increment: l; overflow-wrap: anywhere; }
+.cf-learn li::before { content: counter(l); position: absolute; left: 0; top: 1px; width: 26px; height: 26px; display: grid; place-items: center; border: 3px solid var(--ink); border-radius: 8px; background: var(--sc); color: var(--sc-on); font: 800 14px/1 var(--ff-d); }
+.cf-links { font: 700 14px/1.5 var(--ff-m) !important; }
+.cf-links a { color: inherit; text-underline-offset: 3px; }
+.upd-body { grid-template-columns: minmax(0, 1fr); }
+.cf-bars { display: flex; align-items: flex-end; gap: 6px; max-width: 520px; padding-top: 6px; }
+@media (min-width: 420px) { .cf-bars { gap: 10px; } }
+.cf-bar { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; gap: 6px; font: 700 11px/1 var(--ff-m); }
+.cf-bar i { display: block; width: 100%; height: var(--h); border: 3px solid var(--ink); border-radius: 8px 8px 0 0; background: var(--pink); }
+.cf-bar b { font-weight: 700; font-size: 10px; letter-spacing: -.02em; }
+@media (min-width: 420px) { .cf-bar b { font-size: 11px; letter-spacing: 0; } }
+.cf-bar span { font-weight: 400; opacity: .8; }
+
+
+/* ---------- Case files page ---------- */
+html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are for us, not for visitors */
+.cfp-hero { background: var(--prim); color: var(--on-prim); border-bottom: var(--bd); padding-block: 56px 72px; overflow: hidden; }
+@media (min-width: 768px) { .cfp-hero { padding-block: 72px 96px; } }
+.cfp-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.cfp-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--hi); font: 700 13px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; rotate: -2deg; }
+.cfp-chip.alt { background: var(--paper); color: var(--ink); rotate: 2deg; letter-spacing: .06em; text-transform: none; }
+.cfp-h1 { margin-top: 22px; font: 800 clamp(3rem, 1rem + 11vw, 9.5rem)/.86 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+.cfp-h1 .hi { display: inline-block; max-width: 100%; background: var(--acc); color: var(--on-acc); border: var(--bd); border-radius: .14em; padding: 0 .1em; rotate: -2deg; box-shadow: .05em .05em 0 var(--ink); }
+.cfp-lead { margin-top: 24px; max-width: 30ch; font: 600 clamp(1.25rem, 1rem + 1.4vw, 1.9rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
+.cfp-body { padding-block: 64px 96px; }
+.cfp-body .cf-top { margin-top: 0; }
+/* LAB-NAV:css:start */
+/* ---------- Lab nav (shared by every lab page: keep this block identical in all of them) ---------- */
+.lab-bar { background: var(--ink); color: var(--paper); padding: 9px 14px; text-align: center; font: 400 12px/1.45 var(--ff-m); }
+.lab-bar a { color: var(--hi); font-weight: 700; text-underline-offset: 3px; }
+.nav-toggle { display: none; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border: var(--bd); border-radius: 14px; background: var(--ink); color: var(--hi); font: 700 15px/1 var(--ff-d); cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
+.nav-toggle:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.nav-ico { position: relative; width: 20px; height: 14px; flex: none; }
+.nav-ico i { position: absolute; left: 0; right: 0; height: 3px; border-radius: 2px; background: currentColor; transition: top .3s var(--spring), transform .3s var(--spring), opacity .2s; }
+.nav-ico i:nth-child(1) { top: 0; } .nav-ico i:nth-child(2) { top: 5.5px; } .nav-ico i:nth-child(3) { top: 11px; }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(1) { top: 5.5px; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(3) { top: 5.5px; transform: rotate(-45deg); }
+.nav-links { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
+.nav-link:hover, .nav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
+.nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: -2deg; }
+@media (max-width: 959px) {
+  html.js .nav-toggle { display: inline-flex; }
+  html.js .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px 24px 24px; background: var(--paper); color: var(--ink); border-bottom: var(--bd); box-shadow: 0 6px 0 var(--ink); max-height: calc(100vh - var(--nav-h)); max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; }
+  html.js .nav-links.open { display: flex; }
+  html.js .nav-link { justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 18px; border-color: var(--ink); border-radius: 16px; background: var(--white); font-size: 20px; white-space: normal; }
+  html.js .nav-link::after { content: "→"; flex: none; }
+  html.js .nav-link:hover, html.js .nav-link:focus-visible, html.js .nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: 0deg; translate: 0 0; }
+  html[data-theme="blue"].js .nav-links :focus-visible { outline-color: var(--ink); }
+  html:not(.js) .nav-in { height: auto; flex-wrap: wrap; padding-block: 10px; }
+  html:not(.js) .nav-links { flex-wrap: wrap; }
+}
+@media (max-width: 360px) { html.js .nav-links { padding-inline: 16px; } html.js .nav-link { font-size: 18px; padding: 0 14px; } }
+/* LAB-NAV:css:end */
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
+  html.js .pop, html.js .slap, html.js .reveal { opacity: 1; translate: 0 0; scale: 1; transform: none; }
+  .tape-track, .ring, .scoot, .cta-sticker { animation: none !important; }
+  .scoot { left: 40%; }
+}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- LAB-NAV:html:start -->
+<!-- The lab pages share this bar and nav. Links use data-page: the .html file on localhost, the clean route live. -->
+<div class="lab-bar">the lab: experiments before they go live. not the official homepage. <a href="/" data-page="home">go to the real one →</a></div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#121212"/><circle cx="14" cy="19.5" r="4.6" fill="#fff"/><circle cx="26" cy="19.5" r="4.6" fill="#fff"/><circle cx="15" cy="20.2" r="2.1" fill="#121212"/><circle cx="27" cy="20.2" r="2.1" fill="#121212"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span>Cars24 Patch</span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span class="nav-ico" aria-hidden="true"><i></i><i></i><i></i></span><span class="nav-toggle-t">menu</span></button>
+    <nav class="nav-links" id="nav-links" aria-label="The lab pages">
+      <a class="nav-link" href="/lab" data-page="lab">the lab</a>
+      <a class="nav-link" href="/updates" data-page="updates">updates &amp; journey</a>
+      <a class="nav-link" href="/case-files" data-page="case-files" aria-current="page">case files</a>
+      <a class="nav-link" href="/wall-of-holes" data-page="wall">the wall</a>
+      <a class="nav-link" href="/dodge" data-page="dodge">dodge</a>
+    </nav>
+  </div>
+</header>
+<!-- LAB-NAV:html:end -->
+
+<main id="main">
+<section class="cfp-hero" aria-labelledby="h1">
+  <div class="wrap">
+    <div class="cfp-chips pop"><span class="cfp-chip">the repository</span><span class="cfp-chip alt">draft</span></div>
+    <h1 class="cfp-h1 pop" id="h1" style="--d:.15s">case <span class="hi">files.</span></h1>
+    <p class="cfp-lead pop" style="--d:.3s">everything we try, in one place: the question, what we did, what we found, what we learned.</p>
+  </div>
+</section>
+
+<section class="sec-upd cfp-body" id="case-files" aria-labelledby="h-cfl">
+  <div class="wrap">
+    <h2 class="sr-only" id="h-cfl">All case files</h2>
+    <!--
+      ADD A CASE FILE: copy one <li class="upd cfile reveal" ...> block and paste it above the empty slot.
+        data-type = study | experiment | landing (space separated) drives the filter chips.
+        data-s    = found | doing | done | next (sets the colour). Number it with the next id: cf-04, cf-05 ...
+      Keep every number and finding real, with a source. Entries marked "draft" are wording written from what happened.
+      Updates and the journey that link here live on the lab page (/lab).
+    -->
+    <div class="cf-top reveal">
+        <p class="cf-count" id="cf-count" aria-live="polite">3 case files</p>
+        <div class="cf-filters" role="group" aria-label="Filter the case files">
+          <button class="cf-f" type="button" data-f="all" aria-pressed="true">all</button>
+          <button class="cf-f" type="button" data-f="study" aria-pressed="false">studies</button>
+          <button class="cf-f" type="button" data-f="experiment" aria-pressed="false">experiments</button>
+          <button class="cf-f" type="button" data-f="landing" aria-pressed="false">landings</button>
+        </div>
+      </div>
+    <ul class="cf-grid">
+
+        <li class="upd cfile reveal" id="cf-01" data-type="study" data-s="found" style="--r:-.6deg;--d:0s">
+          <article class="upd-card" aria-labelledby="cf-01-t">
+            <div class="upd-top"><span class="upd-tag">study</span><span class="cf-no">case file 01</span><span class="upd-sample">draft</span></div>
+            <h3 class="upd-title" id="cf-01-t">2,385 people. one table.</h3>
+            <p class="upd-sum">the official numbers, the sums, and what they say.</p>
+            <details>
+              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <div class="upd-body">
+                <div class="cf-sec"><h5>the question</h5><p>how many people die in pothole crashes in India, and is it getting better?</p></div>
+                <div class="cf-sec"><h5>what we did</h5><p>pulled the official figures for 2020–2024 (Ministry of Road Transport and Highways, from the Union Minister’s written reply in Parliament, reported by The Tribune, updated 14 February 2026). then did the sums ourselves and showed the working.</p></div>
+                <div class="cf-sec"><h5>what we found</h5>
+                  <div class="cf-bars" role="img" aria-label="Pothole deaths by year: 2020, 1,555. 2021, 1,481. 2022, 1,856. 2023, 2,161. 2024, 2,385.">
+                    <div class="cf-bar"><b>1,555</b><i style="--h:78px"></i><span>2020</span></div>
+                    <div class="cf-bar"><b>1,481</b><i style="--h:74px"></i><span>2021</span></div>
+                    <div class="cf-bar"><b>1,856</b><i style="--h:93px"></i><span>2022</span></div>
+                    <div class="cf-bar"><b>2,161</b><i style="--h:109px"></i><span>2023</span></div>
+                    <div class="cf-bar"><b>2,385</b><i style="--h:120px"></i><span>2024</span></div>
+                  </div>
+                  <ul class="upd-nums" aria-label="Key figures">
+                    <li><b>+53%</b>2020 → 2024</li><li><b>6.5</b>people a day in 2024</li><li><b>9,438</b>in five years</li><li><b>~1.2%</b>of road deaths (2023)</li>
+                  </ul>
+                </div>
+                <div class="cf-sec"><h5>what we learned</h5>
+                  <ol class="cf-learn">
+                    <li>it isn’t one bad year. it has gone up every year since 2021.</li>
+                    <li>these are recorded crashes only. whatever didn’t get written down isn’t in the number.</li>
+                    <li>a number lands harder when you can see the sum behind it, so every figure we derived has its working in the footer.</li>
+                  </ol>
+                </div>
+                <p class="upd-src">source: MoRTH data, via the Union Minister’s written reply in Parliament; reported by The Tribune · <a href="#src-1">source 1</a> · <a href="#src-2">source 2</a></p>
+                <p class="cf-links"><a href="/#receipts" data-page="home" data-hash="#receipts">see it on the homepage ↗</a></p>
+              </div>
+            </details>
+          </article>
+        </li>
+
+        <li class="upd cfile reveal" id="cf-02" data-type="experiment landing" data-s="doing" style="--r:.6deg;--d:.1s">
+          <article class="upd-card" aria-labelledby="cf-02-t">
+            <div class="upd-top"><span class="upd-tag">experiment</span><span class="upd-tag alt">landing</span><span class="cf-no">case file 02</span><span class="upd-sample">draft</span></div>
+            <h3 class="upd-title" id="cf-02-t">the wall of holes.</h3>
+            <p class="upd-sum">what if potholes got famous instead of ignored?</p>
+            <details>
+              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <div class="upd-body">
+                <div class="cf-sec"><h5>the question</h5><p>can a joke get people to look at a pothole, and then at the numbers?</p></div>
+                <div class="cf-sec"><h5>what we did</h5><p>built a wall of “biggest ***holes of the year”: real potholes from real Indian roads, each credited, plus one blank nominee called “your ex”.</p></div>
+                <div class="cf-sec"><h5>what we found</h5>
+                  <ul class="upd-nums" aria-label="The wall in numbers">
+                    <li><b>8</b>photos</li><li><b>6</b>places</li><li><b>3</b>licences</li><li><b>1</b>nominee with no photo</li>
+                  </ul>
+                </div>
+                <div class="cf-sec"><h5>what we learned</h5>
+                  <ol class="cf-learn">
+                    <li>we couldn’t use photos from google or social media. they belong to the people who took them, and they show faces and number plates. so every photo is openly licensed (Wikimedia Commons) and credited.</li>
+                    <li>a blank frame isn’t a joke. “your ex” only landed once it had a blocked profile picture, an UNFIXABLE stamp and the line “the other kind of ***hole”.</li>
+                    <li>small details flip a joke. at small sizes our UNFIXABLE stamp got clipped and read FIXABLE, the opposite. now it scales with its tile.</li>
+                    <li>safety is part of the idea: footpath only, never in traffic, never while driving.</li>
+                  </ol>
+                </div>
+                <p class="cf-links"><a href="wall-of-holes.html" data-page="wall">see the wall ↗</a></p>
+              </div>
+            </details>
+          </article>
+        </li>
+
+        <li class="upd cfile reveal" id="cf-03" data-type="experiment landing" data-s="doing" style="--r:-.4deg;--d:.2s">
+          <article class="upd-card" aria-labelledby="cf-03-t">
+            <div class="upd-top"><span class="upd-tag">experiment</span><span class="upd-tag alt">landing</span><span class="cf-no">case file 03</span><span class="upd-sample">draft</span></div>
+            <h3 class="upd-title" id="cf-03-t">dodge with your head.</h3>
+            <p class="upd-sum">can a camera game make you feel a pothole before you read the number?</p>
+            <details>
+              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <div class="upd-body">
+                <div class="cf-sec"><h5>the question</h5><p>can a camera game make people feel a pothole before they read the number?</p></div>
+                <div class="cf-sec"><h5>what we did</h5><p>built a game that runs in the browser. your camera feed is the road, and you lean your head to switch between three lanes of potholes. hit one and the screen says “that was pretend”, then shows 2,385.</p></div>
+                <div class="cf-sec"><h5>what we found</h5>
+                  <ul class="upd-nums" aria-label="The game in numbers">
+                    <li><b>3</b>lanes</li><li><b>478</b>face points tracked</li><li><b>~30</b>checks a second</li><li><b>0</b>video uploaded</li>
+                  </ul>
+                </div>
+                <div class="cf-sec"><h5>what we learned</h5>
+                  <ol class="cf-learn">
+                    <li>our first face detector was too coarse: a 12 px head movement read as about 25 px, so half-leans got lost. a landmark model that tracks within a pixel fixed it.</li>
+                    <li>tilting your head is also a lean, so tilt steers too. a small wobble is ignored.</li>
+                    <li>people shift in their seats, so the neutral spot slowly follows them.</li>
+                    <li>the camera stays on your device. nothing is recorded or uploaded, and it stops when you leave.</li>
+                    <li>safety first: play still, indoors, never while walking, riding or driving.</li>
+                  </ol>
+                </div>
+                <p class="cf-links"><a href="dodge.html" data-page="dodge">play it ↗</a> · <a href="updates.html#u-dodge" data-page="updates" data-hash="#u-dodge">the update →</a></p>
+              </div>
+            </details>
+          </article>
+        </li>
+
+        <!-- EMPTY SLOT: copy this for the next case file. -->
+        <li class="upd upd-slot cfile reveal" data-type="study experiment landing" data-s="next" style="--d:.3s">
+          <article class="upd-card" aria-labelledby="cf-next-t">
+            <div class="upd-top"><span class="upd-tag">next</span><span class="cf-no">case file [no.]</span><span class="upd-sample">your turn</span></div>
+            <h3 class="upd-title" id="cf-next-t">[next case file goes here]</h3>
+            <p class="upd-sum">[one plain sentence: the question]</p>
+            <details>
+              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <div class="upd-body">
+                <div class="cf-sec"><h5>the question</h5><p>[what we wanted to find out.]</p></div>
+                <div class="cf-sec"><h5>what we did</h5><p>[what we actually did.]</p></div>
+                <div class="cf-sec"><h5>what we found</h5><p>[numbers, photos, results. with sources.]</p></div>
+                <div class="cf-sec"><h5>what we learned</h5><p>[what we’d do differently or keep.]</p></div>
+              </div>
+            </details>
+          </article>
+        </li>
+      </ul>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#FFD60A"/><circle cx="14" cy="19.5" r="4.6" fill="#121212"/><circle cx="26" cy="19.5" r="4.6" fill="#121212"/><circle cx="15" cy="20.2" r="2.1" fill="#FFD60A"/><circle cx="27" cy="20.2" r="2.1" fill="#FFD60A"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#121212" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <span>Cars24 Patch</span>
+      </a>
+      <p class="foot-tag">made by people who are tired of swerving.<br><span class="reb">Cars24 Patch · a Cars24 Rebellion.</span></p>
+    </div>
+    <div class="src">
+      <h2>sources &amp; notes</h2>
+      <ol>
+        <li id="src-1">Pothole-related deaths, 2020–2024 (1,555 · 1,481 · 1,856 · 2,161 · 2,385): Ministry of Road Transport and Highways data, from the Union Minister’s written reply in Parliament; reported by <a href="https://www.tribuneindia.com/news/uttar-pradesh/pothole-deaths-rise-53-per-cent-in-5-years-up-accounts-for-over-half-of-9400-fatalities" target="_blank" rel="noopener">The Tribune</a>, updated 14 February 2026. Recorded crashes only.</li>
+        <li id="src-2">Derived by Cars24 Patch from source 1: +53% = (2,385 − 1,555) ÷ 1,555; 6.5 a day = 2,385 ÷ 366 days (2024 was a leap year).</li>
+      </ol>
+    </div>
+
+    <div class="foot-b"><span>© 2026 Cars24 Patch. All rights reserved.</span><span><a href="/lab" data-page="lab">back to the lab</a> · <a href="/" data-page="home">the real homepage</a></span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  /* case file filters */
+  var cards = [].slice.call(document.querySelectorAll('.cf-grid > .cfile')), btns = [].slice.call(document.querySelectorAll('.cf-f')), count = document.getElementById('cf-count');
+  function setFilter(f) {
+    var n = 0;
+    cards.forEach(function (c) {
+      var real = !c.classList.contains('upd-slot'), ok = f === 'all' || (c.getAttribute('data-type') || '').split(' ').indexOf(f) > -1;
+      c.hidden = !ok; if (ok && real) n++;
+    });
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-f') === f)); });
+    if (count) count.textContent = n + (n === 1 ? ' case file' : ' case files');
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { setFilter(b.getAttribute('data-f')); }); });
+  setFilter('all');
+
+  /* a link to #cf-02 (here, or from another lab page) opens that card, and shows it if a filter hid it */
+  function openFor(el) {
+    if (!el) return;
+    if (el.hidden) setFilter('all');
+    var d = el.tagName === 'DETAILS' ? el : el.querySelector('details');
+    if (d) d.open = true;
+  }
+  window.addEventListener('hashchange', function () { openFor(document.getElementById(location.hash.slice(1))); });
+  if (location.hash.length > 1) openFor(document.getElementById(location.hash.slice(1)));
+
+  /* reveal on scroll */
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (n) { io.observe(n); });
+  } else { items.forEach(function (n) { n.classList.add('in'); }); }
+})();
+</script>
+<script>
+/* LAB-NAV:js:start */
+/* Lab nav: page links resolve per environment (a[data-page]: the .html file on localhost, the clean route live),
+   and the menu button opens or closes the link panel on small screens. */
+(function () {
+  'use strict';
+  var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
+  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
+  [].forEach.call(document.querySelectorAll('a[data-page]'), function (a) {
+    var p = PAGES[a.getAttribute('data-page')];
+    if (p) a.setAttribute('href', p[local ? 0 : 1] + (a.getAttribute('data-hash') || ''));
+  });
+
+  var nav = document.querySelector('.nav'), btn = document.getElementById('nav-toggle'), panel = document.getElementById('nav-links');
+  if (!nav || !btn || !panel) return;
+  var label = btn.querySelector('.nav-toggle-t');
+  function set(open) {
+    panel.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (label) label.textContent = open ? 'close' : 'menu';
+  }
+  btn.addEventListener('click', function () { set(!panel.classList.contains('open')); });
+  panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) set(false); });
+  document.addEventListener('click', function (e) { if (panel.classList.contains('open') && !nav.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('open')) { set(false); btn.focus(); } });
+  var wide = window.matchMedia('(min-width: 960px)');
+  if (wide.addEventListener) wide.addEventListener('change', function () { set(false); }); else if (wide.addListener) wide.addListener(function () { set(false); });
+})();
+/* LAB-NAV:js:end */
+</script>
+</body>
+</html>

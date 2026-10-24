@@ -9,9 +9,14 @@ Coming-soon site for Cars24 Patch, a Cars24 Rebellion. Static, single-file pages
 | `/` | `index.html` | The homepage. Shut up ***hole. India has swerved, slowed down and suffered enough. |
 | `/on-the-move` | `on-the-move.html` | The calm design. Every pothole has an owner. **And we’re on the move.** |
 | `/know-who` | `know-who.html` | The calm design, other headline. Every pothole has an owner. **Soon, you’ll know who.** |
+| `/lab` | `lab.html` | The lab. Experiments are built and tried here before they reach the homepage. Unlisted (`noindex`). |
+| `/updates` | `updates.html` | What we're up to: the road to launch and the latest updates. Part of the lab, unlisted (`noindex`). |
+| `/case-files` | `case-files.html` | The case-study repository: what we tried, what we found, what we learned. Part of the lab, unlisted (`noindex`). |
+| `/wall-of-holes` | `wall-of-holes.html` | Biggest ***holes of the year: the wall of potholes. Part of the lab, unlisted (`noindex`). |
+| `/dodge` | `dodge.html` | Dodge with your head: a camera game (the camera needs https). Part of the lab, unlisted (`noindex`). |
 | any missing URL | `404.html` | The 404 page, in the homepage style. |
 
-`/genz` used to be the Gen Z page and now redirects to `/` (see `vercel.json`), so old links keep working. The two calm pages are identical apart from one headline line and the matching `og:title`. They are marked `noindex`, so search engines only index the homepage.
+`/genz` used to be the Gen Z page and now redirects to `/` (see `vercel.json`), so old links keep working. The two calm pages are identical apart from one headline line and the matching `og:title`. They are marked `noindex`, so search engines only index the homepage. The lab pages are marked `noindex` too. `/dodge` loads MediaPipe face tracking from jsDelivr and Google Storage only when someone starts the camera; the video never leaves the device.
 
 ## Run locally
 
@@ -47,4 +52,4 @@ The figures on the pages are cited in their footers. In short: pothole-related d
 
 ## Fonts
 
-`index.html` and `404.html` use Bricolage Grotesque, Space Mono and Permanent Marker. `on-the-move.html` and `know-who.html` use Montserrat and Geist. All load from Google Fonts.
+`index.html`, `404.html` and the lab pages use Bricolage Grotesque, Space Mono and Permanent Marker. `on-the-move.html` and `know-who.html` use Montserrat and Geist. All load from Google Fonts.
