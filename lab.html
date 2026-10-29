@@ -484,7 +484,7 @@ html.js .meme.in .meme-cap { opacity: 1; translate: 0 0; transition: opacity .5s
 html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are for us, not for visitors */
 .in-grid { margin-top: 44px; display: grid; gap: 44px 28px; grid-template-columns: minmax(0, 1fr); align-items: start; }
 @media (min-width: 700px) { .in-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1240px) { .in-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; } }
+@media (min-width: 1000px) { .in-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; } }
 .in-card.upd { display: block; }
 .in-card .upd-title { font-size: clamp(1.6rem, 1rem + 1.6vw, 2.3rem); }
 .in-go { margin-top: 18px; }
@@ -505,7 +505,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 .nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
 .nav-link:hover, .nav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
 .nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: -2deg; }
-@media (max-width: 959px) {
+@media (max-width: 1099px) {
   html.js .nav-toggle { display: inline-flex; }
   html.js .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px 24px 24px; background: var(--paper); color: var(--ink); border-bottom: var(--bd); box-shadow: 0 6px 0 var(--ink); max-height: calc(100vh - var(--nav-h)); max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; }
   html.js .nav-links.open { display: flex; }
@@ -539,7 +539,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 
 <!-- LAB-NAV:html:start -->
 <!-- The lab pages share this bar and nav. Links use data-page: the .html file on localhost, the clean route live. -->
-<div class="lab-bar">the lab: experiments before they go live. not the official homepage. <a href="/" data-page="home">go to the real one →</a></div>
+<div class="lab-bar">the lab: stuff we’re still testing. not the official homepage. <a href="/" data-page="home">the real one is over here →</a></div>
 <header class="nav">
   <div class="wrap nav-in">
     <a class="logo" href="#top" aria-label="Cars24 Patch lab — back to top">
@@ -550,6 +550,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
     <nav class="nav-links" id="nav-links" aria-label="The lab pages">
       <a class="nav-link" href="/lab" data-page="lab" aria-current="page">the lab</a>
       <a class="nav-link" href="/updates" data-page="updates">updates &amp; journey</a>
+      <a class="nav-link" href="/research" data-page="research">research</a>
       <a class="nav-link" href="/case-files" data-page="case-files">case files</a>
       <a class="nav-link" href="/wall-of-holes" data-page="wall">the wall</a>
       <a class="nav-link" href="/dodge" data-page="dodge">dodge</a>
@@ -667,33 +668,42 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
   <div class="wrap">
     <div class="upd-head reveal">
       <span class="upd-stamp" aria-hidden="true">a Cars24<br>rebellion</span>
-      <div class="upd-chips"><span class="kicker">inside the lab</span><span class="upd-chip">pick a page</span></div>
-      <h2 class="h2" id="h-in">what we’re up to. <span class="hi">no fluff.</span></h2>
-      <p class="sec-lead">the road to launch, the latest news, every experiment and the games. each one has its own page.</p>
+      <div class="upd-chips"><span class="kicker">behind the tape</span><span class="upd-chip">pick a door</span></div>
+      <h2 class="h2" id="h-in">while you were swerving, <span class="hi">we were building.</span></h2>
+      <p class="sec-lead">a diary, a research library, a pile of case files, a wall of holes and a game you steer with your head. pick a door.</p>
     </div>
 
     <!--
       ADD A PAGE: build it as its own file with the shared lab nav (see BRAND-GUIDE.md, "Lab pages and the nav"), then add a card here.
       data-s only sets the card colour: found = pink, doing = main colour, next = accent, done = paper.
+      Write the card like the wall does: one real image or one twist, not a description of the page.
     -->
     <ul class="in-grid">
       <li class="upd in-card reveal" data-s="doing" style="--r:-.6deg;--d:0s">
         <article class="upd-card">
-          <div class="upd-top"><span class="upd-tag">journey</span><span class="upd-sample">draft</span></div>
-          <h3 class="upd-title">updates &amp; journey.</h3>
-          <p class="upd-sum">the road to launch, and the latest news.</p>
+          <div class="upd-top"><span class="upd-tag">diary</span><span class="upd-sample">draft</span></div>
+          <h3 class="upd-title">the diary.</h3>
+          <p class="upd-sum">the road to launch, step by step. what’s done, what’s next. date: soon.</p>
           <p class="in-go"><a class="btn btn-sm" href="updates.html" data-page="updates">open it <span class="arr">↗</span></a></p>
         </article>
       </li>
       <li class="upd in-card reveal" data-s="found" style="--r:.6deg;--d:.08s">
         <article class="upd-card">
-          <div class="upd-top"><span class="upd-tag">studies</span><span class="upd-sample">draft</span></div>
-          <h3 class="upd-title">case files.</h3>
-          <p class="upd-sum">every study and experiment: the question, what we did, what we found, what we learned.</p>
-          <p class="in-go"><a class="btn btn-sm" href="case-files.html" data-page="case-files">open it <span class="arr">↗</span></a></p>
+          <div class="upd-top"><span class="upd-tag">library</span><span class="upd-sample">draft</span></div>
+          <h3 class="upd-title">the research.</h3>
+          <p class="upd-sum">everything we read about potholes, with a source and a stamp on every claim. open to anyone.</p>
+          <p class="in-go"><a class="btn btn-sm" href="research.html" data-page="research">open it <span class="arr">↗</span></a></p>
         </article>
       </li>
       <li class="upd in-card reveal" data-s="next" style="--r:-.4deg;--d:.16s">
+        <article class="upd-card">
+          <div class="upd-top"><span class="upd-tag">evidence</span><span class="upd-sample">draft</span></div>
+          <h3 class="upd-title">case files.</h3>
+          <p class="upd-sum">every idea we tried and what it taught us. the mistakes stay in. especially the mistakes.</p>
+          <p class="in-go"><a class="btn btn-sm" href="case-files.html" data-page="case-files">open it <span class="arr">↗</span></a></p>
+        </article>
+      </li>
+      <li class="upd in-card reveal" data-s="done" style="--r:.5deg;--d:.24s">
         <article class="upd-card">
           <div class="upd-top"><span class="upd-tag">photos</span><span class="upd-sample">draft</span></div>
           <h3 class="upd-title">the wall of holes.</h3>
@@ -701,11 +711,11 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
           <p class="in-go"><a class="btn btn-sm" href="wall-of-holes.html" data-page="wall">open it <span class="arr">↗</span></a></p>
         </article>
       </li>
-      <li class="upd in-card reveal" data-s="done" style="--r:.8deg;--d:.24s">
+      <li class="upd in-card reveal" data-s="doing" style="--r:-.7deg;--d:.32s">
         <article class="upd-card">
           <div class="upd-top"><span class="upd-tag">game</span><span class="upd-sample">draft</span></div>
           <h3 class="upd-title">dodge with your head.</h3>
-          <p class="upd-sum">a camera game. lean to dodge the potholes. then the real number.</p>
+          <p class="upd-sum">lean left, lean right, miss the potholes. it’s pretend. the number at the end isn’t.</p>
           <p class="in-go"><a class="btn btn-sm" href="dodge.html" data-page="dodge">play it <span class="arr">↗</span></a></p>
         </article>
       </li>
@@ -852,7 +862,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 (function () {
   'use strict';
   var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
-  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
+  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], research: ['research.html', '/research'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
   [].forEach.call(document.querySelectorAll('a[data-page]'), function (a) {
     var p = PAGES[a.getAttribute('data-page')];
     if (p) a.setAttribute('href', p[local ? 0 : 1] + (a.getAttribute('data-hash') || ''));
@@ -870,7 +880,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
   panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) set(false); });
   document.addEventListener('click', function (e) { if (panel.classList.contains('open') && !nav.contains(e.target)) set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('open')) { set(false); btn.focus(); } });
-  var wide = window.matchMedia('(min-width: 960px)');
+  var wide = window.matchMedia('(min-width: 1100px)');
   if (wide.addEventListener) wide.addEventListener('change', function () { set(false); }); else if (wide.addListener) wide.addListener(function () { set(false); });
 })();
 /* LAB-NAV:js:end */

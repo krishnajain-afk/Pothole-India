@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Case files — Cars24 Patch</title>
-<meta name="description" content="Everything Cars24 Patch tries, in one place: the question, what we did, what we found, what we learned.">
+<meta name="description" content="Every idea Cars24 Patch tries: what worked, what did not and what we would do differently. The failures stay in.">
 <!-- Draft page: keep it out of search engines until the case files are reviewed and approved. -->
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#FFD60A">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Cars24 Patch">
 <meta property="og:title" content="Case files — Cars24 Patch">
-<meta property="og:description" content="Everything we try, in one place: the question, what we did, what we found, what we learned.">
+<meta property="og:description" content="Every idea we try: what worked, what did not and what we would do differently. The failures stay in.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FFD60A'/%3E%3Cellipse cx='16' cy='17' rx='11' ry='8' fill='%23121212'/%3E%3Ccircle cx='12' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='20' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='12.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3Ccircle cx='20.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3C/svg%3E">
 
@@ -318,6 +318,20 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 .cfp-lead { margin-top: 24px; max-width: 30ch; font: 600 clamp(1.25rem, 1rem + 1.4vw, 1.9rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
 .cfp-body { padding-block: 64px 96px; }
 .cfp-body .cf-top { margin-top: 0; }
+/* ---------- Stamps (how much weight a claim bears; shared with research.html) ---------- */
+.stamp { display: inline-block; padding: 5px 9px 4px; border: 2.5px solid var(--ink); border-radius: 6px; background: var(--paper); color: var(--ink); font: 700 11px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; rotate: -2deg; white-space: nowrap; }
+.stamp[data-k="established"] { background: var(--prim); color: var(--on-prim); }
+.stamp[data-k="corroborated"] { background: var(--acc); color: var(--on-acc); }
+.stamp[data-k="single"] { background: var(--white); }
+.stamp[data-k="claim"] { background: var(--pink); }
+.stamp[data-k="inference"] { background: transparent; border-style: dashed; }
+.stamp[data-k="mixed"] { background: transparent; border-style: dotted; }
+.stamp[data-k="unknown"] { background: var(--ink); color: var(--hi); }
+.stamp[data-k="told"] { background: var(--hi); color: var(--ink); }
+.cf-miss li::before { content: "?"; background: var(--ink); color: var(--hi); }
+.cf-told { display: grid; gap: 10px; }
+.cf-told li { display: grid; gap: 8px; padding: 12px 14px; border: 2.5px solid var(--ink); border-radius: 10px; background: var(--white); font: 500 clamp(1rem, .95rem + .25vw, 1.12rem)/1.45 var(--ff-d); overflow-wrap: anywhere; }
+.cf-told .stamps { display: flex; flex-wrap: wrap; gap: 8px; }
 /* LAB-NAV:css:start */
 /* ---------- Lab nav (shared by every lab page: keep this block identical in all of them) ---------- */
 .lab-bar { background: var(--ink); color: var(--paper); padding: 9px 14px; text-align: center; font: 400 12px/1.45 var(--ff-m); }
@@ -334,7 +348,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 .nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
 .nav-link:hover, .nav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
 .nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: -2deg; }
-@media (max-width: 959px) {
+@media (max-width: 1099px) {
   html.js .nav-toggle { display: inline-flex; }
   html.js .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px 24px 24px; background: var(--paper); color: var(--ink); border-bottom: var(--bd); box-shadow: 0 6px 0 var(--ink); max-height: calc(100vh - var(--nav-h)); max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; }
   html.js .nav-links.open { display: flex; }
@@ -364,7 +378,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 
 <!-- LAB-NAV:html:start -->
 <!-- The lab pages share this bar and nav. Links use data-page: the .html file on localhost, the clean route live. -->
-<div class="lab-bar">the lab: experiments before they go live. not the official homepage. <a href="/" data-page="home">go to the real one →</a></div>
+<div class="lab-bar">the lab: stuff we’re still testing. not the official homepage. <a href="/" data-page="home">the real one is over here →</a></div>
 <header class="nav">
   <div class="wrap nav-in">
     <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
@@ -375,6 +389,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
     <nav class="nav-links" id="nav-links" aria-label="The lab pages">
       <a class="nav-link" href="/lab" data-page="lab">the lab</a>
       <a class="nav-link" href="/updates" data-page="updates">updates &amp; journey</a>
+      <a class="nav-link" href="/research" data-page="research">research</a>
       <a class="nav-link" href="/case-files" data-page="case-files" aria-current="page">case files</a>
       <a class="nav-link" href="/wall-of-holes" data-page="wall">the wall</a>
       <a class="nav-link" href="/dodge" data-page="dodge">dodge</a>
@@ -386,9 +401,9 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 <main id="main">
 <section class="cfp-hero" aria-labelledby="h1">
   <div class="wrap">
-    <div class="cfp-chips pop"><span class="cfp-chip">the repository</span><span class="cfp-chip alt">draft</span></div>
+    <div class="cfp-chips pop"><span class="cfp-chip">the evidence board</span><span class="cfp-chip alt">draft</span></div>
     <h1 class="cfp-h1 pop" id="h1" style="--d:.15s">case <span class="hi">files.</span></h1>
-    <p class="cfp-lead pop" style="--d:.3s">everything we try, in one place: the question, what we did, what we found, what we learned.</p>
+    <p class="cfp-lead pop" style="--d:.3s">every idea we try goes in here. what worked, what didn’t, what we’d do differently. the failures stay in.</p>
   </div>
 </section>
 
@@ -403,7 +418,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       Updates and the journey that link here live on the lab page (/lab).
     -->
     <div class="cf-top reveal">
-        <p class="cf-count" id="cf-count" aria-live="polite">3 case files</p>
+        <p class="cf-count" id="cf-count" aria-live="polite">5 case files</p>
         <div class="cf-filters" role="group" aria-label="Filter the case files">
           <button class="cf-f" type="button" data-f="all" aria-pressed="true">all</button>
           <button class="cf-f" type="button" data-f="study" aria-pressed="false">studies</button>
@@ -417,13 +432,13 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
           <article class="upd-card" aria-labelledby="cf-01-t">
             <div class="upd-top"><span class="upd-tag">study</span><span class="cf-no">case file 01</span><span class="upd-sample">draft</span></div>
             <h3 class="upd-title" id="cf-01-t">2,385 people. one table.</h3>
-            <p class="upd-sum">the official numbers, the sums, and what they say.</p>
+            <p class="upd-sum">the official numbers, the sums behind them, and what’s missing from the count.</p>
             <details>
-              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <summary><span class="w-closed">open the file</span><span class="w-open">shut it</span></summary>
               <div class="upd-body">
-                <div class="cf-sec"><h5>the question</h5><p>how many people die in pothole crashes in India, and is it getting better?</p></div>
-                <div class="cf-sec"><h5>what we did</h5><p>pulled the official figures for 2020–2024 (Ministry of Road Transport and Highways, from the Union Minister’s written reply in Parliament, reported by The Tribune, updated 14 February 2026). then did the sums ourselves and showed the working.</p></div>
-                <div class="cf-sec"><h5>what we found</h5>
+                <div class="cf-sec"><h5>the hunch</h5><p>everyone agrees potholes are bad. we wanted the number. how many people die in pothole crashes in India, and is it getting better?</p></div>
+                <div class="cf-sec"><h5>what we tried</h5><p>found the official figures for 2020–2024 (Ministry of Road Transport and Highways, from the Union Minister’s written reply in Parliament, reported by The Tribune, updated 14 February 2026). then did the sums ourselves and put the working in the footer, so you don’t have to take our word for it.</p></div>
+                <div class="cf-sec"><h5>what turned up</h5>
                   <div class="cf-bars" role="img" aria-label="Pothole deaths by year: 2020, 1,555. 2021, 1,481. 2022, 1,856. 2023, 2,161. 2024, 2,385.">
                     <div class="cf-bar"><b>1,555</b><i style="--h:78px"></i><span>2020</span></div>
                     <div class="cf-bar"><b>1,481</b><i style="--h:74px"></i><span>2021</span></div>
@@ -435,11 +450,11 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
                     <li><b>+53%</b>2020 → 2024</li><li><b>6.5</b>people a day in 2024</li><li><b>9,438</b>in five years</li><li><b>~1.2%</b>of road deaths (2023)</li>
                   </ul>
                 </div>
-                <div class="cf-sec"><h5>what we learned</h5>
+                <div class="cf-sec"><h5>what it taught us</h5>
                   <ol class="cf-learn">
-                    <li>it isn’t one bad year. it has gone up every year since 2021.</li>
-                    <li>these are recorded crashes only. whatever didn’t get written down isn’t in the number.</li>
-                    <li>a number lands harder when you can see the sum behind it, so every figure we derived has its working in the footer.</li>
+                    <li>it’s not a blip. it has gone up every year since 2021.</li>
+                    <li>a pothole death only counts if somebody writes it down. the number is the written-down ones. anything that never made it onto paper isn’t in there.</li>
+                    <li>a number hits harder when you can see the sum behind it. so every figure we worked out has its working at the bottom of the page. receipts, remember?</li>
                   </ol>
                 </div>
                 <p class="upd-src">source: MoRTH data, via the Union Minister’s written reply in Parliament; reported by The Tribune · <a href="#src-1">source 1</a> · <a href="#src-2">source 2</a></p>
@@ -455,21 +470,21 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
             <h3 class="upd-title" id="cf-02-t">the wall of holes.</h3>
             <p class="upd-sum">what if potholes got famous instead of ignored?</p>
             <details>
-              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <summary><span class="w-closed">open the file</span><span class="w-open">shut it</span></summary>
               <div class="upd-body">
-                <div class="cf-sec"><h5>the question</h5><p>can a joke get people to look at a pothole, and then at the numbers?</p></div>
-                <div class="cf-sec"><h5>what we did</h5><p>built a wall of “biggest ***holes of the year”: real potholes from real Indian roads, each credited, plus one blank nominee called “your ex”.</p></div>
-                <div class="cf-sec"><h5>what we found</h5>
+                <div class="cf-sec"><h5>the hunch</h5><p>we’ve all stopped noticing potholes. could a joke make people look again, and then look at the numbers?</p></div>
+                <div class="cf-sec"><h5>what we tried</h5><p>built an awards wall: “biggest ***holes of the year”. real potholes from real Indian roads, every photo credited. one nominee has no photo and a blocked profile picture: your ex.</p></div>
+                <div class="cf-sec"><h5>what turned up</h5>
                   <ul class="upd-nums" aria-label="The wall in numbers">
-                    <li><b>8</b>photos</li><li><b>6</b>places</li><li><b>3</b>licences</li><li><b>1</b>nominee with no photo</li>
+                    <li><b>8</b>photos</li><li><b>6</b>places</li><li><b>3</b>licences</li><li><b>1</b>ex. photo: deleted.</li>
                   </ul>
                 </div>
-                <div class="cf-sec"><h5>what we learned</h5>
+                <div class="cf-sec"><h5>what it taught us</h5>
                   <ol class="cf-learn">
-                    <li>we couldn’t use photos from google or social media. they belong to the people who took them, and they show faces and number plates. so every photo is openly licensed (Wikimedia Commons) and credited.</li>
-                    <li>a blank frame isn’t a joke. “your ex” only landed once it had a blocked profile picture, an UNFIXABLE stamp and the line “the other kind of ***hole”.</li>
-                    <li>small details flip a joke. at small sizes our UNFIXABLE stamp got clipped and read FIXABLE, the opposite. now it scales with its tile.</li>
-                    <li>safety is part of the idea: footpath only, never in traffic, never while driving.</li>
+                    <li>google images and instagram were out. those photos belong to whoever took them, and plenty show somebody’s face or number plate. so every photo here is openly licensed (Wikimedia Commons) and credited.</li>
+                    <li>a blank frame isn’t a joke. it’s a blank frame. “your ex” only worked once it had a blocked profile picture, an UNFIXABLE stamp and the line “the other kind of ***hole”.</li>
+                    <li>one clipped letter flips a joke. on small screens our UNFIXABLE stamp got cut off and read FIXABLE. the opposite joke, on a page about fixing things. it now shrinks with its tile.</li>
+                    <li>safety is the one thing we won’t joke about. footpath only. never in traffic. never while driving.</li>
                   </ol>
                 </div>
                 <p class="cf-links"><a href="wall-of-holes.html" data-page="wall">see the wall ↗</a></p>
@@ -482,27 +497,101 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
           <article class="upd-card" aria-labelledby="cf-03-t">
             <div class="upd-top"><span class="upd-tag">experiment</span><span class="upd-tag alt">landing</span><span class="cf-no">case file 03</span><span class="upd-sample">draft</span></div>
             <h3 class="upd-title" id="cf-03-t">dodge with your head.</h3>
-            <p class="upd-sum">can a camera game make you feel a pothole before you read the number?</p>
+            <p class="upd-sum">can a game make you feel a pothole before you read the number?</p>
             <details>
-              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <summary><span class="w-closed">open the file</span><span class="w-open">shut it</span></summary>
               <div class="upd-body">
-                <div class="cf-sec"><h5>the question</h5><p>can a camera game make people feel a pothole before they read the number?</p></div>
-                <div class="cf-sec"><h5>what we did</h5><p>built a game that runs in the browser. your camera feed is the road, and you lean your head to switch between three lanes of potholes. hit one and the screen says “that was pretend”, then shows 2,385.</p></div>
-                <div class="cf-sec"><h5>what we found</h5>
+                <div class="cf-sec"><h5>the hunch</h5><p>numbers are easy to scroll past. a pothole you just dodged, or hit, is harder to scroll past. can a game make people feel one before they read the number?</p></div>
+                <div class="cf-sec"><h5>what we tried</h5><p>built a game that runs in your browser. your camera is the road. lean your head to switch between three lanes of potholes. hit one and the screen says “that was pretend.” then it shows 2,385, and “people it wasn’t.”</p></div>
+                <div class="cf-sec"><h5>what turned up</h5>
                   <ul class="upd-nums" aria-label="The game in numbers">
                     <li><b>3</b>lanes</li><li><b>478</b>face points tracked</li><li><b>~30</b>checks a second</li><li><b>0</b>video uploaded</li>
                   </ul>
                 </div>
-                <div class="cf-sec"><h5>what we learned</h5>
+                <div class="cf-sec"><h5>what it taught us</h5>
                   <ol class="cf-learn">
-                    <li>our first face detector was too coarse: a 12 px head movement read as about 25 px, so half-leans got lost. a landmark model that tracks within a pixel fixed it.</li>
-                    <li>tilting your head is also a lean, so tilt steers too. a small wobble is ignored.</li>
-                    <li>people shift in their seats, so the neutral spot slowly follows them.</li>
-                    <li>the camera stays on your device. nothing is recorded or uploaded, and it stops when you leave.</li>
-                    <li>safety first: play still, indoors, never while walking, riding or driving.</li>
+                    <li>our first face tracker was jumpy: a 12 px head move read as about 25 px, so half-leans got lost. a sharper one that tracks 478 points on your face fixed it.</li>
+                    <li>your head tilts when you lean, so we count the tilt too. a tiny wobble is ignored, so it won’t swerve you.</li>
+                    <li>people slouch. the game’s idea of “straight” slowly follows you as you shift in your seat.</li>
+                    <li>your camera stays your camera. nothing is recorded or uploaded, and it switches off when you leave.</li>
+                    <li>safety, again: play sitting still, indoors. never while walking, riding or driving. the fake potholes are the safe ones.</li>
                   </ol>
                 </div>
                 <p class="cf-links"><a href="dodge.html" data-page="dodge">play it ↗</a> · <a href="updates.html#u-dodge" data-page="updates" data-hash="#u-dodge">the update →</a></p>
+              </div>
+            </details>
+          </article>
+        </li>
+
+        <li class="upd cfile reveal" id="cf-04" data-type="study" data-s="found" style="--r:.5deg;--d:.3s">
+          <article class="upd-card" aria-labelledby="cf-04-t">
+            <div class="upd-top"><span class="upd-tag">study</span><span class="cf-no">case file 04</span><span class="upd-sample">draft</span></div>
+            <h3 class="upd-title" id="cf-04-t">why potholes come back.</h3>
+            <p class="upd-sum">it’s mostly water. and, as far as we can find, nobody in India has measured how long the fixes last.</p>
+            <details>
+              <summary><span class="w-closed">open the file</span><span class="w-open">shut it</span></summary>
+              <div class="upd-body">
+                <div class="cf-sec"><h5>the hunch</h5><p>we keep filling the same holes. why do they come back, and what would make a repair last?</p></div>
+                <div class="cf-sec"><h5>what we tried</h5><p>read everything we could get: Indian road codes and court orders, government data, international field studies, academic research and city reporting. every claim got a source and a stamp: established, corroborated, single source, claim, inference or not found.</p></div>
+                <div class="cf-sec"><h5>what turned up</h5>
+                  <ul class="upd-nums" aria-label="The research in numbers">
+                    <li><b>~15</b>ways to repair a pothole</li><li><b>85%</b>of patches survived at dry sites (US and Canada, ~1,250 patches)</li><li><b>48%</b>survived at wet sites</li><li><b>0</b>independent Indian studies on how long repairs last. we looked.</li>
+                  </ul>
+                </div>
+                <div class="cf-sec"><h5>what it taught us</h5>
+                  <ol class="cf-learn">
+                    <li>it’s water. it gets in through cracks, loosens the bitumen, and passing tyres pump it in and out until the road falls apart. as one Indian engineer put it: drainage, drainage, drainage.</li>
+                    <li>a patch on a wet base is a plug sitting on nothing. the Indian Roads Congress itself says treating the surface of a structural failure “doesn’t last long”.</li>
+                    <li>the method’s name matters less than the weather and the prep. in the biggest controlled study, patches at wet sites survived 48% of the time. at dry sites, 85%.</li>
+                    <li>five things decide whether a patch lasts: preparation, the bond at the edge, the material, compaction and what’s underneath. they all matter.</li>
+                    <li>“works in water, ready in 10 minutes” is a claim, not a result. “open to traffic” isn’t “fully cured”, and none of the instant mixes we found has independent Indian survival data.</li>
+                    <li>the repair figures we found count holes filled. we couldn’t find any that counted holes that stayed filled. that gap is the finding.</li>
+                  </ol>
+                </div>
+                <div class="cf-sec"><h5>what we couldn’t find</h5>
+                  <ul class="cf-learn cf-miss">
+                    <li>how long a patch lasts in monsoon rain, on a steep slope, or above 40 °C.</li>
+                    <li>independent tests of any Indian “instant” mix.</li>
+                    <li>how often Indian potholes are structural.</li>
+                    <li>a pothole death count that isn’t a floor: some states report none at all.</li>
+                  </ul>
+                </div>
+                <p class="upd-src">sources and stamps for every claim are on <a href="research.html" data-page="research">the research page</a>.</p>
+                <p class="cf-links"><a href="research.html" data-page="research">read the research ↗</a> · <a href="updates.html#u-research" data-page="updates" data-hash="#u-research">the update →</a></p>
+              </div>
+            </details>
+          </article>
+        </li>
+
+        <li class="upd cfile reveal" id="cf-05" data-type="study" data-s="done" style="--r:-.5deg;--d:.4s">
+          <article class="upd-card" aria-labelledby="cf-05-t">
+            <div class="upd-top"><span class="upd-tag">study</span><span class="upd-tag alt">field visit</span><span class="cf-no">case file 05</span><span class="upd-sample">draft</span></div>
+            <h3 class="upd-title" id="cf-05-t">the machine visit.</h3>
+            <p class="upd-sum">a pothole machine at work, and what a government road lab told us about where it works and where it doesn’t.</p>
+            <details>
+              <summary><span class="w-closed">open the file</span><span class="w-open">shut it</span></summary>
+              <div class="upd-body">
+                <div class="cf-sec"><h5>the hunch</h5><p>a lot of people sell a pothole fix. what does one actually look like, and where does it stop working?</p></div>
+                <div class="cf-sec"><h5>what we tried</h5><p>visited a government road research lab, watched a pothole-repair machine at work, and talked to the scientists behind it.</p></div>
+                <div class="cf-sec"><h5>what turned up</h5>
+                  <ul class="cf-told" aria-label="What we were told, and how it stacks up">
+                    <li>about 9 in 10 paved roads in India are bituminous (asphalt), not concrete, and concrete roads fail differently.<span class="stamps"><span class="stamp" data-k="told">told to us</span> <span class="stamp" data-k="corroborated">our research agrees</span></span></li>
+                    <li>a proper repair has five or six steps, not one.<span class="stamps"><span class="stamp" data-k="told">told to us</span> <span class="stamp" data-k="corroborated">our research agrees</span></span></li>
+                    <li>cold mix is quicker and needs no hot-mix plant. the catch, as they put it: it wears out faster on busy roads, so hot mix suits those better. our research doesn’t settle this either way.<span class="stamps"><span class="stamp" data-k="told">told to us</span></span></li>
+                    <li>hauling hot mix from a plant to the site only makes sense if the plant is close.<span class="stamps"><span class="stamp" data-k="told">told to us</span> <span class="stamp" data-k="corroborated">our research agrees</span></span></li>
+                    <li>a hole past a certain size isn’t a pothole any more. the whole road needs repairing.<span class="stamps"><span class="stamp" data-k="told">told to us</span> <span class="stamp" data-k="corroborated">our research agrees</span></span></li>
+                  </ul>
+                </div>
+                <div class="cf-sec"><h5>what it taught us</h5>
+                  <ol class="cf-learn">
+                    <li>watching a machine work isn’t evidence that it keeps working. the test is whether the patch is still there months later, and someone with no stake in the product has to do the checking.</li>
+                    <li>we mark everything we heard as “told to us”, not “tested by us”. that’s not distrust. it’s how you keep receipts.</li>
+                    <li>the quick fix and the lasting fix aren’t always the same fix. where it’s used matters as much as what it is.</li>
+                    <li>permission comes first. only the road owner can say yes to work on a road, and we want that yes in writing.</li>
+                  </ol>
+                </div>
+                <p class="upd-src">“our research agrees” points to <a href="research.html" data-page="research">the research page</a>, where every claim has a source and a stamp.</p>
+                <p class="cf-links"><a href="research.html" data-page="research">the research ↗</a> · <a href="updates.html#u-visit" data-page="updates" data-hash="#u-visit">the update →</a></p>
               </div>
             </details>
           </article>
@@ -515,12 +604,12 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
             <h3 class="upd-title" id="cf-next-t">[next case file goes here]</h3>
             <p class="upd-sum">[one plain sentence: the question]</p>
             <details>
-              <summary><span class="w-closed">open the case file</span><span class="w-open">close it</span></summary>
+              <summary><span class="w-closed">open the file</span><span class="w-open">shut it</span></summary>
               <div class="upd-body">
-                <div class="cf-sec"><h5>the question</h5><p>[what we wanted to find out.]</p></div>
-                <div class="cf-sec"><h5>what we did</h5><p>[what we actually did.]</p></div>
-                <div class="cf-sec"><h5>what we found</h5><p>[numbers, photos, results. with sources.]</p></div>
-                <div class="cf-sec"><h5>what we learned</h5><p>[what we’d do differently or keep.]</p></div>
+                <div class="cf-sec"><h5>the hunch</h5><p>[the hunch.]</p></div>
+                <div class="cf-sec"><h5>what we tried</h5><p>[what we tried.]</p></div>
+                <div class="cf-sec"><h5>what turned up</h5><p>[what turned up. numbers, photos, results. with sources.]</p></div>
+                <div class="cf-sec"><h5>what it taught us</h5><p>[what it taught us. the mistakes too.]</p></div>
               </div>
             </details>
           </article>
@@ -594,7 +683,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 (function () {
   'use strict';
   var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
-  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
+  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], research: ['research.html', '/research'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
   [].forEach.call(document.querySelectorAll('a[data-page]'), function (a) {
     var p = PAGES[a.getAttribute('data-page')];
     if (p) a.setAttribute('href', p[local ? 0 : 1] + (a.getAttribute('data-hash') || ''));
@@ -612,7 +701,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
   panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) set(false); });
   document.addEventListener('click', function (e) { if (panel.classList.contains('open') && !nav.contains(e.target)) set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('open')) { set(false); btn.focus(); } });
-  var wide = window.matchMedia('(min-width: 960px)');
+  var wide = window.matchMedia('(min-width: 1100px)');
   if (wide.addEventListener) wide.addEventListener('change', function () { set(false); }); else if (wide.addListener) wide.addListener(function () { set(false); });
 })();
 /* LAB-NAV:js:end */

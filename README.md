@@ -12,6 +12,7 @@ Coming-soon site for Cars24 Patch, a Cars24 Rebellion. Static, single-file pages
 | `/lab` | `lab.html` | The lab. Experiments are built and tried here before they reach the homepage. Unlisted (`noindex`). |
 | `/updates` | `updates.html` | What we're up to: the road to launch and the latest updates. Part of the lab, unlisted (`noindex`). |
 | `/case-files` | `case-files.html` | The case-study repository: what we tried, what we found, what we learned. Part of the lab, unlisted (`noindex`). |
+| `/research` | `research.html` | The research library: every study we read or run about potholes, with sources and evidence stamps. Part of the lab, unlisted (`noindex`). |
 | `/wall-of-holes` | `wall-of-holes.html` | Biggest ***holes of the year: the wall of potholes. Part of the lab, unlisted (`noindex`). |
 | `/dodge` | `dodge.html` | Dodge with your head: a camera game (the camera needs https). Part of the lab, unlisted (`noindex`). |
 | any missing URL | `404.html` | The 404 page, in the homepage style. |

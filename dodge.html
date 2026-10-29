@@ -292,7 +292,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
 .nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
 .nav-link:hover, .nav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
 .nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: -2deg; }
-@media (max-width: 959px) {
+@media (max-width: 1099px) {
   html.js .nav-toggle { display: inline-flex; }
   html.js .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px 24px 24px; background: var(--paper); color: var(--ink); border-bottom: var(--bd); box-shadow: 0 6px 0 var(--ink); max-height: calc(100vh - var(--nav-h)); max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; }
   html.js .nav-links.open { display: flex; }
@@ -313,7 +313,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
 
 <!-- LAB-NAV:html:start -->
 <!-- The lab pages share this bar and nav. Links use data-page: the .html file on localhost, the clean route live. -->
-<div class="lab-bar">the lab: experiments before they go live. not the official homepage. <a href="/" data-page="home">go to the real one →</a></div>
+<div class="lab-bar">the lab: stuff we’re still testing. not the official homepage. <a href="/" data-page="home">the real one is over here →</a></div>
 <header class="nav">
   <div class="wrap nav-in">
     <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
@@ -324,6 +324,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
     <nav class="nav-links" id="nav-links" aria-label="The lab pages">
       <a class="nav-link" href="/lab" data-page="lab">the lab</a>
       <a class="nav-link" href="/updates" data-page="updates">updates &amp; journey</a>
+      <a class="nav-link" href="/research" data-page="research">research</a>
       <a class="nav-link" href="/case-files" data-page="case-files">case files</a>
       <a class="nav-link" href="/wall-of-holes" data-page="wall">the wall</a>
       <a class="nav-link" href="/dodge" data-page="dodge" aria-current="page">dodge</a>
@@ -945,7 +946,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
 (function () {
   'use strict';
   var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
-  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
+  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], research: ['research.html', '/research'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
   [].forEach.call(document.querySelectorAll('a[data-page]'), function (a) {
     var p = PAGES[a.getAttribute('data-page')];
     if (p) a.setAttribute('href', p[local ? 0 : 1] + (a.getAttribute('data-hash') || ''));
@@ -963,7 +964,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
   panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) set(false); });
   document.addEventListener('click', function (e) { if (panel.classList.contains('open') && !nav.contains(e.target)) set(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('open')) { set(false); btn.focus(); } });
-  var wide = window.matchMedia('(min-width: 960px)');
+  var wide = window.matchMedia('(min-width: 1100px)');
   if (wide.addEventListener) wide.addEventListener('change', function () { set(false); }); else if (wide.addListener) wide.addListener(function () { set(false); });
 })();
 /* LAB-NAV:js:end */
