@@ -417,8 +417,8 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 <section class="cfp-hero" aria-labelledby="h1">
   <div class="wrap">
     <div class="cfp-chips pop"><span class="cfp-chip">the library</span><span class="cfp-chip alt">draft</span></div>
-    <h1 class="cfp-h1 pop" id="h1" style="--d:.15s">the <span class="hi">research.</span></h1>
-    <p class="cfp-lead pop" style="--d:.3s">every study we read or run about potholes goes on this shelf. anyone can open it. every claim has a source and a stamp.</p>
+    <h1 class="cfp-h1 pop" id="h1" style="--d:.15s">we did the <span class="hi">reading.</span></h1>
+    <p class="cfp-lead pop" style="--d:.3s">so you don’t have to. every claim here has a source and a stamp. when we found nothing, we say “not found” out loud.</p>
   </div>
 </section>
 
@@ -430,13 +430,13 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       <a href="#stamps">the stamps</a>
       <a href="#edition">the public edition</a>
       <a href="#fixes">how potholes get fixed</a>
-      <a href="#test">how a fair test works</a>
+      <a href="#test">testing without fooling ourselves</a>
       <a href="#not-found">what we couldn’t find</a>
       <a href="#sources">sources</a>
     </nav>
     <div class="hub-block" id="shelf">
       <div class="hub-bh reveal"><h3 class="hub-h">on the shelf</h3><span class="hub-draft">newest first</span></div>
-      <p class="sec-lead reveal" style="margin-top:14px">a library, not a blog. every study we read or run lands here, with what it found and where to read it. new ones go on the top of the shelf.</p>
+      <p class="sec-lead reveal" style="margin-top:14px">a library, not a blog. new studies go on top. old ones never get quietly deleted.</p>
       <!--
         ADD A STUDY: copy an <li class="res-card reveal"> block below and paste it at the top of the list (above the first one).
           data-s only sets the card colour: found = pink, doing = main colour, next = accent, done = paper.
@@ -448,7 +448,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
         <li class="res-card reveal" data-s="found">
           <div class="shelf-top"><span class="shelf-type">desk research</span><span class="shelf-date"><time datetime="2026-10">oct 2026</time></span><span class="upd-sample">draft</span></div>
           <h4 class="res-h" style="margin-top:14px;font-size:clamp(1.5rem,1rem + 1.6vw,2.2rem)">why potholes come back, and what would make a repair last.</h4>
-          <p style="margin-top:10px">forty-one pages on what a pothole is, how it forms, why repairs fail, what’s used in India and abroad, and how to test a fix fairly. written by Crashfree India. the public edition is below.</p>
+          <p style="margin-top:10px">forty-one pages. one stubborn question: why does the same hole keep coming back? written by Crashfree India. the readable version is right below.</p>
           <p class="shelf-go"><a class="btn btn-sm" href="#edition">read it <span class="arr">↓</span></a></p>
         </li>
         <li class="res-card reveal" data-s="doing">
@@ -468,7 +468,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
     </div>
     <div class="hub-block" id="stamps">
       <div class="hub-bh reveal"><h3 class="hub-h">how to read the stamps</h3></div>
-      <p class="sec-lead reveal" style="margin-top:14px">every claim carries a stamp, so you can tell how much weight it bears. where the evidence is thin, conflicting or missing, we say so.</p>
+      <p class="sec-lead reveal" style="margin-top:14px">every claim wears a stamp: how much weight it can carry before it cracks. (yes, like a road.) where the evidence is thin or missing, the stamp says so.</p>
       <ul class="legend reveal">
         <li><span class="stamp" data-k="established">established</span> established: stated in a standard, regulation, court order or controlled study.</li>
         <li><span class="stamp" data-k="corroborated">corroborated</span> corroborated: two or more independent sources agree.</li>
@@ -480,11 +480,11 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
     </div>
     <div class="hub-block" id="edition">
       <div class="hub-bh reveal"><h3 class="hub-h">the public edition</h3><span class="hub-goal">oct 2026</span><span class="hub-draft">draft</span></div>
-      <p class="sec-lead reveal" style="margin-top:14px">this is the public edition of the research brief, written by Crashfree India. we left out contact details and plans we haven’t finalised.</p>
+      <p class="sec-lead reveal" style="margin-top:14px">the research brief by Crashfree India, minus the contact details and anything we haven’t locked in yet.</p>
     </div>
     <div class="res-stack">
     <article class="res-card reveal" id="short-answer" data-s="found" aria-labelledby="short-answer-h">
-      <h3 class="res-h" id="short-answer-h">the short answer.</h3>
+      <h3 class="res-h" id="short-answer-h">the short answer. (it’s not a gadget.)</h3>
       <p>no product or machine on the market fixes India’s pothole problem on its own, and we couldn’t find one independent study in India that measured how long pothole repairs last. the few Indian field observations we found cover one to three patches, over one to six months.</p>
       <p>what the evidence does support is a system: work out why each hole formed, fix the cause when it lies below the surface, make proper repairs in suitable weather, and measure what survives.</p>
       <ul class="upd-nums" aria-label="The problem in numbers" style="margin-top:18px">
@@ -494,14 +494,14 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       <div class="res-note">some states report no pothole deaths at all, so these numbers are a floor, not a full count. <span class="stamp" data-k="established">established</span> <br><span style="font-weight:500;font-size:.95em">sources: <a href="https://morth.gov.in/backend/documents/uploaded/Road%20Accidents%20in%20India%202024.pdf" target="_blank" rel="noopener">MoRTH, Road Accidents in India 2024, Table 3.5</a> · <a href="https://theprint.in/india/pothole-deaths-rise-53-in-5-years-up-accounts-for-over-half-of-9400-fatalities/2854367/" target="_blank" rel="noopener">Lok Sabha reply, 12 Feb 2026, via ThePrint</a></span></div>
     </article>
     <article class="res-card reveal" id="what-is" data-s="doing" aria-labelledby="what-is-h">
-      <h3 class="res-h" id="what-is-h">1. what counts as a pothole?</h3>
+      <h3 class="res-h" id="what-is-h">1. when is a hole a pothole?</h3>
       <p>the definitions are close everywhere. what differs is the trigger: how deep a hole has to be before anyone has to act, and how fast.</p>
       <p>India’s maintenance code (<a href="https://law.resource.org/pub/in/bis/irc/irc.gov.in.082.2015.pdf" target="_blank" rel="noopener">IRC:82-2015</a>) describes a pothole as a bowl-shaped cavity in the bituminous surface, sometimes reaching into the layers below. it sizes them: small is up to 25 mm deep and 200 mm wide, medium is 25–50 mm deep and 500 mm wide, large is over 50 mm deep.</p>
       <p>the same 40 mm-deep hole counts as moderate in US and NHAI schemes, triggers action in most UK councils, and wouldn’t breach Ontario’s standard until it reached 8 cm. so any comparison of pothole counts across cities or countries has to check which definition was used. <span class="stamp" data-k="established">established</span></p>
       <p>on paper, India’s highway contract standard is among the strictest: a 10 mm limit and repair within 48 hours. we couldn’t find any record of how often it is enforced. <span class="stamp" data-k="unknown">not found</span></p>
     </article>
     <article class="res-card reveal" id="how-forms" data-s="found" aria-labelledby="how-forms-h">
-      <h3 class="res-h" id="how-forms-h">2. how a pothole forms.</h3>
+      <h3 class="res-h" id="how-forms-h">2. how a road becomes a pothole.</h3>
       <p>a pothole is the last step in a chain of damage. the sources agree on the sequence. <span class="stamp" data-k="corroborated">corroborated</span></p>
       <ol class="res-steps">
         <li><b>water gets in.</b>the surface is meant to be a waterproof lid. cracks, open joints or a mix with too many air pockets let water through. once the air pockets pass about 8%, they tend to link up into channels (<a href="https://pavementinteractive.org/reference-desk/testing/asphalt-tests/moisture-susceptibility/" target="_blank" rel="noopener">Pavement Interactive</a>).</li>
@@ -527,7 +527,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       <div class="res-note">you may have read that “70–80% of potholes form during the monsoon”. that claim traces back only to an unsourced website, so we didn’t use it. and no study measures how much of India’s pothole damage is down to the monsoon, overloading or poor construction. <span class="stamp" data-k="unknown">not found</span></div>
     </article>
     <article class="res-card reveal" id="surface-or-structural" data-s="doing" aria-labelledby="surface-or-structural-h">
-      <h3 class="res-h" id="surface-or-structural-h">3. surface or structural?</h3>
+      <h3 class="res-h" id="surface-or-structural-h">3. a scratch, or a broken bone?</h3>
       <p>the Indian Roads Congress separates two kinds. non-structural potholes stay in the top layers. structural ones involve the base, sub-base and subgrade, and for those, treating the top layer “doesn’t last long” (<a href="https://www.irc.nic.in/admnis/admin/showimg.aspx?ID=471" target="_blank" rel="noopener">Indian Highways, Dec 2017</a>). the fix is to remove the saturated layers and rebuild.</p>
       <p>a patch is a plug in the lid. if what lies beneath is wet and soft, the plug sits on nothing, the edges crack and the hole comes back. a South African guide is blunter: surface repair without fixing the cause is “normally a complete waste of time” (<a href="https://www.csir.co.za/sites/default/files/Documents/Pothole_CSIR_tech_guide.pdf" target="_blank" rel="noopener">CSIR South Africa, 2010</a>).</p>
       <div class="res-pair">
@@ -548,7 +548,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       <div class="res-note">counting only asphalt and concrete, asphalt is roughly 90–96% of paved length. about 95% of India’s road length is non-concrete, and can develop potholes. concrete is common only in a few cities and parts of the national highway network. <span class="stamp" data-k="inference">inference</span></div>
     </article>
     <article class="res-card reveal" id="fixes" data-s="found" aria-labelledby="fixes-h">
-      <h3 class="res-h" id="fixes-h">5. how potholes get fixed.</h3>
+      <h3 class="res-h" id="fixes-h">5. how potholes get fixed. and un-fixed.</h3>
       <p>about fifteen repair approaches are in use worldwide. they differ mostly in how the bitumen is made workable, and how it then hardens. Indian codes still treat hot mix as the preferred patching material, and cold mixes as the fallback where cold weather or heavy rain rule it out (<a href="https://law.resource.org/pub/in/bis/irc/irc.gov.in.sp.100.2014.pdf" target="_blank" rel="noopener">IRC:SP:100-2014</a>).</p>
       <details id="harden">
         <summary><span class="w-closed">how each material hardens</span><span class="w-open">close it</span></summary>
@@ -622,14 +622,14 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       </details>
     </article>
     <article class="res-card reveal" id="india-knows" data-s="doing" aria-labelledby="india-knows-h">
-      <h3 class="res-h" id="india-knows-h">6. does anyone know how long a repair lasts?</h3>
+      <h3 class="res-h" id="india-knows-h">6. does anyone know how long a repair lasts? (we couldn’t find anyone.)</h3>
       <p>we searched Indian journals, institutional repositories, court records, government-lab publications and the reporting on each city programme. we found no independent, systematic field study in India of how long pothole repairs survive. <span class="stamp" data-k="unknown">not found</span></p>
       <p>the few field observations that exist are very small and short. the best documented checked three patches on a busy Delhi highway: after six months of heavy rain the material hadn’t come out (<a href="https://nopr.niscpr.res.in/bitstream/123456789/45713/1/BVAAP%2026%281%29%2037-42.pdf" target="_blank" rel="noopener">Gola et al. 2018</a>). there is a student project on three potholes over one month. there is an expert-opinion survey of 23 experts, which is not field measurement. and there is a government-funded project (2023–26) with planned field validation, whose field results aren’t out yet (<a href="https://www.indiascienceandtechnology.gov.in/research/evaluation-advanced-pothole-patching-materials-and-methods-bituminous-pavements" target="_blank" rel="noopener">SRM University-AP project page</a>).</p>
       <p>a 2026 review of cold-mix repair by Indian researchers also cites no Indian field study of patch performance (<a href="https://link.springer.com/article/10.1007/s42947-026-00884-6" target="_blank" rel="noopener">Manjushree &amp; Lokeshwari 2026</a>). claims of “long-lasting” repairs from developers and agencies come with no published data. <span class="stamp" data-k="claim">claim</span></p>
       <div class="res-note">the repair figures we found count potholes filled. we couldn’t find any that counted how many stayed filled. the gap in evidence is itself a central finding. <span class="stamp" data-k="unknown">not found</span></div>
     </article>
     <article class="res-card reveal" id="ideal" data-s="next" aria-labelledby="ideal-h">
-      <h3 class="res-h" id="ideal-h">7. the ideal system.</h3>
+      <h3 class="res-h" id="ideal-h">7. what would actually work.</h3>
       <p>no single method or product fits every Indian condition, least of all the monsoon. the ideal is a system in which each method does the job it is best at. <span class="stamp" data-k="inference">inference</span></p>
       <ol class="res-steps">
         <li><b>prevent.</b>seal cracks, clear drains and resurface on schedule. the Indian Roads Congress calls this “a stitch in time”.</li>
@@ -644,7 +644,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       <p>what a group like ours can do now: triage, making safe, permanent repair in dry windows, and independent verification, all with the road owner’s permission. prevention and structural repair need the owner’s budget and engineers.</p>
     </article>
     <article class="res-card reveal" id="test" data-s="found" aria-labelledby="test-h">
-      <h3 class="res-h" id="test-h">8. how a fair test works.</h3>
+      <h3 class="res-h" id="test-h">8. how to test a fix without fooling yourself.</h3>
       <p>a pilot that produces the missing evidence would be valuable in its own right. here is what a fair test needs.</p>
       <ol class="res-steps">
         <li><b>matched arms.</b>three or four options at comparable sites (same road class, traffic and pothole sizes), plus the road owner’s current practice as a control. randomise which method goes where, if possible.</li>
