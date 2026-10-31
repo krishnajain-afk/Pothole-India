@@ -213,7 +213,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
 /* the text takes the height it needs; the picture fills the rest (never less than 34%) */
 .rs-pic { position: relative; flex: 1 1 auto; min-height: 34%; border-bottom: var(--bd); overflow: hidden; background: var(--bg, var(--prim)); }
 .rs-pic img, .rs-pic svg { display: block; width: 100%; height: 100%; pointer-events: none; }
-.rs-pic img { object-fit: cover; }
+.rs-pic img { position: absolute; inset: 0; object-fit: cover; }   /* sized by the picture area, not by the photo, so it crops to fit */
 .rs-badge { position: absolute; left: 10px; top: 10px; padding: 6px 10px 5px; border: 2px solid var(--ink); border-radius: 999px; background: var(--paper); color: var(--ink); font: 700 11px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; }
 .rs-badge.ver { background: var(--hi); }
 .rs-stamp { position: absolute; top: 16%; padding: 6px 12px 4px; border: 4px solid; border-radius: 10px; background: rgba(255,255,255,.92); font: 800 clamp(1.3rem, 9cqw, 2.4rem)/1 var(--ff-d); letter-spacing: -.01em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; white-space: nowrap; opacity: 0; pointer-events: none; }
@@ -396,17 +396,17 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
   var P = [
     { name: 'pinky', age: '6', dist: '0.2 km away. always.', bio: 'looking for something long term.', q: 'flags', a: 'green: i’m always there for you.\nred: i’m always there.', draw: { bg: 'var(--pink)', eyes: 'lashes', mouth: 'smile' } },
     { name: 'capital_crater', place: 'new delhi', bio: 'big city hole. big city energy.', q: 'it’s not you, it’s…', a: 'your suspension.',
-      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', alt: 'A broken, potholed road in New Delhi', by: 'Rrthakur22', link: 'https://commons.wikimedia.org/wiki/File:Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', alt: 'A broken, potholed road in New Delhi', by: 'Rrthakur22', link: 'https://commons.wikimedia.org/wiki/File:Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
     { name: 'puddle.princess', age: '3', dist: 'under that harmless-looking puddle.', bio: 'i look shallow. i’m not.', q: 'my love language', a: 'your alignment.', draw: { bg: 'var(--acc)', eyes: 'peek', mouth: 'none', acc: 'puddle' } },
     { name: 'road_full_of_us', place: 'bihar', bio: 'i don’t come alone. i bring friends. a lot of friends.', q: 'red flag', a: 'i’m not one pothole. i’m a group chat.',
-      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg', alt: 'A road full of potholes in Bihar', by: 'Savant dev', link: 'https://commons.wikimedia.org/wiki/File:Roads_in_Bihar_have_potholes.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg', alt: 'A road full of potholes in Bihar', by: 'Savant dev', link: 'https://commons.wikimedia.org/wiki/File:Roads_in_Bihar_have_potholes.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
     { name: 'the_landmark', age: '11', dist: 'so old, people give directions using me.', bio: 'turn left after me. everyone does.', q: 'i’m a 10 but', a: 'i live on your commute.', draw: { bg: 'var(--paper)', eyes: 'shades', mouth: 'smirk', acc: 'sign' } },
     { name: 'cone_wearer', age: '2', dist: 'wears a traffic cone. calls it a hat.', bio: 'someone patched me once. i came back.', q: 'my toxic trait', a: 'the comeback nobody asked for.', draw: { bg: 'var(--prim)', eyes: 'round', mouth: 'smirk', acc: 'cone' } },
     { name: 'arrivals_lounge', place: 'outside kolkata airport', bio: 'the first one you meet. every single trip.', q: 'together we could', a: 'make you miss your flight.',
-      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg', alt: 'A potholed road outside Kolkata Airport', by: 'Slyronit', link: 'https://commons.wikimedia.org/wiki/File:Potholed_road_outside_Kolkata_Airport.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg', alt: 'A potholed road outside Kolkata Airport', by: 'Slyronit', link: 'https://commons.wikimedia.org/wiki/File:Potholed_road_outside_Kolkata_Airport.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
     { name: 'tiny_but_mighty', age: '1', dist: 'small. ruins your day anyway.', bio: '6 inches deep, if that matters.', q: 'delulu is', a: 'the solulu. so is a road roller.', draw: { bg: 'var(--pink)', eyes: 'round', mouth: 'o', size: .62 } },
     { name: 'situationship_road', place: 'bengaluru', bio: 'you never know where you stand with me. mostly in a hole.', q: 'we’re not dating', a: 'we just meet on the same road every day.',
-      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg', alt: 'A crumbling road with potholes at Munnekollala, Bengaluru', by: 'Gangaasoonu', link: 'https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg', alt: 'A crumbling road with potholes at Munnekollala, Bengaluru', by: 'Gangaasoonu', link: 'https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
     { name: 'settled_hai', age: 'since forever', dist: 'kahin nahi jayega.', bio: 'beta, pothole hai. settled hai. family bhi achhi hai.', q: 'family background', a: 'three monsoons. zero repairs.', draw: { bg: 'var(--prim)', eyes: 'sleepy', mouth: 'smile', acc: 'garland' } }
   ];
   var LEFT = ['ghosted. honestly, healthy.', 'patched. no closure needed.', 'left on read. and filled in.', 'it’s not you. it’s your depth.', 'blocked. and tarred.'];
@@ -446,12 +446,22 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
   function safe(u) { return typeof u === 'string' && /^https:\/\//.test(u) ? u : ''; }
   function linkTo(text, url) { var u = safe(url); if (!u) return el('span', '', text); var a = el('a', '', text); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
 
+  /* Photos load through this site's own image service (Vercel fetches the Commons file once, resizes it and serves it
+     from our domain), so a browser that can't reach Wikimedia still sees them. If that fails, try the Commons file directly. */
+  function photo(p) {
+    var direct = safe(p.src), img = new Image(), triedDirect = false;
+    img.alt = p.alt; img.decoding = 'async'; img.draggable = false;
+    img.addEventListener('error', function () { if (!triedDirect && direct) { triedDirect = true; img.referrerPolicy = 'no-referrer'; img.src = direct; } });
+    img.src = direct ? '/_next/image?url=' + encodeURIComponent(direct) + '&w=828&q=75' : '';
+    return img;
+  }
+
   function card(p) {
     var c = el('article', 'rs-card');
     c.setAttribute('aria-label', 'profile: ' + p.name);
     var pic = el('div', 'rs-pic');
     if (p.draw) { pic.style.setProperty('--bg', p.draw.bg); pic.innerHTML = art(p.draw); pic.appendChild(el('span', 'rs-badge', 'drawn')); }
-    else { var img = new Image(); img.src = safe(p.src); img.alt = p.alt; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; img.draggable = false; pic.appendChild(img); pic.appendChild(el('span', 'rs-badge ver', 'verified pothole')); }
+    else { pic.appendChild(photo(p)); pic.appendChild(el('span', 'rs-badge ver', 'verified pothole')); }
     pic.appendChild(el('span', 'rs-stamp l', 'patched'));
     pic.appendChild(el('span', 'rs-stamp r', 'it’s a match'));
     c.appendChild(pic);

@@ -7,6 +7,10 @@ const STATIC_PAGES = ['lab', 'updates', 'research', 'case-files', 'wall-of-holes
 const nextConfig: NextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
+  images: {
+    // pothole se rishta loads its Commons photos through /_next/image, so they are served from our own domain
+    remotePatterns: [{ protocol: 'https', hostname: 'upload.wikimedia.org', pathname: '/wikipedia/commons/**' }],
+  },
   async redirects() {
     return [
       { source: '/genz', destination: '/', permanent: false },
