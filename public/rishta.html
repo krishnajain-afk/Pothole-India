@@ -366,7 +366,7 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
   <div class="wrap">
     <div class="rs-note-card reveal">
       <h2 id="h-photos">about the profiles.</h2>
-      <p>the drawn ones are ours. the ones marked verified are real potholes on real Indian roads: openly licensed photos from Wikimedia Commons, credited on their card and cropped to fit. every bio is made up. the potholes are not.</p>
+      <p>every profile is a real pothole on a real Indian road: openly licensed photos from Wikimedia Commons, credited on their card and cropped to fit. (the chennai one is hiding under the monsoon.) every bio is made up. the potholes are not.</p>
     </div>
   </div>
 </section>
@@ -390,69 +390,51 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
   'use strict';
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* THE PROFILES. Drawn ones have `draw` (see art() below); verified ones have a photo with its credit.
-     Bios are jokes about the situation. Never a joke about the people hurt by potholes, never a real person's name.
-     Photos: openly licensed (Wikimedia Commons), the same ones as the wall, hot-linked for now. */
+  /* THE PROFILES. Every one is a real pothole photo: openly licensed on Wikimedia Commons, credited on its card.
+     `file` is the copy the build downloads into /rishta-photos/ (scripts/fetch-rishta-photos.mjs: keep the two lists
+     in step), `src` is the Commons original it falls back to. `place` comes from the Commons file page; the rest of the
+     card is a made-up dating profile. Bios are jokes about the situation: never about the people hurt by potholes,
+     never a real person's name. */
   var P = [
-    { name: 'pinky', age: '6', dist: '0.2 km away. always.', bio: 'looking for something long term.', q: 'flags', a: 'green: i’m always there for you.\nred: i’m always there.', draw: { bg: 'var(--pink)', eyes: 'lashes', mouth: 'smile' } },
+    { name: 'pinky', place: 'bengaluru', bio: 'looking for something long term.', q: 'flags', a: 'green: i’m always there for you.\nred: i’m always there.',
+      file: 'bengaluru.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Potholes_in_Bengaluru_road.jpg/960px-Potholes_in_Bengaluru_road.jpg', alt: 'Potholes in a road in Bengaluru', by: 'Mallikarjunasj', link: 'https://commons.wikimedia.org/wiki/File:Potholes_in_Bengaluru_road.jpg', lic: 'CC0', licUrl: 'https://creativecommons.org/publicdomain/zero/1.0/' },
     { name: 'capital_crater', place: 'new delhi', bio: 'big city hole. big city energy.', q: 'it’s not you, it’s…', a: 'your suspension.',
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', alt: 'A broken, potholed road in New Delhi', by: 'Rrthakur22', link: 'https://commons.wikimedia.org/wiki/File:Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
-    { name: 'puddle.princess', age: '3', dist: 'under that harmless-looking puddle.', bio: 'i look shallow. i’m not.', q: 'my love language', a: 'your alignment.', draw: { bg: 'var(--acc)', eyes: 'peek', mouth: 'none', acc: 'puddle' } },
+      file: 'new-delhi.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', alt: 'A broken, potholed road in New Delhi', by: 'Rrthakur22', link: 'https://commons.wikimedia.org/wiki/File:Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'puddle.princess', place: 'chennai', note: 'somewhere under that water', badge: 'monsoon edition', bio: 'i look shallow. i’m not.', q: 'my love language', a: 'your alignment.',
+      file: 'chennai.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg/960px-India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg', alt: 'A flooded Chennai street in the monsoon, where potholes could be hiding underwater', by: 'McKay Savage', link: 'https://commons.wikimedia.org/wiki/File:India_-_Chennai_-_Monsoon_-_06_(3059058000).jpg', lic: 'CC BY 2.0', licUrl: 'https://creativecommons.org/licenses/by/2.0' },
     { name: 'road_full_of_us', place: 'bihar', bio: 'i don’t come alone. i bring friends. a lot of friends.', q: 'red flag', a: 'i’m not one pothole. i’m a group chat.',
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg', alt: 'A road full of potholes in Bihar', by: 'Savant dev', link: 'https://commons.wikimedia.org/wiki/File:Roads_in_Bihar_have_potholes.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
-    { name: 'the_landmark', age: '11', dist: 'so old, people give directions using me.', bio: 'turn left after me. everyone does.', q: 'i’m a 10 but', a: 'i live on your commute.', draw: { bg: 'var(--paper)', eyes: 'shades', mouth: 'smirk', acc: 'sign' } },
-    { name: 'cone_wearer', age: '2', dist: 'wears a traffic cone. calls it a hat.', bio: 'someone patched me once. i came back.', q: 'my toxic trait', a: 'the comeback nobody asked for.', draw: { bg: 'var(--prim)', eyes: 'round', mouth: 'smirk', acc: 'cone' } },
+      file: 'bihar.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg', alt: 'A road full of potholes in Bihar', by: 'Savant dev', link: 'https://commons.wikimedia.org/wiki/File:Roads_in_Bihar_have_potholes.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'the_landmark', place: 'bengaluru', bio: 'turn left after me. everyone does.', q: 'i’m a 10 but', a: 'i live on your commute.',
+      file: 'munnekollala-2.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Roads_deformed_T_munnekollala_Bengaluru_2.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru_2.jpg', alt: 'A crumbling, potholed stretch of road at Munnekollala, Bengaluru', by: 'Gangaasoonu', link: 'https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru_2.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
     { name: 'arrivals_lounge', place: 'outside kolkata airport', bio: 'the first one you meet. every single trip.', q: 'together we could', a: 'make you miss your flight.',
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg', alt: 'A potholed road outside Kolkata Airport', by: 'Slyronit', link: 'https://commons.wikimedia.org/wiki/File:Potholed_road_outside_Kolkata_Airport.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
-    { name: 'tiny_but_mighty', age: '1', dist: 'small. ruins your day anyway.', bio: '6 inches deep, if that matters.', q: 'delulu is', a: 'the solulu. so is a road roller.', draw: { bg: 'var(--pink)', eyes: 'round', mouth: 'o', size: .62 } },
+      file: 'kolkata-airport.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg', alt: 'A potholed road outside Kolkata Airport', by: 'Slyronit', link: 'https://commons.wikimedia.org/wiki/File:Potholed_road_outside_Kolkata_Airport.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'tiny_but_mighty', place: 'assam', bio: 'small. ruins your day anyway.', q: 'delulu is', a: 'the solulu. so is a road roller.',
+      file: 'assam.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg', alt: 'Potholes on a road in Assam', by: 'KEmel49', link: 'https://commons.wikimedia.org/wiki/File:Potholes_on_road.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
     { name: 'situationship_road', place: 'bengaluru', bio: 'you never know where you stand with me. mostly in a hole.', q: 'we’re not dating', a: 'we just meet on the same road every day.',
-      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg', alt: 'A crumbling road with potholes at Munnekollala, Bengaluru', by: 'Gangaasoonu', link: 'https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
-    { name: 'settled_hai', age: 'since forever', dist: 'kahin nahi jayega.', bio: 'beta, pothole hai. settled hai. family bhi achhi hai.', q: 'family background', a: 'three monsoons. zero repairs.', draw: { bg: 'var(--prim)', eyes: 'sleepy', mouth: 'smile', acc: 'garland' } }
+      file: 'munnekollala-1.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg', alt: 'A crumbling road with potholes at Munnekollala, Bengaluru', by: 'Gangaasoonu', link: 'https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'settled_hai', place: 'karimganj, assam', bio: 'beta, pothole hai. settled hai. family bhi achhi hai.', q: 'family background', a: 'three monsoons. zero repairs.',
+      file: 'karimganj.jpg', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg', alt: 'A rickshaw driving through potholes in Karimganj, Assam', by: 'KEmel49', link: 'https://commons.wikimedia.org/wiki/File:Driving_through_potholes.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' }
   ];
   var LEFT = ['ghosted. honestly, healthy.', 'patched. no closure needed.', 'left on read. and filled in.', 'it’s not you. it’s your depth.', 'blocked. and tarred.'];
   var RIGHT = ['it’s a match. your suspension has questions.', 'matched. your spine wants space.', 'it’s a match. your mechanic says thanks.', 'matched. they’ll be there tomorrow. and the day after.', 'it’s a match. your tyre would like a word.'];
-
-  /* a drawn pothole: our mascot, with a few outfits */
-  function art(d) {
-    var s = d.size || 1, cx = 100, cy = d.acc === 'sign' ? 96 : 90, rx = 72 * s, ry = 44 * s, ex = 22 * s, ey = cy - 6 * s, er = 11 * s, out = '';
-    out += '<ellipse cx="' + cx + '" cy="' + (cy + ry * .9) + '" rx="' + rx * 1.1 + '" ry="' + ry * .28 + '" fill="#121212" fill-opacity=".18"/>';
-    out += '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" fill="#FFD60A" stroke="#121212" stroke-width="4"/>';
-    out += '<ellipse cx="' + cx + '" cy="' + (cy + 2 * s) + '" rx="' + rx * .82 + '" ry="' + ry * .78 + '" fill="#121212"/>';
-    if (d.acc === 'puddle') {
-      out += '<ellipse cx="' + cx + '" cy="' + (cy + 10) + '" rx="' + rx * .8 + '" ry="' + ry * .5 + '" fill="#3B2BFF" fill-opacity=".85"/>';
-      out += '<path d="M' + (cx - 30) + ' ' + (cy + 8) + 'h18M' + (cx + 8) + ' ' + (cy + 16) + 'h22" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-opacity=".7"/>';
-      ey = cy - 12;
-    }
-    [-1, 1].forEach(function (sd) {
-      var x = cx + sd * ex;
-      if (d.eyes === 'shades') return;
-      out += '<circle cx="' + x + '" cy="' + ey + '" r="' + er + '" fill="#fff"/>';
-      if (d.eyes === 'sleepy') out += '<path d="M' + (x - er) + ' ' + ey + 'a' + er + ' ' + er + ' 0 0 1 ' + 2 * er + ' 0z" fill="#121212"/><circle cx="' + x + '" cy="' + (ey + er * .35) + '" r="' + er * .38 + '" fill="#121212"/>';
-      else out += '<circle cx="' + (x + sd * er * .15) + '" cy="' + (ey + (d.eyes === 'peek' ? er * .3 : 0)) + '" r="' + er * .45 + '" fill="#121212"/>';
-      if (d.eyes === 'lashes') out += '<path d="M' + (x - er * .8) + ' ' + (ey - er * 1.05) + 'l-4 -6M' + x + ' ' + (ey - er * 1.25) + 'v-7M' + (x + er * .8) + ' ' + (ey - er * 1.05) + 'l4 -6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>';
-    });
-    if (d.eyes === 'shades') out += '<rect x="' + (cx - ex - 15) + '" y="' + (ey - 9) + '" width="30" height="17" rx="7" fill="#121212" stroke="#fff" stroke-width="2.5"/><rect x="' + (cx + ex - 15) + '" y="' + (ey - 9) + '" width="30" height="17" rx="7" fill="#121212" stroke="#fff" stroke-width="2.5"/><path d="M' + (cx - ex + 15) + ' ' + (ey - 2) + 'h' + (2 * ex - 30) + '" stroke="#fff" stroke-width="2.5"/>';
-    var my = cy + 20 * s;
-    if (d.mouth === 'smile') out += '<path d="M' + (cx - 14 * s) + ' ' + my + 'q' + 14 * s + ' ' + 10 * s + ' ' + 28 * s + ' 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>';
-    if (d.mouth === 'smirk') out += '<path d="M' + (cx - 12 * s) + ' ' + (my + 2) + 'q' + 16 * s + ' ' + 4 * s + ' ' + 26 * s + ' ' + (-7 * s) + '" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>';
-    if (d.mouth === 'o') out += '<ellipse cx="' + cx + '" cy="' + (my + 2) + '" rx="' + 5 * s + '" ry="' + 7 * s + '" fill="none" stroke="#fff" stroke-width="3"/>';
-    if (d.acc === 'cone') out += '<g transform="translate(' + (cx + rx * .45) + ' ' + (cy - ry - 42) + ') rotate(14)"><path d="M0 50 L14 0 L28 50Z" fill="#FF2D2D" stroke="#121212" stroke-width="3.5" stroke-linejoin="round"/><path d="M5 34h18M9 20h10" stroke="#fff" stroke-width="5"/><rect x="-7" y="48" width="42" height="9" rx="3" fill="#FF2D2D" stroke="#121212" stroke-width="3.5"/></g>';
-    if (d.acc === 'sign') out += '<g><path d="M40 20v40" stroke="#121212" stroke-width="4"/><path d="M28 10h70l10 10-10 10H28z" fill="#FFD60A" stroke="#121212" stroke-width="3.5" stroke-linejoin="round"/><text x="34" y="25" font-family="Space Mono, monospace" font-size="11" font-weight="700" fill="#121212">TURN LEFT</text></g>';
-    if (d.acc === 'garland') { for (var i = 0; i <= 10; i++) { var t = Math.PI * (i / 10), gx = cx - rx * .95 * Math.cos(t), gy = cy - ry * 1.08 - Math.sin(t) * 16; out += '<circle cx="' + gx.toFixed(1) + '" cy="' + gy.toFixed(1) + '" r="7" fill="' + (i % 2 ? '#FF5FA2' : '#FFD60A') + '" stroke="#121212" stroke-width="2.5"/>'; } }
-    return '<svg viewBox="0 0 200 150" aria-hidden="true">' + out + '</svg>';
-  }
 
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
   function safe(u) { return typeof u === 'string' && /^https:\/\//.test(u) ? u : ''; }
   function linkTo(text, url) { var u = safe(url); if (!u) return el('span', '', text); var a = el('a', '', text); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
 
-  /* Photos load through this site's own image service (Vercel fetches the Commons file once, resizes it and serves it
-     from our domain), so a browser that can't reach Wikimedia still sees them. If that fails, try the Commons file directly. */
+  /* Three tries, so a photo never shows blank: 1. our own copy, downloaded at build time; 2. this site's image service
+     (Vercel fetches the Commons file and serves it from our domain); 3. the Commons file directly. */
   function photo(p) {
-    var direct = safe(p.src), img = new Image(), triedDirect = false;
+    var direct = safe(p.src), img = new Image(), tries = [];
+    if (/^[a-z0-9-]+\.jpg$/.test(p.file || '')) tries.push('/rishta-photos/' + p.file);
+    if (direct) { tries.push('/_next/image?url=' + encodeURIComponent(direct) + '&w=828&q=75'); tries.push(direct); }
     img.alt = p.alt; img.decoding = 'async'; img.draggable = false;
-    img.addEventListener('error', function () { if (!triedDirect && direct) { triedDirect = true; img.referrerPolicy = 'no-referrer'; img.src = direct; } });
-    img.src = direct ? '/_next/image?url=' + encodeURIComponent(direct) + '&w=828&q=75' : '';
+    img.addEventListener('error', function () {
+      if (!tries.length) return;
+      if (tries.length === 1) img.referrerPolicy = 'no-referrer';   // the last try is Commons itself
+      img.src = tries.shift();
+    });
+    img.src = tries.shift() || '';
     return img;
   }
 
@@ -460,18 +442,16 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
     var c = el('article', 'rs-card');
     c.setAttribute('aria-label', 'profile: ' + p.name);
     var pic = el('div', 'rs-pic');
-    if (p.draw) { pic.style.setProperty('--bg', p.draw.bg); pic.innerHTML = art(p.draw); pic.appendChild(el('span', 'rs-badge', 'drawn')); }
-    else { pic.appendChild(photo(p)); pic.appendChild(el('span', 'rs-badge ver', 'verified pothole')); }
+    pic.appendChild(photo(p)); pic.appendChild(el('span', 'rs-badge ver', p.badge || 'verified pothole'));
     pic.appendChild(el('span', 'rs-stamp l', 'patched'));
     pic.appendChild(el('span', 'rs-stamp r', 'it’s a match'));
     c.appendChild(pic);
-    var b = el('div', 'rs-body'), nm = el('h3', 'rs-name', p.name);
-    if (p.age) { nm.appendChild(document.createTextNode(', ')); nm.appendChild(el('span', '', p.age)); }
-    b.appendChild(nm);
-    b.appendChild(el('p', 'rs-dist', p.place ? p.place + ' · real pothole' : p.dist));
+    var b = el('div', 'rs-body');
+    b.appendChild(el('h3', 'rs-name', p.name));
+    b.appendChild(el('p', 'rs-dist', p.place + ' · ' + (p.note || 'real pothole')));
     b.appendChild(el('p', 'rs-bio', p.bio));
     var pr = el('div', 'rs-prompt'); pr.appendChild(el('b', '', p.q)); pr.appendChild(el('span', '', p.a)); b.appendChild(pr);
-    if (p.by) { var cr = el('p', 'rs-credit'); cr.appendChild(document.createTextNode('photo: ')); cr.appendChild(linkTo(p.by, p.link)); cr.appendChild(document.createTextNode(' · ')); cr.appendChild(linkTo(p.lic, p.licUrl)); b.appendChild(cr); }
+    var cr = el('p', 'rs-credit'); cr.appendChild(document.createTextNode('photo: ')); cr.appendChild(linkTo(p.by, p.link)); cr.appendChild(document.createTextNode(' · ')); cr.appendChild(linkTo(p.lic, p.licUrl)); b.appendChild(cr);
     c.appendChild(b);
     return c;
   }

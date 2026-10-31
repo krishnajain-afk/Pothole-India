@@ -4,3 +4,5 @@ node_modules
 .next
 next-env.d.ts
 *.tsbuildinfo
+# downloaded at build time by scripts/fetch-rishta-photos.mjs
+public/rishta-photos/

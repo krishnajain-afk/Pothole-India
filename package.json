@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/fetch-rishta-photos.mjs",
     "build": "next build",
     "start": "next start"
   },

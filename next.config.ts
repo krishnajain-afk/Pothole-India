@@ -8,8 +8,11 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
   images: {
-    // pothole se rishta loads its Commons photos through /_next/image, so they are served from our own domain
-    remotePatterns: [{ protocol: 'https', hostname: 'upload.wikimedia.org', pathname: '/wikipedia/commons/**' }],
+    // fallback for pothole se rishta: if a build-time photo is missing, the card loads it through /_next/image
+    remotePatterns: [
+      { protocol: 'https', hostname: 'upload.wikimedia.org', pathname: '/wikipedia/commons/**' },
+      { protocol: 'https', hostname: 'thumb.wikimedia.org', pathname: '/wikipedia/commons/**' },   // Commons' newer thumbnail host
+    ],
   },
   async redirects() {
     return [
