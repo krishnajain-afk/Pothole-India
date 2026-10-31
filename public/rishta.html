@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>pothole se rishta — Cars24 Patch</title>
+<meta name="description" content="Swipe left to patch. Swipe right to regret it. The most eligible potholes in India, from the Cars24 Patch lab.">
+<!-- Lab page: keep it out of search engines until the user approves it. -->
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#FFD60A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cars24 Patch">
+<meta property="og:title" content="pothole se rishta — Cars24 Patch">
+<meta property="og:description" content="Swipe left to patch. Swipe right to regret it.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23FFD60A'/%3E%3Cellipse cx='16' cy='17' rx='11' ry='8' fill='%23121212'/%3E%3Ccircle cx='12' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='20' cy='15.5' r='2.6' fill='white'/%3E%3Ccircle cx='12.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3Ccircle cx='20.6' cy='15.8' r='1.2' fill='%23121212'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+/* Yellow is the look. ?theme=blue shows the alternative (nothing is saved). Set before first paint. */
+(function () {
+  var t = 'yellow';
+  try { if (new URLSearchParams(location.search).get('theme') === 'blue') t = 'blue'; } catch (e) {}
+  document.documentElement.setAttribute('data-theme', t);
+  if (/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:') document.documentElement.classList.add('is-local');
+  document.documentElement.classList.add('js');
+})();
+</script>
+
+<!-- Vercel Web Analytics: cookieless page views. Switch it on in Vercel: project > Analytics > Enable. -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+
+<style>
+/* ==========================================================================
+   Cars24 Patch — the loud one.
+   Caution-tape yellow · asphalt black · electric blue · sticker pink.
+   Bricolage Grotesque (display) · Space Mono (labels) · Permanent Marker (scribbles)
+   ========================================================================== */
+:root {
+  --ink: #121212;
+  --paper: #F6F1E6;
+  --yellow: #FFD60A;
+  --blue: #3B2BFF;
+  /* Theme roles. Yellow theme: yellow is the big colour, blue is the accent. The blue theme swaps them. */
+  --prim: var(--yellow); --on-prim: var(--ink);     /* nav, hero, tape, pills, call-to-action */
+  --acc: var(--blue);    --on-acc: var(--white);    /* stickers, highlight blocks, the game section */
+  --hi: #FFD60A;                                    /* bright text on black */
+  --focus: var(--blue); --edge: #FFD60A;
+  --squig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23121212' stroke-width='3' stroke-linecap='round'/></svg>");
+  --pink: #FF5FA2;
+  --red: #FF2D2D;
+  --white: #FFFFFF;
+
+  --ff-d: 'Bricolage Grotesque', 'Archivo Narrow', Impact, system-ui, sans-serif;
+  --ff-m: 'Space Mono', ui-monospace, Menlo, monospace;
+  --ff-h: 'Permanent Marker', 'Comic Sans MS', cursive;
+
+  --bd: 3px solid var(--ink);
+  --sh: 6px 6px 0 var(--ink);
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --spring: cubic-bezier(.34, 1.56, .64, 1);
+  --nav-h: 72px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--ff-d); font-weight: 500; font-size: 17px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button, input { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 8px; }
+::selection { background: var(--ink); color: var(--yellow); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: 16px; top: -64px; z-index: 400; background: var(--ink); color: var(--yellow); padding: 12px 20px; border-radius: 12px; text-decoration: none; }
+.skip:focus { top: 12px; }
+
+/* film grain over everything (static, cheap) */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 150; pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+.wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 24px; }
+@media (min-width: 768px) { .wrap { padding-inline: 40px; } }
+
+.cond { font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 56px; padding: 0 26px;
+  border: var(--bd); border-radius: 16px; background: var(--ink); color: var(--yellow);
+  font: 700 17px/1 var(--ff-d); letter-spacing: -.01em; white-space: nowrap; text-decoration: none; cursor: pointer;
+  box-shadow: var(--sh); transition: transform .18s var(--ease), box-shadow .18s var(--ease), background-color .2s;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 var(--ink); }
+.btn:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 var(--ink); }
+.btn[disabled] { cursor: progress; }
+.btn-yellow { background: var(--prim); color: var(--on-prim); }
+.btn-sm { height: 46px; padding: 0 20px; font-size: 15px; box-shadow: 4px 4px 0 var(--ink); }
+.btn-sm:hover { box-shadow: 6px 6px 0 var(--ink); }
+.btn .arr { display: inline-block; transition: transform .25s var(--spring); }
+.btn:hover .arr { transform: translate(3px, -3px) rotate(8deg); }
+.btn .spin { display: none; width: 18px; height: 18px; border-radius: 50%; border: 3px solid rgba(255,214,10,.35); border-top-color: var(--yellow); animation: spin .7s linear infinite; }
+.btn.is-loading .spin { display: block; } .btn.is-loading .arr { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------- Nav ---------- */
+.nav { position: sticky; top: 0; z-index: 100; background: var(--prim); color: var(--on-prim); border-bottom: var(--bd); }
+.nav-in { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font: 800 24px/1 var(--ff-d); letter-spacing: -.03em; white-space: nowrap; }
+.logo svg { width: 36px; height: 36px; flex: none; transition: transform .4s var(--spring); }
+.logo:hover svg { transform: rotate(-12deg) scale(1.1); }
+@media (max-width: 420px) { .logo { font-size: 20px; gap: 8px; } .logo svg { width: 30px; height: 30px; } .btn-sm { padding: 0 16px; font-size: 14px; } }
+@media (max-width: 400px) { .nav-in { gap: 8px; } .logo { font-size: 18px; } }
+@media (max-width: 360px) { .nav-in { gap: 8px; } .logo { font-size: 17px; gap: 6px; } .logo svg { width: 26px; height: 26px; } .btn-sm { padding: 0 12px; font-size: 13px; gap: 6px; } }
+@media (max-width: 340px) { .logo { font-size: 15px; gap: 5px; } .logo svg { width: 24px; height: 24px; } }
+@media (max-width: 300px) { .wrap { padding-inline: 16px; } .logo { font-size: 14px; } .btn-sm .arr { display: none; } }
+
+/* ---------- Sections ---------- */
+.sec { position: relative; padding-block: 88px; }
+@media (min-width: 1024px) { .sec { padding-block: 120px; } }
+.kicker { display: inline-block; font: 700 13px/1 var(--ff-m); letter-spacing: .14em; text-transform: uppercase; padding: 8px 12px; border: var(--bd); border-radius: 10px; background: var(--white); rotate: -1.5deg; }
+.h2 { margin-top: 22px; font: 800 clamp(2.8rem, 1rem + 7vw, 6.4rem)/.88 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+.h2 .hi { background: var(--prim); color: var(--on-prim); border: var(--bd); border-radius: 12px; padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.sec-lead { margin-top: 20px; max-width: 36ch; font: 500 clamp(1.1rem, 1rem + .6vw, 1.4rem)/1.4 var(--ff-d); }
+
+html.js .reveal { opacity: 0; translate: 0 36px; transition: opacity .7s var(--ease), translate .8s var(--spring); transition-delay: var(--d, 0s); }
+html.js .reveal.in { opacity: 1; translate: 0 0; }
+
+/* entrance */
+html.js .pop { opacity: 0; animation: pop-in .9s var(--spring) var(--d, 0s) forwards; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(.35em) rotate(5deg) scale(.9); } to { opacity: 1; transform: none; } }
+html.js .slap { opacity: 0; animation: slap .7s var(--spring) var(--d, 0s) forwards; }
+@keyframes slap { from { opacity: 0; scale: 1.8; rotate: calc(var(--r, 0deg) * 3); } to { opacity: 1; scale: 1; rotate: var(--r, 0deg); } }
+
+/* Footer */
+.foot { background: var(--ink); color: var(--paper); padding-block: 64px 40px; }
+.foot .logo { color: var(--yellow); }
+.foot-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
+.foot-tag { font: 400 14px var(--ff-m); opacity: .85; }
+.src { margin-top: 40px; padding-top: 28px; border-top: 2px solid rgba(246,241,230,.2); }
+.src h2 { font: 700 12px var(--ff-m); letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); }
+.src ol { margin-top: 16px; display: grid; gap: 10px; list-style: decimal; padding-left: 20px; font: 400 13px/1.6 var(--ff-m); opacity: .9; }
+.src li::marker { color: var(--yellow); }
+.src a { color: var(--yellow); text-underline-offset: 3px; }
+.foot-b { margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font: 400 12px var(--ff-m); opacity: .75; }
+
+/* ---------- Theme: blue ---------- */
+html[data-theme="blue"] {
+  --prim: var(--blue); --on-prim: var(--white);
+  --acc: var(--yellow); --on-acc: var(--ink);
+  --focus: var(--ink); --edge: #7A6FFF;
+  --squig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='28' height='10' viewBox='0 0 28 10'><path d='M0 5 Q7 -1 14 5 T28 5' fill='none' stroke='%23FFFFFF' stroke-width='3' stroke-linecap='round'/></svg>");
+}
+html[data-theme="blue"] :is(.nav, .hero, .sec-yellow) :focus-visible { outline-color: #fff; }
+html[data-theme="blue"] .hero::selection { background: var(--ink); }
+/* text on white/paper cards must stay dark even inside a blue or yellow section */
+.checks, .sub-done, .kicker { color: var(--ink); }
+
+
+/* ---------- Cars24 bits ---------- */
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.foot-tag .reb { color: var(--pink); font-weight: 700; }
+.patch-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--hi); font: 700 13px/1 var(--ff-m); letter-spacing: .04em; text-transform: none; rotate: 2deg; }
+.game-copy .chips { margin-bottom: 0; }
+.reb-band { background: var(--paper); border-top: var(--bd); border-bottom: var(--bd); padding-block: 48px; text-align: center; overflow: hidden; }
+.reb-tag { display: inline-block; max-width: 100%; padding: 14px 24px 12px; border: var(--bd); border-radius: 999px; background: var(--pink); color: var(--ink); font: 800 clamp(1.2rem, .6rem + 3.2vw, 2.6rem)/1 var(--ff-d); letter-spacing: -.02em; text-transform: none; box-shadow: var(--sh); rotate: -2deg; transition: rotate .4s var(--spring), box-shadow .3s; }
+.reb-tag:hover { rotate: 1deg; box-shadow: 8px 8px 0 var(--ink); }
+.cfp-hero { background: var(--prim); color: var(--on-prim); border-bottom: var(--bd); padding-block: 56px 72px; overflow: hidden; }
+@media (min-width: 768px) { .cfp-hero { padding-block: 72px 96px; } }
+.cfp-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.cfp-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--hi); font: 700 13px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; rotate: -2deg; }
+.cfp-chip.alt { background: var(--paper); color: var(--ink); rotate: 2deg; letter-spacing: .06em; text-transform: none; }
+.cfp-h1 { margin-top: 22px; font: 800 clamp(3rem, 1rem + 11vw, 9.5rem)/.86 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+.cfp-h1 .hi { display: inline-block; max-width: 100%; background: var(--acc); color: var(--on-acc); border: var(--bd); border-radius: .14em; padding: 0 .1em; rotate: -2deg; box-shadow: .05em .05em 0 var(--ink); }
+.cfp-lead { margin-top: 24px; max-width: 30ch; font: 600 clamp(1.25rem, 1rem + 1.4vw, 1.9rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
+
+/* ---------- pothole se rishta (page-only classes carry the rs- prefix) ---------- */
+.rs-sec { background: var(--ink); color: var(--paper); border-bottom: var(--bd); padding-block: 64px 96px; overflow: hidden; }
+.rs-grid { display: grid; gap: 44px; align-items: start; }
+@media (min-width: 960px) { .rs-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 72px; align-items: center; } }
+.rs-copy .kicker { color: var(--ink); border-color: var(--paper); }
+.rs-copy .sec-lead { color: var(--paper); max-width: 34ch; }
+.rs-keys { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+.rs-keys span { padding: 9px 14px 8px; border: 3px solid var(--paper); border-radius: 999px; font: 700 13px/1 var(--ff-m); letter-spacing: .04em; }
+.rs-score { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
+.rs-pill { display: inline-flex; align-items: baseline; gap: 10px; padding: 12px 18px; border: var(--bd); border-radius: 14px; background: var(--prim); color: var(--on-prim); box-shadow: 5px 5px 0 var(--pink); font: 700 13px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; }
+.rs-pill.alt { background: var(--pink); color: var(--ink); box-shadow: 5px 5px 0 var(--paper); }
+.rs-pill b { font: 800 30px/1 var(--ff-d); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+
+.rs-play { min-width: 0; }
+.rs-stage { position: relative; width: 100%; max-width: 400px; margin-inline: auto; aspect-ratio: 3 / 4.25; container-type: inline-size; }
+.rs-card {
+  position: absolute; inset: 0; display: flex; flex-direction: column; border: var(--bd); border-radius: 24px; background: var(--paper); color: var(--ink);
+  box-shadow: 8px 8px 0 var(--pink); overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: grab;
+  transition: transform .35s var(--spring), box-shadow .3s;
+}
+.rs-card.is-next { transform: translateY(16px) scale(.94); box-shadow: 6px 6px 0 var(--acc); cursor: default; }
+.rs-card.is-drag { cursor: grabbing; transition: none; }
+.rs-card.is-gone { transition: transform .4s var(--ease), opacity .4s; opacity: 0; }
+.rs-card.rs-hint { animation: rs-hint 1.6s var(--ease) .9s 1; }
+@keyframes rs-hint { 0%, 100% { transform: none; } 25% { transform: translateX(-26px) rotate(-4deg); } 60% { transform: translateX(22px) rotate(3deg); } }
+/* the text takes the height it needs; the picture fills the rest (never less than 34%) */
+.rs-pic { position: relative; flex: 1 1 auto; min-height: 34%; border-bottom: var(--bd); overflow: hidden; background: var(--bg, var(--prim)); }
+.rs-pic img, .rs-pic svg { display: block; width: 100%; height: 100%; pointer-events: none; }
+.rs-pic img { object-fit: cover; }
+.rs-badge { position: absolute; left: 10px; top: 10px; padding: 6px 10px 5px; border: 2px solid var(--ink); border-radius: 999px; background: var(--paper); color: var(--ink); font: 700 11px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; }
+.rs-badge.ver { background: var(--hi); }
+.rs-stamp { position: absolute; top: 16%; padding: 6px 12px 4px; border: 4px solid; border-radius: 10px; background: rgba(255,255,255,.92); font: 800 clamp(1.3rem, 9cqw, 2.4rem)/1 var(--ff-d); letter-spacing: -.01em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; white-space: nowrap; opacity: 0; pointer-events: none; }
+.rs-stamp.l { right: 7%; rotate: 12deg; color: var(--pink); border-color: var(--pink); }
+.rs-stamp.r { left: 7%; rotate: -12deg; color: var(--red); border-color: var(--red); }
+.rs-body { flex: 0 0 auto; display: flex; flex-direction: column; gap: 2.2cqw; padding: 4.4cqw 5cqw 5cqw; }
+.rs-name { font: 800 clamp(1.4rem, 8.6cqw, 2.3rem)/.92 var(--ff-d); letter-spacing: -.03em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; overflow-wrap: anywhere; }
+.rs-name span { font-weight: 500; }
+.rs-dist { font: 700 clamp(11px, 3.2cqw, 13px)/1.3 var(--ff-m); }
+.rs-bio { font: 600 clamp(.95rem, 4.4cqw, 1.15rem)/1.3 var(--ff-d); letter-spacing: -.01em; }
+.rs-prompt { padding: 2.4cqw 3cqw; border: 2px dashed var(--ink); border-radius: 12px; }
+.rs-prompt b { display: block; font: 700 clamp(10px, 2.8cqw, 12px)/1.2 var(--ff-m); letter-spacing: .08em; text-transform: uppercase; }
+.rs-prompt span { display: block; margin-top: 4px; white-space: pre-line; font: 700 clamp(.95rem, 4.4cqw, 1.15rem)/1.25 var(--ff-d); letter-spacing: -.01em; }
+.rs-credit { font: 400 clamp(10px, 2.7cqw, 11px)/1.35 var(--ff-m); opacity: .85; overflow-wrap: anywhere; }
+.rs-credit a { color: inherit; text-underline-offset: 2px; }
+
+.rs-end { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 7cqw; border: 3px dashed var(--paper); border-radius: 24px; text-align: center; }
+.rs-end[hidden] { display: none; }
+.rs-end h3 { font: 800 clamp(1.8rem, 11cqw, 3rem)/.92 var(--ff-d); letter-spacing: -.03em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; color: var(--hi); }
+.rs-end p { max-width: 26ch; font: 600 clamp(1rem, 4.6cqw, 1.2rem)/1.35 var(--ff-d); }
+.rs-end .btn { white-space: normal; height: auto; min-height: 50px; padding-block: 10px; text-align: center; }
+.rs-end-btns { display: grid; gap: 12px; justify-items: center; margin-top: 6px; }
+.rs-link { background: none; border: 0; padding: 6px; color: var(--paper); font: 700 13px/1.3 var(--ff-m); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+.rs-btns { display: flex; justify-content: center; gap: 14px; margin-top: 30px; }
+.rs-btns .btn { min-width: 0; }
+.rs-btn-paper { background: var(--paper); color: var(--ink); }
+.rs-btn-pink { background: var(--pink); color: var(--ink); }
+.rs-btns .btn[disabled] { opacity: .45; cursor: not-allowed; transform: none; }
+@media (max-width: 380px) { .rs-btns .btn { padding: 0 16px; font-size: 15px; } }
+.rs-react { min-height: 2.8em; margin-top: 20px; text-align: center; font: 400 clamp(1.05rem, .9rem + .8vw, 1.4rem)/1.25 var(--ff-h); color: var(--hi); rotate: -1.5deg; }
+
+.rs-note { padding-block: 56px 72px; background: var(--paper); }
+.rs-note-card { max-width: 760px; padding: clamp(20px, 4vw, 36px); border: var(--bd); border-radius: 24px; background: var(--white); box-shadow: var(--sh); rotate: -.5deg; }
+.rs-note-card h2 { font: 800 clamp(1.6rem, 1rem + 2.4vw, 2.6rem)/.95 var(--ff-d); letter-spacing: -.03em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+.rs-note-card p { margin-top: 12px; font: 500 1.05rem/1.5 var(--ff-d); max-width: 60ch; }
+/* LAB-NAV:css:start */
+/* ---------- Lab nav (shared by every lab page: keep this block identical in all of them) ---------- */
+.lab-bar { background: var(--ink); color: var(--paper); padding: 9px 14px; text-align: center; font: 400 12px/1.45 var(--ff-m); }
+.lab-bar a { color: var(--hi); font-weight: 700; text-underline-offset: 3px; }
+.nav-toggle { display: none; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border: var(--bd); border-radius: 14px; background: var(--ink); color: var(--hi); font: 700 15px/1 var(--ff-d); cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
+.nav-toggle:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.nav-ico { position: relative; width: 20px; height: 14px; flex: none; }
+.nav-ico i { position: absolute; left: 0; right: 0; height: 3px; border-radius: 2px; background: currentColor; transition: top .3s var(--spring), transform .3s var(--spring), opacity .2s; }
+.nav-ico i:nth-child(1) { top: 0; } .nav-ico i:nth-child(2) { top: 5.5px; } .nav-ico i:nth-child(3) { top: 11px; }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(1) { top: 5.5px; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(3) { top: 5.5px; transform: rotate(-45deg); }
+.nav-links { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
+.nav-link:hover, .nav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
+.nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: -2deg; }
+@media (max-width: 1099px) {
+  html.js .nav-toggle { display: inline-flex; }
+  html.js .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px 24px 24px; background: var(--paper); color: var(--ink); border-bottom: var(--bd); box-shadow: 0 6px 0 var(--ink); max-height: calc(100vh - var(--nav-h)); max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; }
+  html.js .nav-links.open { display: flex; }
+  html.js .nav-link { justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 18px; border-color: var(--ink); border-radius: 16px; background: var(--white); font-size: 20px; white-space: normal; }
+  html.js .nav-link::after { content: "→"; flex: none; }
+  html.js .nav-link:hover, html.js .nav-link:focus-visible, html.js .nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: 0deg; translate: 0 0; }
+  html[data-theme="blue"].js .nav-links :focus-visible { outline-color: var(--ink); }
+  html:not(.js) .nav-in { height: auto; flex-wrap: wrap; padding-block: 10px; }
+  html:not(.js) .nav-links { flex-wrap: wrap; }
+}
+@media (max-width: 360px) { html.js .nav-links { padding-inline: 16px; } html.js .nav-link { font-size: 18px; padding: 0 14px; } }
+/* LAB-NAV:css:end */
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
+  html.js .pop, html.js .slap, html.js .reveal { opacity: 1; translate: 0 0; scale: 1; transform: none; }
+  .tape-track, .ring, .scoot, .cta-sticker { animation: none !important; }
+  .scoot { left: 40%; }
+}
+@media (prefers-reduced-motion: reduce) { .rs-card.rs-hint { animation: none; } }
+</style>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- LAB-NAV:html:start -->
+<!-- The lab pages share this bar and nav. Links use data-page: the .html file on localhost, the clean route live. -->
+<div class="lab-bar">the lab: stuff we’re still testing. not the official homepage. <a href="/" data-page="home">the real one is over here →</a></div>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
+      <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#121212"/><circle cx="14" cy="19.5" r="4.6" fill="#fff"/><circle cx="26" cy="19.5" r="4.6" fill="#fff"/><circle cx="15" cy="20.2" r="2.1" fill="#121212"/><circle cx="27" cy="20.2" r="2.1" fill="#121212"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+      <span>Cars24 Patch</span>
+    </a>
+    <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span class="nav-ico" aria-hidden="true"><i></i><i></i><i></i></span><span class="nav-toggle-t">menu</span></button>
+    <nav class="nav-links" id="nav-links" aria-label="The lab pages">
+      <a class="nav-link" href="/lab" data-page="lab">the lab</a>
+      <a class="nav-link" href="/updates" data-page="updates">updates &amp; journey</a>
+      <a class="nav-link" href="/research" data-page="research">research</a>
+      <a class="nav-link" href="/case-files" data-page="case-files">case files</a>
+      <a class="nav-link" href="/wall-of-holes" data-page="wall">the wall</a>
+      <a class="nav-link" href="/dodge" data-page="dodge">dodge</a>
+      <a class="nav-link" href="/rishta" data-page="rishta" aria-current="page">rishta</a>
+    </nav>
+  </div>
+</header>
+<!-- LAB-NAV:html:end -->
+
+<main id="main">
+<section class="cfp-hero" aria-labelledby="h1">
+  <div class="wrap">
+    <div class="cfp-chips pop"><span class="cfp-chip">swipe right on potholes</span><span class="cfp-chip alt">draft</span></div>
+    <h1 class="cfp-h1 pop" id="h1" style="--d:.15s">pothole se <span class="hi">rishta.</span></h1>
+    <p class="cfp-lead pop" style="--d:.3s">settled hai. kahin nahi jayega. meet the most eligible potholes in India.</p>
+  </div>
+</section>
+
+<section class="rs-sec" aria-labelledby="h-rules">
+  <div class="wrap rs-grid">
+    <div class="rs-copy reveal">
+      <span class="kicker">the rules</span>
+      <h2 class="h2" id="h-rules">left to patch. right to <span class="hi">regret it.</span></h2>
+      <p class="sec-lead">drag the card, tap the buttons, or use the arrow keys. no real potholes were harmed. sadly.</p>
+      <p class="rs-keys" aria-hidden="true"><span>← patch it</span><span>match it →</span></p>
+      <div class="rs-score" aria-live="polite">
+        <span class="rs-pill">patched <b id="rs-patched">0</b></span>
+        <span class="rs-pill alt">matched <b id="rs-matched">0</b></span>
+      </div>
+    </div>
+
+    <div class="rs-play reveal" style="--d:.12s">
+      <div class="rs-stage" id="rs-stage" aria-label="Pothole profiles. Swipe left to patch, right to match.">
+        <div class="rs-end" id="rs-end" hidden>
+          <h3>no more potholes near you.</h3>
+          <p id="rs-end-line">(we wish.)</p>
+          <div class="rs-end-btns">
+            <a class="btn btn-yellow btn-sm" href="/#subscribe" data-page="home" data-hash="#subscribe">match with the people fixing them <span class="arr">↗</span></a>
+            <button class="btn btn-sm rs-btn-pink" id="rs-share" type="button">send your match <span class="arr">↗</span></button>
+            <button class="rs-link" id="rs-again" type="button">swipe again ↻</button>
+          </div>
+        </div>
+      </div>
+      <div class="rs-btns">
+        <button class="btn rs-btn-paper" id="rs-left" type="button"><span aria-hidden="true">←</span> patch it</button>
+        <button class="btn rs-btn-pink" id="rs-right" type="button">match it <span aria-hidden="true">→</span></button>
+      </div>
+      <p class="rs-react" id="rs-react" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+  <noscript><p class="wrap" style="margin-top:24px">the swiping needs JavaScript.</p></noscript>
+</section>
+
+<section class="rs-note" aria-labelledby="h-photos">
+  <div class="wrap">
+    <div class="rs-note-card reveal">
+      <h2 id="h-photos">about the profiles.</h2>
+      <p>the drawn ones are ours. the ones marked verified are real potholes on real Indian roads: openly licensed photos from Wikimedia Commons, credited on their card and cropped to fit. every bio is made up. the potholes are not.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#FFD60A"/><circle cx="14" cy="19.5" r="4.6" fill="#121212"/><circle cx="26" cy="19.5" r="4.6" fill="#121212"/><circle cx="15" cy="20.2" r="2.1" fill="#FFD60A"/><circle cx="27" cy="20.2" r="2.1" fill="#FFD60A"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#121212" stroke-width="2.4" stroke-linecap="round"/></svg>
+        <span>Cars24 Patch</span>
+      </a>
+      <p class="foot-tag">made by people who are tired of swerving.<br><span class="reb">Cars24 Patch · a Cars24 Rebellion.</span></p>
+    </div>
+    <div class="foot-b"><span>© 2026 Cars24 Patch. All rights reserved.</span><span><a href="/lab" data-page="lab">back to the lab</a> · <a href="/" data-page="home">the real homepage</a></span></div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* THE PROFILES. Drawn ones have `draw` (see art() below); verified ones have a photo with its credit.
+     Bios are jokes about the situation. Never a joke about the people hurt by potholes, never a real person's name.
+     Photos: openly licensed (Wikimedia Commons), the same ones as the wall, hot-linked for now. */
+  var P = [
+    { name: 'pinky', age: '6', dist: '0.2 km away. always.', bio: 'looking for something long term.', q: 'flags', a: 'green: i’m always there for you.\nred: i’m always there.', draw: { bg: 'var(--pink)', eyes: 'lashes', mouth: 'smile' } },
+    { name: 'capital_crater', place: 'new delhi', bio: 'big city hole. big city energy.', q: 'it’s not you, it’s…', a: 'your suspension.',
+      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', alt: 'A broken, potholed road in New Delhi', by: 'Rrthakur22', link: 'https://commons.wikimedia.org/wiki/File:Broken_Roads_in_India%27s_Capital_New_Delhi.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'puddle.princess', age: '3', dist: 'under that harmless-looking puddle.', bio: 'i look shallow. i’m not.', q: 'my love language', a: 'your alignment.', draw: { bg: 'var(--acc)', eyes: 'peek', mouth: 'none', acc: 'puddle' } },
+    { name: 'road_full_of_us', place: 'bihar', bio: 'i don’t come alone. i bring friends. a lot of friends.', q: 'red flag', a: 'i’m not one pothole. i’m a group chat.',
+      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg', alt: 'A road full of potholes in Bihar', by: 'Savant dev', link: 'https://commons.wikimedia.org/wiki/File:Roads_in_Bihar_have_potholes.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'the_landmark', age: '11', dist: 'so old, people give directions using me.', bio: 'turn left after me. everyone does.', q: 'i’m a 10 but', a: 'i live on your commute.', draw: { bg: 'var(--paper)', eyes: 'shades', mouth: 'smirk', acc: 'sign' } },
+    { name: 'cone_wearer', age: '2', dist: 'wears a traffic cone. calls it a hat.', bio: 'someone patched me once. i came back.', q: 'my toxic trait', a: 'the comeback nobody asked for.', draw: { bg: 'var(--prim)', eyes: 'round', mouth: 'smirk', acc: 'cone' } },
+    { name: 'arrivals_lounge', place: 'outside kolkata airport', bio: 'the first one you meet. every single trip.', q: 'together we could', a: 'make you miss your flight.',
+      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg', alt: 'A potholed road outside Kolkata Airport', by: 'Slyronit', link: 'https://commons.wikimedia.org/wiki/File:Potholed_road_outside_Kolkata_Airport.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'tiny_but_mighty', age: '1', dist: 'small. ruins your day anyway.', bio: '6 inches deep, if that matters.', q: 'delulu is', a: 'the solulu. so is a road roller.', draw: { bg: 'var(--pink)', eyes: 'round', mouth: 'o', size: .62 } },
+    { name: 'situationship_road', place: 'bengaluru', bio: 'you never know where you stand with me. mostly in a hole.', q: 'we’re not dating', a: 'we just meet on the same road every day.',
+      src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg', alt: 'A crumbling road with potholes at Munnekollala, Bengaluru', by: 'Gangaasoonu', link: 'https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru.jpg', lic: 'CC BY-SA 4.0', licUrl: 'https://creativecommons.org/licenses/by-sa/4.0' },
+    { name: 'settled_hai', age: 'since forever', dist: 'kahin nahi jayega.', bio: 'beta, pothole hai. settled hai. family bhi achhi hai.', q: 'family background', a: 'three monsoons. zero repairs.', draw: { bg: 'var(--prim)', eyes: 'sleepy', mouth: 'smile', acc: 'garland' } }
+  ];
+  var LEFT = ['ghosted. honestly, healthy.', 'patched. no closure needed.', 'left on read. and filled in.', 'it’s not you. it’s your depth.', 'blocked. and tarred.'];
+  var RIGHT = ['it’s a match. your suspension has questions.', 'matched. your spine wants space.', 'it’s a match. your mechanic says thanks.', 'matched. they’ll be there tomorrow. and the day after.', 'it’s a match. your tyre would like a word.'];
+
+  /* a drawn pothole: our mascot, with a few outfits */
+  function art(d) {
+    var s = d.size || 1, cx = 100, cy = d.acc === 'sign' ? 96 : 90, rx = 72 * s, ry = 44 * s, ex = 22 * s, ey = cy - 6 * s, er = 11 * s, out = '';
+    out += '<ellipse cx="' + cx + '" cy="' + (cy + ry * .9) + '" rx="' + rx * 1.1 + '" ry="' + ry * .28 + '" fill="#121212" fill-opacity=".18"/>';
+    out += '<ellipse cx="' + cx + '" cy="' + cy + '" rx="' + rx + '" ry="' + ry + '" fill="#FFD60A" stroke="#121212" stroke-width="4"/>';
+    out += '<ellipse cx="' + cx + '" cy="' + (cy + 2 * s) + '" rx="' + rx * .82 + '" ry="' + ry * .78 + '" fill="#121212"/>';
+    if (d.acc === 'puddle') {
+      out += '<ellipse cx="' + cx + '" cy="' + (cy + 10) + '" rx="' + rx * .8 + '" ry="' + ry * .5 + '" fill="#3B2BFF" fill-opacity=".85"/>';
+      out += '<path d="M' + (cx - 30) + ' ' + (cy + 8) + 'h18M' + (cx + 8) + ' ' + (cy + 16) + 'h22" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-opacity=".7"/>';
+      ey = cy - 12;
+    }
+    [-1, 1].forEach(function (sd) {
+      var x = cx + sd * ex;
+      if (d.eyes === 'shades') return;
+      out += '<circle cx="' + x + '" cy="' + ey + '" r="' + er + '" fill="#fff"/>';
+      if (d.eyes === 'sleepy') out += '<path d="M' + (x - er) + ' ' + ey + 'a' + er + ' ' + er + ' 0 0 1 ' + 2 * er + ' 0z" fill="#121212"/><circle cx="' + x + '" cy="' + (ey + er * .35) + '" r="' + er * .38 + '" fill="#121212"/>';
+      else out += '<circle cx="' + (x + sd * er * .15) + '" cy="' + (ey + (d.eyes === 'peek' ? er * .3 : 0)) + '" r="' + er * .45 + '" fill="#121212"/>';
+      if (d.eyes === 'lashes') out += '<path d="M' + (x - er * .8) + ' ' + (ey - er * 1.05) + 'l-4 -6M' + x + ' ' + (ey - er * 1.25) + 'v-7M' + (x + er * .8) + ' ' + (ey - er * 1.05) + 'l4 -6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>';
+    });
+    if (d.eyes === 'shades') out += '<rect x="' + (cx - ex - 15) + '" y="' + (ey - 9) + '" width="30" height="17" rx="7" fill="#121212" stroke="#fff" stroke-width="2.5"/><rect x="' + (cx + ex - 15) + '" y="' + (ey - 9) + '" width="30" height="17" rx="7" fill="#121212" stroke="#fff" stroke-width="2.5"/><path d="M' + (cx - ex + 15) + ' ' + (ey - 2) + 'h' + (2 * ex - 30) + '" stroke="#fff" stroke-width="2.5"/>';
+    var my = cy + 20 * s;
+    if (d.mouth === 'smile') out += '<path d="M' + (cx - 14 * s) + ' ' + my + 'q' + 14 * s + ' ' + 10 * s + ' ' + 28 * s + ' 0" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>';
+    if (d.mouth === 'smirk') out += '<path d="M' + (cx - 12 * s) + ' ' + (my + 2) + 'q' + 16 * s + ' ' + 4 * s + ' ' + 26 * s + ' ' + (-7 * s) + '" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>';
+    if (d.mouth === 'o') out += '<ellipse cx="' + cx + '" cy="' + (my + 2) + '" rx="' + 5 * s + '" ry="' + 7 * s + '" fill="none" stroke="#fff" stroke-width="3"/>';
+    if (d.acc === 'cone') out += '<g transform="translate(' + (cx + rx * .45) + ' ' + (cy - ry - 42) + ') rotate(14)"><path d="M0 50 L14 0 L28 50Z" fill="#FF2D2D" stroke="#121212" stroke-width="3.5" stroke-linejoin="round"/><path d="M5 34h18M9 20h10" stroke="#fff" stroke-width="5"/><rect x="-7" y="48" width="42" height="9" rx="3" fill="#FF2D2D" stroke="#121212" stroke-width="3.5"/></g>';
+    if (d.acc === 'sign') out += '<g><path d="M40 20v40" stroke="#121212" stroke-width="4"/><path d="M28 10h70l10 10-10 10H28z" fill="#FFD60A" stroke="#121212" stroke-width="3.5" stroke-linejoin="round"/><text x="34" y="25" font-family="Space Mono, monospace" font-size="11" font-weight="700" fill="#121212">TURN LEFT</text></g>';
+    if (d.acc === 'garland') { for (var i = 0; i <= 10; i++) { var t = Math.PI * (i / 10), gx = cx - rx * .95 * Math.cos(t), gy = cy - ry * 1.08 - Math.sin(t) * 16; out += '<circle cx="' + gx.toFixed(1) + '" cy="' + gy.toFixed(1) + '" r="7" fill="' + (i % 2 ? '#FF5FA2' : '#FFD60A') + '" stroke="#121212" stroke-width="2.5"/>'; } }
+    return '<svg viewBox="0 0 200 150" aria-hidden="true">' + out + '</svg>';
+  }
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; }
+  function safe(u) { return typeof u === 'string' && /^https:\/\//.test(u) ? u : ''; }
+  function linkTo(text, url) { var u = safe(url); if (!u) return el('span', '', text); var a = el('a', '', text); a.href = u; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
+
+  function card(p) {
+    var c = el('article', 'rs-card');
+    c.setAttribute('aria-label', 'profile: ' + p.name);
+    var pic = el('div', 'rs-pic');
+    if (p.draw) { pic.style.setProperty('--bg', p.draw.bg); pic.innerHTML = art(p.draw); pic.appendChild(el('span', 'rs-badge', 'drawn')); }
+    else { var img = new Image(); img.src = safe(p.src); img.alt = p.alt; img.decoding = 'async'; img.referrerPolicy = 'no-referrer'; img.draggable = false; pic.appendChild(img); pic.appendChild(el('span', 'rs-badge ver', 'verified pothole')); }
+    pic.appendChild(el('span', 'rs-stamp l', 'patched'));
+    pic.appendChild(el('span', 'rs-stamp r', 'it’s a match'));
+    c.appendChild(pic);
+    var b = el('div', 'rs-body'), nm = el('h3', 'rs-name', p.name);
+    if (p.age) { nm.appendChild(document.createTextNode(', ')); nm.appendChild(el('span', '', p.age)); }
+    b.appendChild(nm);
+    b.appendChild(el('p', 'rs-dist', p.place ? p.place + ' · real pothole' : p.dist));
+    b.appendChild(el('p', 'rs-bio', p.bio));
+    var pr = el('div', 'rs-prompt'); pr.appendChild(el('b', '', p.q)); pr.appendChild(el('span', '', p.a)); b.appendChild(pr);
+    if (p.by) { var cr = el('p', 'rs-credit'); cr.appendChild(document.createTextNode('photo: ')); cr.appendChild(linkTo(p.by, p.link)); cr.appendChild(document.createTextNode(' · ')); cr.appendChild(linkTo(p.lic, p.licUrl)); b.appendChild(cr); }
+    c.appendChild(b);
+    return c;
+  }
+
+  var stage = document.getElementById('rs-stage'), endBox = document.getElementById('rs-end'), react = document.getElementById('rs-react');
+  var btnL = document.getElementById('rs-left'), btnR = document.getElementById('rs-right');
+  var outP = document.getElementById('rs-patched'), outM = document.getElementById('rs-matched');
+  var idx = 0, patched = 0, matched = 0, top = null, next = null, busy = false, lastMatch = '', firstHint = true;
+
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  function layout() {
+    if (!top && idx < P.length) { top = card(P[idx]); stage.appendChild(top); bind(top); }
+    if (!next && idx + 1 < P.length) { next = card(P[idx + 1]); next.classList.add('is-next'); next.setAttribute('aria-hidden', 'true'); stage.insertBefore(next, top); }
+    if (top && firstHint && !reduce) { top.classList.add('rs-hint'); firstHint = false; }
+    var done = idx >= P.length;
+    endBox.hidden = !done; btnL.disabled = done; btnR.disabled = done;
+    if (done) {
+      document.getElementById('rs-end-line').textContent =
+        matched === 0 ? 'you patched all ' + patched + '. zero matches. standards: high. road: still bad.' :
+        matched > patched ? 'you matched with ' + matched + ' potholes. bestie, this isn’t it.' :
+        patched + ' patched, ' + matched + ' matched. the real ones don’t take no for an answer.';
+    }
+  }
+  function swipe(dir) {
+    if (busy || !top) return;
+    busy = true;
+    var c = top, w = stage.offsetWidth, p = P[idx];
+    c.classList.remove('is-drag', 'rs-hint');
+    c.querySelector(dir < 0 ? '.rs-stamp.l' : '.rs-stamp.r').style.opacity = 1;
+    if (dir < 0) { patched++; outP.textContent = patched; react.textContent = pick(LEFT); }
+    else { matched++; outM.textContent = matched; lastMatch = p.name; react.textContent = pick(RIGHT); }
+    function finish() {
+      if (c.parentNode) c.parentNode.removeChild(c);
+      idx++; top = next; next = null;
+      if (top) { top.classList.remove('is-next'); top.removeAttribute('aria-hidden'); bind(top); }
+      busy = false; layout();
+    }
+    if (reduce) { finish(); return; }
+    c.classList.add('is-gone');
+    c.style.transform = 'translate(' + dir * w * 1.4 + 'px, ' + (parseFloat(c.dataset.dy) || 0) + 'px) rotate(' + dir * 24 + 'deg)';
+    setTimeout(finish, 380);
+  }
+  function bind(c) {
+    var sx = 0, sy = 0, dx = 0, dy = 0, id = null;
+    var sl = c.querySelector('.rs-stamp.l'), stR = c.querySelector('.rs-stamp.r');
+    c.addEventListener('pointerdown', function (e) {
+      if (busy || c !== top || (e.target.closest && e.target.closest('a'))) return;
+      id = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0;
+      c.classList.remove('rs-hint'); c.classList.add('is-drag');
+      try { c.setPointerCapture(id); } catch (err) {}
+    });
+    c.addEventListener('pointermove', function (e) {
+      if (e.pointerId !== id) return;
+      dx = e.clientX - sx; dy = e.clientY - sy;
+      c.dataset.dy = dy * .3;
+      c.style.transform = 'translate(' + dx + 'px, ' + dy * .3 + 'px) rotate(' + dx * .06 + 'deg)';
+      sl.style.opacity = Math.max(0, Math.min(1, -dx / 110)); stR.style.opacity = Math.max(0, Math.min(1, dx / 110));
+    });
+    function up(e) {
+      if (e.pointerId !== id) return;
+      id = null;
+      var limit = Math.min(120, stage.offsetWidth * .3);
+      if (Math.abs(dx) > limit) { swipe(dx < 0 ? -1 : 1); return; }
+      c.classList.remove('is-drag'); c.style.transform = ''; sl.style.opacity = 0; stR.style.opacity = 0;
+    }
+    c.addEventListener('pointerup', up);
+    c.addEventListener('pointercancel', up);
+  }
+
+  btnL.addEventListener('click', function () { swipe(-1); });
+  btnR.addEventListener('click', function () { swipe(1); });
+  window.addEventListener('keydown', function (e) {
+    if (e.target && /^(input|textarea|select)$/i.test(e.target.tagName)) return;
+    if (e.key === 'ArrowLeft') { if (top) { swipe(-1); e.preventDefault(); } }
+    else if (e.key === 'ArrowRight') { if (top) { swipe(1); e.preventDefault(); } }
+  });
+  document.getElementById('rs-again').addEventListener('click', function () {
+    idx = 0; patched = 0; matched = 0; outP.textContent = 0; outM.textContent = 0; react.textContent = 'fresh potholes. same roads.';
+    layout(); btnR.focus();
+  });
+
+  /* "send your match": the Web Share sheet on phones, the clipboard elsewhere */
+  function toast(t) { react.textContent = t; }
+  document.getElementById('rs-share').addEventListener('click', function () {
+    var url = location.origin + location.pathname;
+    var text = lastMatch ? 'i matched with a pothole called ' + lastMatch + '. settled hai, kahin nahi jayega. your turn.' : 'a pothole sent me a rishta. i said no. your turn.';
+    if (navigator.share) { navigator.share({ title: 'pothole se rishta', text: text, url: url }).catch(function () {}); return; }
+    var full = text + ' ' + url;
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(full).then(function () { toast('link copied. send it to the group chat.'); }, function () { toast('copy this: ' + full); });
+    else toast('copy this: ' + full);
+  });
+
+  layout();
+
+  /* reveal on scroll */
+  var items = [].slice.call(document.querySelectorAll('.reveal'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (en) { en.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    items.forEach(function (n) { io.observe(n); });
+  } else { items.forEach(function (n) { n.classList.add('in'); }); }
+})();
+</script>
+<script>
+/* LAB-NAV:js:start */
+/* Lab nav: page links resolve per environment (a[data-page]: the .html file on localhost, the clean route live),
+   and the menu button opens or closes the link panel on small screens. */
+(function () {
+  'use strict';
+  var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
+  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], research: ['research.html', '/research'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'], rishta: ['rishta.html', '/rishta'] };
+  [].forEach.call(document.querySelectorAll('a[data-page]'), function (a) {
+    var p = PAGES[a.getAttribute('data-page')];
+    if (p) a.setAttribute('href', p[local ? 0 : 1] + (a.getAttribute('data-hash') || ''));
+  });
+
+  var nav = document.querySelector('.nav'), btn = document.getElementById('nav-toggle'), panel = document.getElementById('nav-links');
+  if (!nav || !btn || !panel) return;
+  var label = btn.querySelector('.nav-toggle-t');
+  function set(open) {
+    panel.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (label) label.textContent = open ? 'close' : 'menu';
+  }
+  btn.addEventListener('click', function () { set(!panel.classList.contains('open')); });
+  panel.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) set(false); });
+  document.addEventListener('click', function (e) { if (panel.classList.contains('open') && !nav.contains(e.target)) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('open')) { set(false); btn.focus(); } });
+  var wide = window.matchMedia('(min-width: 1100px)');
+  if (wide.addEventListener) wide.addEventListener('change', function () { set(false); }); else if (wide.addListener) wide.addListener(function () { set(false); });
+})();
+/* LAB-NAV:js:end */
+</script>
+</body>
+</html>

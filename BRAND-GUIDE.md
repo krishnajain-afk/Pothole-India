@@ -66,6 +66,7 @@ There are **two visual systems**. Do not mix them. And there are **two kinds of 
 | `/case-files` | `public/case-files.html` | Gen Z | LIVE, lab, `noindex`. The case-study repository |
 | `/wall-of-holes` | `public/wall-of-holes.html` | Gen Z | LIVE, lab, `noindex`. Biggest ***holes of the year |
 | `/dodge` | `public/dodge.html` | Gen Z | LIVE, lab, `noindex`. Head-lean camera game |
+| `/rishta` | `public/rishta.html` | Gen Z | lab, `noindex`. **pothole se rishta**: swipe left to patch, right to match (§12.7) |
 | `/on-the-move` | `public/on-the-move.html` | **Calm** (Crashfree India system) | LIVE, `noindex` |
 | `/know-who` | `public/know-who.html` | Calm | LIVE, `noindex` |
 | `/robots.txt`, `/sitemap.xml`, `/icon.svg` | `app/robots.ts`, `app/sitemap.ts`, `app/icon.svg` | — | LIVE (new with Next.js) |
@@ -243,7 +244,7 @@ Derived (shown with the working in the footer):
 
 ## 6. Design system — GEN Z (loud) pages
 
-Applies to: the homepage, the 404 and the six lab pages.
+Applies to: the homepage, the 404 and the seven lab pages.
 **Style keywords:** caution-tape yellow, asphalt black, electric blue, sticker pink, hard offset shadows, thick outlines, tilted stickers, tape strips, marquee tapes, film grain, springy motion. *Neo-brutalist / zine / sticker-bomb.*
 
 ### 6.1 Colour tokens (copy exactly)
@@ -488,11 +489,12 @@ Paper section: `meme break` kicker; white tilted card with tape: **1 kachori + 2
 | case files | `public/case-files.html` | `/case-files` |
 | the wall | `public/wall-of-holes.html` | `/wall-of-holes` |
 | dodge | `public/dodge.html` | `/dodge` |
+| rishta | `public/rishta.html` | `/rishta` |
 
-- **One shared nav, copy-pasted into every lab page** (until the lab is ported to Next.js, when it becomes one component). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. They must be **identical in all six files**, except in the HTML block: which link carries `aria-current="page"`, and the logo (`#top` on the lab front page, `/lab` elsewhere). After changing one, copy it to the others and re-diff (checksums).
-- **Markup:** the `lab-bar` above the sticky yellow `header.nav`: logo · `menu` button · `<nav id="nav-links">` with six `.nav-link`s. The homepage nav is unchanged (logo only).
-- **Behaviour:** ≥1100px inline pills, current page = ink pill tilted −2°. <1100px a `menu` button opens a paper panel; closes on link click, outside click, Esc (focus returns) and on resize to desktop. Without JS the links wrap.
-- **Links between pages** use `<a href="…" data-page="home|lab|updates|research|case-files|wall|dodge" data-hash="#id">`. The shared script rewrites `href`: on localhost to the old local file names (`index-genz.html`, `index-genz-meme.html`, `updates.html`…), on a real host to the clean route. `next.config.ts` rewrites `index-genz.html` → `/` and `index-genz-meme.html` → `/lab.html`, so these links work under `npm run dev` too. Never hard-code page paths.
+- **One shared nav, copy-pasted into every lab page** (until the lab is ported to Next.js, when it becomes one component). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. They must be **identical in all seven files**, except in the HTML block: which link carries `aria-current="page"`, and the logo (`#top` on the lab front page, `/lab` elsewhere). After changing one, copy it to the others and re-diff (checksums).
+- **Markup:** the `lab-bar` above the sticky yellow `header.nav`: logo · `menu` button · `<nav id="nav-links">` with seven `.nav-link`s. The homepage nav is unchanged (logo only).
+- **Behaviour:** ≥1100px inline pills (seven links still fit on one row at 1100px, checked 2026-10-31), current page = ink pill tilted −2°. <1100px a `menu` button opens a paper panel; closes on link click, outside click, Esc (focus returns) and on resize to desktop. Without JS the links wrap.
+- **Links between pages** use `<a href="…" data-page="home|lab|updates|research|case-files|wall|dodge|rishta" data-hash="#id">`. The shared script rewrites `href`: on localhost to the old local file names (`index-genz.html`, `index-genz-meme.html`, `updates.html`…), on a real host to the clean route. `next.config.ts` rewrites `index-genz.html` → `/` and `index-genz-meme.html` → `/lab.html`, so these links work under `npm run dev` too. Never hard-code page paths.
 - **To add a lab page:** build it from `public/case-files.html` (head, CSS, footer, the three nav blocks), add it to `PAGES` in the JS block and as a `.nav-link` in **every** lab page, add its name to `STATIC_PAGES` in `next.config.ts`, then add a card to `#inside` on the lab front page.
 - **Template slots:** each head script sets `is-local` on localhost and `html:not(.is-local) .upd-slot { display: none }` hides the empty "your turn" slots for live visitors.
 - **Gotcha:** the current-page link is rotated, so compare `offsetTop`, not `getBoundingClientRect().top`, in tests.
@@ -515,6 +517,14 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 
 **Publishing red lines (never on the public site without the owner's written OK):** names, emails or contact routes of officials, scientists or companies; allegations about named people or companies; vendor criticism by name; costs, quotes, prices, contract, exclusivity or partnership terms; unreleased technology; the pilot city, the road authority, the timeline, offers of free test stretches; another firm's claims or offers; "profit" or funding-route talk; Slack mentions and internal opinions. Anything a source told us in a meeting is shown as **told to us, not tested by us**, in generic terms ("a government road research lab"), and only where our own research agrees or we say it is unsettled. **Scan every public page for these before any push** (grep for names like CRRI/the scientists, `@` emails, `₹`/`Rs`, `profit`, `exclusiv`, `pilot city`, `slack`, `Potfill`).
 
+### 12.7 pothole se rishta (`public/rishta.html`, built 2026-10-31)
+- **Idea (the user's):** "pothole Tinder", tied to the dating-app memes. Name chosen by the user: **pothole se rishta**; profiles are a **mix of drawings and real photos**. Never use the Tinder name, flame logo or a look-alike app screen (trademark); the swipe gesture carries the reference on its own.
+- **How it plays:** a stack of 10 pothole "dating profiles". Swipe left (or `← patch it`, or the ← key) = **patched**, pink stamp; swipe right (`match it →`, →) = **it's a match**, red stamp. A short drag snaps back. A deadpan line reacts to every swipe (`ghosted. honestly, healthy.` / `it's a match. your suspension has questions.`). Score pills `patched` / `matched`. The end card `no more potholes near you.` gives a line based on the score, `match with the people fixing them ↗` (→ `/#subscribe`), `send your match ↗` (Web Share, clipboard fallback) and `swipe again ↻`.
+- **Profiles** live in the `P` array in the page script: `name, age, dist, bio, q, a` plus either `draw: { bg, eyes, mouth, acc, size }` (drawn by `art()`: our mascot with outfits: lashes, shades, sleepy eyes, puddle, traffic cone, TURN LEFT sign, marigold garland, tiny) or a photo (`src, alt, by, link, lic, licUrl, place`, the same openly licensed Wikimedia Commons photos as the wall, hot-linked, credited on the card, badge `verified pothole`). Order alternates drawn / photo and ends on `settled_hai` (the rishta joke).
+- **Copy rules for profiles:** dating-app formats (bio, prompt, green flag / red flag, "i'm a 10 but…", situationship, delulu), one joke per card, the joke is the pothole's personality. Never a real person's name, never a joke about the people hurt by potholes, no death figures on this page. Photo profiles name only the real place from Commons; everything else on a card is plainly made up (the page says so: `every bio is made up. the potholes are not.`). Hinglish is fine here (it's a joke page): `settled hai. kahin nahi jayega.`
+- **Layout:** the card's text takes the height it needs and the picture fills the rest (never under 34%), so nothing clips; checked for all 10 cards at 280–2560px. Page-only classes use the `rs-` prefix.
+- **Status:** all copy `draft`. Not linked from the homepage.
+
 **Known source quirks:** the meeting minutes spell one scientist "Sikha" and CRRI's own page "Siksha"; the minutes muddle hot mix, emulsion and solvents (hot mix is not made with emulsion; emulsion cold mix is water-based, cutback uses a solvent such as kerosene); "10% concrete / 90% bitumen" matches the brief only as a share of **paved** roads.
 
 ---
@@ -525,6 +535,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 - **`/` and the 404 run on Next.js** (merged 2026-10-30 from `claude/nextjs-migration`, a fast-forward from `cc2bb93`). Verified on the preview and on production: build READY, homepage title/canonical/JSON-LD/form/game present, `/genz` 307, a bad URL 404, sitemap and robots correct.
 - **The lab copy pass is live** on `/lab`, `/updates`, `/research`, `/case-files` (the §3 table); every number, stamp and source unchanged. Still `draft`.
 - `/wall-of-holes`, `/dodge`, `/on-the-move`, `/know-who`: unchanged HTML in `public/`.
+- **On branch `claude/nextjs-migration`, not yet live:** the new lab page `/rishta` (pothole se rishta, §12.7), its card on `/lab` and the `rishta` link in the lab nav; plus this guide and `CLAUDE.md`.
 - Previous production deployment (the last all-HTML version, `cc2bb93`) is kept by Vercel as the rollback candidate.
 - Branches `claude/compassionate-wozniak-1k5k4x` (copy pass) and `claude/nextjs-migration` are merged into `main`; `feature/lab` and `feature/research` are older and redundant. Deleting them needs the owner's say-so.
 
@@ -563,6 +574,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 18. 2026-10-30: user: the hub copy "feels like AI content … no Gen Z flavour", unlike the hero and the wall. **Copy pass** on the lab hub pages (§3 table), reviewed on a preview, then made live in the lab.
 19. 2026-10-30: **migration to Next.js** (user: better for SEO "and other things too"). Decision: static App Router app on Vercel; port page by page with DOM + pixel parity checks; unported pages served unchanged from `public/`. The homepage and the 404 ported first; canonical, sitemap, robots, JSON-LD, `app/icon.svg`, `@vercel/analytics` added. The guide's old "no framework, no build, no package.json" rule is retired.
 20. 2026-10-30: user restated the workflow: **experiments go live in the lab first**; after a final check and confirmation the user decides whether they move to the homepage.
+21. 2026-10-31: user idea "pothole Tinder" → **pothole se rishta** (name and drawings + photos mix chosen by the user), built as its own lab page `/rishta` with a card on `/lab`. No Tinder branding.
 
 ---
 

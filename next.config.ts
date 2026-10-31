@@ -2,7 +2,7 @@ import type { NextConfig } from 'next';
 
 /* Pages that are still plain HTML in /public, served at their clean routes.
    Each one moves into app/ as it gets ported; delete its line here when it does. */
-const STATIC_PAGES = ['lab', 'updates', 'research', 'case-files', 'wall-of-holes', 'dodge', 'on-the-move', 'know-who'];
+const STATIC_PAGES = ['lab', 'updates', 'research', 'case-files', 'wall-of-holes', 'dodge', 'rishta', 'on-the-move', 'know-who'];
 
 const nextConfig: NextConfig = {
   trailingSlash: false,

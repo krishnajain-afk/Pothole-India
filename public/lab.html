@@ -554,6 +554,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       <a class="nav-link" href="/case-files" data-page="case-files">case files</a>
       <a class="nav-link" href="/wall-of-holes" data-page="wall">the wall</a>
       <a class="nav-link" href="/dodge" data-page="dodge">dodge</a>
+      <a class="nav-link" href="/rishta" data-page="rishta">rishta</a>
     </nav>
   </div>
 </header>
@@ -719,6 +720,14 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
           <p class="in-go"><a class="btn btn-sm" href="dodge.html" data-page="dodge">play it <span class="arr">↗</span></a></p>
         </article>
       </li>
+      <li class="upd in-card reveal" data-s="found" style="--r:.6deg;--d:.4s">
+        <article class="upd-card">
+          <div class="upd-top"><span class="upd-tag">game</span><span class="upd-sample">draft</span></div>
+          <h3 class="upd-title">pothole se rishta.</h3>
+          <p class="upd-sum">swipe left to patch. swipe right to regret it. settled hai, kahin nahi jayega.</p>
+          <p class="in-go"><a class="btn btn-sm" href="rishta.html" data-page="rishta">swipe it <span class="arr">↗</span></a></p>
+        </article>
+      </li>
     </ul>
   </div>
 </section>
@@ -862,7 +871,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 (function () {
   'use strict';
   var local = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === 'file:';
-  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], research: ['research.html', '/research'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'] };
+  var PAGES = { home: ['index-genz.html', '/'], lab: ['index-genz-meme.html', '/lab'], updates: ['updates.html', '/updates'], research: ['research.html', '/research'], 'case-files': ['case-files.html', '/case-files'], wall: ['wall-of-holes.html', '/wall-of-holes'], dodge: ['dodge.html', '/dodge'], rishta: ['rishta.html', '/rishta'] };
   [].forEach.call(document.querySelectorAll('a[data-page]'), function (a) {
     var p = PAGES[a.getAttribute('data-page')];
     if (p) a.setAttribute('href', p[local ? 0 : 1] + (a.getAttribute('data-hash') || ''));
