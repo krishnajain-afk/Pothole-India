@@ -3,6 +3,8 @@
 Coming-soon site for Cars24 Patch, a Cars24 Rebellion. A Next.js app (App Router, no Tailwind, no CSS framework), being migrated
 page by page from the original single-file HTML pages.
 
+**Before changing anything, read [`BRAND-GUIDE.md`](BRAND-GUIDE.md)** (voice, design system, rules, current state). `CLAUDE.md` is the short version for Claude Code.
+
 ## Migration status
 
 | Page | Where it lives now |
