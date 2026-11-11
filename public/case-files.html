@@ -316,6 +316,15 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 .cfp-h1 { margin-top: 22px; font: 800 clamp(3rem, 1rem + 11vw, 9.5rem)/.86 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
 .cfp-h1 .hi { display: inline-block; max-width: 100%; background: var(--acc); color: var(--on-acc); border: var(--bd); border-radius: .14em; padding: 0 .1em; rotate: -2deg; box-shadow: .05em .05em 0 var(--ink); }
 .cfp-lead { margin-top: 24px; max-width: 30ch; font: 600 clamp(1.25rem, 1rem + 1.4vw, 1.9rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
+/* the censor: *** flips to POT (same trick as the homepage) */
+.censor { display: inline-grid; perspective: 700px; margin-right: .045em; cursor: pointer; vertical-align: baseline; width: var(--ws, auto); transition: width .6s var(--spring); }
+.censor.is-pot { width: var(--wp, auto); }
+.censor .face { grid-area: 1 / 1; display: block; width: max-content; backface-visibility: hidden; transition: transform .75s var(--spring); }
+.censor .stars { justify-self: start; }
+.censor .pot { justify-self: start; transform: rotateX(180deg); background: var(--acc); color: var(--on-acc); border: .045em solid var(--ink); border-radius: .16em; padding: 0 .1em; rotate: -3deg; box-shadow: .055em .055em 0 var(--ink); }
+.censor.is-pot .stars { transform: rotateX(-180deg); }
+.censor.is-pot .pot { transform: rotateX(0); }
+.nb { white-space: nowrap; }
 .cfp-body { padding-block: 64px 96px; }
 .cfp-body .cf-top { margin-top: 0; }
 /* ---------- Stamps (how much weight a claim bears; shared with research.html) ---------- */
@@ -402,8 +411,8 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 <main id="main">
 <section class="cfp-hero" aria-labelledby="h1">
   <div class="wrap">
-    <div class="cfp-chips pop"><span class="cfp-chip">the evidence board</span><span class="cfp-chip alt">draft</span></div>
-    <h1 class="cfp-h1 pop" id="h1" style="--d:.15s">case <span class="hi">files.</span></h1>
+    <div class="cfp-chips pop"><span class="cfp-chip">the truth is down there</span><span class="cfp-chip alt">draft</span></div>
+    <h1 class="cfp-h1 pop" id="h1" style="--d:.15s"><span class="sr-only">The pothole files.</span><span aria-hidden="true">the <span class="nb"><span class="censor" id="censor"><span class="face stars">***</span><span class="face pot">pot</span></span>hole</span> <span class="hi">files.</span></span></h1>
     <p class="cfp-lead pop" style="--d:.3s">every idea we tried, filed. the good ones, the dumb ones, and the one where a missing letter made us look ridiculous.</p>
   </div>
 </section>
@@ -668,6 +677,33 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
   }
   window.addEventListener('hashchange', function () { openFor(document.getElementById(location.hash.slice(1))); });
   if (location.hash.length > 1) openFor(document.getElementById(location.hash.slice(1)));
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* the censor: *** <-> pot, same trick as the homepage */
+  var censor = document.getElementById('censor');
+  var auto = false, hover = false, pinned = false, tA, tB;
+  function render() { censor.classList.toggle('is-pot', auto || hover || pinned); }
+  function cycle() {
+    clearTimeout(tA); clearTimeout(tB);
+    if (reduce) return;
+    tA = setTimeout(function () {
+      auto = true; render();
+      tB = setTimeout(function () { auto = false; render(); cycle(); }, 1900);
+    }, 2600);
+  }
+  censor.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') { hover = true; render(); } });
+  censor.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') { hover = false; render(); } });
+  censor.addEventListener('click', function () { pinned = !pinned; render(); });
+  setTimeout(cycle, 1400);
+  function sizeCensor() {
+    var s = censor.querySelector('.stars'), p = censor.querySelector('.pot');
+    censor.style.setProperty('--ws', s.offsetWidth + 'px');
+    censor.style.setProperty('--wp', (p.offsetWidth + parseFloat(getComputedStyle(censor).fontSize) * 0.08) + 'px');
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeCensor);
+  window.addEventListener('load', sizeCensor);
+  if (window.ResizeObserver) new ResizeObserver(sizeCensor).observe(document.getElementById('h1')); else window.addEventListener('resize', sizeCensor);
+  sizeCensor();
 
   /* reveal on scroll */
   var items = [].slice.call(document.querySelectorAll('.reveal'));
