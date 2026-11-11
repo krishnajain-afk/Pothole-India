@@ -124,19 +124,6 @@ export function RebBand() {
   );
 }
 
-export function Nav() {
-  return (
-    <header className="nav">
-      <div className="wrap nav-in">
-        <a className="logo" href="#top" aria-label="Cars24 Patch — home">
-          <Mark />
-          <span>Cars24 Patch</span>
-        </a>
-      </div>
-    </header>
-  );
-}
-
 export function Footer() {
   return (
     <footer className="foot">

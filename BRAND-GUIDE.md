@@ -6,7 +6,7 @@
 >
 > **The one rule that matters most:** this site is *intentionally loud, funny, Gen Z and rebellious*. Do **not** "normalise" it into a clean corporate / SaaS look. When in doubt, copy the existing pages, not your defaults.
 
-Last updated: 2026-10-31 · Owner: Krishna (Cars24 / Crashfree India) · Repo: <https://github.com/krishnajain-afk/Pothole-India> (public)
+Last updated: 2026-11-11 · Owner: Krishna (Cars24 / Crashfree India) · Repo: <https://github.com/krishnajain-afk/Pothole-India> (public)
 
 ---
 
@@ -134,7 +134,7 @@ The user's verdict: the **homepage hero and the wall of holes are the benchmark*
 
 | Flat (earlier draft) | Now (live) |
 |---|---|
-| `how it's going.` / `no press releases. just what we did, what we found, and what we got wrong.` | `dear diary.` / `it's us again. we've been busy. some of it even worked.` |
+| `how it's going.` / `no press releases. just what we did, what we found, and what we got wrong.` → `it's us again. we've been busy. some of it even worked.` (rejected 2026-11-11: "still feels like AI") | `dear diary.` / `the potholes are winning. for now. this is us keeping score.` |
 | `the road to launch` · `milestone: launch · date: soon` | `are we there yet?` · `destination: launch · eta: soon` |
 | `do the homework` | `nerd out, properly` … `we took notes. a concerning amount of notes.` |
 | `test a repair properly` | `fix one. then check it stays fixed.` … `filling a hole is easy. staying filled is the whole game.` |
@@ -143,7 +143,7 @@ The user's verdict: the **homepage hero and the wall of holes are the benchmark*
 | `we went to see the machine.` | `we met a pothole machine. it was busy.` … `because hearing isn't testing.` |
 | `why potholes come back.` / `we keep filling the same holes…` | `the comeback nobody asked for.` / `same hole. same spot. again. like a sequel nobody ordered.` |
 | `watching a machine work isn't evidence that it keeps working.` | `a machine working on the day is a demo, not a result.` |
-| `the research.` / `every study we read or run about potholes goes on this shelf…` | `we did the reading.` / `so you don't have to. … when we found nothing, we say "not found" out loud.` |
+| `the research.` / `every study we read or run about potholes goes on this shelf…` → `we did the reading.` (2026-11-11: "okay" but not Gen Z enough) | `***hole studies.` (the `***` flips to `POT`, like the hero and the wall) / `self-taught. forty-one pages, zero chill, and a receipt on every claim. where the receipt is missing, we say so.` |
 | `surface or structural?` · `the ideal system.` · `how a fair test works.` | `a scratch, or a broken bone?` · `what would actually work.` · `how to test a fix without fooling yourself.` |
 | `read the numbers` | `read the receipts` … `nobody trusts a number that won't show its working.` |
 | `test the ideas` | `break things on purpose` … `still finding out which ideas are dumb.` |
@@ -190,7 +190,7 @@ The copy lives in `components/home/Hero.tsx`, `components/home/Sections.tsx` and
 | Sources (footer) | see §5.4 |
 
 > **User decisions on "Cars24 Rebellion" placement:** it appears in the **pre-footer pink band**, the **footer line**, and the "by Cars24 Patch" chip in the game section. It was **removed from the hero** and the **navbar**. Do not add it back there.
-> **Navbar** = logo only. The "notify me" button was **removed from the homepage navbar** (it still exists in the calm pages' navbars).
+> **Navbar** = logo + four links: `updates & journey` · `research` · `case files` · `the wall` (user decision 2026-11-11; it was logo-only before). Built in `components/home/HomeNav.tsx` (classes `hnav-`), inline from 960px, a `menu` panel below. **The meme break is never linked from the homepage.** These four pages stay lab pages (lab bar, `draft` chips, `noindex`) until the user says otherwise. The "notify me" button stays off the homepage navbar (it still exists in the calm pages' navbars).
 
 ### 4.3 Approved copy — 404 (`app/not-found.tsx`) — user-supplied, exact
 - H1: `Cool. Another thing that doesn't work.`
@@ -287,7 +287,7 @@ Body 17px/1.5 weight 500. Hero headline `clamp(3.6rem, 22cqw, 13rem)`. `.h2` `cl
 - `.wrap`: `max-width:1280px; padding-inline:24px` (≥768: 40px; ≤300: 16px). Single column on phones; 2-column hero ≥960px.
 - Section rhythm (homepage): **yellow hero → paper tapes → paper receipts → blue game → yellow CTA → paper band → ink footer.** The lab front page adds an ink `#inside` (cards) and a paper meme break. Alternate colours; every coloured section has a `3px` ink top/bottom border.
 - Vertical padding `.sec`: 88px (≥1024: 120px).
-- Sticky nav 72px: logo (mascot icon + "Cars24 Patch") only on the homepage.
+- Sticky nav 72px: logo (mascot icon + "Cars24 Patch") + the four links on the homepage (§4.2).
 
 ### 6.4 Borders, shadows, radii, tilt
 - Outline `3px solid ink` everywhere. Hard offset shadow `6px 6px 0` (hover `10px 10px 0`, press `2px 2px`). Radii: buttons 16, chips 999, kicker 10, cards 22–28, polaroids 16.
@@ -449,7 +449,7 @@ Repo layout: `app/`, `components/`, `lib/`, `public/`, `next.config.ts`, `vercel
 
 ### 12.1 Updates & journey (`public/updates.html`) + case files (`public/case-files.html`)
 The old "dispatches" section grew into a hub that was split into pages on 2026-10-24 (the user: everything on one page "won't look good"). The idea: the updates grow into a **case-study / portfolio repository** of everything done on the way to the milestone (studies, learnings, landings, photos), with the journey, updates and case files all linked.
-- **`updates.html`:** yellow hero `dear diary.` / `it's us again. we've been busy. some of it even worked.`, then an ink section with jump chips (`are we there yet? · plot twists · research ↗ · case files ↗`), the two parts below and a `more behind the tape` button row.
+- **`updates.html`:** yellow hero `dear diary.` / `the potholes are winning. for now. this is us keeping score.`, then an ink section with jump chips (`are we there yet? · plot twists · research ↗ · case files ↗`), the two parts below and a `more behind the tape` button row.
 - **1. Are we there yet? (`#journey`):** progress bar + **6** step cards (`data-s` done/doing/next; 3 columns at ≥1000px). `destination: launch · eta: soon`. Steps: read the receipts (done) → hang the sign (done) → nerd out, properly (done: the research and the machine visit) → break things on purpose (doing) → fix one. then check it stays fixed. (next: a real road, the road owner's written permission, someone independent checking; **no place names, no timeline**) → launch (next).
 - **2. Plot twists (`#updates-feed`):** dated cards, newest first, with **filter chips** (all / research / field visits / experiments / milestones, driven by `data-type`) and a live count. Today: the research (oct 2026), the machine visit (oct 2026), dodge (22 Oct), the wall (16 Oct), the finding (1 Oct), the list (1 Oct) + a hidden empty slot. **The research and visit dates are month-only on purpose until the exact days are confirmed.**
 - **3. Case files (`case-files.html`):** filter chips (all/studies/experiments/landings, live count), 2-column grid, a card with open details spans the full row, `#cf-02` deep links open that card. Each case file = the hunch · what we tried · what turned up (numbers/bars/chips) · what it taught us (numbered) · links. Built: **01 "2,385 people. one table."**, **02 "the wall of holes."**, **03 "dodge with your head."**, **04 "the comeback nobody asked for."**, **05 "we met a pothole machine."** + an empty template slot. All wording is marked **`draft`**.
@@ -579,6 +579,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 21. 2026-10-31: user idea "pothole Tinder" → **pothole se rishta** (name and drawings + photos mix chosen by the user), built as its own lab page `/rishta` with a card on `/lab`. No Tinder branding.
 22. 2026-10-31: rishta photo cards showed blank for the user → photos now served through Vercel's image service from our own domain (fallback: direct Commons URL); crop fixed; all 4 confirmed as Commons *Potholes in India* photos.
 23. 2026-10-31: user: not every card had a photo (6 of 10 were drawings) and "it needs to be photos, not fake" → every card is now a real Commons photo (9 cards; `cone_wearer` dropped); the build downloads the photos so they are served from our own domain, with the image service and Commons as fallbacks.
+24. 2026-11-11: the homepage nav gets four links (updates & journey, research, case files, the wall); the meme is never linked from `/`; the four pages stay lab pages (lab bar, draft, noindex). Copy: the diary line ("still feels like AI") → `the potholes are winning. for now. this is us keeping score.`; the research hero → `***hole studies.` with the `***`⇄`POT` flip. Options were offered and the user picked.
 
 ---
 

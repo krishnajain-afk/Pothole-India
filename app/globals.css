@@ -89,6 +89,31 @@ body::after {
 @media (max-width: 340px) { .logo { font-size: 15px; gap: 5px; } .logo svg { width: 24px; height: 24px; } }
 @media (max-width: 300px) { .wrap { padding-inline: 16px; } .logo { font-size: 14px; } .btn-sm .arr { display: none; } }
 
+/* homepage nav links (2026-11-11: the nav was logo-only before). Page-only classes carry the hnav- prefix. */
+.hnav-links { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.hnav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
+.hnav-link:hover, .hnav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
+.hnav-toggle { display: none; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border: var(--bd); border-radius: 14px; background: var(--ink); color: var(--hi); font: 700 15px/1 var(--ff-d); cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
+.hnav-toggle:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.hnav-ico { position: relative; width: 20px; height: 14px; flex: none; }
+.hnav-ico i { position: absolute; left: 0; right: 0; height: 3px; border-radius: 2px; background: currentColor; transition: top .3s var(--spring), transform .3s var(--spring), opacity .2s; }
+.hnav-ico i:nth-child(1) { top: 0; } .hnav-ico i:nth-child(2) { top: 5.5px; } .hnav-ico i:nth-child(3) { top: 11px; }
+.hnav-toggle[aria-expanded="true"] .hnav-ico i:nth-child(1) { top: 5.5px; transform: rotate(45deg); }
+.hnav-toggle[aria-expanded="true"] .hnav-ico i:nth-child(2) { opacity: 0; }
+.hnav-toggle[aria-expanded="true"] .hnav-ico i:nth-child(3) { top: 5.5px; transform: rotate(-45deg); }
+@media (max-width: 959px) {
+  html.js .hnav-toggle { display: inline-flex; }
+  html.js .hnav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px 24px 24px; background: var(--paper); color: var(--ink); border-bottom: var(--bd); box-shadow: 0 6px 0 var(--ink); max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; }
+  html.js .hnav-links.open { display: flex; }
+  html.js .hnav-link { justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 18px; border-color: var(--ink); border-radius: 16px; background: var(--white); font-size: 20px; white-space: normal; }
+  html.js .hnav-link::after { content: "→"; flex: none; }
+  html.js .hnav-link:hover, html.js .hnav-link:focus-visible { translate: 0 0; }
+  html[data-theme="blue"].js .hnav-links :focus-visible { outline-color: var(--ink); }
+  html:not(.js) .nav-in { height: auto; flex-wrap: wrap; padding-block: 10px; }
+  html:not(.js) .hnav-links { flex-wrap: wrap; }
+}
+@media (max-width: 360px) { html.js .hnav-links { padding-inline: 16px; } html.js .hnav-link { font-size: 18px; padding: 0 14px; } .hnav-toggle { padding: 0 12px; gap: 8px; } }
+
 /* ---------- Hero ---------- */
 .hero { position: relative; background: var(--prim); color: var(--on-prim); overflow: hidden; }
 .hero .wrap { position: relative; z-index: 1; }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Hero } from '@/components/home/Hero';
-import { Cta, Footer, Nav, RebBand, Receipts, Swerve, Tapes } from '@/components/home/Sections';
+import { Cta, Footer, RebBand, Receipts, Swerve, Tapes } from '@/components/home/Sections';
+import { Nav } from '@/components/home/HomeNav';
 import { HomeEffects } from '@/components/home/HomeEffects';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
 
