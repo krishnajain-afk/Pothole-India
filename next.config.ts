@@ -1,14 +1,16 @@
 import type { NextConfig } from 'next';
 
 /* Pages that are still plain HTML in /public, served at their clean routes.
-   Each one moves into app/ as it gets ported; delete its line here when it does. */
-const STATIC_PAGES = ['lab', 'updates', 'research', 'case-files', 'wall-of-holes', 'dodge', 'rishta', 'on-the-move', 'know-who'];
+   Each one moves into app/ as it gets ported: move its name from STATIC_PAGES to PORTED (so the old .html address
+   still redirects) and add its route to PORTED in components/site/SiteNav.tsx. */
+const STATIC_PAGES = ['lab', 'updates', 'research', 'case-files', 'dodge', 'rishta', 'on-the-move', 'know-who'];
+const PORTED = ['wall-of-holes'];
 
 const nextConfig: NextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
   images: {
-    // fallback for pothole se rishta: if a build-time photo is missing, the card loads it through /_next/image
+    // fallback for the rishta and wall photos: if a build-time copy is missing, the photo loads through /_next/image
     remotePatterns: [
       { protocol: 'https', hostname: 'upload.wikimedia.org', pathname: '/wikipedia/commons/**' },
       { protocol: 'https', hostname: 'thumb.wikimedia.org', pathname: '/wikipedia/commons/**' },   // Commons' newer thumbnail host
@@ -18,7 +20,7 @@ const nextConfig: NextConfig = {
     return [
       { source: '/genz', destination: '/', permanent: false },
       // the .html names still work, but the clean route is the real address
-      ...STATIC_PAGES.map((p) => ({ source: `/${p}.html`, destination: `/${p}`, permanent: true })),
+      ...[...STATIC_PAGES, ...PORTED].map((p) => ({ source: `/${p}.html`, destination: `/${p}`, permanent: true })),
     ];
   },
   async rewrites() {

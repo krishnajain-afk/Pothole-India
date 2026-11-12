@@ -1,0 +1,63 @@
+/* Cars24 Patch — the wall of holes. Ported from public/wall-of-holes.html; the shared base (tokens, buttons, nav,
+   kicker, h2, reveal, footer, the censor) is in globals.css. The homepage CSS is global and this file stays loaded
+   after you leave the page, so every wall-only class carries the wh- prefix. */
+.wh-hero { background: var(--prim); color: var(--on-prim); border-bottom: var(--bd); padding-block: 56px 72px; overflow: hidden; }
+@media (min-width: 768px) { .wh-hero { padding-block: 72px 96px; } }
+.wh-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.wh-chip { display: inline-block; padding: 9px 16px 8px; border: var(--bd); border-radius: 999px; background: var(--ink); color: var(--hi); font: 700 13px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; rotate: -2deg; }
+.wh-chip.alt { background: var(--paper); color: var(--ink); rotate: 2deg; letter-spacing: .06em; text-transform: none; }
+.wh-h1 { margin-top: 22px; font: 800 clamp(2.8rem, 1rem + 11vw, 9.5rem)/.86 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+.wh-h1 .hi { display: inline-block; max-width: 100%; background: var(--acc); color: var(--on-acc); border: var(--bd); border-radius: .14em; padding: 0 .1em; rotate: -2deg; box-shadow: .05em .05em 0 var(--ink); }
+.wh-lead { margin-top: 24px; max-width: 28ch; font: 600 clamp(1.25rem, 1rem + 1.4vw, 1.9rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
+.wh-nb { white-space: nowrap; }
+
+.wh-wall { background: var(--paper); padding-block: 72px 56px; }
+@media (min-width: 1024px) { .wh-wall { padding-block: 104px 72px; } }
+.wh-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 8px 40px; }
+.wh-head .sec-lead { margin-top: 0; max-width: 32ch; }
+.wh-grid { margin-top: 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 56px 32px; align-items: start; }
+.wh-tile {
+  position: relative; display: block; min-width: 0; padding: 12px 12px 14px;
+  background: var(--white); border: var(--bd); border-radius: 16px; box-shadow: var(--sh); rotate: var(--r, 0deg);
+  transition: rotate .4s var(--spring), translate .4s var(--spring), box-shadow .3s, opacity .7s var(--ease);
+}
+.wh-tile:hover { rotate: 0deg; translate: 0 -6px; box-shadow: 10px 10px 0 var(--ink); }
+.wh-tile::before { content: ""; position: absolute; top: -14px; left: 50%; width: 84px; height: 24px; translate: -50% 0; rotate: var(--tr, 2deg); background: var(--prim); border: 2px solid var(--ink); z-index: 2; }
+.wh-tile-ex::before { background: var(--pink); }
+.wh-tile-ph { position: relative; width: 100%; aspect-ratio: var(--ar, 1/1); border: 3px solid var(--ink); border-radius: 8px; overflow: hidden; background: var(--ink); }
+.wh-tile-ph img, .wh-tile-ph svg { display: block; width: 100%; height: 100%; }
+.wh-tile-ph img { object-fit: cover; }
+.wh-tile-ph.wh-blank { display: grid; place-items: center; background: #fff; }
+.wh-tile-ph.wh-blank svg { width: 58%; height: auto; }
+.wh-stamp { position: absolute; right: 8%; top: 42%; rotate: -12deg; padding: 6px 12px 4px; border: 4px solid var(--pink); border-radius: 8px; background: rgba(255,255,255,.9); color: var(--pink); font: 800 clamp(1.4rem, .8rem + 2vw, 2.1rem)/1 var(--ff-d); letter-spacing: .06em; text-transform: uppercase; }
+.wh-stamp.wh-no { border-color: var(--red); color: var(--red); }
+.wh-tile-meta { margin-top: 12px; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 10px; font: 700 13px/1.3 var(--ff-m); }
+.wh-tile-by { font-weight: 400; opacity: .85; overflow-wrap: anywhere; }
+.wh-tile-credit { margin-top: 8px; font: 400 11px/1.4 var(--ff-m); opacity: .85; overflow-wrap: anywhere; }
+.wh-tile-credit a { color: inherit; text-underline-offset: 3px; }
+
+.wh-how { background: var(--acc); color: var(--on-acc); border-block: var(--bd); overflow: hidden; }
+.wh-steps { margin-top: 48px; display: grid; gap: 28px; }
+@media (min-width: 900px) { .wh-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.wh-step { min-width: 0; padding: 28px; border: var(--bd); border-radius: 26px; background: var(--white); color: var(--ink); box-shadow: var(--sh); rotate: var(--r, 0deg); }
+.wh-step-n { display: block; font: 800 clamp(3rem, 2rem + 3vw, 4.6rem)/.9 var(--ff-d); letter-spacing: -.04em; font-stretch: 75%; font-variation-settings: 'wdth' 75; color: var(--pink); }
+.wh-step h3 { margin-top: 10px; font: 800 clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem)/1 var(--ff-d); letter-spacing: -.025em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+.wh-step p { margin-top: 10px; font: 500 1.05rem/1.5 var(--ff-d); overflow-wrap: anywhere; }
+
+.wh-safe { background: var(--paper); }
+.wh-safe-card { padding: clamp(22px, 4vw, 52px); border: var(--bd); border-radius: 28px; background: var(--pink); color: var(--ink); box-shadow: var(--sh); rotate: -.6deg; }
+.wh-safe-card .h2 { margin-top: 18px; }
+.wh-safe-list { margin-top: 28px; display: grid; gap: 14px; max-width: 60ch; }
+.wh-safe-list li { position: relative; padding-left: 40px; font: 600 clamp(1.05rem, 1rem + .4vw, 1.3rem)/1.4 var(--ff-d); letter-spacing: -.01em; overflow-wrap: anywhere; }
+.wh-safe-list li::before { content: ""; position: absolute; left: 0; top: .1em; width: 26px; height: 26px; border: 3px solid var(--ink); border-radius: 8px; background: var(--yellow); }
+.wh-safe-list li::after { content: ""; position: absolute; left: 9px; top: calc(.1em + 4px); width: 7px; height: 12px; border: solid var(--ink); border-width: 0 3px 3px 0; rotate: 45deg; }
+
+.wh-cta { background: var(--prim); color: var(--on-prim); border-top: var(--bd); overflow: hidden; }
+.wh-cta-grid { display: grid; gap: 40px; align-items: start; }
+@media (min-width: 900px) { .wh-cta-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 56px; } }
+.wh-cta .h2 .hi { background: var(--acc); color: var(--on-acc); }
+.wh-cta-btn { margin-top: 28px; }
+.wh-credit { padding: 24px; border: var(--bd); border-radius: 22px; background: var(--white); color: var(--ink); box-shadow: var(--sh); rotate: 1deg; }
+.wh-credit h3 { font: 800 1.5rem/1 var(--ff-d); letter-spacing: -.02em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+.wh-credit p { margin-top: 12px; font: 500 1rem/1.5 var(--ff-d); overflow-wrap: anywhere; }
+.wh-credit .wh-credit-mail { font: 400 13px/1.4 var(--ff-m); opacity: .8; }

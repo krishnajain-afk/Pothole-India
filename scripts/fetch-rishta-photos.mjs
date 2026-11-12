@@ -1,10 +1,10 @@
 /* Downloads the pothole photos into public/rishta-photos/ before every build, so /rishta and /wall-of-holes serve
    them from our own domain and never depend on Wikimedia when someone opens the page.
    Every photo is openly licensed on Wikimedia Commons and credited on its card or tile (see the P array in
-   public/rishta.html and HOLES in public/wall-of-holes.html; the wall uses 8 of these 9). The files are not
+   public/rishta.html and HOLES in app/wall-of-holes/holes.ts; the wall uses 8 of these 9). The files are not
    committed: .gitignore skips the folder.
    This script never fails the build. If a download fails, the page falls back to the image service, then to
-   the Commons URL. Keep this list and the `file` names in both pages in step. */
+   the Commons URL (components/site/Photo.tsx on the wall). Keep this list and the `file` names in both in step. */
 import { mkdir, writeFile, stat } from 'node:fs/promises';
 
 const COMMONS = 'https://upload.wikimedia.org/wikipedia/commons/thumb/';

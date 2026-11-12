@@ -64,7 +64,7 @@ There are **two visual systems**. Do not mix them. And there are **two kinds of 
 | `/updates` | `public/updates.html` | Gen Z | LIVE, lab, `noindex`. "dear diary.": the road to launch + the latest updates |
 | `/research` | `public/research.html` | Gen Z | LIVE, lab, `noindex`. The research library (§12.6) |
 | `/case-files` | `public/case-files.html` | Gen Z | LIVE, lab, `noindex`. The case-study repository |
-| `/wall-of-holes` | `public/wall-of-holes.html` | Gen Z | LIVE, lab, `noindex`. Biggest ***holes of the year |
+| `/wall-of-holes` | `app/wall-of-holes/` (`page.tsx`, `holes.ts` = the tiles, `wall.css`) | Gen Z | LIVE, `noindex`, **ported to Next.js** 2026-11-12. Biggest ***holes of the year |
 | `/dodge` | `public/dodge.html` | Gen Z | LIVE, lab, `noindex`. Head-lean camera game |
 | `/rishta` | `public/rishta.html` | Gen Z | lab, `noindex`. **pothole se rishta**: swipe left to patch, right to match (§12.7) |
 | `/on-the-move` | `public/on-the-move.html` | **Calm** (Crashfree India system) | LIVE, `noindex` |
@@ -73,7 +73,8 @@ There are **two visual systems**. Do not mix them. And there are **two kinds of 
 | — | `google-apps-script.gs` | — | Apps Script for sign-ups. Repo copy has a placeholder Sheet ID; **never commit the real one** |
 
 - `/genz` → 307 redirect to `/` (old link kept alive). `/<page>.html` → 308 redirect to `/<page>` for every page still in `public/`.
-- How the HTML pages get their clean routes: `STATIC_PAGES` in `next.config.ts` rewrites `/lab` → `/lab.html` and so on. **When a page is ported**, it moves into `app/<route>/page.tsx`, and its `public/<route>.html` and its `STATIC_PAGES` entry are deleted in the same change.
+- How the HTML pages get their clean routes: `STATIC_PAGES` in `next.config.ts` rewrites `/lab` → `/lab.html` and so on. **When a page is ported**, it moves into `app/<route>/page.tsx`, its `public/<route>.html` is deleted, its name moves from `STATIC_PAGES` to `PORTED` in `next.config.ts` (so `/<route>.html` still redirects), and its route goes into `PORTED` in `components/site/SiteNav.tsx` (so links to it stay inside the app), all in the same change.
+- **Everything is built in Next.js from now on** (user, 2026-11-12: "lets build completely in next js .. and we can remove completely HTML pages"). No new pages or features in `public/*.html`; every remaining HTML page gets ported, one at a time with the §8 parity check, and its HTML file is deleted.
 - Local preview: `npm run dev` → <http://localhost:3000>. Every route above works locally exactly as live.
 
 ---
@@ -389,8 +390,10 @@ Method (a real browser; Playwright and Chromium are fine):
 
 - **Next.js 16 (App Router) + React 19 + TypeScript 5**, no Tailwind, no CSS framework, no UI library. `npm run dev` / `npm run build` / `npm start`. Node 22+.
 - **Everything is prerendered as static pages**: Next.js is used for structure (components, one shared CSS, metadata, sitemap), not for servers or databases.
-- **Hybrid during the migration:** ported pages live in `app/`; unported pages are the original single-file HTML in `public/`, served at clean routes by `next.config.ts` (`STATIC_PAGES` rewrites, `.html` → clean 308 redirects). Never hand-edit a route in two places.
-- **Homepage structure:** `app/page.tsx` (metadata + JSON-LD + layout) → server components in `components/home/` (`Hero.tsx`, `Sections.tsx` with Tapes / Receipts / Swerve / Cta / RebBand / Nav / Footer, `bits.tsx` with Mark / Starburst / SubscribeForm / `vars()`). The behaviour (flip, eyes, counters, forms, confetti, game, custom cursor, parallax) is the original vanilla script in `lib/home-behaviour.js`, started once by the client component `components/home/HomeEffects.tsx`. It works on the server-rendered markup **by id and class**, so keep ids/classes in the components in sync with it.
+- **Hybrid during the migration (ending: everything moves to Next.js):** ported pages live in `app/`; unported pages are the original single-file HTML in `public/`, served at clean routes by `next.config.ts` (`STATIC_PAGES` rewrites, `.html` → clean 308 redirects). Never hand-edit a route in two places.
+- **Moving between ported pages does not reload the page** (that was the point of the port, user 2026-11-12). Links to ported routes are Next `<Link>`s through `PageLink` in `components/site/SiteNav.tsx`; links to pages still in `public/` stay plain links (a full load) until they are ported. So every page's behaviour must **start and stop cleanly**: an effect that adds listeners, timers, animation loops or observers returns a cleanup, and any class it puts on `<html>` comes off on cleanup (the homepage's custom cursor sets `has-cursor`, which hides the mouse).
+- **Shared site components** (`components/site/`): `SiteNav.tsx` (`Nav` with `current`, `PageLink`, `PORTED`), `PageFooter.tsx` (the hub pages' footer), `PageEffects.tsx` (reveal on scroll + the `#censor` flip, with cleanup), `Photo.tsx` (a photo with the three-step fallback: `/rishta-photos/` → `/_next/image` → Commons). Page-only CSS lives next to its page (`app/wall-of-holes/wall.css`) and stays loaded after you leave, so its classes carry a page prefix (`wh-`).
+- **Homepage structure:** `app/page.tsx` (metadata + JSON-LD + layout) → server components in `components/home/` (`Hero.tsx`, `Sections.tsx` with Tapes / Receipts / Swerve / Cta / RebBand / Nav / Footer, `bits.tsx` with Mark / Starburst / SubscribeForm / `vars()`). The nav is the shared `components/site/SiteNav.tsx`. The behaviour (flip, eyes, counters, forms, confetti, game, custom cursor, parallax) is the original vanilla script in `lib/home-behaviour.js`, started by the client component `components/home/HomeEffects.tsx`; `startHome()` returns a stop function that undoes everything (2026-11-12), so the homepage works again when you come back to it without a reload. It works on the server-rendered markup **by id and class**, so keep ids/classes in the components in sync with it.
 - **`vercel.json`** sets `"framework": "nextjs"` (the Vercel project itself has no framework preset). **`next.config.ts`**: `/genz` → `/` (307), the static-page rewrites and redirects, and headers `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY`. No CSP. `poweredByHeader: false`.
 - **SEO** (`lib/site.ts` holds `SITE_URL = https://www.potholefreeindia.org`): `metadataBase`, canonical `/`, Open Graph + Twitter tags, `WebSite` JSON-LD with only on-page facts, `app/robots.ts` (allow all + sitemap), `app/sitemap.ts` (indexable pages only: today just `/`). Lab and calm pages keep their own `noindex` tags. Vercel adds `x-robots-tag: noindex` to **preview** deployments only.
 
@@ -462,11 +465,11 @@ The old "dispatches" section grew into a hub that was split into pages on 2026-1
 ### 12.2 Meme break (`#meme` on `/lab`)
 Paper section: `meme break` kicker; white tilted card with tape: **1 kachori + 2 samosa = pothole (worried face)**, hand-drawn SVGs; caption **`Inn potholes ka kya bharosa??`** (the last part on a blue highlight). **User decision (2026-10-02): not going on the homepage for now.**
 
-### 12.3 Wall of Holes (`public/wall-of-holes.html`)
+### 12.3 Wall of Holes (`app/wall-of-holes/`, ported 2026-11-12)
 - Concept: **"Biggest ***holes of the year"** (satirical nominees wall).
 - **H1:** `biggest ***holes of the year.` with the `***`⇄`POT` flip. Chips `2026 edition`, `your ex is nominated too`. Lead: `the nominees are in. real potholes on real Indian roads. and, obviously, your ex.`
 - **Grid:** 3×3 (auto-fit, 3/2/1 columns), polaroid tiles, **the "your ex" tile is item #5 = the exact centre.**
-- **Photos:** 8 openly licensed Wikimedia Commons photos (New Delhi, Kolkata, Bengaluru ×2, Bihar, Karimganj/Assam, Chennai, Assam) — CC BY-SA 4.0 / CC BY 2.0 / CC0. Served from our own domain since 2026-11-12: each entry in `HOLES` has a `file` and the tile loads the same build-time copy as rishta (`/rishta-photos/<file>`, §12.7), then `/_next/image`, then the Commons URL, so a tile never shows blank (the hot-linked photos could show blank, like rishta's did). Each tile shows `photo: <author> · <licence>` linking to the Commons file page and licence. Entries live in the `HOLES` array in the page script (`src, alt, place, by, link, lic, licUrl, fixed, ex`).
+- **Photos:** 8 openly licensed Wikimedia Commons photos (New Delhi, Kolkata, Bengaluru ×2, Bihar, Karimganj/Assam, Chennai, Assam) — CC BY-SA 4.0 / CC BY 2.0 / CC0. Served from our own domain since 2026-11-12: each entry in `HOLES` has a `file` and the tile loads the same build-time copy as rishta (`/rishta-photos/<file>`, §12.7), then `/_next/image`, then the Commons URL, so a tile never shows blank (the hot-linked photos could show blank, like rishta's did). Each tile shows `photo: <author> · <licence>` linking to the Commons file page and licence. Entries live in `HOLES` in `app/wall-of-holes/holes.ts` (`file, src, alt, place, by, link, lic, licUrl, fixed, ex`); the tiles are rendered on the server now, so they show without JavaScript. Only `https` credit links become links (the CC0 licence page is `http`, so it stays plain text, as before). Page-only classes use the `wh-` prefix (`wh-grid`, `wh-tile`, `wh-stamp`, `wh-steps`, `wh-safe-card`, `wh-credit`…). The port passed the §8 parity check: identical DOM (162 nodes, classes mapped) and 0 differing pixels below the nav at 320–2560px in both themes.
 - **"your ex" tile:** blocked-person avatar + red **`UNFIXABLE`** stamp; caption `your ex` / `the other kind of ***hole`; credit `photo: deleted. we don't talk about them.`
 - Below: how it works (`snap. pin. fixed.`), safety card (`no heroics. footpath only.`), CTA `nominations open soon` (links to `/#subscribe`), "about the photos" card. **The takedown sentence and contact email are hidden** until there is an email (a comment in the file says how to restore them).
 
@@ -487,13 +490,13 @@ Paper section: `meme break` kicker; white tilted card with tape: **1 kachori + 2
 | updates & journey | `public/updates.html` | `/updates` |
 | research | `public/research.html` | `/research` |
 | case files | `public/case-files.html` | `/case-files` |
-| the wall | `public/wall-of-holes.html` | `/wall-of-holes` |
+| the wall | `app/wall-of-holes/` (Next.js) | `/wall-of-holes` |
 | dodge | `public/dodge.html` | `/dodge` |
 | *(not in the nav)* | `public/rishta.html` | `/rishta`: reached only from its card on `/lab` (user, 2026-11-11) |
 
-- **One shared nav, copy-pasted into every lab page** (until the lab is ported to Next.js, when it becomes one component). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. The css and js blocks must be **identical in all seven files**. The HTML block comes in two kinds:
+- **One shared nav, copy-pasted into every HTML page still in `public/`** (ported pages use `components/site/SiteNav.tsx` instead). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. The css and js blocks must be **identical in every HTML lab file** (six since the wall was ported). The HTML block comes in two kinds:
   - **`LAB-NAV:html`** on the three lab-only pages (`lab.html`, `dodge.html`, `rishta.html`): the lab bar + logo to the lab (`#top` on the lab front page, `/lab` elsewhere) + six links (the lab, the four hub pages, dodge). Identical in those three except `aria-current` and the logo.
-  - **`SITE-NAV:html`** on the four pages the homepage links to (`updates`, `research`, `case-files`, `wall-of-holes`): no lab bar, logo to `/`, the same four links as the homepage, footer link `back to the homepage`. Identical in those four except `aria-current`. **These pages never link to `/lab`, `/dodge` or `/rishta`** (not in the nav, the footer or the content: the `play it ↗` / `play dodge` links were removed 2026-11-12). Grep for `data-page="(lab|dodge|rishta)"` before any push.
+  - **`SITE-NAV:html`** on the hub pages still in HTML (`updates`, `research`, `case-files`; the wall is ported and uses `SiteNav`): no lab bar, logo to `/`, the same four links as the homepage, footer link `back to the homepage`. Identical in those except `aria-current`. **These pages never link to `/lab`, `/dodge` or `/rishta`** (not in the nav, the footer or the content: the `play it ↗` / `play dodge` links were removed 2026-11-12). Grep for `data-page="(lab|dodge|rishta)"` before any push.
   After changing one, copy it to the others of its kind and re-diff (checksums).
 - **Markup (lab nav):** the `lab-bar` above the sticky yellow `header.nav`: logo · `menu` button · `<nav id="nav-links">` with six `.nav-link`s (rishta is deliberately left out; `PAGES` still maps `rishta` so the `/lab` card link works). The site nav uses the same classes without the lab bar and with four links.
 - **Behaviour:** ≥1100px inline pills (seven links still fit on one row at 1100px, checked 2026-10-31), current page = ink pill tilted −2°. <1100px a `menu` button opens a paper panel; closes on link click, outside click, Esc (focus returns) and on resize to desktop. Without JS the links wrap.
@@ -539,13 +542,13 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 ### Live on `main` = `56dc686`
 - **`/` and the 404 run on Next.js** (merged 2026-10-30 from `claude/nextjs-migration`, a fast-forward from `cc2bb93`). Verified on the preview and on production: build READY, homepage title/canonical/JSON-LD/form/game present, `/genz` 307, a bad URL 404, sitemap and robots correct.
 - **The lab copy pass is live** on `/lab`, `/updates`, `/research`, `/case-files` (the §3 table); every number, stamp and source unchanged. Still `draft`.
-- `/wall-of-holes`, `/dodge`, `/on-the-move`, `/know-who`: unchanged HTML in `public/`.
+- `/dodge`, `/on-the-move`, `/know-who`: unchanged HTML in `public/`. `/wall-of-holes` ported to Next.js (2026-11-12).
 - **`/rishta` is live** (pothole se rishta, §12.7), with its card on `/lab` and the `rishta` link in the lab nav (`main` = `26758b7`, 2026-10-31); this guide and `CLAUDE.md` are in the repo.
 - Previous production deployment (the last all-HTML version, `cc2bb93`) is kept by Vercel as the rollback candidate.
 - Branches `claude/compassionate-wozniak-1k5k4x` (copy pass) and `claude/nextjs-migration` are merged into `main`; `feature/lab` and `feature/research` are older and redundant. Deleting them needs the owner's say-so.
 
 ### Migration: what's next
-1. Port the lab pages one at a time, starting with the shared lab nav as one React component, then `/lab` itself (it shares most of the homepage components).
+1. Port every remaining HTML page, one at a time, and delete its HTML (user, 2026-11-12). Done: `/`, the 404, `/wall-of-holes`. Next: `/case-files`, `/updates`, `/research` (the hub pages: `SiteNav`, `PageFooter` and `PageEffects` are ready for them), then the lab (`/lab`, `/dodge`, `/rishta`, with the lab nav as one React component) and the calm pages.
 2. Self-host the fonts with `next/font` (pixel-check the change).
 3. ~~Self-host the wall photos~~ (done 2026-11-12, via the rishta build download); consider `next/image`.
 4. Once the hub is indexable: one URL per case file / study with its own metadata and share image, added to the sitemap.
@@ -587,6 +590,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 26. 2026-11-11: rishta is taken out of the lab nav (which the homepage's four links lead into); it is reachable only from its card on `/lab`.
 27. 2026-11-12: user: clicking case files or the wall from the homepage still exposed the lab (and through it rishta), "as both pages we are not combining". The four homepage-linked pages get their own site nav (logo → `/`, the same four links, no lab bar) and no links to `/lab`, `/dodge` or `/rishta`. The lab pages keep the lab nav, which still links to the four.
 28. 2026-11-12: user: "fix the wall photos too". The wall's 8 photos are the same Commons files as rishta's, so the wall now loads the build-time copies in `/rishta-photos/`, with the image service and Commons as fallbacks.
+29. 2026-11-12: user: "while navigating why the whole page loads … we are using next js right", then "start porting the wall .. and from lets build completely in next js .. and we can remove completely HTML pages". The wall is ported (parity-checked) and its HTML deleted; the homepage nav became the shared `SiteNav` with `<Link>`s to ported pages, so home ↔ wall no longer reloads; the homepage script now stops cleanly when you leave. Every other HTML page follows, one at a time.
 
 ---
 

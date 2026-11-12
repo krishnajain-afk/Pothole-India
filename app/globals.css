@@ -93,6 +93,7 @@ body::after {
 .hnav-links { display: flex; align-items: center; gap: 4px; min-width: 0; }
 .hnav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
 .hnav-link:hover, .hnav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
+.hnav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: -2deg; }   /* the page you're on (hub pages) */
 .hnav-toggle { display: none; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border: var(--bd); border-radius: 14px; background: var(--ink); color: var(--hi); font: 700 15px/1 var(--ff-d); cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
 .hnav-toggle:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
 .hnav-ico { position: relative; width: 20px; height: 14px; flex: none; }
@@ -108,6 +109,7 @@ body::after {
   html.js .hnav-link { justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 18px; border-color: var(--ink); border-radius: 16px; background: var(--white); font-size: 20px; white-space: normal; }
   html.js .hnav-link::after { content: "→"; flex: none; }
   html.js .hnav-link:hover, html.js .hnav-link:focus-visible { translate: 0 0; }
+  html.js .hnav-link[aria-current="page"] { rotate: 0deg; }
   html[data-theme="blue"].js .hnav-links :focus-visible { outline-color: var(--ink); }
   html:not(.js) .nav-in { height: auto; flex-wrap: wrap; padding-block: 10px; }
   html:not(.js) .hnav-links { flex-wrap: wrap; }
@@ -334,6 +336,7 @@ html.js .reveal.in { opacity: 1; translate: 0 0; }
 .src li::marker { color: var(--yellow); }
 .src a { color: var(--yellow); text-underline-offset: 3px; }
 .foot-b { margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font: 400 12px var(--ff-m); opacity: .75; }
+.foot-b a { color: inherit; text-underline-offset: 3px; }
 
 /* custom cursor (fine pointers only) */
 .cursor { position: fixed; left: 0; top: 0; width: 18px; height: 18px; border-radius: 50%; background: #fff; mix-blend-mode: difference; pointer-events: none; z-index: 500; opacity: 0; transition: width .25s var(--ease), height .25s var(--ease), opacity .2s; }
