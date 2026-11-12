@@ -412,19 +412,21 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
        lic, licUrl   the licence name and its page
        fixed      true once it has been repaired (shows a FIXED stamp)
        ex         true makes the "your ex" tile (blocked avatar, UNFIXABLE stamp)
-     These eight are openly licensed photos from Wikimedia Commons, hot-linked for now:
-     download them into /wall/ and point src there before going live.
+       file       our own copy in /rishta-photos/ (the build downloads it: scripts/fetch-rishta-photos.mjs, the
+                  same photos the rishta page uses; a new photo needs a line there too)
+     These eight are openly licensed photos from Wikimedia Commons. Each tile tries our copy first, then this site's
+     image service, then the Commons file itself, so a photo never shows blank.
      Photos people send in go up only with their permission. */
   var HOLES = [
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg", "alt": "A broken, potholed road in New Delhi", "place": "New Delhi", "by": "Rrthakur22", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Broken_Roads_in_India%27s_Capital_New_Delhi.jpg"},
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg", "alt": "A potholed road outside Kolkata Airport", "place": "Kolkata, West Bengal", "by": "Slyronit", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Potholed_road_outside_Kolkata_Airport.jpg"},
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg", "alt": "A crumbling road with potholes at Munnekollala, Bengaluru", "place": "Munnekollala, Bengaluru", "by": "Gangaasoonu", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru.jpg"},
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg", "alt": "A road full of potholes in Bihar", "place": "Bihar", "by": "Savant dev", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Roads_in_Bihar_have_potholes.jpg"},
+    {"file": "new-delhi.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/14/Broken_Roads_in_India%27s_Capital_New_Delhi.jpg/960px-Broken_Roads_in_India%27s_Capital_New_Delhi.jpg", "alt": "A broken, potholed road in New Delhi", "place": "New Delhi", "by": "Rrthakur22", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Broken_Roads_in_India%27s_Capital_New_Delhi.jpg"},
+    {"file": "kolkata-airport.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/Potholed_road_outside_Kolkata_Airport.jpg/960px-Potholed_road_outside_Kolkata_Airport.jpg", "alt": "A potholed road outside Kolkata Airport", "place": "Kolkata, West Bengal", "by": "Slyronit", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Potholed_road_outside_Kolkata_Airport.jpg"},
+    {"file": "munnekollala-1.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Roads_deformed_T_munnekollala_Bengaluru.jpg/960px-Roads_deformed_T_munnekollala_Bengaluru.jpg", "alt": "A crumbling road with potholes at Munnekollala, Bengaluru", "place": "Munnekollala, Bengaluru", "by": "Gangaasoonu", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Roads_deformed_T_munnekollala_Bengaluru.jpg"},
+    {"file": "bihar.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Roads_in_Bihar_have_potholes.jpg/960px-Roads_in_Bihar_have_potholes.jpg", "alt": "A road full of potholes in Bihar", "place": "Bihar", "by": "Savant dev", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Roads_in_Bihar_have_potholes.jpg"},
     {"ex": true},
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg", "alt": "A rickshaw driving through potholes in Karimganj, Assam", "place": "Karimganj, Assam", "by": "KEmel49", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Driving_through_potholes.jpg"},
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Potholes_in_Bengaluru_road.jpg/960px-Potholes_in_Bengaluru_road.jpg", "alt": "Potholes in a road in Bengaluru", "place": "Bengaluru, Karnataka", "by": "Mallikarjunasj", "lic": "CC0", "licUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en", "link": "https://commons.wikimedia.org/wiki/File:Potholes_in_Bengaluru_road.jpg"},
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg/960px-India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg", "alt": "A flooded Chennai street in the monsoon, where potholes could be hiding underwater", "place": "Chennai, Tamil Nadu", "by": "McKay Savage from London, UK", "lic": "CC BY 2.0", "licUrl": "https://creativecommons.org/licenses/by/2.0", "link": "https://commons.wikimedia.org/wiki/File:India_-_Chennai_-_Monsoon_-_06_(3059058000).jpg"},
-    {"src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg", "alt": "Potholes on a road in Assam", "place": "Assam", "by": "KEmel49", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Potholes_on_road.jpg"}
+    {"file": "karimganj.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1d/Driving_through_potholes.jpg/960px-Driving_through_potholes.jpg", "alt": "A rickshaw driving through potholes in Karimganj, Assam", "place": "Karimganj, Assam", "by": "KEmel49", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Driving_through_potholes.jpg"},
+    {"file": "bengaluru.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Potholes_in_Bengaluru_road.jpg/960px-Potholes_in_Bengaluru_road.jpg", "alt": "Potholes in a road in Bengaluru", "place": "Bengaluru, Karnataka", "by": "Mallikarjunasj", "lic": "CC0", "licUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en", "link": "https://commons.wikimedia.org/wiki/File:Potholes_in_Bengaluru_road.jpg"},
+    {"file": "chennai.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg/960px-India_-_Chennai_-_Monsoon_-_06_%283059058000%29.jpg", "alt": "A flooded Chennai street in the monsoon, where potholes could be hiding underwater", "place": "Chennai, Tamil Nadu", "by": "McKay Savage from London, UK", "lic": "CC BY 2.0", "licUrl": "https://creativecommons.org/licenses/by/2.0", "link": "https://commons.wikimedia.org/wiki/File:India_-_Chennai_-_Monsoon_-_06_(3059058000).jpg"},
+    {"file": "assam.jpg", "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c1/Potholes_on_road.jpg/960px-Potholes_on_road.jpg", "alt": "Potholes on a road in Assam", "place": "Assam", "by": "KEmel49", "lic": "CC BY-SA 4.0", "licUrl": "https://creativecommons.org/licenses/by-sa/4.0", "link": "https://commons.wikimedia.org/wiki/File:Potholes_on_road.jpg"}
   ];
 
   var wall = document.getElementById('wall');
@@ -457,8 +459,11 @@ html[data-theme="blue"] .hero::selection { background: var(--ink); }
       ph.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="38" r="17" fill="#D9D4C7"/><path d="M16 92c0-20 15-32 34-32s34 12 34 32z" fill="#D9D4C7"/><circle cx="50" cy="50" r="41" fill="none" stroke="#FF2D2D" stroke-width="7"/><path d="M21 79L79 21" stroke="#FF2D2D" stroke-width="7" stroke-linecap="round"/></svg>';
       ph.appendChild(el('span', 'tile-stamp no', 'unfixable'));
     } else if (safe(h.src)) {
-      var img = new Image();
-      img.src = h.src;
+      var img = new Image(), tries = [];
+      if (/^[a-z0-9-]+\.jpg$/.test(h.file || '')) tries.push('/rishta-photos/' + h.file);
+      tries.push('/_next/image?url=' + encodeURIComponent(h.src) + '&w=828&q=75', h.src);
+      img.addEventListener('error', function () { if (tries.length) img.src = tries.shift(); });
+      img.src = tries.shift();
       img.alt = h.alt || 'A pothole on an Indian road';
       img.loading = 'lazy';
       img.decoding = 'async';
