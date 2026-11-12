@@ -400,27 +400,24 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- LAB-NAV:html:start -->
-<!-- The lab pages share this bar and nav. Links use data-page: the .html file on localhost, the clean route live. -->
-<div class="lab-bar">the lab: stuff we’re still testing. not the official homepage. <a href="/" data-page="home">the real one is over here →</a></div>
+<!-- SITE-NAV:html:start -->
+<!-- The four pages the homepage links to share this nav (same four links as the homepage). They never link to the lab, dodge or rishta. -->
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
+    <a class="logo" href="/" data-page="home" aria-label="Cars24 Patch — home">
       <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#121212"/><circle cx="14" cy="19.5" r="4.6" fill="#fff"/><circle cx="26" cy="19.5" r="4.6" fill="#fff"/><circle cx="15" cy="20.2" r="2.1" fill="#121212"/><circle cx="27" cy="20.2" r="2.1" fill="#121212"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
       <span>Cars24 Patch</span>
     </a>
     <button class="nav-toggle" id="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links"><span class="nav-ico" aria-hidden="true"><i></i><i></i><i></i></span><span class="nav-toggle-t">menu</span></button>
-    <nav class="nav-links" id="nav-links" aria-label="The lab pages">
-      <a class="nav-link" href="/lab" data-page="lab">the lab</a>
+    <nav class="nav-links" id="nav-links" aria-label="More from Cars24 Patch">
       <a class="nav-link" href="/updates" data-page="updates">updates &amp; journey</a>
       <a class="nav-link" href="/research" data-page="research" aria-current="page">research</a>
       <a class="nav-link" href="/case-files" data-page="case-files">case files</a>
       <a class="nav-link" href="/wall-of-holes" data-page="wall">the wall</a>
-      <a class="nav-link" href="/dodge" data-page="dodge">dodge</a>
     </nav>
   </div>
 </header>
-<!-- LAB-NAV:html:end -->
+<!-- SITE-NAV:html:end -->
 
 <main id="main">
 <section class="cfp-hero" aria-labelledby="h1">
@@ -758,7 +755,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 <footer class="foot">
   <div class="wrap">
     <div class="foot-top">
-      <a class="logo" href="/lab" data-page="lab" aria-label="Cars24 Patch lab — home">
+      <a class="logo" href="/" data-page="home" aria-label="Cars24 Patch — home">
         <svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="22" rx="18" ry="14" fill="#FFD60A"/><circle cx="14" cy="19.5" r="4.6" fill="#121212"/><circle cx="26" cy="19.5" r="4.6" fill="#121212"/><circle cx="15" cy="20.2" r="2.1" fill="#FFD60A"/><circle cx="27" cy="20.2" r="2.1" fill="#FFD60A"/><path d="M14 28.5q6 4 12 0" fill="none" stroke="#121212" stroke-width="2.4" stroke-linecap="round"/></svg>
         <span>Cars24 Patch</span>
       </a>
@@ -772,7 +769,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
       </ol>
     </div>
 
-    <div class="foot-b"><span>© 2026 Cars24 Patch. All rights reserved.</span><span><a href="/lab" data-page="lab">back to the lab</a> · <a href="/" data-page="home">the real homepage</a></span></div>
+    <div class="foot-b"><span>© 2026 Cars24 Patch. All rights reserved.</span><span><a href="/" data-page="home">back to the homepage</a></span></div>
   </div>
 </footer>
 

@@ -6,7 +6,7 @@
 >
 > **The one rule that matters most:** this site is *intentionally loud, funny, Gen Z and rebellious*. Do **not** "normalise" it into a clean corporate / SaaS look. When in doubt, copy the existing pages, not your defaults.
 
-Last updated: 2026-11-11 · Owner: Krishna (Cars24 / Crashfree India) · Repo: <https://github.com/krishnajain-afk/Pothole-India> (public)
+Last updated: 2026-11-12 · Owner: Krishna (Cars24 / Crashfree India) · Repo: <https://github.com/krishnajain-afk/Pothole-India> (public)
 
 ---
 
@@ -190,7 +190,7 @@ The copy lives in `components/home/Hero.tsx`, `components/home/Sections.tsx` and
 | Sources (footer) | see §5.4 |
 
 > **User decisions on "Cars24 Rebellion" placement:** it appears in the **pre-footer pink band**, the **footer line**, and the "by Cars24 Patch" chip in the game section. It was **removed from the hero** and the **navbar**. Do not add it back there.
-> **Navbar** = logo + four links: `updates & journey` · `research` · `case files` · `the wall` (user decision 2026-11-11; it was logo-only before). Built in `components/home/HomeNav.tsx` (classes `hnav-`), inline from 960px, a `menu` panel below. **The meme break is never linked from the homepage.** These four pages stay lab pages (lab bar, `draft` chips, `noindex`) until the user says otherwise. The "notify me" button stays off the homepage navbar (it still exists in the calm pages' navbars).
+> **Navbar** = logo + four links: `updates & journey` · `research` · `case files` · `the wall` (user decision 2026-11-11; it was logo-only before). Built in `components/home/HomeNav.tsx` (classes `hnav-`), inline from 960px, a `menu` panel below. **The meme break is never linked from the homepage.** These four pages keep their `draft` chips and `noindex` until the user says otherwise, but they are **not part of the lab**: no lab bar, and they never link to `/lab`, `/dodge` or `/rishta` (user, 2026-11-12: the lab and rishta are not combined with them). They share the site nav in §12.5. The "notify me" button stays off the homepage navbar (it still exists in the calm pages' navbars).
 
 ### 4.3 Approved copy — 404 (`app/not-found.tsx`) — user-supplied, exact
 - H1: `Cool. Another thing that doesn't work.`
@@ -491,8 +491,11 @@ Paper section: `meme break` kicker; white tilted card with tape: **1 kachori + 2
 | dodge | `public/dodge.html` | `/dodge` |
 | *(not in the nav)* | `public/rishta.html` | `/rishta`: reached only from its card on `/lab` (user, 2026-11-11) |
 
-- **One shared nav, copy-pasted into every lab page** (until the lab is ported to Next.js, when it becomes one component). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. They must be **identical in all seven files**, except in the HTML block: which link carries `aria-current="page"`, and the logo (`#top` on the lab front page, `/lab` elsewhere). After changing one, copy it to the others and re-diff (checksums).
-- **Markup:** the `lab-bar` above the sticky yellow `header.nav`: logo · `menu` button · `<nav id="nav-links">` with six `.nav-link`s (rishta is deliberately left out; `PAGES` still maps `rishta` so the `/lab` card link works). The homepage nav is unchanged (logo only).
+- **One shared nav, copy-pasted into every lab page** (until the lab is ported to Next.js, when it becomes one component). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. The css and js blocks must be **identical in all seven files**. The HTML block comes in two kinds:
+  - **`LAB-NAV:html`** on the three lab-only pages (`lab.html`, `dodge.html`, `rishta.html`): the lab bar + logo to the lab (`#top` on the lab front page, `/lab` elsewhere) + six links (the lab, the four hub pages, dodge). Identical in those three except `aria-current` and the logo.
+  - **`SITE-NAV:html`** on the four pages the homepage links to (`updates`, `research`, `case-files`, `wall-of-holes`): no lab bar, logo to `/`, the same four links as the homepage, footer link `back to the homepage`. Identical in those four except `aria-current`. **These pages never link to `/lab`, `/dodge` or `/rishta`** (not in the nav, the footer or the content: the `play it ↗` / `play dodge` links were removed 2026-11-12). Grep for `data-page="(lab|dodge|rishta)"` before any push.
+  After changing one, copy it to the others of its kind and re-diff (checksums).
+- **Markup (lab nav):** the `lab-bar` above the sticky yellow `header.nav`: logo · `menu` button · `<nav id="nav-links">` with six `.nav-link`s (rishta is deliberately left out; `PAGES` still maps `rishta` so the `/lab` card link works). The site nav uses the same classes without the lab bar and with four links.
 - **Behaviour:** ≥1100px inline pills (seven links still fit on one row at 1100px, checked 2026-10-31), current page = ink pill tilted −2°. <1100px a `menu` button opens a paper panel; closes on link click, outside click, Esc (focus returns) and on resize to desktop. Without JS the links wrap.
 - **Links between pages** use `<a href="…" data-page="home|lab|updates|research|case-files|wall|dodge|rishta" data-hash="#id">`. The shared script rewrites `href`: on localhost to the old local file names (`index-genz.html`, `index-genz-meme.html`, `updates.html`…), on a real host to the clean route. `next.config.ts` rewrites `index-genz.html` → `/` and `index-genz-meme.html` → `/lab.html`, so these links work under `npm run dev` too. Never hard-code page paths.
 - **To add a lab page:** build it from `public/case-files.html` (head, CSS, footer, the three nav blocks), add it to `PAGES` in the JS block and as a `.nav-link` in **every** lab page, add its name to `STATIC_PAGES` in `next.config.ts`, then add a card to `#inside` on the lab front page.
@@ -582,6 +585,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 24. 2026-11-11: the homepage nav gets four links (updates & journey, research, case files, the wall); the meme is never linked from `/`; the four pages stay lab pages (lab bar, draft, noindex). Copy: the diary line ("still feels like AI") → `the potholes are winning. for now. this is us keeping score.`; the research hero → `***hole studies.` with the `***`⇄`POT` flip. Options were offered and the user picked.
 25. 2026-11-11: more `***` heroes, chosen by the user from options: the diary → `dear ***hole,` (a letter to the pothole); case files → `the ***hole files.` with the chip `the truth is down there` (an X-Files nod). The gag is now on the homepage, wall, dodge, research, diary and case files: don't add it to more pages without asking.
 26. 2026-11-11: rishta is taken out of the lab nav (which the homepage's four links lead into); it is reachable only from its card on `/lab`.
+27. 2026-11-12: user: clicking case files or the wall from the homepage still exposed the lab (and through it rishta), "as both pages we are not combining". The four homepage-linked pages get their own site nav (logo → `/`, the same four links, no lab bar) and no links to `/lab`, `/dodge` or `/rishta`. The lab pages keep the lab nav, which still links to the four.
 
 ---
 
