@@ -4,6 +4,7 @@
 
 ## Always (the short version — details are in the guide above)
 
+- **The message:** India has swerved, slowed down and suffered enough, **so we're fixing the potholes ourselves.** Never accountability, blame or "who owns this road"; say who fixes it (us). The sign-up button is `tell me first ↗` and always promises *we'll email you the day we start fixing.* Write for the Gen Z reader in BRAND-GUIDE §3 (first line carries the idea, one joke per block, long stuff folded, every ask says what you get).
 - This site is **intentionally loud, funny, Gen Z and rebellious**. Never "normalise" it into a clean corporate/SaaS look. Copy the existing pages' style.
 - **Copy benchmark = the homepage hero and the wall page:** quirky, human, one odd specific thing per block, one Gen Z touch at most. Copy that describes the page, lists three things or summarises reads as AI-written and has been rewritten twice; see BRAND-GUIDE §3 "Benchmark". Rewriting never adds facts.
 - Voice: deadpan, lowercase source copy (CSS uppercases headlines), short fragments, **no exclamation marks**, no invented facts. Serious data stays straight and sourced. No jokes about the deaths.

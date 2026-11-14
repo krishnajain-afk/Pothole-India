@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cars24 Patch — Coming soon</title>
-<meta name="description" content="Cars24 Patch is coming soon: a public platform to report, track and close road defects. Potholes killed 2,385 people in India in 2024. Get notified at launch.">
+<meta name="description" content="Potholes killed 2,385 people in India in 2024. So Cars24 Patch is fixing them ourselves: properly, with permission, and checked months later. Coming soon.">
 <meta name="theme-color" content="#4A35FF">
 <meta name="robots" content="noindex">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Cars24 Patch — Every pothole has an owner. And we're on the move.">
-<meta property="og:description" content="Potholes killed 2,385 people in India in 2024. Cars24 Patch is coming soon. Get notified at launch.">
+<meta property="og:title" content="Cars24 Patch — Potholes don't fix themselves. And we're on the move.">
+<meta property="og:description" content="Potholes killed 2,385 people in India in 2024. So we're fixing them ourselves. Cars24 Patch is coming soon.">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234A35FF'/%3E%3Cellipse cx='16' cy='17' rx='9' ry='6.5' fill='none' stroke='white' stroke-width='2'/%3E%3Cellipse cx='16' cy='17' rx='3.6' ry='2.4' fill='white'/%3E%3C/svg%3E">
 
@@ -440,7 +440,7 @@ html.js .h-line > span { display: block; transform: translateY(112%); animation:
 .perspective p { color: var(--muted); font-size: 16px; line-height: 1.65; }
 .perspective p b { color: var(--ink); }
 
-/* ---------- 03 · Ownership (brand section) ---------- */
+/* ---------- 03 · Why it keeps coming back (brand section) ---------- */
 .own-h { margin-top: 64px; font-family: var(--ff-head); font-weight: 600; font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); line-height: 1.3; }
 .route { position: relative; margin-top: 32px; display: grid; gap: 16px; }
 .route::before { content: ""; position: absolute; left: 27px; top: 28px; bottom: 28px; width: 2px; background: repeating-linear-gradient(to bottom, rgba(255,255,255,.4) 0 8px, transparent 8px 16px); }
@@ -465,7 +465,7 @@ html.js .h-line > span { display: block; transform: translateY(112%); animation:
 .pivot { margin-top: 56px; font-family: var(--ff-head); font-weight: 600; font-size: clamp(1.25rem, 1rem + 1.2vw, 1.875rem); line-height: 1.4; max-width: 32ch; }
 .pivot span { color: var(--lavender); }
 
-/* ---------- 04 · What we are building ---------- */
+/* ---------- 04 · What we are doing ---------- */
 .flow { display: grid; gap: 24px; margin-top: 64px; }
 @media (min-width: 640px) { .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1040px) { .flow { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
@@ -541,7 +541,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
       <span>Cars24 Patch</span>
     </a>
     <div class="nav-r">
-      <button class="btn btn-primary btn-sm" type="button" data-scroll-subscribe>Notify me <svg class="ic ic-arrow"><use href="#i-arrow"/></svg></button>
+      <button class="btn btn-primary btn-sm" type="button" data-scroll-subscribe>Tell me first <svg class="ic ic-arrow"><use href="#i-arrow"/></svg></button>
     </div>
   </div>
 </header>
@@ -556,30 +556,30 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
         <span class="chip rise" style="--d:.05s"><i class="dot"></i>Coming soon</span>
 
         <h1 class="h1" id="h1">
-          <span class="h-line" style="--d:.15s"><span>Every pothole</span></span>
-          <span class="h-line" style="--d:.25s"><span>has an owner.</span></span>
+          <span class="h-line" style="--d:.15s"><span>Potholes don’t</span></span>
+          <span class="h-line" style="--d:.25s"><span>fix themselves.</span></span>
           <span class="h-line accent" style="--d:.38s"><span>And we’re on the move.</span></span>
         </h1>
 
         <p class="lead rise" style="--d:.55s">
           Potholes killed <strong>2,385 people in India in 2024</strong>.<sup class="ref"><a href="#src-1" aria-label="Source 1">1</a></sup>
-          Cars24 Patch is a public platform to report, track and close road defects — so every pothole has a name against it and a deadline attached.
+          So Cars24 Patch is fixing them ourselves — properly, with permission, and checked months later to make sure the fix lasts.
         </p>
 
         <div class="hero-actions rise" style="--d:.7s">
-          <form class="sub" id="hero-form" novalidate data-source="hero" aria-label="Get notified when Cars24 Patch launches">
+          <form class="sub" id="hero-form" novalidate data-source="hero" aria-label="Hear first when Cars24 Patch starts fixing potholes">
             <div class="sub-field">
               <svg class="ic ic-mail" aria-hidden="true"><use href="#i-mail"/></svg>
               <label class="sr-only" for="email-hero">Email address</label>
               <input id="email-hero" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="Your email address" required aria-describedby="msg-hero">
               <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-              <button class="btn btn-primary" type="submit"><span class="lbl">Notify me</span><svg class="ic ic-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="spin" aria-hidden="true"></span></button>
+              <button class="btn btn-primary" type="submit"><span class="lbl">Tell me first</span><svg class="ic ic-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="spin" aria-hidden="true"></span></button>
             </div>
             <p class="sub-msg" id="msg-hero" role="status" aria-live="polite"></p>
-            <p class="sub-note">No spam. Launch updates only.</p>
+            <p class="sub-note">No spam. We’ll email you the day we start fixing.</p>
             <div class="sub-done" role="status">
               <span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-              <div><b>You’re on the list.</b><span>We’ll email you the moment Cars24 Patch opens.</span></div>
+              <div><b>You’re on the list.</b><span>We’ll email you the day we start fixing.</span></div>
             </div>
           </form>
           <div class="hero-more">
@@ -620,12 +620,12 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
         <div class="pin-chip"><span class="pi"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span>Pinned to map</div>
 
         <div class="rep" id="rep">
-          <div class="rep-h"><b>Pothole report</b><em>Illustrative</em></div>
+          <div class="rep-h"><b>Pothole repair</b><em>Illustrative</em></div>
           <ol>
-            <li class="done"><i></i>Reported</li>
-            <li class="done"><i></i>Routed to road owner</li>
-            <li><i></i>Fix scheduled</li>
-            <li class="final"><i></i>Verified &amp; closed</li>
+            <li class="done"><i></i>Spotted</li>
+            <li class="done"><i></i>Permission in writing</li>
+            <li><i></i>Repaired properly</li>
+            <li class="final"><i></i>Still there after the monsoon</li>
           </ol>
         </div>
       </div>
@@ -774,74 +774,74 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 
     <div class="perspective reveal">
       <h3>In proportion</h3>
-      <p>Potholes account for about <b>1.2% of India’s road deaths</b> — 2,161 of 1,72,890 in 2023.<sup class="ref"><a href="#src-2" aria-label="Derived figures">2</a>,<a href="#src-3" aria-label="Source 3">3</a></sup> A small share, but a category that is, by definition, a maintenance failure. Every one of these crashes happened on a road that some authority is responsible for keeping in repair.</p>
+      <p>Potholes account for about <b>1.2% of India’s road deaths</b> — 2,161 of 1,72,890 in 2023.<sup class="ref"><a href="#src-2" aria-label="Derived figures">2</a>,<a href="#src-3" aria-label="Source 3">3</a></sup> A small share, but a fixable one.</p>
     </div>
   </div>
 </section>
 
-<!-- ============================== 03 · WHY IT STAYS (brand) ============================== -->
-<section class="sec sec-brand" id="ownership" aria-labelledby="h-03">
+<!-- ============================== 03 · WHY IT KEEPS COMING BACK (brand) ============================== -->
+<section class="sec sec-brand" id="why-it-returns" aria-labelledby="h-03">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow"><span class="n">03</span> Why it stays broken</span>
-      <h2 class="h2 wide" id="h-03">When everyone owns the road,<br><span class="accent">no one owns the pothole.</span></h2>
-      <p class="lead">India’s roads are split between national, state, city and village authorities. Before a citizen can complain, they have to work out who is responsible — and each authority has its own channel. Rarely is there a public record of what was reported, who is accountable and when it will be fixed.</p>
+      <span class="eyebrow"><span class="n">03</span> Why it keeps coming back</span>
+      <h2 class="h2 wide" id="h-03">Filling a hole is easy.<br><span class="accent">Keeping it filled is the job.</span></h2>
+      <p class="lead">Water gets under the surface and traffic pumps it through the layers below. A patch laid on a wet, weak base sits on nothing, and the same hole comes back.<sup class="ref"><a href="#src-4" aria-label="Source 4">4</a></sup></p>
     </div>
 
-    <h3 class="own-h reveal">One journey. Up to four owners.</h3>
+    <h3 class="own-h reveal">What lasts, and what doesn’t.</h3>
 
     <div class="route reveal" id="route" style="--d:.1s">
       <i class="route-dot" aria-hidden="true"></i>
       <article class="node" tabindex="0">
-        <span class="tag">City</span>
-        <div><h4>Your street</h4><p>Lanes, colony roads and city arterials.</p><span class="who">Municipal corporation or local body</span></div>
+        <span class="tag">Dry</span>
+        <div><h4>A dry site</h4><p>85% of patches survived.</p><span class="who">US and Canada, about 1,250 patches</span></div>
       </article>
       <article class="node" tabindex="0">
-        <span class="tag">SH</span>
-        <div><h4>State highway</h4><p>The road that connects your city to the next.</p><span class="who">State PWD or road development body</span></div>
+        <span class="tag">Wet</span>
+        <div><h4>A wet site</h4><p>48% of patches survived. Same study.</p><span class="who">US and Canada, about 1,250 patches</span></div>
       </article>
       <article class="node" tabindex="0">
-        <span class="tag">NH</span>
-        <div><h4>National highway</h4><p>Long-distance corridors and expressways.</p><span class="who">NHAI, MoRTH or state PWD</span></div>
+        <span class="tag">Base</span>
+        <div><h4>A weak base</h4><p>Treating only the surface of a structural failure “doesn’t last long”.</p><span class="who">Indian Roads Congress</span></div>
       </article>
       <article class="node" tabindex="0">
-        <span class="tag">Rural</span>
-        <div><h4>Village road</h4><p>The last stretch into a village.</p><span class="who">Panchayati Raj or PMGSY agency</span></div>
+        <span class="tag">India</span>
+        <div><h4>Indian roads</h4><p>We found no independent study of how long pothole repairs last here.</p><span class="who">Our research, 2026</span></div>
       </article>
     </div>
 
     <div class="gaps reveal" style="--d:.1s">
-      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg>Different owner for each stretch</span>
-      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>Different complaint channel for each owner</span>
-      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>No shared deadline for any of them</span>
+      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg>Repairs are counted when filled, not when they last</span>
+      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>Wet weather is the hardest test</span>
+      <span class="gap-pill"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>The real result shows months later</span>
     </div>
 
-    <p class="pivot reveal">The pothole is the symptom. <span>The missing owner is the problem.</span></p>
+    <p class="pivot reveal">The pothole is the symptom. <span>Water underneath is the problem.</span></p>
   </div>
 </section>
 
-<!-- ============================== 04 · WHAT WE ARE BUILDING (lavender) ============================== -->
+<!-- ============================== 04 · WHAT WE ARE DOING (lavender) ============================== -->
 <section class="sec sec-lite" id="build" aria-labelledby="h-04">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow"><span class="n">04</span> What we’re building</span>
-      <h2 class="h2 wide" id="h-04">One place to report it.<br><span class="accent">One clock until it’s fixed.</span></h2>
-      <p class="lead">Cars24 Patch is being built to give every road defect a record, a responsible authority and a deadline — visible to everyone.</p>
+      <span class="eyebrow"><span class="n">04</span> What we’re doing</span>
+      <h2 class="h2 wide" id="h-04">Fix it properly.<br><span class="accent">Check it stays fixed.</span></h2>
+      <p class="lead">Cars24 Patch fixes potholes ourselves. No waiting, no blame. Every result goes public, including the patches that fail.</p>
     </div>
 
     <ol class="flow">
-      <li class="fstep reveal" style="--d:0s"><span class="fnum">01</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span><h3>Report</h3><p>A photo and your location. You don’t need to know who owns the road.</p></li>
-      <li class="fstep reveal" style="--d:.12s"><span class="fnum">02</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-route"/></svg></span><h3>Route</h3><p>Your report goes to the authority responsible for that stretch.</p></li>
-      <li class="fstep reveal" style="--d:.24s"><span class="fnum">03</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg></span><h3>Track</h3><p>A public status and a deadline for every report, visible to everyone.</p></li>
-      <li class="fstep reveal" style="--d:.36s"><span class="fnum">04</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span><h3>Close</h3><p>A report is marked resolved only after the repair is verified.</p></li>
+      <li class="fstep reveal" style="--d:0s"><span class="fnum">01</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span><h3>Permission</h3><p>We only work where we have a yes in writing.</p></li>
+      <li class="fstep reveal" style="--d:.12s"><span class="fnum">02</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span><h3>Repair</h3><p>In a dry window, done properly: cut back to sound road, clean, tack, compact, seal the edges.</p></li>
+      <li class="fstep reveal" style="--d:.24s"><span class="fnum">03</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg></span><h3>Check</h3><p>Someone with no stake in it inspects the patch months later, through a monsoon.</p></li>
+      <li class="fstep reveal" style="--d:.36s"><span class="fnum">04</span><span class="fic"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg></span><h3>Publish</h3><p>What lasted and what didn’t, out in the open.</p></li>
     </ol>
 
     <div class="principles reveal">
-      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Public record</span>
-      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Time-bound</span>
-      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Verified closure</span>
+      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Written permission</span>
+      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Proper repair</span>
+      <span class="pchip"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Independent check</span>
     </div>
-    <p class="devnote reveal"><i></i>In development. Features and launch timing may change.</p>
+    <p class="devnote reveal"><i></i>In development. Plans and timing may change.</p>
   </div>
 </section>
 
@@ -851,23 +851,23 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
     <div class="cta-in">
       <div class="reveal">
         <span class="eyebrow">Launching soon</span>
-        <h2 class="h2" id="h-cta">Be first to know<br><span class="accent">when we go live.</span></h2>
-        <p class="lead">Leave your email and we’ll tell you the moment Cars24 Patch opens.</p>
+        <h2 class="h2" id="h-cta">Be first to know<br><span class="accent">when we start fixing.</span></h2>
+        <p class="lead">Leave your email and we’ll tell you the day the first repairs go in.</p>
       </div>
       <div class="cta-form reveal" style="--d:.15s">
-        <form class="sub" id="final-form" novalidate data-source="footer" aria-label="Get notified when Cars24 Patch launches">
+        <form class="sub" id="final-form" novalidate data-source="footer" aria-label="Hear first when Cars24 Patch starts fixing potholes">
           <div class="sub-field">
             <svg class="ic ic-mail" aria-hidden="true"><use href="#i-mail"/></svg>
             <label class="sr-only" for="email-final">Email address</label>
             <input id="email-final" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" placeholder="Your email address" required aria-describedby="msg-final">
             <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-            <button class="btn btn-primary on-white" type="submit"><span class="lbl">Notify me</span><svg class="ic ic-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="spin" aria-hidden="true"></span></button>
+            <button class="btn btn-primary on-white" type="submit"><span class="lbl">Tell me first</span><svg class="ic ic-arrow" aria-hidden="true"><use href="#i-arrow"/></svg><span class="spin" aria-hidden="true"></span></button>
           </div>
           <p class="sub-msg" id="msg-final" role="status" aria-live="polite"></p>
-          <p class="sub-note">No spam. Launch updates only.</p>
+          <p class="sub-note">No spam. We’ll email you the day we start fixing.</p>
           <div class="sub-done" role="status">
             <span class="tick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            <div><b>You’re on the list.</b><span>We’ll email you the moment Cars24 Patch opens.</span></div>
+            <div><b>You’re on the list.</b><span>We’ll email you the day we start fixing.</span></div>
           </div>
         </form>
         <p class="cta-meta"><i class="dot"></i>Coming soon</p>
@@ -885,7 +885,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
         <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="currentColor"/><ellipse cx="16" cy="17" rx="9" ry="6.5" fill="none" stroke="#fff" stroke-width="2"/><ellipse cx="16" cy="17" rx="3.6" ry="2.4" fill="#fff"/></svg>
         <span>Cars24 Patch</span>
       </a>
-      <p class="foot-tag">Public accountability for India’s roads.</p>
+      <p class="foot-tag">Fixing India’s potholes ourselves, and checking they stay fixed.</p>
     </div>
 
     <div class="src">
@@ -894,7 +894,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
         <li id="src-1">Pothole-related deaths and accidents, 2020–2024: Ministry of Road Transport and Highways (MoRTH) data, from the Union Minister’s written reply in Parliament; reported by <a href="https://www.tribuneindia.com/news/uttar-pradesh/pothole-deaths-rise-53-per-cent-in-5-years-up-accounts-for-over-half-of-9400-fatalities" target="_blank" rel="noopener">The Tribune</a>, updated 14 February 2026. Series: 1,555 · 1,481 · 1,856 · 2,161 · 2,385 deaths (total 9,438; 23,056 accidents).</li>
         <li id="src-2">Derived by Cars24 Patch from source 1: +53% = (2,385 − 1,555) ÷ 1,555; 6.5 a day = 2,385 ÷ 366 days (2024 was a leap year); 1.2% = 2,161 ÷ 1,72,890.</li>
         <li id="src-3">Total road deaths in 2023 (1,72,890): MoRTH, <em>Road Accidents in India 2023</em>; reported by <a href="https://www.business-standard.com/india-news/india-road-accidents-deaths-injuries-report-road-highway-ministry-nitin-gadkari-125082801527_1.html" target="_blank" rel="noopener">Business Standard</a>, 28 August 2025.</li>
-        <li>Road ownership shown is indicative. Responsibility for a given stretch varies by state and by road.</li>
+        <li id="src-4">Patch survival at dry and wet sites: FHWA-RD-98-073, the SHRP H-106 pothole repair field study (about 1,250 patches, US and Canada). “Doesn’t last long”: <em>Indian Highways</em>, Indian Roads Congress, December 2017. Indian repair studies: our own search, published on the Cars24 Patch research page.</li>
       </ol>
     </div>
 
@@ -1061,7 +1061,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   function setBusy(form, busy) {
     var b = $('button[type="submit"]', form);
     b.classList.toggle('is-loading', busy); b.disabled = busy;
-    $('.lbl', b).textContent = busy ? 'Sending' : 'Notify me';
+    $('.lbl', b).textContent = busy ? 'Sending' : 'Tell me first';
   }
   function send(email, source) {
     if (!CONFIG.endpoint) {
@@ -1084,7 +1084,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var email = input.value.trim();
-      if (!email) { setMsg(form, 'Enter your email address to get notified.'); input.focus(); return; }
+      if (!email) { setMsg(form, 'Enter your email address first.'); input.focus(); return; }
       if (!EMAIL.test(email)) { setMsg(form, 'That doesn’t look like a valid email address. Check it and try again.'); input.focus(); return; }
       if ($('.hp', form).value) { markDone(); return; }          // honeypot: bots fill hidden fields
       setMsg(form, ''); setBusy(form, true);
@@ -1097,7 +1097,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   });
   if (store(true)) forms.forEach(function (f) { f.classList.add('is-done'); });
 
-  /* ---------- nav "Notify me": focus the nearest form ---------- */
+  /* ---------- nav "Tell me first": focus the nearest form ---------- */
   $$('[data-scroll-subscribe]').forEach(function (b) {
     b.addEventListener('click', function () {
       var behavior = reduce ? 'auto' : 'smooth';

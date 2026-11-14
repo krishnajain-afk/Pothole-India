@@ -96,7 +96,7 @@ export default function WallOfHoles() {
             <ol className="wh-steps">
               <li className="wh-step reveal" style={vars({ '--r': '-1.2deg', '--d': '0s' })}><span className="wh-step-n">01</span><h3>snap it. safely.</h3><p>stand on the footpath or somewhere safe. get the pothole and a bit of the road in the frame. daylight helps.</p></li>
               <li className="wh-step reveal" style={vars({ '--r': '1deg', '--d': '.12s' })}><span className="wh-step-n">02</span><h3>we pin it.</h3><p>it goes on the wall with the city it’s from, and your handle if you want one.</p></li>
-              <li className="wh-step reveal" style={vars({ '--r': '-.8deg', '--d': '.24s' })}><span className="wh-step-n">03</span><h3>watch it get fixed.</h3><p>when one gets repaired, its tile gets a FIXED stamp. that’s the whole point.</p></li>
+              <li className="wh-step reveal" style={vars({ '--r': '-.8deg', '--d': '.24s' })}><span className="wh-step-n">03</span><h3>watch it get fixed.</h3><p>when we fix one, its tile gets a FIXED stamp. that’s the whole point.</p></li>
             </ol>
           </div>
         </section>
@@ -121,8 +121,8 @@ export default function WallOfHoles() {
             <div className="reveal">
               <span className="kicker">got a bigger one?</span>
               <h2 className="h2" id="h-cta">nominations open <span className="hi">soon.</span></h2>
-              <p className="sec-lead">drop your email on the homepage and we’ll tell you the day nominations open.</p>
-              <p className="wh-cta-btn"><PageLink className="btn" href="/#subscribe">get notified <span className="arr">↗</span></PageLink></p>
+              <p className="sec-lead">get on the list. you’ll hear first when nominations open, and when we start fixing.</p>
+              <p className="wh-cta-btn"><PageLink className="btn" href="/#subscribe">tell me first <span className="arr">↗</span></PageLink></p>
             </div>
             <div className="wh-credit reveal" style={vars({ '--d': '.12s' })}>
               <h3>about the photos</h3>

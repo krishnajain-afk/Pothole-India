@@ -6,7 +6,7 @@
 >
 > **The one rule that matters most:** this site is *intentionally loud, funny, Gen Z and rebellious*. Do **not** "normalise" it into a clean corporate / SaaS look. When in doubt, copy the existing pages, not your defaults.
 
-Last updated: 2026-11-12 · Owner: Krishna (Cars24 / Crashfree India) · Repo: <https://github.com/krishnajain-afk/Pothole-India> (public)
+Last updated: 2026-11-14 · Owner: Krishna (Cars24 / Crashfree India) · Repo: <https://github.com/krishnajain-afk/Pothole-India> (public)
 
 ---
 
@@ -33,8 +33,9 @@ say "push". Experiments go in the lab first. Tell me what you plan to change bef
 
 **Cars24 Patch** is a *coming-soon* website for a road-safety initiative about potholes in India, part of **a Cars24 Rebellion**. It:
 
+- says one thing: **we're done waiting, so we're fixing the potholes ourselves** (user, 2026-11-14). Not a complaint platform, not "who owns this road", no blame;
 - tells, in a funny but serious-underneath way, *why potholes need fixing* (official death figures, cited);
-- collects emails for launch (Google Sheet via Apps Script);
+- collects emails with one clear promise: **we email you the day we start fixing** (Google Sheet via Apps Script);
 - is playful: a swerve-dodging mini game, a `***hole` → `POT` flip headline, tapes, stickers, memes;
 - has a **lab**: a small set of unlisted pages where experiments go live first, plus a growing hub of updates, case files and research.
 
@@ -81,6 +82,24 @@ There are **two visual systems**. Do not mix them. And there are **two kinds of 
 
 ## 3. Brand voice
 
+### The message (user, 2026-11-14) — read this before writing a single word
+> **India has swerved, slowed down and suffered enough. So we're fixing the potholes ourselves.**
+
+- **We fix them. Ourselves.** Not "the potholes are getting fixed" (by whom?), not "report it and we'll chase the authority". Say who does it: us.
+- **No accountability, no blame, no "who owns this road".** Never tell people a road belongs to XYZ, never route complaints, never promise deadlines from anyone else. The old calm pages ("Every pothole has an owner", "Soon, you'll know who", report → route → track → close) were rewritten for this. Permission is different: we only work on a road with a yes in writing, and we say so plainly ("permission in writing"), without making it about the owner.
+- **What the sign-up gets you:** the button says `tell me first ↗`, never `notify me` (notify about what?). The promise is the same on every page: *we email you the day we start fixing.* No spam.
+- **How a fix is told:** properly, in dry weather, with permission, checked months later by someone with no stake in it, and the result goes public, failures included. That is the whole story the hub (diary, case files, research) proves.
+
+### Who we write for: Gen Z (user, 2026-11-14)
+Young urban Indians, roughly 18–28, who ride a scooter or sit on the back of one, and scroll a lot.
+- **How they think:** "show me, don't sell me". They clock marketing in two seconds. A brand that does something beats a brand that says something. They trust receipts, screenshots and people who admit mistakes.
+- **How they feel about potholes:** tired, not outraged. It's a daily side quest they've stopped noticing. Doom-scrolling about the system makes them feel powerless; someone simply fixing it feels like relief.
+- **What they do:** skim the first line, maybe the second. Screenshot the funny bit. Send it to the group chat. Join if it costs nothing and promises something specific. Play a 30-second game.
+- **What they won't do:** read a wall of text, fill a complaint form, follow an NGO's mission statement, trust a number with no source, click "learn more".
+- **What they love to read:** one odd specific line (`shut up ***hole`, `your ex is nominated too`), deadpan honesty (`we know. we know.`), a dare, a meme shape, a stat that hits, a mistake owned (`it read FIXABLE`).
+- **What they hate:** lectures and guilt-trips, corporate words (`leverage`, `solutions`, `stakeholders`), "learn more" buttons, blame-the-government rants, fake hype and exclamation marks, cringe slang piled up, being asked for their email with no idea why.
+- **So, every block:** first line carries the whole idea (if they stop there, they got it). One joke per block, never next to the deaths. Long detail goes in a fold (`<details>`), a tl;dr sits on top of anything long (the research page has "the 30-second version"). Every ask says what you get.
+
 ### One line
 > A tired, funny friend who is done swerving: deadpan, lowercase, specific, never cruel — and completely serious about the numbers.
 
@@ -90,7 +109,7 @@ There are **two visual systems**. Do not mix them. And there are **two kinds of 
 3. **Lowercase source copy.** Write display headlines in lowercase; CSS (`text-transform: uppercase`, condensed font) makes them loud. Keep capitals for proper nouns: *India, Cars24 Patch, MoRTH, Parliament, The Tribune*.
 4. **Deadpan beats hype.** **No exclamation marks anywhere.** No "Amazing!", no "Don't miss out!!". Sarcasm and understatement do the work.
 5. **Speak to "you", for "us".** "you've been doing this daily for years." / "India has swerved, slowed down and suffered enough."
-6. **Rebellion = confident, not hateful.** We're annoyed *at the situation* (potholes, shrugging), not at named people or authorities. The calm pages' "Every pothole has an owner" is about accountability, not blame.
+6. **Rebellion = doing, not complaining.** We're annoyed *at the situation* (potholes, shrugging), not at people or authorities, and we answer it by fixing potholes ourselves. No accountability campaigns, no "who owns this road" (2026-11-14).
 7. **Specific over vague.** Numbers, places, concrete images (your spine, your axle, your scooter).
 8. **Self-aware and meme-literate, used sparingly.** 1–2 slang touches per surface, never a slang pile-up.
 
@@ -165,27 +184,27 @@ The copy lives in `components/home/Hero.tsx`, `components/home/Sections.tsx` and
 | Surface | Exact copy |
 |---|---|
 | Tab title | `Cars24 Patch — shut up ***hole. Coming soon.` |
-| Meta description | `India has swerved, slowed down and suffered enough. The potholes are getting fixed. Cars24 Patch, coming soon.` |
+| Meta description | `India has swerved, slowed down and suffered enough. So we're fixing the potholes ourselves. Cars24 Patch, coming soon.` |
 | Hero chip | `coming soon` |
 | Hero headline | `shut up` / `***hole` (flips to `pot` `hole`) |
 | Flip note | `(it's "pot". relax.)` |
 | Lead | `India has swerved, slowed down and suffered enough.` — highlight marks on **swerved** (pink), **slowed down** (paper), **suffered enough** (blue) |
-| Big line | `The potholes are getting fixed.` (squiggle under "getting fixed.") — *was "filled"; user changed every "filled" → "fixed"* |
-| Form | placeholder `drop your email` · button `notify me ↗` · note `no spam. just potholes (getting fixed).` |
-| Success | **`you're on the list.`** / `ride safe. we'll email you when it's live.` |
+| Big line | `so we're fixing the potholes ourselves.` (squiggle under "ourselves.") — *was "The potholes are getting fixed." until 2026-11-14: it never said who fixes them* |
+| Form | placeholder `drop your email` · button `tell me first ↗` (was `notify me`: notify about what?) · note `we'll email you the day we start fixing. no spam.` |
+| Success | **`you're on the list.`** / `ride safe. we'll email you the day we start fixing.` |
 | Errors | `type your email first.` · `that email looks off. check it?` · `something broke on our side. try again?` |
-| Tape 1 | `coming soon ✦ potholes: getting fixed ✦ your spine says thanks ✦ … ✦ arrive in one piece` |
+| Tape 1 | `coming soon ✦ fixing them ourselves ✦ your spine says thanks ✦ coming soon ✦ no blame game ✦ arrive in one piece` |
 | Tape 2 | `shut up pothole ✦ shut up ***hole ✦ …` |
 | Receipts | kicker `the receipts` · H2 `okay, serious for a sec.` · lead `the swerving isn't a joke. neither are the numbers.` |
 | Stat 1 | `2,385` — `people died in pothole crashes in India in 2024.` — `official MoRTH data · source 1` |
 | Stat 2 | `+53%` — `more than in 2020. and it's gone up every year since 2021.` — `1,555 → 2,385 · source 2` |
 | Stat 3 | `6.5` — `people. every single day.` — `2,385 ÷ 366 days · source 2` |
-| Closer | `every one of those roads has an owner. time everyone knew who.` |
+| Closer | `no blame game. no complaint forms. we'll just fix them.` (was the road-owner line, retired 2026-11-14) |
 | Game | chip `side quest` + `by Cars24 Patch` · H2 `swerve practice.` · `you've been doing this daily for years. let's see the score.` · pills `dodged` / `best` · hint `← → or A / D to swerve. on a phone, tap the left or right side.` · overlay `ready?` / `three lanes. loads of potholes. zero chill.` / button `play ↗` |
 | Game over | `you swerved past N and hit one. that's exactly why we're filling them.` *(deliberately left as "filling")* |
 | Sticker | starburst `fill 'em up` *(deliberately left)* · starburst `coming soon` |
-| Ring text (around hole) | `… POTHOLES GETTING FIXED …` |
-| CTA | kicker `don't miss it` · H2 `potholes: getting fixed.` / `you: getting notified.` |
+| Ring text (around hole) | `COMING SOON ✦ WE FIX THEM OURSELVES ✦ …` |
+| CTA | kicker `don't miss it` · H2 `potholes: getting fixed. by us.` / `you: first to know.` |
 | Pre-footer band | pink pill `a Cars24 Rebellion` |
 | Footer | `made by people who are tired of swerving.` / `Cars24 Patch · a Cars24 Rebellion.` · `© 2026 Cars24 Patch. All rights reserved.` · `coming soon.` |
 | Sources (footer) | see §5.4 |
@@ -202,11 +221,11 @@ The copy lives in `components/home/Hero.tsx`, `components/home/Sections.tsx` and
 
 ### 4.4 Approved copy — calm pages (`/on-the-move`, `/know-who`)
 Calm, plain, credible (sentence case, real punctuation, still no exclamation marks).
-- Kicker `Coming soon` · H1 `Every pothole has an owner.` + line 3: **`And we're on the move.`** (on-the-move) or **`Soon, you'll know who.`** (know-who)
+- Kicker `Coming soon` · H1 `Potholes don't fix themselves.` + line 3: **`And we're on the move.`** (on-the-move) or **`So we're fixing them.`** (know-who; was `Soon, you'll know who.`, retired 2026-11-14 with the whole owner story)
 - `Potholes killed 2,385 people in India in 2024.`
-- `Cars24 Patch is a public platform to report, track and close road defects — so every pothole has a name against it and a deadline attached.`
-- Form: `Notify me` · `No spam. Launch updates only.` · success `You're on the list. We'll email you the moment Cars24 Patch opens.`
-- Sections: `Why this matters` → `How it starts` (crack → water → traffic → hole) → `What it costs` (the figures) → `Why it stays broken` (four road owners: City / State highway / National highway / Village road). `noindex`.
+- `So Cars24 Patch is fixing them ourselves — properly, with permission, and checked months later to make sure the fix lasts.` Illustrative card `Pothole repair`: Spotted → Permission in writing → Repaired properly → Still there after the monsoon.
+- Form: `Tell me first` · `No spam. We'll email you the day we start fixing.` · success `You're on the list. We'll email you the day we start fixing.` · CTA `Be first to know when we start fixing.`
+- Sections: `How it starts` (crack → water → traffic → hole) → `What it costs` (the figures; "a small share, but a fixable one") → `Why it keeps coming back` (`Filling a hole is easy. Keeping it filled is the job.`: 85% of patches survived at dry sites, 48% at wet ones, a weak base, no Indian survival study; source 4) → `What we're doing` (`Fix it properly. Check it stays fixed.`: Permission → Repair → Check → Publish). Footer tag `Fixing India's potholes ourselves, and checking they stay fixed.` `noindex`.
 
 ### 4.5 Lab copy (live, still marked `draft`)
 Everything on the lab hub pages carries a `draft` chip until the user approves the wording. The current live lines are in the §3 benchmark table. Lab front page (`#inside`): kicker `behind the tape`, chip `pick a door`, H2 `while you were swerving, we were building.`, lead `we fell into a pothole. it went deeper than expected. this is everything we dragged out.` Cards: `the diary.` (`dear diary. today we read forty-one pages about bitumen. voluntarily.`), `the research.` (`we read the boring stuff so you don't have to. every claim gets a receipt, or gets called out.`), `case files.` (`every idea we tried, including the dumb ones. especially the dumb ones.`), `the wall of holes.`, `dodge with your head.`. Lab bar: `the lab: stuff we're still testing. not the official homepage. the real one is over here →`.
@@ -591,6 +610,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 27. 2026-11-12: user: clicking case files or the wall from the homepage still exposed the lab (and through it rishta), "as both pages we are not combining". The four homepage-linked pages get their own site nav (logo → `/`, the same four links, no lab bar) and no links to `/lab`, `/dodge` or `/rishta`. The lab pages keep the lab nav, which still links to the four.
 28. 2026-11-12: user: "fix the wall photos too". The wall's 8 photos are the same Commons files as rishta's, so the wall now loads the build-time copies in `/rishta-photos/`, with the image service and Commons as fallbacks.
 29. 2026-11-12: user: "while navigating why the whole page loads … we are using next js right", then "start porting the wall .. and from lets build completely in next js .. and we can remove completely HTML pages". The wall is ported (parity-checked) and its HTML deleted; the homepage nav became the shared `SiteNav` with `<Link>`s to ported pages, so home ↔ wall no longer reloads; the homepage script now stops cleanly when you leave. Every other HTML page follows, one at a time.
+30. 2026-11-14: user: "we are not going to make people accountable for who owns the road … we are going to fix the potholes by ourselves", "what does notify refer to?", and a full copy audit of every page for Gen Z (less text, top-down flow). Done: the message and the Gen Z profile in §3; the homepage and lab hero say `so we're fixing the potholes ourselves.`; the road-owner closer became `no blame game. no complaint forms. we'll just fix them.`; `notify me` became `tell me first ↗` with the promise `we'll email you the day we start fixing.` everywhere; the calm pages were rewritten (no owners, report or deadlines: permission → repair → check → publish); `road owner` lines on the diary, case files and research became `permission in writing`; research got `the 30-second version.` on top; metas lost their lists of three. The 404 copy stayed (user-supplied, and `We're fixing the roads first` already says it).
 
 ---
 

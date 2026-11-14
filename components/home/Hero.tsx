@@ -21,14 +21,14 @@ export function Hero() {
             </div>
 
             <p className="lead" id="lead">India has <mark className="m-pink" style={vars({ '--c': 'var(--pink)', '--d': '.9s' })}>swerved</mark>, <mark style={vars({ '--c': 'var(--white)', '--d': '1.15s' })}>slowed down</mark> and <mark className="m-blue" style={vars({ '--c': 'var(--acc)', '--d': '1.4s' })}>suffered enough</mark>.</p>
-            <p className="big-line pop" style={vars({ '--d': '.7s' })}>The potholes are <span className="squig">getting fixed.</span></p>
+            <p className="big-line pop" style={vars({ '--d': '.7s' })}>so we’re fixing the potholes <span className="squig">ourselves.</span></p>
 
             <SubscribeForm id="hero-form" idSuffix="hero" source="hero" className="sub pop" style={vars({ '--d': '.85s' })} />
           </div>
 
           {/* the pothole has opinions */}
           <div className="art" aria-hidden="true">
-            <svg className="ring" viewBox="-100 -100 200 200"><defs><path id="ringPath" d="M0,-86 a86,86 0 1,1 0,172 a86,86 0 1,1 0,-172" /></defs><text><textPath href="#ringPath" textLength="536" lengthAdjust="spacing">COMING SOON ✦ POTHOLES GETTING FIXED ✦ COMING SOON ✦ POTHOLES GETTING FIXED ✦ </textPath></text></svg>
+            <svg className="ring" viewBox="-100 -100 200 200"><defs><path id="ringPath" d="M0,-86 a86,86 0 1,1 0,172 a86,86 0 1,1 0,-172" /></defs><text><textPath href="#ringPath" textLength="536" lengthAdjust="spacing">COMING SOON ✦ WE FIX THEM OURSELVES ✦ COMING SOON ✦ WE FIX THEM OURSELVES ✦ </textPath></text></svg>
             <div className="hole" id="hole">
               <div className="face-wrap">
                 <span className="eye l"><i className="pupil"></i></span>

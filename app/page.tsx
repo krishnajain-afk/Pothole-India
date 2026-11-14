@@ -5,7 +5,7 @@ import { Nav } from '@/components/site/SiteNav';
 import { HomeEffects } from '@/components/home/HomeEffects';
 import { SITE_NAME, SITE_URL } from '@/lib/site';
 
-const DESCRIPTION = 'India has swerved, slowed down and suffered enough. The potholes are getting fixed. Cars24 Patch, coming soon.';
+const DESCRIPTION = 'India has swerved, slowed down and suffered enough. So we’re fixing the potholes ourselves. Cars24 Patch, coming soon.';
 
 export const metadata: Metadata = {
   title: 'Cars24 Patch — shut up ***hole. Coming soon.',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     url: '/',
     title: 'Shut up ***hole. — Cars24 Patch, coming soon',
-    description: 'India has swerved, slowed down and suffered enough. The potholes are getting fixed.',
+    description: 'India has swerved, slowed down and suffered enough. So we’re fixing the potholes ourselves.',
     locale: 'en_IN',
   },
   twitter: { card: 'summary' },

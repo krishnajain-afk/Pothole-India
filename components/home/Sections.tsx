@@ -19,7 +19,7 @@ function Tape({ className, phrases, times }: { className: string; phrases: strin
 export function Tapes() {
   return (
     <div className="tapes" aria-hidden="true">
-      <Tape className="tape t1" times={2} phrases={['coming soon', 'potholes: getting fixed', 'your spine says thanks', 'coming soon', 'potholes: getting fixed', 'arrive in one piece']} />
+      <Tape className="tape t1" times={2} phrases={['coming soon', 'fixing them ourselves', 'your spine says thanks', 'coming soon', 'no blame game', 'arrive in one piece']} />
       <Tape className="tape t2" times={6} phrases={['shut up pothole', 'shut up ***hole']} />
     </div>
   );
@@ -53,7 +53,7 @@ export function Receipts() {
           </article>
         </div>
 
-        <p className="closer reveal">every one of those roads has an owner. <span>time everyone knew who.</span></p>
+        <p className="closer reveal">no blame game. no complaint forms. <span>we’ll just fix them.</span></p>
       </div>
     </section>
   );
@@ -103,7 +103,7 @@ export function Cta() {
         <div className="cta-grid">
           <div className="reveal">
             <span className="kicker">don’t miss it</span>
-            <h2 className="h2" id="h-cta">potholes: getting fixed.<br /><span className="blue">you: getting notified.</span></h2>
+            <h2 className="h2" id="h-cta">potholes: getting fixed. by us.<br /><span className="blue">you: first to know.</span></h2>
           </div>
           <div className="reveal" style={vars({ '--d': '.12s' })}>
             <SubscribeForm id="final-form" idSuffix="final" source="footer" />

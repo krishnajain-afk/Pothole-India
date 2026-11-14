@@ -38,16 +38,16 @@ export function Starburst({ fill, lines }: { fill: string; lines: [string, strin
 /* the sign-up form. The behaviour script finds it by .sub and reads data-source. */
 export function SubscribeForm({ id, idSuffix, source, className = 'sub', style }: { id: string; idSuffix: string; source: string; className?: string; style?: CSSProperties }) {
   return (
-    <form className={className} style={style} id={id} noValidate data-source={source} aria-label="Get notified when Cars24 Patch launches">
+    <form className={className} style={style} id={id} noValidate data-source={source} aria-label="Hear first when Cars24 Patch starts fixing potholes">
       <div className="sub-row">
         <label className="sr-only" htmlFor={`email-${idSuffix}`}>Email address</label>
         <input id={`email-${idSuffix}`} name="email" type="email" inputMode="email" autoComplete="email" autoCapitalize="off" spellCheck={false} maxLength={254} placeholder="drop your email" required aria-describedby={`msg-${idSuffix}`} />
         <input className="hp" type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-        <button className="btn" type="submit"><span className="lbl">notify me</span><span className="arr">↗</span><span className="spin" aria-hidden="true"></span></button>
+        <button className="btn" type="submit"><span className="lbl">tell me first</span><span className="arr">↗</span><span className="spin" aria-hidden="true"></span></button>
       </div>
       <p className="sub-msg" id={`msg-${idSuffix}`} role="status" aria-live="polite"></p>
-      <p className="sub-note">no spam. just potholes (getting fixed).</p>
-      <div className="sub-done" role="status"><b>you’re on the list.</b><span>ride safe. we’ll email you when it’s live.</span></div>
+      <p className="sub-note">we’ll email you the day we start fixing. no spam.</p>
+      <div className="sub-done" role="status"><b>you’re on the list.</b><span>ride safe. we’ll email you the day we start fixing.</span></div>
     </form>
   );
 }
