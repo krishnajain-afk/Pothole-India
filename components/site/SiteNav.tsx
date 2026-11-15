@@ -14,7 +14,7 @@ const LINKS: [string, string][] = [
   ['/case-files', 'case files'],
   ['/wall-of-holes', 'the wall'],
 ];
-export const PORTED = new Set(['/', '/wall-of-holes']);
+export const PORTED = new Set(['/', '/wall-of-holes', '/case-files']);
 
 /** A link that stays inside the app when its target page is ported, and is a plain link otherwise. */
 export function PageLink({ href, ...rest }: React.ComponentProps<'a'> & { href: string }) {

@@ -3,8 +3,8 @@ import type { NextConfig } from 'next';
 /* Pages that are still plain HTML in /public, served at their clean routes.
    Each one moves into app/ as it gets ported: move its name from STATIC_PAGES to PORTED (so the old .html address
    still redirects) and add its route to PORTED in components/site/SiteNav.tsx. */
-const STATIC_PAGES = ['lab', 'updates', 'research', 'case-files', 'dodge', 'rishta', 'on-the-move', 'know-who'];
-const PORTED = ['wall-of-holes'];
+const STATIC_PAGES = ['lab', 'updates', 'research', 'dodge', 'rishta', 'on-the-move', 'know-who'];
+const PORTED = ['wall-of-holes', 'case-files'];
 
 const nextConfig: NextConfig = {
   trailingSlash: false,
