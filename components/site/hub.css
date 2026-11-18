@@ -88,7 +88,7 @@
 .jr-bar i[data-s="doing"] { background: var(--prim); border-color: var(--prim); }
 .jr { margin-top: 28px; display: grid; gap: 26px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 700px) { .jr { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1100px) { .jr { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; } }
+@media (min-width: 1000px) { .jr { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; } }
 .jr-step { --sc: var(--hi); --sc-on: var(--ink); position: relative; min-width: 0; padding: 20px 18px 18px; border: var(--bd); border-radius: 20px; background: var(--paper); color: var(--ink); box-shadow: 6px 6px 0 var(--sc); rotate: var(--r, 0deg); }
 .jr-step[data-s="done"] { --sc: var(--pink); --sc-on: var(--ink); }
 .jr-step[data-s="doing"] { --sc: var(--prim); --sc-on: var(--on-prim); }
@@ -143,7 +143,12 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 .cfp-lead { margin-top: 24px; max-width: 30ch; font: 600 clamp(1.25rem, 1rem + 1.4vw, 1.9rem)/1.35 var(--ff-d); letter-spacing: -.015em; }
 .nb { white-space: nowrap; }
 .cfp-body { padding-block: 64px 96px; }
-.cfp-body .cf-top { margin-top: 0; }
+.cfp-body .wrap > .cf-top { margin-top: 0; }   /* case files: the filter bar opens the section (the diary's sits inside a block) */
+/* the diary (moved from public/updates.html) */
+.cfp-body .hub-nav { margin-top: 0; }
+.cfp-body .hub-nav + .hub-block { margin-top: 56px; }
+.upd[hidden] { display: none; }
+.more-go { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 14px 16px; }
 /* ---------- Stamps (how much weight a claim bears; shared with research.html) ---------- */
 .stamp { display: inline-block; padding: 5px 9px 4px; border: 2.5px solid var(--ink); border-radius: 6px; background: var(--paper); color: var(--ink); font: 700 11px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; rotate: -2deg; white-space: nowrap; }
 .stamp[data-k="established"] { background: var(--prim); color: var(--on-prim); }

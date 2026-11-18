@@ -3,7 +3,7 @@ import { vars } from '@/components/home/bits';
 import { Nav, PageLink } from '@/components/site/SiteNav';
 import { PageFooter } from '@/components/site/PageFooter';
 import { PageEffects } from '@/components/site/PageEffects';
-import { CaseFileFilters } from '@/components/site/CaseFileFilters';
+import { HubFilters } from '@/components/site/HubFilters';
 import '@/components/site/hub.css';
 
 /* The case files, ported from public/case-files.html. Styles: components/site/hub.css (shared with the diary and the
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
 };
 
 const TOTAL = 5;   // the number of case files below (the count shown before any filter)
+const FILTERS: [string, string][] = [['all', 'all'], ['study', 'studies'], ['experiment', 'experiments'], ['landing', 'landings']];
 
 export default function CaseFiles() {
   return (
@@ -50,7 +51,7 @@ export default function CaseFiles() {
               Keep every number and finding real, with a source. Entries marked "draft" are wording written from what happened.
               The four parts are always: the hunch / what we tried / what turned up / what it taught us.
             */}
-            <CaseFileFilters total={TOTAL} />
+            <HubFilters cards=".cf-grid > .cfile" filters={FILTERS} unit={['case file', 'case files']} countId="cf-count" label="Filter the case files" total={TOTAL} />
             <ul className="cf-grid">
 
                 <li className="upd cfile reveal" id="cf-01" data-type="study" data-s="found" style={vars({ '--r': '-.6deg', '--d': '0s' })}>
