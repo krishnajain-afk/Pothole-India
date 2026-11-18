@@ -3,8 +3,8 @@ import type { NextConfig } from 'next';
 /* Pages that are still plain HTML in /public, served at their clean routes.
    Each one moves into app/ as it gets ported: move its name from STATIC_PAGES to PORTED (so the old .html address
    still redirects) and add its route to PORTED in components/site/SiteNav.tsx. */
-const STATIC_PAGES = ['lab', 'dodge', 'rishta', 'on-the-move', 'know-who'];
-const PORTED = ['wall-of-holes', 'case-files', 'updates', 'research'];
+const STATIC_PAGES = ['dodge', 'rishta', 'on-the-move', 'know-who'];
+const PORTED = ['wall-of-holes', 'case-files', 'updates', 'research', 'lab'];
 
 const nextConfig: NextConfig = {
   trailingSlash: false,
@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
         ...STATIC_PAGES.map((p) => ({ source: `/${p}`, destination: `/${p}.html` })),
         // the lab nav uses the local file names on localhost (index-genz.html = /, index-genz-meme.html = /lab)
         { source: '/index-genz.html', destination: '/' },
-        { source: '/index-genz-meme.html', destination: '/lab.html' },
+        { source: '/index-genz-meme.html', destination: '/lab' },
       ],
       afterFiles: [],
       fallback: [],

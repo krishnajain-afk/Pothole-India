@@ -61,7 +61,7 @@ There are **two visual systems**. Do not mix them. And there are **two kinds of 
 |---|---|---|---|
 | `/` | `app/page.tsx` + `components/home/*` · CSS `app/globals.css` · behaviour `lib/home-behaviour.js` | **Gen Z (loud)** | LIVE homepage, **ported to Next.js** |
 | any missing URL | `app/not-found.tsx` + `app/not-found.css` + `components/NotFoundEffects.tsx` | Gen Z | LIVE, ported, real 404 status, `noindex` |
-| `/lab` | `public/lab.html` | Gen Z | LIVE, unlisted (`noindex`). **The lab's front page:** homepage copy + swerve game + meme break + one card per lab page (`#inside`). Experiments go here first |
+| `/lab` | `app/lab/page.tsx` (+ `meme.ts`) · nav `components/site/LabNav.tsx` · styles `components/site/lab.css` | Gen Z | LIVE, unlisted (`noindex`), **ported to Next.js** 2026-11-18. **The lab's front page:** homepage copy + swerve game + meme break + one card per lab page (`#inside`). Experiments go here first |
 | `/updates` | `app/updates/page.tsx` · styles `components/site/hub.css` · filters `components/site/HubFilters.tsx` | Gen Z | LIVE, `noindex`, **ported to Next.js** 2026-11-18. "dear ***hole,": the road to launch + the latest updates |
 | `/research` | `app/research/page.tsx` · styles `components/site/hub.css` | Gen Z | LIVE, `noindex`, **ported to Next.js** 2026-11-18. The research library (§12.6) |
 | `/case-files` | `app/case-files/page.tsx` · styles `components/site/hub.css` · filters `components/site/HubFilters.tsx` | Gen Z | LIVE, `noindex`, **ported to Next.js** 2026-11-15. The case-study repository |
@@ -74,7 +74,7 @@ There are **two visual systems**. Do not mix them. And there are **two kinds of 
 | — | `google-apps-script.gs` | — | Apps Script for sign-ups. Repo copy has a placeholder Sheet ID; **never commit the real one** |
 
 - `/genz` → 307 redirect to `/` (old link kept alive). `/<page>.html` → 308 redirect to `/<page>` for every page still in `public/`.
-- How the HTML pages get their clean routes: `STATIC_PAGES` in `next.config.ts` rewrites `/lab` → `/lab.html` and so on. **When a page is ported**, it moves into `app/<route>/page.tsx`, its `public/<route>.html` is deleted, its name moves from `STATIC_PAGES` to `PORTED` in `next.config.ts` (so `/<route>.html` still redirects), and its route goes into `PORTED` in `components/site/SiteNav.tsx` (so links to it stay inside the app), all in the same change.
+- How the HTML pages get their clean routes: `STATIC_PAGES` in `next.config.ts` rewrites `/dodge` → `/dodge.html` and so on. **When a page is ported**, it moves into `app/<route>/page.tsx`, its `public/<route>.html` is deleted, its name moves from `STATIC_PAGES` to `PORTED` in `next.config.ts` (so `/<route>.html` still redirects), and its route goes into `PORTED` in `components/site/SiteNav.tsx` (so links to it stay inside the app), all in the same change.
 - **Everything is built in Next.js from now on** (user, 2026-11-12: "lets build completely in next js .. and we can remove completely HTML pages"). No new pages or features in `public/*.html`; every remaining HTML page gets ported, one at a time with the §8 parity check, and its HTML file is deleted.
 - Local preview: `npm run dev` → <http://localhost:3000>. Every route above works locally exactly as live.
 
@@ -441,7 +441,7 @@ Method (a real browser; Playwright and Chromium are fine):
 
 ## 10. Working rules & user preferences (learned the hard way)
 
-0. **Lab first (user rule, 2026-10-23, restated 2026-10-30):** every experiment goes live in **the lab first** (front page `public/lab.html` at `/lab`, plus the lab pages). Only after a final check and the user's confirmation is anything promoted to the homepage (`/`, now `app/page.tsx` + `components/home/`). Never edit the homepage first. Anything big gets **its own lab page**, and the lab front page keeps a card for it (`#inside`).
+0. **Lab first (user rule, 2026-10-23, restated 2026-10-30):** every experiment goes live in **the lab first** (front page `app/lab/` at `/lab`, plus the lab pages). Only after a final check and the user's confirmation is anything promoted to the homepage (`/`, now `app/page.tsx` + `components/home/`). Never edit the homepage first. Anything big gets **its own lab page**, and the lab front page keeps a card for it (`#inside`).
 1. **Never push unless the user says "push" / "go".** Many requests are "try it locally". A push to `main` is public within a minute.
 2. **Do exactly what was asked — nothing more.** Change one thing, report it, ask before widening scope. If an instruction is ambiguous about copy, change only the named strings.
 3. **Exact user copy is sacred** (404 text, hero line). Don't "improve" it.
@@ -506,7 +506,7 @@ Paper section: `meme break` kicker; white tilted card with tape: **1 kachori + 2
 ### 12.5 Lab pages and the nav
 | Nav label | File | Live route |
 |---|---|---|
-| the lab | `public/lab.html` | `/lab` |
+| the lab | `app/lab/` (Next.js) | `/lab` |
 | updates & journey | `app/updates/` (Next.js) | `/updates` |
 | research | `app/research/` (Next.js) | `/research` |
 | case files | `app/case-files/` (Next.js) | `/case-files` |
@@ -514,13 +514,14 @@ Paper section: `meme break` kicker; white tilted card with tape: **1 kachori + 2
 | dodge | `public/dodge.html` | `/dodge` |
 | *(not in the nav)* | `public/rishta.html` | `/rishta`: reached only from its card on `/lab` (user, 2026-11-11) |
 
-- **One shared nav, copy-pasted into every HTML page still in `public/`** (ported pages use `components/site/SiteNav.tsx` instead). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. The css and js blocks must be **identical in every HTML lab file** (three since the four hub pages were ported: lab, dodge, rishta). The HTML block:
-  - **`LAB-NAV:html`** on the three lab-only pages (`lab.html`, `dodge.html`, `rishta.html`): the lab bar + logo to the lab (`#top` on the lab front page, `/lab` elsewhere) + six links (the lab, the four hub pages, dodge). Identical in those three except `aria-current` and the logo.
+- **One shared nav, copy-pasted into every HTML page still in `public/`** (ported pages use `components/site/SiteNav.tsx` instead). Three marked blocks: `/* LAB-NAV:css:start … end */`, `<!-- LAB-NAV:html:start … end -->`, `/* LAB-NAV:js:start … end */`. The css and js blocks must be **identical in every HTML lab file** (two since the lab front page was ported: dodge, rishta). The HTML block:
+  - **`LAB-NAV:html`** on the lab pages still in HTML (`dodge.html`, `rishta.html`): the lab bar + logo to `/lab` + six links (the lab, the four hub pages, dodge). Identical in those two except `aria-current`.
+  - **The lab front page** (`app/lab/`, ported 2026-11-18) uses `components/site/LabNav.tsx`: the same lab bar, logo to `#top`, the same six links through `PageLink` (so `/lab` ↔ the hub pages and the homepage don't reload; `/dodge` and `/rishta` still do until they're ported) and the same menu below 1100px. Its CSS (lab bar, nav, `#inside` cards, meme) is `components/site/lab.css`. Dodge and rishta switch to `LabNav` when they're ported.
   - **The four hub pages** (research, the diary, case files, the wall) are all ported (2026-11-18) and use `components/site/SiteNav.tsx`: no lab bar, logo to `/`, the homepage's four links, footer link `back to the homepage`. The old `SITE-NAV:html` block is gone with their HTML files. **These pages never link to `/lab`, `/dodge` or `/rishta`** (not in the nav, the footer or the content: the `play it ↗` / `play dodge` links were removed 2026-11-12). Grep for `data-page="(lab|dodge|rishta)"` before any push.
   After changing one, copy it to the others of its kind and re-diff (checksums).
 - **Markup (lab nav):** the `lab-bar` above the sticky yellow `header.nav`: logo · `menu` button · `<nav id="nav-links">` with six `.nav-link`s (rishta is deliberately left out; `PAGES` still maps `rishta` so the `/lab` card link works). The site nav uses the same classes without the lab bar and with four links.
 - **Behaviour:** ≥1100px inline pills (seven links still fit on one row at 1100px, checked 2026-10-31), current page = ink pill tilted −2°. <1100px a `menu` button opens a paper panel; closes on link click, outside click, Esc (focus returns) and on resize to desktop. Without JS the links wrap.
-- **Links between pages** use `<a href="…" data-page="home|lab|updates|research|case-files|wall|dodge|rishta" data-hash="#id">`. The shared script rewrites `href`: on localhost to the old local file names (`index-genz.html`, `index-genz-meme.html`, `updates.html`…), on a real host to the clean route. `next.config.ts` rewrites `index-genz.html` → `/` and `index-genz-meme.html` → `/lab.html`, so these links work under `npm run dev` too. Never hard-code page paths.
+- **Links between pages** use `<a href="…" data-page="home|lab|updates|research|case-files|wall|dodge|rishta" data-hash="#id">`. The shared script rewrites `href`: on localhost to the old local file names (`index-genz.html`, `index-genz-meme.html`, `updates.html`…), on a real host to the clean route. `next.config.ts` rewrites `index-genz.html` → `/` and `index-genz-meme.html` → `/lab`, so these links work under `npm run dev` too. Never hard-code page paths.
 - **To add a lab page:** build it from `public/case-files.html` (head, CSS, footer, the three nav blocks), add it to `PAGES` in the JS block and as a `.nav-link` in **every** lab page, add its name to `STATIC_PAGES` in `next.config.ts`, then add a card to `#inside` on the lab front page.
 - **Template slots:** each head script sets `is-local` on localhost and `html:not(.is-local) .upd-slot { display: none }` hides the empty "your turn" slots for live visitors.
 - **Gotcha:** the current-page link is rotated, so compare `offsetTop`, not `getBoundingClientRect().top`, in tests.
@@ -568,7 +569,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 - Branches `claude/compassionate-wozniak-1k5k4x` (copy pass) and `claude/nextjs-migration` are merged into `main`; `feature/lab` and `feature/research` are older and redundant. Deleting them needs the owner's say-so.
 
 ### Migration: what's next
-1. Port every remaining HTML page, one at a time, and delete its HTML (user, 2026-11-12). Done: `/`, the 404, `/wall-of-holes`, `/case-files`, `/updates`, `/research` (every homepage-linked page: moving around the site no longer reloads). Next: the lab (`/lab`, `/dodge`, `/rishta`, with the lab nav as one React component) and the calm pages.
+1. Port every remaining HTML page, one at a time, and delete its HTML (user, 2026-11-12). Done: `/`, the 404, `/wall-of-holes`, `/case-files`, `/updates`, `/research` (every homepage-linked page: moving around the site no longer reloads), `/lab` (with the lab nav as one React component, `LabNav`). Next: `/dodge`, `/rishta` and the calm pages.
 2. Self-host the fonts with `next/font` (pixel-check the change).
 3. ~~Self-host the wall photos~~ (done 2026-11-12, via the rishta build download); consider `next/image`.
 4. Once the hub is indexable: one URL per case file / study with its own metadata and share image, added to the sitemap.
@@ -615,6 +616,7 @@ The user: "we are going to put updates whenever we have something … a hub, lik
 31. 2026-11-15: user: "start porting the case files page". Ported to `app/case-files/` (parity: identical DOM, 299 nodes; pixels identical except text anti-aliasing noise and the footer link underline, which now has the same 3px offset as the wall's). Filters and `#cf-0N` deep links in `CaseFileFilters`; the hub styles moved unchanged into `components/site/hub.css`. Found while testing: after an in-page `#` link, going to another page and back showed the wrong page (already live on the homepage since the wall port); fixed for every page with `HashLinks` in the layout.
 32. 2026-11-18: user: "start porting the updates page". Ported to `app/updates/` (parity: identical DOM, 259 nodes; pixels identical except text anti-aliasing noise on the filter labels and the shared footer underline). The case-files filter component became the shared `HubFilters` (also handles `a[data-open]`); `hub.css` took the diary's extra rules (`.more-go`, `.upd[hidden]`, the jump chips' spacing, the 3-column journey from 1000px) and case files' filter-bar rule was scoped so it doesn't touch the diary's. A deep link from case files into the diary (`/updates#u-dodge`) now opens the card without a reload.
 33. 2026-11-18: user: "start porting the research page". Ported to `app/research/` (parity: identical DOM, 588 nodes; with every fold open, 0 differing pixels at 320–2560px in both themes; folds closed, only the shared footer underline). Research's card styles moved unchanged into `hub.css`; `PageEffects` gained "a `#link` to a `<details>` opens it" and a `threshold` option. All four homepage-linked pages are now Next.js, so the whole public site moves without reloads. Seen during the build: Next.js's own CLI now stops one build in two to recommend upgrading, because 16.4.3 has two moderate advisories (GHSA-mfr8-8qww-v76h, GHSA-vc7v-qv4w-wrv8: `'use cache'` / `unstable_cache` leaks; the site uses neither). Fixed in 16.4.6; upgrade is pending the owner's OK. Vercel's builds are not stopped by it.
+34. 2026-11-18: user: "start porting the lab page". Ported to `app/lab/` (parity: identical DOM, 436 nodes; 0 differing pixels at 320–2560px in both themes). It reuses the homepage's components and behaviour script (`HomeEffects`), plus `LabNav` (the LAB-NAV block as React, `components/site/lab.css`), the `#inside` cards and the meme break (its drawing kept as the original markup in `app/lab/meme.ts`). Lab ↔ homepage ↔ hub pages no longer reload; dodge and rishta are still HTML and keep their LAB-NAV blocks.
 
 ---
 

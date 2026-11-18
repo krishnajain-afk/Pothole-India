@@ -1,0 +1,83 @@
+/* Cars24 Patch — the lab (moved unchanged from public/lab.html; dodge and rishta will share it when they're ported).
+   The homepage CSS is global and this file stays loaded after you leave the lab, so these class names (lab-bar,
+   nav-toggle, nav-ico, nav-links, nav-link, in-grid, in-card, in-go, sec-meme, meme, eq-, m-pupil, m-sweat) belong to
+   the lab: grep before reusing any. The hub card styles (upd-) come from components/site/hub.css. */
+/* ---------- Meme break (experiment) ---------- */
+.sec-meme { background: var(--paper); border-bottom: var(--bd); padding-block: 64px 72px; overflow: hidden; text-align: center; }
+@media (min-width: 1024px) { .sec-meme { padding-block: 88px 96px; } }
+.meme {
+  container-type: inline-size; position: relative; width: 100%; max-width: 860px; margin: 30px auto 0; padding: clamp(18px, 4vw, 38px);
+  background: var(--white); border: var(--bd); border-radius: 26px; box-shadow: var(--sh); rotate: -1deg; color: var(--ink);
+}
+.meme::before {
+  content: ""; position: absolute; left: 50%; top: -15px; width: 110px; height: 30px; translate: -50% 0; rotate: 2deg;
+  background: var(--prim); border: 2px solid var(--ink); opacity: .96;
+}
+.eq { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 4cqw 1.8cqw; }
+.eq-item { display: flex; flex-direction: column; align-items: center; gap: 1.2cqw; }
+.eq-pic { display: flex; align-items: flex-end; gap: .6cqw; }
+.eq-n, .eq-op { font: 800 clamp(2rem, 12cqw, 6rem)/.9 var(--ff-d); letter-spacing: -.04em; font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+.eq-n { padding-bottom: 1.6cqw; }
+.eq-op { align-self: center; padding-bottom: 3.2cqw; color: var(--ink); }
+.eq-pic svg { display: block; height: auto; overflow: visible; filter: drop-shadow(.8cqw .8cqw 0 var(--ink)); transition: rotate .35s var(--spring), scale .35s var(--spring); }
+.eq-kach svg { width: clamp(46px, 17cqw, 140px); }
+.eq-sam svg { width: clamp(70px, 25cqw, 210px); }
+.eq-pot svg { width: clamp(54px, 20cqw, 170px); }
+.eq-item:hover .eq-pic svg { rotate: -7deg; scale: 1.08; }
+.eq-l { font: 700 clamp(10px, 2.5cqw, 14px)/1 var(--ff-m); letter-spacing: .04em; font-style: normal; }
+.eq-res { display: flex; align-items: flex-end; justify-content: center; gap: 1.8cqw; }
+.m-pupil { animation: m-look 5s ease-in-out infinite; }
+@keyframes m-look { 0%, 12% { transform: translate(-3px, -2px); } 30%, 46% { transform: translate(3px, -2px); } 62%, 78% { transform: translate(0, 3px); } 100% { transform: translate(-3px, -2px); } }
+.m-sweat { animation: m-sweat 2.6s ease-in infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes m-sweat { 0% { translate: 0 -3px; opacity: 0; } 25% { opacity: 1; } 100% { translate: 0 10px; opacity: 0; } }
+.meme-cap { margin-top: clamp(22px, 5cqw, 40px); font: 800 clamp(2rem, 11.5cqw, 5rem)/.92 var(--ff-d); letter-spacing: -.035em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; }
+.meme-cap span { display: inline-block; max-width: 100%; margin-top: .06em; padding: .02em .14em 0; background: var(--acc); color: var(--on-acc); border: var(--bd); border-radius: 12px; box-decoration-break: clone; -webkit-box-decoration-break: clone; rotate: -1.5deg; }
+html.js .meme .eq-item, html.js .meme .eq-op, html.js .meme .meme-cap { opacity: 0; scale: .6; }
+html.js .meme .meme-cap { scale: 1; translate: 0 14px; }
+html.js .meme.in .eq-item, html.js .meme.in .eq-op { opacity: 1; scale: 1; transition: opacity .4s var(--ease), scale .6s var(--spring); transition-delay: calc(var(--i, 0) * .16s + .15s); }
+html.js .meme.in .meme-cap { opacity: 1; translate: 0 0; transition: opacity .5s var(--ease) 1s, translate .7s var(--spring) 1s; }
+/* narrow card: the equation becomes two rows, "1 kachori + 2 samosa" then "= pothole" */
+@container (max-width: 430px) {
+  .eq-res { flex-basis: 100%; }
+  .eq-n, .eq-op { font-size: clamp(1.8rem, 11cqw, 3.4rem); }
+  .eq-kach svg { width: 23cqw; } .eq-sam svg { width: 34cqw; } .eq-pot svg { width: 28cqw; }
+  .eq-l { font-size: 10px; }
+}
+
+/* ---------- The lab: the cards that point at each lab page ---------- */
+.in-grid { margin-top: 44px; display: grid; gap: 44px 28px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 700px) { .in-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .in-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; } }
+.in-card.upd { display: block; }
+.in-card .upd-title { font-size: clamp(1.6rem, 1rem + 1.6vw, 2.3rem); }
+.in-go { margin-top: 18px; }
+
+/* LAB-NAV:css:start */
+/* ---------- Lab nav (shared by every lab page: keep this block identical in all of them) ---------- */
+.lab-bar { background: var(--ink); color: var(--paper); padding: 9px 14px; text-align: center; font: 400 12px/1.45 var(--ff-m); }
+.lab-bar a { color: var(--hi); font-weight: 700; text-underline-offset: 3px; }
+.nav-toggle { display: none; align-items: center; gap: 10px; height: 46px; padding: 0 16px; border: var(--bd); border-radius: 14px; background: var(--ink); color: var(--hi); font: 700 15px/1 var(--ff-d); cursor: pointer; box-shadow: 4px 4px 0 var(--ink); transition: transform .18s var(--ease), box-shadow .18s var(--ease); }
+.nav-toggle:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--ink); }
+.nav-ico { position: relative; width: 20px; height: 14px; flex: none; }
+.nav-ico i { position: absolute; left: 0; right: 0; height: 3px; border-radius: 2px; background: currentColor; transition: top .3s var(--spring), transform .3s var(--spring), opacity .2s; }
+.nav-ico i:nth-child(1) { top: 0; } .nav-ico i:nth-child(2) { top: 5.5px; } .nav-ico i:nth-child(3) { top: 11px; }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(1) { top: 5.5px; transform: rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .nav-ico i:nth-child(3) { top: 5.5px; transform: rotate(-45deg); }
+.nav-links { display: flex; align-items: center; gap: 4px; min-width: 0; }
+.nav-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border: 3px solid transparent; border-radius: 999px; color: inherit; font: 700 15px/1 var(--ff-d); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s, translate .25s var(--spring); }
+.nav-link:hover, .nav-link:focus-visible { background: var(--ink); color: var(--hi); translate: 0 -2px; }
+.nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: -2deg; }
+@media (max-width: 1099px) {
+  html.js .nav-toggle { display: inline-flex; }
+  html.js .nav-links { display: none; position: absolute; left: 0; right: 0; top: 100%; flex-direction: column; align-items: stretch; gap: 10px; padding: 18px 24px 24px; background: var(--paper); color: var(--ink); border-bottom: var(--bd); box-shadow: 0 6px 0 var(--ink); max-height: calc(100vh - var(--nav-h)); max-height: calc(100dvh - var(--nav-h)); overflow-y: auto; }
+  html.js .nav-links.open { display: flex; }
+  html.js .nav-link { justify-content: space-between; gap: 12px; min-height: 56px; padding: 0 18px; border-color: var(--ink); border-radius: 16px; background: var(--white); font-size: 20px; white-space: normal; }
+  html.js .nav-link::after { content: "→"; flex: none; }
+  html.js .nav-link:hover, html.js .nav-link:focus-visible, html.js .nav-link[aria-current="page"] { background: var(--ink); color: var(--hi); rotate: 0deg; translate: 0 0; }
+  html[data-theme="blue"].js .nav-links :focus-visible { outline-color: var(--ink); }
+  html:not(.js) .nav-in { height: auto; flex-wrap: wrap; padding-block: 10px; }
+  html:not(.js) .nav-links { flex-wrap: wrap; }
+}
+@media (max-width: 360px) { html.js .nav-links { padding-inline: 16px; } html.js .nav-link { font-size: 18px; padding: 0 14px; } }
+/* LAB-NAV:css:end */

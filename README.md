@@ -26,11 +26,11 @@ the icon as `app/icon.svg`, and Vercel Analytics through `@vercel/analytics`.
 | `/` | `app/page.tsx` | The homepage. Shut up ***hole. India has swerved, slowed down and suffered enough. |
 | `/on-the-move` | `public/on-the-move.html` | The calm design. Every pothole has an owner. **And we’re on the move.** |
 | `/know-who` | `public/know-who.html` | The calm design, other headline. Every pothole has an owner. **Soon, you’ll know who.** |
-| `/lab` | `public/lab.html` | The lab. Experiments are built and tried here before they reach the homepage. Unlisted (`noindex`). |
-| `/updates` | `public/updates.html` | What we're up to: the road to launch and the latest updates. Part of the lab, unlisted (`noindex`). |
-| `/case-files` | `public/case-files.html` | The case-study repository: what we tried, what we found, what we learned. Part of the lab, unlisted (`noindex`). |
-| `/research` | `public/research.html` | The research library: every study we read or run about potholes, with sources and evidence stamps. Part of the lab, unlisted (`noindex`). |
-| `/wall-of-holes` | `public/wall-of-holes.html` | Biggest ***holes of the year: the wall of potholes. Part of the lab, unlisted (`noindex`). |
+| `/lab` | `app/lab/page.tsx` | The lab. Experiments are built and tried here before they reach the homepage. Unlisted (`noindex`). |
+| `/updates` | `app/updates/page.tsx` | What we're up to: the road to launch and the latest updates. Part of the lab, unlisted (`noindex`). |
+| `/case-files` | `app/case-files/page.tsx` | The case-study repository: what we tried, what we found, what we learned. Part of the lab, unlisted (`noindex`). |
+| `/research` | `app/research/page.tsx` | The research library: every study we read or run about potholes, with sources and evidence stamps. Part of the lab, unlisted (`noindex`). |
+| `/wall-of-holes` | `app/wall-of-holes/page.tsx` | Biggest ***holes of the year: the wall of potholes. Part of the lab, unlisted (`noindex`). |
 | `/dodge` | `public/dodge.html` | Dodge with your head: a camera game (the camera needs https). Part of the lab, unlisted (`noindex`). |
 | any missing URL | `app/not-found.tsx` | The 404 page, in the homepage style. |
 
