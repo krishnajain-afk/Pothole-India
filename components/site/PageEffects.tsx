@@ -4,8 +4,10 @@ import { useEffect } from 'react';
 
 /* The behaviour every hub page shares: .reveal blocks slide in as you scroll, and the #censor in the hero flips
    *** <-> pot (auto every few seconds, on hover with a mouse, click to pin), sized so "***" hugs the word.
-   Same trick as the homepage (lib/home-behaviour.js). Everything it starts is stopped when you leave the page. */
-export function PageEffects() {
+   Same trick as the homepage (lib/home-behaviour.js). A #link to a <details> (e.g. research#methods) opens it.
+   `threshold` is how much of a block must show before it slides in (research uses less: its open cards get very tall).
+   Everything it starts is stopped when you leave the page. */
+export function PageEffects({ threshold = 0.12 }: { threshold?: number }) {
   useEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const ac = new AbortController(), timers: number[] = [];
@@ -20,9 +22,17 @@ export function PageEffects() {
         if (!e.isIntersecting) return;
         e.target.classList.add('in');
         io?.unobserve(e.target);
-      }), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+      }), { threshold, rootMargin: '0px 0px -6% 0px' });
       items.forEach((n) => io!.observe(n));
     } else items.forEach((n) => n.classList.add('in'));
+
+    /* a #link to a <details> opens it (on arrival and on every hash change) */
+    const openFold = () => {
+      const el = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+      if (el instanceof HTMLDetailsElement) el.open = true;
+    };
+    openFold();
+    window.addEventListener('hashchange', openFold, { signal: ac.signal });
 
     /* the censor: *** <-> pot */
     const censor = document.getElementById('censor');
@@ -54,6 +64,6 @@ export function PageEffects() {
     }
 
     return () => { alive = false; ac.abort(); timers.forEach(clearTimeout); io?.disconnect(); ro?.disconnect(); };
-  }, []);
+  }, [threshold]);
   return null;
 }

@@ -1,7 +1,7 @@
 /* Cars24 Patch — the hub pages (case files now; the diary and the research library when they are ported).
    Moved unchanged from public/case-files.html. The homepage CSS is global and this file stays loaded after you leave
    a hub page, so these class names (upd-, hub-, jr-, cf-, cfp-, stamp) must not be reused on other pages:
-   grep before naming anything. The shared base (tokens, buttons, nav, kicker, reveal, footer, the censor) is in
+   grep before naming anything (the research library adds res-, legend, shelf, chips-note). The shared base (tokens, buttons, nav, kicker, reveal, footer, the censor) is in
    app/globals.css. */
 /* ---------- Dispatches / updates (experiment) ---------- */
 .sec-upd { background: var(--ink); color: var(--paper); border-bottom: var(--bd); padding-block: 88px; overflow: hidden; }
@@ -149,7 +149,7 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 .cfp-body .hub-nav + .hub-block { margin-top: 56px; }
 .upd[hidden] { display: none; }
 .more-go { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 14px 16px; }
-/* ---------- Stamps (how much weight a claim bears; shared with research.html) ---------- */
+/* ---------- Stamps (how much weight a claim bears; used on research and case files) ---------- */
 .stamp { display: inline-block; padding: 5px 9px 4px; border: 2.5px solid var(--ink); border-radius: 6px; background: var(--paper); color: var(--ink); font: 700 11px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; rotate: -2deg; white-space: nowrap; }
 .stamp[data-k="established"] { background: var(--prim); color: var(--on-prim); }
 .stamp[data-k="corroborated"] { background: var(--acc); color: var(--on-acc); }
@@ -163,3 +163,68 @@ html:not(.is-local) .upd-slot { display: none; }   /* empty template slots are f
 .cf-told { display: grid; gap: 10px; }
 .cf-told li { display: grid; gap: 8px; padding: 12px 14px; border: 2.5px solid var(--ink); border-radius: 10px; background: var(--white); font: 500 clamp(1rem, .95rem + .25vw, 1.12rem)/1.45 var(--ff-d); overflow-wrap: anywhere; }
 .cf-told .stamps { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- The research library (moved from public/research.html; the stamps above are shared) ---------- */
+.res-card { --sc: var(--hi); min-width: 0; padding: clamp(18px, 3vw, 30px); border: var(--bd); border-radius: 22px; background: var(--paper); color: var(--ink); box-shadow: 8px 8px 0 var(--sc); }
+.res-card[data-s="found"] { --sc: var(--pink); }
+.res-card[data-s="doing"] { --sc: var(--prim); }
+.res-card[data-s="next"] { --sc: var(--acc); }
+.res-card[data-s="done"] { --sc: var(--paper); }
+.res-card p, .res-card li { overflow-wrap: anywhere; }
+.res-card a:not(.btn) { color: inherit; text-underline-offset: 3px; }
+.res-h { font: 800 clamp(1.7rem, 1rem + 2.2vw, 2.7rem)/.95 var(--ff-d); letter-spacing: -.03em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; text-wrap: balance; overflow-wrap: anywhere; }
+.res-sub { margin-top: 22px; font: 800 clamp(1.2rem, 1rem + .8vw, 1.6rem)/1 var(--ff-d); letter-spacing: -.02em; text-transform: uppercase; font-stretch: 75%; font-variation-settings: 'wdth' 75; }
+.res-card > p, .res-body > p { margin-top: 14px; max-width: 64ch; font: 500 clamp(1rem, .95rem + .25vw, 1.15rem)/1.55 var(--ff-d); }
+.res-card > .res-h + p { margin-top: 12px; }
+.res-note { margin-top: 18px; padding: 14px 16px; border: var(--bd); border-radius: 14px; background: var(--white); font: 600 clamp(1rem, .95rem + .25vw, 1.12rem)/1.45 var(--ff-d); }
+.res-note .stamp { margin-left: 6px; vertical-align: middle; }
+.res-ul { margin-top: 14px; display: grid; gap: 10px; max-width: 66ch; }
+.res-ul li { position: relative; padding-left: 26px; font: 500 clamp(1rem, .95rem + .25vw, 1.12rem)/1.5 var(--ff-d); }
+.res-ul li::before { content: ""; position: absolute; left: 4px; top: .55em; width: 10px; height: 10px; border: 3px solid var(--ink); background: var(--sc, var(--hi)); rotate: 45deg; }
+.res-miss li::before { content: "?"; width: auto; height: auto; border: 0; background: none; rotate: 0deg; top: 0; font: 800 1.1em/1.3 var(--ff-m); }
+.res-steps { margin-top: 16px; display: grid; gap: 14px; max-width: 66ch; counter-reset: s; }
+.res-steps li { position: relative; padding-left: 44px; font: 500 clamp(1rem, .95rem + .25vw, 1.12rem)/1.5 var(--ff-d); counter-increment: s; }
+.res-steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 32px; height: 32px; display: grid; place-items: center; border: 3px solid var(--ink); border-radius: 9px; background: var(--sc); color: var(--ink); font: 800 16px/1 var(--ff-d); }
+.res-steps b { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; margin-right: .3em; }
+.res-pair { margin-top: 16px; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .res-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.res-pair > div { padding: 14px 16px; border: var(--bd); border-radius: 14px; background: var(--white); }
+.res-pair h4 { font: 700 12px/1.3 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; }
+.res-pair ul { margin-top: 10px; display: grid; gap: 8px; }
+.res-pair li { font: 500 1rem/1.45 var(--ff-d); overflow-wrap: anywhere; }
+.res-meth { margin-top: 16px; display: grid; gap: 12px; }
+.res-meth li { padding: 14px 16px; border: 2.5px solid var(--ink); border-radius: 12px; background: var(--white); }
+.res-meth b { display: inline; font: 800 1.12rem/1.2 var(--ff-d); text-transform: uppercase; letter-spacing: -.01em; font-stretch: 75%; font-variation-settings: 'wdth' 75; margin-right: 8px; }
+.res-meth p { margin-top: 8px; font: 500 1rem/1.5 var(--ff-d); overflow-wrap: anywhere; }
+.res-card details { margin-top: 20px; }
+.res-card summary { display: inline-flex; align-items: center; gap: 12px; min-height: 46px; padding: 0 18px; border: var(--bd); border-radius: 14px; background: var(--ink); color: var(--hi); font: 700 15px/1 var(--ff-d); cursor: pointer; list-style: none; user-select: none; box-shadow: 4px 4px 0 var(--sc); transition: translate .18s var(--ease), box-shadow .18s var(--ease); }
+.res-card summary::-webkit-details-marker { display: none; }
+.res-card summary::after { content: "+"; font-size: 24px; line-height: 1; transition: rotate .3s var(--spring); }
+.res-card details[open] summary::after { rotate: 45deg; }
+.res-card summary:hover { translate: -2px -2px; box-shadow: 6px 6px 0 var(--sc); }
+.res-card .w-open, .res-card details[open] .w-closed { display: none; }
+.res-card details[open] .w-open { display: inline; }
+.res-body { margin-top: 16px; padding-top: 16px; border-top: 3px dashed var(--ink); animation: upd-in .45s var(--ease) both; }
+.res-body dl { display: grid; gap: 12px; }
+.res-body dt { font: 700 13px/1.3 var(--ff-m); letter-spacing: .04em; text-transform: uppercase; }
+.res-body dd { margin: 2px 0 0; font: 500 1rem/1.5 var(--ff-d); overflow-wrap: anywhere; }
+.res-stack { margin-top: 56px; display: grid; gap: 44px; }
+.legend { margin-top: 22px; display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .legend { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.legend li { display: grid; gap: 10px; align-content: start; padding: 16px; border: var(--bd); border-radius: 16px; background: var(--paper); color: var(--ink); font: 500 1rem/1.45 var(--ff-d); }
+.legend .stamp { justify-self: start; }
+.shelf { margin-top: 28px; display: grid; gap: 44px 28px; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) { .shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.shelf-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.shelf-type { display: inline-block; padding: 7px 12px 6px; border: 2.5px solid var(--ink); border-radius: 999px; background: var(--sc); color: var(--ink); font: 700 12px/1 var(--ff-m); letter-spacing: .12em; text-transform: uppercase; }
+.shelf-date { font: 700 11px/1 var(--ff-m); letter-spacing: .1em; text-transform: uppercase; opacity: .75; }
+.shelf-go { margin-top: 18px; }
+.shelf-go .btn { white-space: normal; height: auto; min-height: 46px; padding-block: 10px; text-align: center; }
+.upd-slot.res-card { background: transparent; color: var(--paper); border: 3px dashed var(--paper); box-shadow: none; }
+.upd-slot.res-card .shelf-type { border-color: var(--paper); background: transparent; color: var(--paper); }
+.upd-slot.res-card .btn { background: var(--hi); color: var(--ink); border-color: var(--paper); box-shadow: 4px 4px 0 var(--paper); }
+.res-src { margin-top: 16px; display: grid; gap: 8px; }
+.res-src li { font: 400 13px/1.55 var(--ff-m); overflow-wrap: anywhere; }
+.res-src a { text-underline-offset: 3px; }
+.chips-note { margin-top: 14px; font: 400 13px/1.5 var(--ff-m); opacity: .85; max-width: 70ch; }
